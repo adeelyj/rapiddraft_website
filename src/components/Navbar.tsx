@@ -31,9 +31,6 @@ export default function Navbar() {
                                 className="h-8 w-auto"
                             />
                             <span className="sr-only">RapidDraft</span>
-                            <span className="ml-2 inline-flex items-center rounded-full bg-orange-50 text-orange-700 text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5">
-                                Coming soon
-                            </span>
                         </Link>
                     </div>
 

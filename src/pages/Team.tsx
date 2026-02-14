@@ -23,7 +23,7 @@ export default function Team() {
             title: "Founder & AI Lead",
             bio: "Sreekar Reddy Sajjala is RapidDraft's Founder and AI Lead, bringing 3+ years of experience building production AI systems, data pipelines, and full-stack engineering tools deployed on Azure and GCP with measurable impact. With a strong background in FEM, CFD, topology optimization, and generative design across aerospace and energy, he bridges physics-informed modeling with data-driven AI. He brings the technical depth RapidDraft needs to deliver reliable, engineering-grade automation.",
             image: "/media/sreekar.jpg",
-            linkedin: ""
+            linkedin: "https://www.linkedin.com/in/sreekar2858/"
         }
     ];
 
