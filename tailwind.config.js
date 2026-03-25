@@ -16,7 +16,7 @@ export default {
         light: "#f9fafb", // gray-50
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         '2xl': '1rem',
