@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Product from './pages/Product';
@@ -6,6 +6,8 @@ import UseCases from './pages/UseCases';
 import Team from './pages/Team';
 import BookDemo from './pages/BookDemo';
 import DealRoom from './pages/DealRoom';
+import CompanyDemoPage from './pages/CompanyDemoPage';
+import { getCompanyDemoByHostname, getCompanyDemoBySlug } from './companyDemos/registry';
 
 const PITCH_HOSTNAME = 'pitch.rapiddraft.ai';
 const MAIN_SITE_ORIGIN = 'https://rapiddraft.ai';
@@ -18,8 +20,21 @@ function ExternalRedirect({ to }: { to: string }) {
   return null;
 }
 
+function CompanyDemoRoute() {
+  const { slug } = useParams<{ slug: string }>();
+  const companyDemo = slug ? getCompanyDemoBySlug(slug) : undefined;
+
+  if (!companyDemo) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <CompanyDemoPage config={companyDemo} />;
+}
+
 function App() {
-  const isPitchHostname = typeof window !== 'undefined' && window.location.hostname === PITCH_HOSTNAME;
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isPitchHostname = hostname === PITCH_HOSTNAME;
+  const companyDemoFromHostname = hostname ? getCompanyDemoByHostname(hostname) : undefined;
 
   if (isPitchHostname) {
     const redirectPath =
@@ -35,8 +50,13 @@ function App() {
     );
   }
 
+  if (companyDemoFromHostname && typeof window !== 'undefined' && window.location.pathname === '/') {
+    return <CompanyDemoPage config={companyDemoFromHostname} isHostMode />;
+  }
+
   return (
     <Routes>
+      <Route path="/pilots/:slug" element={<CompanyDemoRoute />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Product />} />
         <Route path="how-it-works" element={<Navigate to="/" replace />} />
