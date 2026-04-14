@@ -8,6 +8,19 @@ The source of truth is the GitHub repo branch that Netlify watches:
 
 `adeelyj/rapiddraft_website` -> `codex/rapiddraft-changes`
 
+Current hosted site identity:
+
+- Netlify site: `rapiddraft`
+- Netlify site id: `9b777f3c-0133-45ac-bfbd-d275bc7642e3`
+- custom domain: `rapiddraft.ai`
+- domain aliases: `rapiddraft.io`, `pitch.rapiddraft.ai`, `somic.rapiddraft.ai`, `webasto.rapiddraft.ai`
+
+Useful local paths on this machine:
+
+1. Git-backed worktree on `main`: `D:\02_Code\16_rapiddraft_website_live`
+2. Git-backed worktree used for branch edits and deploy work: `D:\02_Code\16_rapiddraft_website_codex`
+3. Non-git local copy that should not be treated as deploy truth: `D:\02_Code\15_RapidDraft_website`
+
 Important:
 
 1. Do not assume `D:\02_Code\15_RapidDraft_website` is the live source of truth. That local copy can be useful for inspection, but Netlify will keep serving whatever is on the watched Git branch.
