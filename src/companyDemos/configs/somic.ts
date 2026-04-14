@@ -6,278 +6,241 @@ export const somicDemoConfig: CompanyDemoConfig = {
     hostnames: ['somic.rapiddraft.ai'],
     accessLabel: 'Private SOMIC pilot demo',
     summary:
-        'A SOMIC 434-style revision walkthrough that turns Rev A and Rev B into a change summary, release gate, changed-part DFM pass, and exportable evidence packet.',
+        'A SOMIC revision-before-release walkthrough that turns Rev A and Rev B into a change summary, release gate, changed-part DFM pass, and exportable evidence packet.',
     hero: {
         badge: 'Private SOMIC pilot demo',
-        title: 'From Rev A to release-ready for a SOMIC change package',
+        title: 'Turn a SOMIC revision pair into a release-ready review',
         description:
-            'RapidDraft turns a customer-driven format change into one review flow: compare revisions, run the release gate, validate the changed part, and export an evidence packet engineering can stand behind.',
-        proofChips: ['Revision diff', 'Release gate', 'DFM on changed part', 'Evidence packet'],
+            'RapidDraft helps SOMIC review one machine change the way the team actually works: compare Rev A and Rev B, explain what changed, run the release gate, check one changed part, and export the evidence packet.',
+        proofChips: ['Rev A -> Rev B', 'Change summary', 'Release gate', 'Changed-part DFM'],
         scenarioTitle: 'Scenario',
         scenarioBody:
-            'A SOMIC mechanical engineer is preparing a customer-driven format change on a SOMIC 434-style machine and needs the changed revision package ready for Freigabe without manually reconstructing every change.',
+            'A SOMIC engineer is preparing a customer-driven format change on a 434-style machine and needs the release discussion focused on what changed, what blocks Freigabe, and whether the changed part is still manufacturable.',
     },
     heroStoryboard: {
-        eyebrow: 'SOMIC 434-style release flow',
-        title: 'From customer change to evidence packet',
-        revisionLabel: 'Rev A → Rev B',
+        eyebrow: 'SOMIC revision-before-release flow',
+        title: 'From format change to Freigabe packet',
+        revisionLabel: 'Rev A -> Rev B',
         steps: [
-            { label: '1. Scope the revision', text: 'Pair the released baseline with the candidate package.' },
-            { label: '2. Explain the change', text: 'Generate the revision diff and re-check summary.' },
-            { label: '3. Gate the release', text: 'Run deterministic checks and validate the changed part.' },
-            { label: '4. Export the packet', text: 'Package findings, decisions, and evidence for Freigabe.' },
+            { label: '1. Pair the revisions', text: 'Start from the released baseline and the candidate change package.' },
+            { label: '2. Explain the delta', text: 'Show exactly what changed before the approval discussion starts.' },
+            { label: '3. Gate the release', text: 'Run deterministic release-readiness checks on the candidate package.' },
+            { label: '4. Check the changed part', text: 'Validate one representative changed part before export.' },
         ],
     },
     fitCards: [
         {
             title: 'Engineering',
             body:
-                'Baseline versus candidate review is the shortest path from a new format request to a usable approval discussion. The engineer spends less time reconstructing what changed and more time judging what matters.',
+                'SOMICs core pain is revision review before release, not generic AI for CAD. The value is faster understanding of one real machine change.',
         },
         {
-            title: 'Engineering leadership',
+            title: 'Release leads',
             body:
-                'The same flow gives leads a consistent release gate: what changed, what still blocks release, and what evidence supports the final decision.',
+                'The same flow gives leadership one consistent answer: what changed, what still blocks Freigabe, and what evidence supports the decision.',
         },
         {
-            title: 'Manufacturing / documentation',
+            title: 'Manufacturing handoff',
             body:
-                'A single packet can serve drawing review, changed-part manufacturability, and downstream documentation handoff instead of scattering context across emails and PDFs.',
+                'The pilot only goes one step beyond document review: validate one changed machined part so the packet is useful beyond the meeting itself.',
         },
     ],
     chapters: [
         {
-            id: 'change-request-arrives',
+            id: 'scope-revision',
             stepNumber: 1,
-            title: 'The change request arrives',
+            title: 'Scope the revision pair',
             engineerAction:
-                'A SOMIC engineer receives a new carton or format requirement on a 434-style line. The request touches the format set, a changed machine module, several drawings, and the release package.',
+                'The engineer selects the released package and the candidate package for one customer-driven format change on a SOMIC machine.',
             rapiddraftReturn:
-                'RapidDraft frames the work as a baseline-versus-candidate review so the team starts with the exact revision pair and the affected artifact set.',
+                'RapidDraft opens one bounded review session around the exact Rev A and Rev B pair that needs approval.',
             managementValue:
-                'The review starts with a bounded scope instead of a vague “please check the new revision” handoff.',
-            artifactsIn: ['Customer change request', 'Released Rev A package', 'Candidate Rev B package'],
+                'The meeting starts from one explicit revision scope instead of a vague handoff to check the new version.',
+            artifactsIn: ['Released Rev A package', 'Candidate Rev B package', 'Basic change context'],
             artifactsOut: ['Scoped review session'],
             video: {
-                placeholderTitle: 'Video 1 · From change request to review scope',
+                placeholderTitle: 'Video 1 · Scope the SOMIC revision',
                 recordingBrief:
-                    'Show the engineer opening a SOMIC 434-style change request, selecting the released baseline, and defining the candidate package to review.',
-                durationLabel: '1–2 min',
+                    'Show the engineer selecting Rev A and Rev B for a believable format change on a SOMIC 434-style machine.',
+                durationLabel: '1-2 min',
             },
         },
         {
-            id: 'start-review-session',
+            id: 'explain-change',
             stepNumber: 2,
-            title: 'Start a review session',
+            title: 'Explain what changed',
             engineerAction:
-                'The engineer loads exported artifacts instead of waiting for deep vault setup: drawing PDFs, model exports, and the candidate release package.',
+                'Before the approval discussion, the engineer opens the diff to understand which views, notes, dimensions, and geometry changed.',
             rapiddraftReturn:
-                'RapidDraft pairs the baseline and candidate artifacts, captures the key metadata, and opens a review room with the right context attached.',
+                'RapidDraft highlights changed content and writes a plain-language summary of what must be rechecked.',
             managementValue:
-                'Pilot value appears without forcing SOMIC to reconfigure its current CAD, PDM, or PLM flow on day one.',
-            artifactsIn: ['Rev A STEP or drawing exports', 'Rev B STEP or drawing exports', 'Basic revision metadata'],
-            artifactsOut: ['Baseline-candidate pair', 'Review room'],
+                'Review time shifts from detective work to decision work, which is the exact wedge SOMIC already signaled.',
+            artifactsOut: ['Revision diff', 'Plain-language change summary'],
             video: {
-                placeholderTitle: 'Video 2 · Artifact-first intake',
+                placeholderTitle: 'Video 2 · Revision diff and summary',
                 recordingBrief:
-                    'Show how the engineer starts from exported artifacts, pairs the candidate with the released baseline, and creates a bounded review room.',
-                durationLabel: '1–2 min',
+                    'Make this the hero moment: compare Rev A and Rev B, highlight the changed region, and read out the generated summary.',
+                durationLabel: '2-3 min',
             },
         },
         {
-            id: 'see-what-changed',
+            id: 'run-release-gate',
             stepNumber: 3,
-            title: 'See what changed',
+            title: 'Run the release gate',
             engineerAction:
-                'Before the approval discussion, the engineer opens the diff to understand which views, notes, dimensions, and geometry actually changed.',
+                'The engineer runs deterministic release-readiness checks on the candidate package before Freigabe.',
             rapiddraftReturn:
-                'RapidDraft highlights added, removed, and modified content, then writes a plain-language summary of what changed and what should be re-checked.',
+                'RapidDraft flags revision-table issues, title-block mismatches, missing notes, dangling dimensions, and other release blockers with severity and evidence.',
             managementValue:
-                'Review time shifts from detective work to decision work, which is the core wedge SOMIC already reacted to.',
-            artifactsOut: ['Visual diff', 'Plain-language change summary'],
-            video: {
-                placeholderTitle: 'Video 3 · Revision diff and change summary',
-                recordingBrief:
-                    'Make this the hero video: show Rev A versus Rev B, highlight the changed region, and read out the machine-generated “what changed” summary.',
-                durationLabel: '2–3 min',
-            },
-        },
-        {
-            id: 'release-readiness-gate',
-            stepNumber: 4,
-            title: 'Run the release-readiness gate',
-            engineerAction:
-                'The engineer runs the deterministic release gate on the candidate package to catch revision hygiene and documentation blockers before Freigabe.',
-            rapiddraftReturn:
-                'RapidDraft flags missing notes, revision-table issues, title-block mismatches, dangling dimensions, and other release-readiness problems with severity and evidence.',
-            managementValue:
-                'Approvals become more consistent, and release blockers surface before they leak into manufacturing, FAT, or documentation work.',
+                'Approval becomes more consistent because checklist logic no longer lives only in reviewer memory.',
             artifactsOut: ['Release checklist results', 'Severity-ranked blockers'],
             video: {
-                placeholderTitle: 'Video 4 · DraftLint-style release gate',
+                placeholderTitle: 'Video 3 · Deterministic release gate',
                 recordingBrief:
-                    'Walk through the release-readiness findings, show a few blockers, and make clear that RapidDraft is a consistency and coverage layer, not a CAD replacement.',
-                durationLabel: '1–2 min',
+                    'Walk through the findings and make clear that RapidDraft is a release-review intelligence layer, not a CAD replacement.',
+                durationLabel: '1-2 min',
             },
         },
         {
-            id: 'validate-changed-part',
-            stepNumber: 5,
-            title: 'Validate the changed machined part',
+            id: 'check-changed-part',
+            stepNumber: 4,
+            title: 'Check one changed part',
             engineerAction:
-                'The engineer checks one representative changed part or format tool linked to the revision, focusing on manufacturability of the actual changed geometry.',
+                'The engineer selects one representative changed part or format tool that matters to the release and runs a focused manufacturability check.',
             rapiddraftReturn:
-                'RapidDraft runs DFM on the changed part, ties findings to geometry, and produces a short summary manufacturing can understand quickly.',
+                'RapidDraft produces geometry-linked DFM findings on the changed part and summarizes the manufacturing risk clearly.',
             managementValue:
-                'SOMIC can see how the same review flow extends from documentation readiness to Haag-style part manufacturability.',
+                'This is the SOMIC-specific extension beyond paperwork: the review packet also says something useful about the changed hardware.',
             artifactsIn: ['Changed STEP part', 'Selected manufacturing route'],
-            artifactsOut: ['Geometry-linked DFM findings', 'Changed-part summary'],
+            artifactsOut: ['Changed-part DFM findings', 'Manufacturing summary'],
             video: {
-                placeholderTitle: 'Video 5 · DFM on the changed part',
+                placeholderTitle: 'Video 4 · Changed-part manufacturability',
                 recordingBrief:
-                    'Use one believable SOMIC-style machined part or format tool, then show how RapidDraft spots changed-part manufacturability risks with linked evidence.',
-                durationLabel: '1–2 min',
+                    'Use one believable SOMIC-style machined part or format tool and show a tight changed-part DFM slice.',
+                durationLabel: '1-2 min',
             },
         },
         {
-            id: 'capture-findings',
-            stepNumber: 6,
-            title: 'Capture findings and decisions',
+            id: 'export-packet',
+            stepNumber: 5,
+            title: 'Export the Freigabe packet',
             engineerAction:
-                'The reviewer converts important findings into tracked items, assigns owners, and records why a point must be fixed or can be accepted as-is.',
+                'Once the revision is understood, the engineer exports one packet for approval and downstream handoff.',
             rapiddraftReturn:
-                'RapidDraft keeps each item linked to evidence, status, and rationale so the review survives the meeting instead of disappearing into email.',
+                'RapidDraft compiles the change summary, release-gate results, and changed-part DFM evidence into one review packet.',
             managementValue:
-                'Decision memory stays with the revision and can be carried into the next change cycle.',
-            artifactsOut: ['Owned review items', 'Decision rationale'],
-            video: {
-                placeholderTitle: 'Video 6 · Thin but credible review memory',
-                recordingBrief:
-                    'Show a lightweight closure loop: convert a finding into an item, assign it, mark one accepted as-is, and record the reason.',
-                durationLabel: '1–2 min',
-            },
-        },
-        {
-            id: 'export-evidence-packet',
-            stepNumber: 7,
-            title: 'Export the evidence packet',
-            engineerAction:
-                'Once the candidate is understood, the engineer exports the review packet for approval, manufacturing handoff, or documentation follow-up.',
-            rapiddraftReturn:
-                'RapidDraft compiles the change summary, release-gate results, DFM findings, and decision log into one release-ready packet.',
-            managementValue:
-                'Teams get a traceable artifact that travels with the revision rather than a loose set of screenshots or meeting notes.',
+                'The result travels with the revision instead of being scattered across screenshots, PDFs, and meeting notes.',
             artifactsOut: ['Release evidence packet', 'Approval-ready summary'],
             video: {
-                placeholderTitle: 'Video 7 · One-click export',
+                placeholderTitle: 'Video 5 · Export the evidence packet',
                 recordingBrief:
-                    'Show the final packet generation and briefly scan the exported sections: change summary, blockers, changed-part DFM, and decision log.',
-                durationLabel: '1–2 min',
+                    'Show the exported packet and briefly scan the sections: change summary, blockers, and changed-part manufacturability.',
+                durationLabel: '1-2 min',
             },
         },
         {
-            id: 'expansion-path',
-            stepNumber: 8,
-            title: 'Show the immediate expansion path',
+            id: 'show-next-step',
+            stepNumber: 6,
+            title: 'Show the next step, not the whole roadmap',
             engineerAction:
-                'After the core flow lands, the team looks at how the same review can trigger automatically once SOMIC confirms the preferred intake path.',
+                'After the core workflow lands, the team looks at the most believable follow-on intake path.',
             rapiddraftReturn:
-                'RapidDraft shows a believable next step from export-based intake today to workflow-triggered or vault-linked execution later.',
+                'RapidDraft shows how this can move from export-based intake today toward workflow-triggered execution later.',
             managementValue:
-                'SOMIC sees a credible adoption path: immediate value now, deeper integration only once it is worth the effort.',
-            artifactsOut: ['Pilot roadmap', 'Integration next step'],
+                'SOMIC sees a credible adoption path without the first meeting turning into a speculative PDM integration pitch.',
+            artifactsOut: ['Pilot roadmap'],
             video: {
-                placeholderTitle: 'Video 8 · From pilot to integration',
+                placeholderTitle: 'Video 6 · Practical expansion path',
                 recordingBrief:
-                    'Close by showing the roadmap ladder: export-based intake first, workflow trigger next, and deeper PDM or PLM store-back only after the core wedge is proven.',
+                    'Close with the narrow roadmap: export-first now, workflow trigger later, deeper system coupling only after the wedge is proven.',
                 durationLabel: '1 min',
             },
         },
     ],
     capabilities: [
         {
-            title: 'Review intelligence',
+            title: 'Revision pairing and diff',
             body:
-                'Revision pairing, evidence anchors, and plain-language change summaries explain what changed before the meeting starts.',
+                'RapidDraft turns one released package and one candidate package into a bounded engineering review instead of an open-ended artifact hunt.',
         },
         {
-            title: 'Deterministic release checks',
+            title: 'Deterministic release gate',
             body:
-                'DraftLint-style gates catch checklist failures and release blockers with consistent severity instead of ad hoc reviewer memory.',
+                'Checklist-style checks catch release blockers with consistent severity before Freigabe depends on reviewer memory alone.',
         },
         {
-            title: 'Decision memory',
+            title: 'Changed-part DFM',
             body:
-                'Findings can become owned items with status and rationale, so the next revision inherits context instead of reopening the same debate.',
+                'One focused manufacturability pass on the changed part connects the release review to the real hardware decision.',
         },
         {
-            title: 'Manufacturing-ready export',
+            title: 'Release-ready export',
             body:
-                'One packet ties together change summary, release readiness, changed-part DFM, and closure notes for handoff or approval.',
+                'One packet ties together the revision summary, blockers, and changed-part evidence for approval and handoff.',
         },
     ],
     nonClaims: [
         'RapidDraft is not a CAD replacement. SOMIC engineers stay in SolidWorks, NX, or their current export workflow.',
-        'RapidDraft is not a full PLM replacement. The goal is to automate painful review work inside the existing process.',
-        'RapidDraft is not promising full native PDM automation today. The first pilot remains artifact-first and low-friction.',
+        'RapidDraft is not a full PLM replacement. The first pilot proves one review wedge inside the existing process.',
+        'RapidDraft is not promising deep PDM automation on day one. The first step is still artifact-first and low-friction.',
         'RapidDraft is not claiming guaranteed design correctness. It improves coverage, traceability, and review speed.',
     ],
     rolloutPhases: [
         {
             phase: 'Now',
-            title: 'Artifact-first review',
+            title: 'Revision-before-release review',
             body:
-                'Use Rev A and Rev B exports, run change summary, release checks, changed-part DFM, and export a packet without deep system changes.',
+                'Start with Rev A and Rev B, run the change summary and release gate, and validate one changed part without deep system changes.',
         },
         {
             phase: 'Next',
             title: 'Workflow-triggered intake',
             body:
-                'Add a watched folder, export hook, or workflow action so review runs start from a defined engineering trigger instead of manual pairing.',
+                'Add a watched folder, export hook, or workflow action so review sessions start from a defined engineering trigger.',
         },
         {
             phase: 'Later',
-            title: 'Deeper PDM or store-back',
+            title: 'Deeper store-back',
             body:
-                'When SOMIC confirms the real stack and the value is proven, attach reports back to the vault or move into deeper task-driven integration.',
+                'Only after the wedge is proven should reports and results move into deeper PDM or PLM attachment paths.',
         },
     ],
     cta: {
         buttonLabel: 'Book a SOMIC walkthrough',
         buttonHref: '/book-demo',
         panelTitle: 'What we need from SOMIC',
-        needs: ['Rev A and Rev B artifacts', '1–2 drawing PDFs', 'Current approval template'],
+        needs: ['Rev A and Rev B artifacts', '1-2 drawing PDFs', 'One representative changed part'],
         note:
-            'With those three inputs, we can mirror a real release packet instead of showing a generic CAD demo.',
+            'With those inputs, we can show a real revision-before-release review instead of a generic CAD demo.',
     },
     narrative: {
         hostModeNote: 'Built from the SOMIC pilot dossier and RapidDraft review vision.',
         fitKicker: 'Why this fits SOMIC',
-        fitTitle: 'Built for a revision-heavy packaging-machine workflow',
+        fitTitle: 'Built for revision-before-release on modular machine variants',
         fitBody:
-            'The strongest SOMIC wedge is not generic AI for CAD. It is a revision-before-release review flow that respects their real release pressure, modular product families, and documentation burden.',
+            'The SOMIC story is narrow on purpose: compare one revision pair, surface release blockers, and check one changed part before Freigabe.',
         storylineKicker: 'Storyline chapters',
-        storylineTitle: 'One end-to-end workflow an engineer can actually follow',
+        storylineTitle: 'A focused release-review workflow',
         storylineBody:
-            'Each chapter is one video slot: what the engineer does, what RapidDraft returns, and why the result matters beyond the screen.',
+            'Each chapter keeps the pilot close to SOMICs real approval pressure: what changed, what blocks release, and whether the changed part is still safe to make.',
         capabilityKicker: 'Capability map',
         capabilityTitle: 'What the SOMIC demo is really proving',
         capabilityBody:
-            'The storyline stays narrow on purpose. It shows the parts of RapidDraft that most directly support a change-driven release workflow.',
+            'This demo proves revision-before-release intelligence, with changed-part manufacturability as the supporting second layer.',
         nonClaimsKicker: 'What this demo does not claim',
         nonClaimsTitle: 'Credibility matters more than breadth',
         nonClaimsBody:
             'This page is designed to show where RapidDraft is strongest for SOMIC right now, while keeping the longer-term integration story honest.',
         rolloutKicker: 'Pilot expansion path',
-        rolloutTitle: 'A believable rollout, not a forced integration jump',
+        rolloutTitle: 'Start narrow, then earn the right to integrate',
         rolloutBody:
-            'The first SOMIC pilot should prove the review wedge with minimal friction, then earn the right to integrate more deeply.',
+            'The first SOMIC pilot should prove the release-review wedge first and only then move toward deeper workflow attachment.',
         finalCtaKicker: 'Final CTA',
-        finalCtaTitle: 'Use the first meeting to prove the release wedge',
+        finalCtaTitle: 'Prove the revision-before-release wedge',
         finalCtaBody:
-            'If SOMIC sees a trustworthy change summary, a credible release gate, a changed-part DFM slice, and a clean evidence packet, the next conversation becomes much easier.',
+            'If SOMIC sees a trustworthy change summary, a credible release gate, a believable changed-part DFM slice, and a clean evidence packet, the next conversation becomes much easier.',
         footerBody:
-            'This storyline is anchored in the SOMIC pilot dossier and RapidDraft’s revision-before-release product wedge: change summary, release gating, manufacturability feedback, and traceable evidence.',
+            'This storyline is anchored in the SOMIC pilot dossier and RapidDrafts revision-before-release wedge: compare revisions, gate release, validate the changed part, and export the evidence.',
         footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/somic_pilot/_index/',
         footerLinkLabel: 'Open the SOMIC wiki dossier',
     },
