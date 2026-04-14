@@ -17,6 +17,17 @@ export const somicDemoConfig: CompanyDemoConfig = {
         scenarioBody:
             'A SOMIC mechanical engineer is preparing a customer-driven format change on a SOMIC 434-style machine and needs the changed revision package ready for Freigabe without manually reconstructing every change.',
     },
+    heroStoryboard: {
+        eyebrow: 'SOMIC 434-style release flow',
+        title: 'From customer change to evidence packet',
+        revisionLabel: 'Rev A → Rev B',
+        steps: [
+            { label: '1. Scope the revision', text: 'Pair the released baseline with the candidate package.' },
+            { label: '2. Explain the change', text: 'Generate the revision diff and re-check summary.' },
+            { label: '3. Gate the release', text: 'Run deterministic checks and validate the changed part.' },
+            { label: '4. Export the packet', text: 'Package findings, decisions, and evidence for Freigabe.' },
+        ],
+    },
     fitCards: [
         {
             title: 'Engineering',
@@ -238,5 +249,36 @@ export const somicDemoConfig: CompanyDemoConfig = {
         needs: ['Rev A and Rev B artifacts', '1–2 drawing PDFs', 'Current approval template'],
         note:
             'With those three inputs, we can mirror a real release packet instead of showing a generic CAD demo.',
+    },
+    narrative: {
+        hostModeNote: 'Built from the SOMIC pilot dossier and RapidDraft review vision.',
+        fitKicker: 'Why this fits SOMIC',
+        fitTitle: 'Built for a revision-heavy packaging-machine workflow',
+        fitBody:
+            'The strongest SOMIC wedge is not generic AI for CAD. It is a revision-before-release review flow that respects their real release pressure, modular product families, and documentation burden.',
+        storylineKicker: 'Storyline chapters',
+        storylineTitle: 'One end-to-end workflow an engineer can actually follow',
+        storylineBody:
+            'Each chapter is one video slot: what the engineer does, what RapidDraft returns, and why the result matters beyond the screen.',
+        capabilityKicker: 'Capability map',
+        capabilityTitle: 'What the SOMIC demo is really proving',
+        capabilityBody:
+            'The storyline stays narrow on purpose. It shows the parts of RapidDraft that most directly support a change-driven release workflow.',
+        nonClaimsKicker: 'What this demo does not claim',
+        nonClaimsTitle: 'Credibility matters more than breadth',
+        nonClaimsBody:
+            'This page is designed to show where RapidDraft is strongest for SOMIC right now, while keeping the longer-term integration story honest.',
+        rolloutKicker: 'Pilot expansion path',
+        rolloutTitle: 'A believable rollout, not a forced integration jump',
+        rolloutBody:
+            'The first SOMIC pilot should prove the review wedge with minimal friction, then earn the right to integrate more deeply.',
+        finalCtaKicker: 'Final CTA',
+        finalCtaTitle: 'Use the first meeting to prove the release wedge',
+        finalCtaBody:
+            'If SOMIC sees a trustworthy change summary, a credible release gate, a changed-part DFM slice, and a clean evidence packet, the next conversation becomes much easier.',
+        footerBody:
+            'This storyline is anchored in the SOMIC pilot dossier and RapidDraft’s revision-before-release product wedge: change summary, release gating, manufacturability feedback, and traceable evidence.',
+        footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/somic_pilot/_index/',
+        footerLinkLabel: 'Open the SOMIC wiki dossier',
     },
 };

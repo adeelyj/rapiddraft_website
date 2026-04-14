@@ -1,7 +1,8 @@
 import { somicDemoConfig } from './configs/somic';
+import { webastoDemoConfig } from './configs/webasto';
 import type { CompanyDemoConfig } from './types';
 
-const companyDemos: CompanyDemoConfig[] = [somicDemoConfig];
+const companyDemos: CompanyDemoConfig[] = [somicDemoConfig, webastoDemoConfig];
 
 function normalizeHostname(hostname: string) {
     return hostname.trim().toLowerCase().replace(/\.$/, '');

@@ -32,7 +32,7 @@ function DemoHeader({ config, isHostMode }: { config: CompanyDemoConfig; isHostM
                     </Link>
                 ) : (
                     <span className="hidden text-sm text-gray-500 sm:inline">
-                        Built from the SOMIC pilot dossier and RapidDraft review vision.
+                        {config.narrative.hostModeNote}
                     </span>
                 )}
             </div>
@@ -40,14 +40,7 @@ function DemoHeader({ config, isHostMode }: { config: CompanyDemoConfig; isHostM
     );
 }
 
-function HeroStoryboard() {
-    const steps = [
-        { label: '1. Scope the revision', text: 'Pair the released baseline with the candidate package.' },
-        { label: '2. Explain the change', text: 'Generate the revision diff and re-check summary.' },
-        { label: '3. Gate the release', text: 'Run deterministic checks and validate the changed part.' },
-        { label: '4. Export the packet', text: 'Package findings, decisions, and evidence for Freigabe.' },
-    ];
-
+function HeroStoryboard({ config }: { config: CompanyDemoConfig }) {
     return (
         <div className="warm-panel relative overflow-hidden p-4 sm:p-5">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,237,213,0.7),transparent_54%)]" />
@@ -56,19 +49,19 @@ function HeroStoryboard() {
                     <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
                         <div>
                             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-orange-200">
-                                SOMIC 434-style release flow
+                                {config.heroStoryboard.eyebrow}
                             </p>
                             <h3 className="mt-2 text-lg font-semibold tracking-tight sm:text-xl">
-                                From customer change to evidence packet
+                                {config.heroStoryboard.title}
                             </h3>
                         </div>
                         <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
-                            Rev A → Rev B
+                            {config.heroStoryboard.revisionLabel}
                         </div>
                     </div>
 
                     <div className="mt-5 space-y-4">
-                        {steps.map((item, index) => (
+                        {config.heroStoryboard.steps.map((item, index) => (
                             <div key={item.label} className="flex items-start gap-4">
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-sm font-semibold text-orange-100 ring-1 ring-white/10">
                                     0{index + 1}
@@ -78,7 +71,7 @@ function HeroStoryboard() {
                                         <p className="text-sm font-semibold text-white">{item.label}</p>
                                         <p className="mt-1 text-sm leading-6 text-white/72">{item.text}</p>
                                     </div>
-                                    {index < steps.length - 1 ? (
+                                    {index < config.heroStoryboard.steps.length - 1 ? (
                                         <ArrowRight className="mt-1 hidden h-4 w-4 shrink-0 text-white/40 sm:block" />
                                     ) : null}
                                 </div>
@@ -259,7 +252,7 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                             </Reveal>
 
                             <Reveal delay={0.08}>
-                                <HeroStoryboard />
+                                <HeroStoryboard config={config} />
                             </Reveal>
                         </div>
                     </div>
@@ -268,11 +261,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                 <section className="border-b border-stone-200/70 bg-white py-16 md:py-20">
                     <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
                         <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">Why this fits SOMIC</p>
-                            <h2 className="section-title mt-6">Built for a revision-heavy packaging-machine workflow</h2>
-                            <p className="section-copy mt-5">
-                                The strongest SOMIC wedge is not generic AI for CAD. It is a revision-before-release review flow that respects their real release pressure, modular product families, and documentation burden.
-                            </p>
+                            <p className="site-kicker">{config.narrative.fitKicker}</p>
+                            <h2 className="section-title mt-6">{config.narrative.fitTitle}</h2>
+                            <p className="section-copy mt-5">{config.narrative.fitBody}</p>
                         </Reveal>
 
                         <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -292,11 +283,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                 <section id="storyline" className="bg-[#fff8f3] py-16 md:py-20">
                     <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
                         <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">Storyline chapters</p>
-                            <h2 className="section-title mt-6">One end-to-end workflow an engineer can actually follow</h2>
-                            <p className="section-copy mt-5">
-                                Each chapter is one video slot: what the engineer does, what RapidDraft returns, and why the result matters beyond the screen.
-                            </p>
+                            <p className="site-kicker">{config.narrative.storylineKicker}</p>
+                            <h2 className="section-title mt-6">{config.narrative.storylineTitle}</h2>
+                            <p className="section-copy mt-5">{config.narrative.storylineBody}</p>
                         </Reveal>
 
                         <div className="mt-12 grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)] xl:grid-cols-[300px_minmax(0,1fr)]">
@@ -366,11 +355,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                 <section className="border-y border-stone-200/70 bg-white py-16 md:py-20">
                     <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
                         <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">Capability map</p>
-                            <h2 className="section-title mt-6">What the SOMIC demo is really proving</h2>
-                            <p className="section-copy mt-5">
-                                The storyline stays narrow on purpose. It shows the parts of RapidDraft that most directly support a change-driven release workflow.
-                            </p>
+                            <p className="site-kicker">{config.narrative.capabilityKicker}</p>
+                            <h2 className="section-title mt-6">{config.narrative.capabilityTitle}</h2>
+                            <p className="section-copy mt-5">{config.narrative.capabilityBody}</p>
                         </Reveal>
 
                         <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -386,11 +373,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                 <section className="bg-[#fff8f3] py-16 md:py-20">
                     <div className="mx-auto grid max-w-[1180px] gap-10 px-5 sm:px-6 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:px-8 xl:px-10">
                         <Reveal>
-                            <p className="site-kicker">What this demo does not claim</p>
-                            <h2 className="section-title mt-6 max-w-[12ch]">Credibility matters more than breadth</h2>
-                            <p className="section-copy mt-5">
-                                This page is designed to show where RapidDraft is strongest for SOMIC right now, while keeping the longer-term integration story honest.
-                            </p>
+                            <p className="site-kicker">{config.narrative.nonClaimsKicker}</p>
+                            <h2 className="section-title mt-6 max-w-[12ch]">{config.narrative.nonClaimsTitle}</h2>
+                            <p className="section-copy mt-5">{config.narrative.nonClaimsBody}</p>
                         </Reveal>
 
                         <div className="space-y-4">
@@ -413,11 +398,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                 <section className="border-y border-stone-200/70 bg-white py-16 md:py-20">
                     <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
                         <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">Pilot expansion path</p>
-                            <h2 className="section-title mt-6">A believable rollout, not a forced integration jump</h2>
-                            <p className="section-copy mt-5">
-                                The first SOMIC pilot should prove the review wedge with minimal friction, then earn the right to integrate more deeply.
-                            </p>
+                            <p className="site-kicker">{config.narrative.rolloutKicker}</p>
+                            <h2 className="section-title mt-6">{config.narrative.rolloutTitle}</h2>
+                            <p className="section-copy mt-5">{config.narrative.rolloutBody}</p>
                         </Reveal>
 
                         <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -452,11 +435,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                         <div className="grid gap-6 lg:grid-cols-[minmax(0,0.56fr)_minmax(0,0.44fr)]">
                             <Reveal>
                                 <div className="surface-card h-full p-7 sm:p-8">
-                                    <p className="site-kicker">Final CTA</p>
-                                    <h2 className="section-title mt-6 max-w-[12ch]">Use the first meeting to prove the release wedge</h2>
-                                    <p className="section-copy mt-5 max-w-2xl">
-                                        If SOMIC sees a trustworthy change summary, a credible release gate, a changed-part DFM slice, and a clean evidence packet, the next conversation becomes much easier.
-                                    </p>
+                                    <p className="site-kicker">{config.narrative.finalCtaKicker}</p>
+                                    <h2 className="section-title mt-6 max-w-[12ch]">{config.narrative.finalCtaTitle}</h2>
+                                    <p className="section-copy mt-5 max-w-2xl">{config.narrative.finalCtaBody}</p>
                                     <div className="mt-8">
                                         <Link to={config.cta.buttonHref} className="btn-primary">
                                             {config.cta.buttonLabel}
@@ -494,15 +475,15 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
             <footer className="border-t border-white/10 bg-dark text-white">
                 <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-5 py-8 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 xl:px-10">
                     <p className="max-w-3xl text-sm leading-7 text-gray-400">
-                        This storyline is anchored in the SOMIC pilot dossier and RapidDraft’s revision-before-release product wedge: change summary, release gating, manufacturability feedback, and traceable evidence.
+                        {config.narrative.footerBody}
                     </p>
                     <a
-                        href="https://wiki.rapiddraft.ai/10_pilots/somic_pilot/_index/"
+                        href={config.narrative.footerLinkHref}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-orange-200"
                     >
-                        Open the SOMIC wiki dossier
+                        {config.narrative.footerLinkLabel}
                         <ArrowRight className="h-4 w-4" />
                     </a>
                 </div>
@@ -510,3 +491,5 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
         </div>
     );
 }
+
+

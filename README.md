@@ -1,5 +1,29 @@
 # RapidDraft Website
 
+## Deploy Source Of Truth
+
+Netlify production for this site is Git-connected and should be treated as branch-driven, not folder-driven.
+
+The source of truth is the GitHub repo branch that Netlify watches:
+
+`adeelyj/rapiddraft_website` -> `codex/rapiddraft-changes`
+
+Important:
+
+1. Do not assume `D:\02_Code\15_RapidDraft_website` is the live source of truth. That local copy can be useful for inspection, but Netlify will keep serving whatever is on the watched Git branch.
+2. When a subdomain tenant page like `somic.rapiddraft.ai` or `webasto.rapiddraft.ai` is added or updated, make the code change in the Git-backed website worktree, push the watched branch, then verify the deploy.
+3. Custom-domain setup is a separate step from content deploy. A tenant page will still show stale or generic content if DNS is correct but the watched branch does not contain the tenant config.
+
+Recommended release checklist for tenant pages:
+
+1. Update the tenant config and shared page logic in the Git-backed website repo.
+2. Run `npm run build` locally.
+3. Push the change to the Netlify-watched branch.
+4. Confirm the new production deploy in Netlify.
+5. Confirm Netlify site domain aliases include the tenant hostname.
+6. Confirm Cloudflare DNS points the tenant hostname at Netlify.
+7. Verify the hostname renders the tenant page, not the generic homepage.
+
 ## Cloudflare Web Analytics
 
 This site can load Cloudflare Web Analytics without changing the Netlify hosting setup.
