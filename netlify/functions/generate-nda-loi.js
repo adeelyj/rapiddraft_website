@@ -134,6 +134,17 @@ async function createGoogleClients() {
             refresh_token: readEnv('GOOGLE_OAUTH_REFRESH_TOKEN', { required: true }),
         });
     } else {
+        const hasServiceAccountCredentials = Boolean(
+            readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL') &&
+            readEnv('GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY')
+        );
+
+        if (!hasServiceAccountCredentials) {
+            throw new Error(
+                'Google auth is not configured. In Netlify, set either GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET, and GOOGLE_OAUTH_REFRESH_TOKEN or GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY.'
+            );
+        }
+
         const clientEmail = readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL', { required: true });
         const privateKey = normalizePrivateKey(readEnv('GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY', { required: true }));
 
