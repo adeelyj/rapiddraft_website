@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="./media/rd_icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Manufacturing-ready drawings and design reviews, automated." />
-    <meta property="og:title" content="RapidDraft | Manufacturing ready drawings and design reviews" />
-    <meta property="og:description" content="Manufacturing-ready drawings and design reviews, automated." />
+    <meta name="description" content="RapidDraft keeps drawing release, design review, and manufacturing feedback attached to the CAD model." />
+    <meta name="theme-color" content="#ea580c" />
+    <meta property="og:title" content="RapidDraft | AI for drawing release and design review" />
+    <meta property="og:description" content="RapidDraft keeps drawing release, design review, and manufacturing feedback attached to the CAD model." />
     <meta property="og:image" content="/media/rd_social.png" />
-    <meta property="og:url" content="/" />
+    <meta property="og:url" content="https://rapiddraft.ai/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RapidDraft | Manufacturing ready drawings and design reviews" />
-    <meta name="twitter:description" content="Manufacturing-ready drawings and design reviews, automated." />
+    <meta name="twitter:title" content="RapidDraft | AI for drawing release and design review" />
+    <meta name="twitter:description" content="RapidDraft keeps drawing release, design review, and manufacturing feedback attached to the CAD model." />
     <meta name="twitter:image" content="/media/rd_social.png" />
-    <title>RapidDraft | Manufacturing ready drawings and design reviews</title>
+    <title>RapidDraft | AI for drawing release and design review</title>
   </head>
   <body>
     <div id="root"></div>
@@ -31,6 +32,30 @@
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
+    </form>
+    <form name="nda-request" data-netlify="true" netlify hidden>
+      <input type="text" name="full-name" />
+      <input type="text" name="title" />
+      <input type="email" name="email" />
+      <input type="text" name="company" />
+      <input type="text" name="jurisdiction" />
+      <textarea name="address"></textarea>
+      <input type="text" name="business-unit-site" />
+      <input type="text" name="systems-environment" />
+      <textarea name="use-case-workflow"></textarea>
+      <input type="text" name="submission_recipient" />
+    </form>
+    <form name="loi-request" data-netlify="true" netlify hidden>
+      <input type="text" name="full-name" />
+      <input type="text" name="title" />
+      <input type="email" name="email" />
+      <input type="text" name="company" />
+      <input type="text" name="jurisdiction" />
+      <textarea name="address"></textarea>
+      <textarea name="use-case-workflow"></textarea>
+      <input type="text" name="business-unit-site" />
+      <textarea name="systems-environment"></textarea>
+      <input type="text" name="submission_recipient" />
     </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,12 +1,18 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Product from './pages/Product';
+import CadConcept from './pages/CadConcept';
 import UseCases from './pages/UseCases';
 import Team from './pages/Team';
 import BookDemo from './pages/BookDemo';
-import JoinUs from './pages/JoinUs';
-import Pitch from './pages/Pitch';
+import DealRoom from './pages/DealRoom';
+import CompanyDemoPage from './pages/CompanyDemoPage';
+import { getCompanyDemoByHostname, getCompanyDemoBySlug } from './companyDemos/registry';
+import DealRoomV2 from './pages/DealRoomV2';
+import DealRoomV3 from './pages/DealRoomV3';
+import NdaRequest from './pages/NdaRequest';
+import LoiRequest from './pages/LoiRequest';
 
 const PITCH_HOSTNAME = 'pitch.rapiddraft.ai';
 const MAIN_SITE_ORIGIN = 'https://rapiddraft.ai';
@@ -19,29 +25,60 @@ function ExternalRedirect({ to }: { to: string }) {
   return null;
 }
 
+function CompanyDemoRoute() {
+  const { slug } = useParams<{ slug: string }>();
+  const companyDemo = slug ? getCompanyDemoBySlug(slug) : undefined;
+
+  if (!companyDemo) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <CompanyDemoPage config={companyDemo} />;
+}
+
 function App() {
-  const isPitchHostname = typeof window !== 'undefined' && window.location.hostname === PITCH_HOSTNAME;
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isPitchHostname = hostname === PITCH_HOSTNAME;
+  const companyDemoFromHostname = hostname ? getCompanyDemoByHostname(hostname) : undefined;
 
   if (isPitchHostname) {
-    const redirectTarget = `${MAIN_SITE_ORIGIN}${window.location.pathname}${window.location.search}${window.location.hash}`;
+    const redirectPath =
+      window.location.pathname === '/' || window.location.pathname === '/pitch' || window.location.pathname === '/how-it-works'
+        ? '/'
+        : window.location.pathname;
+    const redirectTarget = `${MAIN_SITE_ORIGIN}${redirectPath}${window.location.search}${window.location.hash}`;
 
     return (
       <Routes>
-        <Route path="/" element={<Pitch />} />
         <Route path="*" element={<ExternalRedirect to={redirectTarget} />} />
       </Routes>
     );
   }
 
+  if (companyDemoFromHostname && typeof window !== 'undefined' && window.location.pathname === '/') {
+    return <CompanyDemoPage config={companyDemoFromHostname} isHostMode />;
+  }
+
   return (
     <Routes>
-      <Route path="/pitch" element={<Pitch />} />
+      <Route path="/pilots/:slug" element={<CompanyDemoRoute />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Product />} />
+        <Route path="cad-concept" element={<CadConcept />} />
+        <Route path="how-it-works" element={<Navigate to="/" replace />} />
+        <Route path="pitch" element={<Navigate to="/" replace />} />
+        <Route path="deal-room" element={<DealRoomV3 />} />
+        <Route path="deal-room/nda-request" element={<NdaRequest />} />
+        <Route path="deal-room/loi-request" element={<LoiRequest />} />
+        <Route path="deal-room_v1" element={<DealRoom />} />
+        <Route path="deal-room_v2" element={<DealRoomV2 />} />
+        <Route path="deal-room_v3" element={<Navigate to="/deal-room" replace />} />
+        <Route path="deal-room_v3/nda-request" element={<Navigate to="/deal-room/nda-request" replace />} />
+        <Route path="deal-room_v3/loi-request" element={<Navigate to="/deal-room/loi-request" replace />} />
         <Route path="use-cases" element={<UseCases />} />
         <Route path="team" element={<Team />} />
         <Route path="book-demo" element={<BookDemo />} />
-        <Route path="join-us" element={<JoinUs />} />
+        <Route path="join-us" element={<Navigate to="/team#open-roles" replace />} />
       </Route>
     </Routes>
   );

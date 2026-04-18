@@ -1,154 +1,303 @@
-﻿import { Link } from 'react-router-dom';
-import { Linkedin } from 'lucide-react';
+import { ArrowRight, Linkedin } from 'lucide-react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import PageMeta from '../components/PageMeta';
 import Section from '../components/Section';
+import Reveal from '../components/home/Reveal';
+
+const leadershipTeam = [
+    {
+        name: 'Adeel Yawar Jamil',
+        title: 'Founder & Mechanical Engineering Lead',
+        bio: 'Adeel brings 15+ years across CAD, simulation, and technical documentation in aerospace, automotive, and process industries. RapidDraft grew from his repeated experience of good designs slowing down in drawing and review chaos.',
+        image: '/media/adeel.jpg',
+        linkedin: 'https://www.linkedin.com/in/adeelyawarjamil/',
+    },
+    {
+        name: 'Dr. Hasan Raza',
+        title: 'Founder & Operations Lead',
+        bio: 'Hasan has spent 15+ years scaling engineering and manufacturing operations globally. He brings the operating discipline required to make RapidDraft useful inside real industrial release workflows.',
+        image: '/media/hasan.jpg',
+        linkedin: 'https://www.linkedin.com/in/shasanrr/',
+    },
+    {
+        name: 'Sreekar Reddy Sajjala',
+        title: 'Founder & AI Lead',
+        bio: 'Sreekar builds production AI systems and engineering software with a background spanning FEM, CFD, topology optimization, and data-driven tooling. He connects engineering-grade reasoning with reliable software delivery.',
+        image: '/media/sreekar.jpg',
+        linkedin: 'https://www.linkedin.com/in/sreekar2858/',
+    },
+];
+
+const advisors = [
+    {
+        name: 'Shehjar Kaul',
+        role: 'Machine Learning and Business Expert, Siemens',
+        image: '/media/shehjar.jpg',
+        linkedin: 'https://www.linkedin.com/in/shehjarkaul/',
+    },
+    {
+        name: 'Julio Saucedo',
+        role: 'Battery Design and Manufacturing Lead, Volocopter',
+        image: '/media/julio.jpg',
+        linkedin: 'https://www.linkedin.com/in/julio-saucedo/',
+    },
+    {
+        name: 'Muneeb Ahmed',
+        role: 'Program Manager, Amazon',
+        image: '/media/muneeb.jpg',
+        linkedin: 'https://www.linkedin.com/in/muneebdotahmed/',
+    },
+];
+
+const roles = [
+    {
+        category: 'Full-stack',
+        title: 'Full Stack Web Developer',
+        description:
+            'Build and scale the user-facing platform that turns complex CAD intelligence into fast, intuitive, and reliable engineering workflows.',
+        tags: ['Node.js/Python', 'React', 'CAD API exp', 'Cloud (AWS/GCP)', 'Git'],
+    },
+    {
+        category: 'ML / Comp. Geom',
+        title: 'AI & ML Expert',
+        description:
+            'Build intelligent systems that understand 3D geometry and drawings to automate DFM checks, feature recognition, and engineering decisions.',
+        tags: ['Python', 'PyTorch', 'OpenCascade', 'Graph Algorithms', '3D Vision'],
+    },
+    {
+        category: 'Mechanical Background',
+        title: 'CAD Automation Engineer',
+        description:
+            'Develop the core CAD automation logic that extracts geometry, relationships, and engineering intent from NX/SolidWorks/CATIA models.',
+        tags: ['GD&T Logic', 'NX/SolidWorks', 'Geometry Processing'],
+    },
+];
 
 export default function Team() {
-    const leadershipTeam = [
-        {
-            name: "Adeel Yawar Jamil",
-            title: "Founder & Mechanical Engineering Lead",
-            bio: "Adeel brings more than 15 years of experience in CAD, simulation, and technical documentation across aerospace, automotive, and process industries. Having repeatedly watched great designs stall in drawing and review chaos, he started RapidDraft to build the tooling he wished he'd had on every project.",
-            image: "/media/adeel.jpg",
-            linkedin: "https://www.linkedin.com/in/adeelyawarjamil/"
-        },
-        {
-            name: "Dr. Hasan Raza",
-            title: "Founder & Operations / Transformation Lead",
-            bio: "Hasan is a senior leader with 15+ years' experience scaling engineering and manufacturing operations and delivering strong financial performance globally. He specializes in digital and organizational transformation, building high-performance teams, and aligning execution with strategic business goals, bringing the operational rigor RapidDraft needs to grow.",
-            image: "/media/hasan.jpg",
-            linkedin: "https://www.linkedin.com/in/shasanrr/"
-        },
-        {
-            name: "Sreekar Reddy Sajjala",
-            title: "Founder & AI Lead",
-            bio: "Sreekar Reddy Sajjala is RapidDraft's Founder and AI Lead, bringing 3+ years of experience building production AI systems, data pipelines, and full-stack engineering tools deployed on Azure and GCP with measurable impact. With a strong background in FEM, CFD, topology optimization, and generative design across aerospace and energy, he bridges physics-informed modeling with data-driven AI. He brings the technical depth RapidDraft needs to deliver reliable, engineering-grade automation.",
-            image: "/media/sreekar.jpg",
-            linkedin: "https://www.linkedin.com/in/sreekar2858/"
-        }
-    ];
+    const location = useLocation();
 
-    const engineeringAdvisory = [
-        {
-            name: "Shehjar Kaul",
-            role: "Machine Learning and Business Expert, Siemens",
-            image: "/media/shehjar.jpg",
-            linkedin: "https://www.linkedin.com/in/shehjarkaul/"
-        },
-        {
-            name: "Julio Saucedo",
-            role: "Battery Design and Manufacturing Lead, Volocopter",
-            image: "/media/julio.jpg",
-            linkedin: "https://www.linkedin.com/in/julio-saucedo/"
-        },
-        {
-            name: "Muneeb Ahmed",
-            role: "Program Manager, Amazon",
-            image: "/media/muneeb.jpg",
-            linkedin: "https://www.linkedin.com/in/muneebdotahmed/"
-        }
-    ];
+    useEffect(() => {
+        if (!location.hash) return;
 
-    const storyImage = "/media/story-engineers.png";
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (!element) return;
+
+        window.requestAnimationFrame(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }, [location.hash]);
 
     return (
         <>
-            <Section className="pt-0">
-                <div className="text-center max-w-4xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Our mission</h2>
-                    <p className="mt-4 text-lg text-gray-900">
-                        To transform technical drawings and design reviews from a painful bottleneck into a reliable, intelligent partner for every engineering team.
+            <PageMeta
+                title="RapidDraft Team | Engineers building drawing intelligence"
+                description="Meet the RapidDraft team, advisors, and open roles behind a more structured approach to drawing release and design review."
+                path="/team"
+            />
+
+            <section className="hero-mesh relative overflow-hidden border-b border-stone-200/70 py-16 md:py-24">
+                <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
+                    <Reveal className="mx-auto max-w-4xl text-center">
+                        <h1 className="hero-title md:text-[4rem] lg:text-6xl">
+                            Built by engineers who have felt the release bottleneck firsthand.
+                        </h1>
+                        <p className="hero-copy mx-auto mt-6 max-w-3xl">
+                            RapidDraft exists because technical drawings and design reviews still slow down real hardware programs. We are building the software we wished existed: tooling that reduces repeated effort, tightens review cycles, and makes release workflows easier to govern.
+                        </p>
+                    </Reveal>
+                </div>
+            </section>
+
+            <Section className="pb-14 pt-14 md:pb-16 md:pt-20">
+                <Reveal className="mx-auto max-w-4xl text-center">
+                    <div className="site-kicker">Where release workflows still break down</div>
+                    <h2 className="section-title mt-5 text-balance">
+                        Our mission is to turn engineering release workflows from manual bottlenecks into structured, reliable systems.
+                    </h2>
+                    <p className="section-copy mx-auto mt-5 max-w-3xl">
+                        RapidDraft was shaped by experience across mechanical design, simulation, technical documentation, and industrial execution. We are building AI-powered tooling that reduces repeated drafting and review effort, improves consistency, and helps engineering teams move from design intent to release-ready output with greater speed and control.
                     </p>
-                </div>
+                </Reveal>
             </Section>
 
-            <Section className="pt-0">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-bold text-gray-900">Our story</h2>
-                        <p className="text-gray-900 leading-relaxed">
-                            RapidDraft was born out of years spent in the trenches of mechanical design, simulation, and technical documentation. After working on aircraft and automotive battery packs, complex structures, and safety-critical components, we kept hitting the same wall: drawings and reviews were always the slowest, most painful part of getting real hardware out the door.
-                        </p>
-                        <p className="text-gray-900 leading-relaxed">
-                            Instead of accepting drawings as an unavoidable bottleneck, we decided to treat them as a system problem. RapidDraft combines deep CAD and FEM experience with modern AI and automation to turn drawing creation, checking, and manufacturability reviews into a governed, repeatable workflow. Our goal is simple: give engineers back their time, reduce program risk, and make manufacturing teams trust the drawings they receive.
-                        </p>
-                    </div>
-                    <div className="relative">
-                        <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-gray-200 shadow-2xl">
-                            <img src={storyImage} alt="RapidDraft workflow" className="w-full h-full object-cover" />
-                        </div>
-                    </div>
-                </div>
-            </Section>
+            <Section background="light" className="pb-16 pt-16 md:pb-20 md:pt-20">
+                <Reveal className="mx-auto max-w-3xl text-center">
+                    <h2 className="section-title mt-1 text-balance">
+                        Engineering depth, AI capability, and industrial execution in one founding team.
+                    </h2>
+                    <p className="section-copy mx-auto mt-5 max-w-3xl">
+                        The founding team brings together the technical understanding to see where the bottleneck lives, the product capability to build around it, and the operational discipline to make it useful inside real programs.
+                    </p>
+                </Reveal>
 
-            <Section className="pt-0">
-                <div className="text-center max-w-4xl mx-auto mb-12">
-                    <h2 className="text-3xl font-bold text-gray-900">Leadership team</h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                    {leadershipTeam.map((leader) => (
-                        <div
+                <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-3">
+                    {leadershipTeam.map((leader, index) => (
+                        <Reveal
                             key={leader.name}
-                            className="relative bg-white border border-gray-100 rounded-3xl p-8 shadow-xl shadow-gray-200/70"
+                            delay={index * 0.05}
+                            className="surface-card flex h-full flex-col p-6 sm:p-7"
                         >
-                            {leader.linkedin && (
+                            <div className="flex items-start justify-end">
                                 <a
                                     href={leader.linkedin}
-                                    className="absolute top-4 right-4 inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/10 border border-orange-100 text-primary hover:bg-primary/20 transition-colors"
+                                    className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-200 bg-white text-gray-700 transition hover:border-primary hover:text-primary"
                                     aria-label={`LinkedIn profile of ${leader.name}`}
                                 >
-                                    <Linkedin className="w-4 h-4" />
+                                    <Linkedin className="h-4 w-4" />
                                 </a>
-                            )}
-                            <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 mx-auto mb-6 border border-gray-200">
-                                <img src={leader.image} alt={leader.name} className="w-full h-full object-cover" />
                             </div>
-                            <h3 className="text-2xl font-bold text-center text-gray-900">{leader.name}</h3>
-                            <div className="text-center text-primary font-medium mt-1 mb-4">{leader.title}</div>
-                            <p className="text-gray-700 leading-relaxed text-sm">
-                                {leader.bio}
-                            </p>
-                        </div>
+                            <div className="mt-3 overflow-hidden rounded-[2rem] border border-stone-200/80 bg-stone-100">
+                                <div className="aspect-[4/4.6]">
+                                    <img src={leader.image} alt={leader.name} className="h-full w-full object-cover" />
+                                </div>
+                            </div>
+                            <div className="mt-6 flex flex-1 flex-col">
+                                <h3 className="card-title text-[1.55rem] md:text-[1.75rem]">{leader.name}</h3>
+                                <p className="mt-2 text-sm font-medium uppercase tracking-[0.16em] text-primary">
+                                    {leader.title}
+                                </p>
+                                <p className="card-copy mt-5">{leader.bio}</p>
+                            </div>
+                        </Reveal>
                     ))}
                 </div>
             </Section>
 
-            <Section className="pt-0">
-                <div className="text-center max-w-4xl mx-auto mb-10">
-                    <h2 className="text-3xl font-bold text-gray-900">Engineering & Advisory Team</h2>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {engineeringAdvisory.map((member) => (
-                        <div
-                            key={member.name}
-                            className="relative bg-white border border-gray-100 rounded-2xl p-6 shadow-xl shadow-gray-200/60 flex items-center gap-4"
-                        >
-                            <a
-                                href={member.linkedin}
-                                className="absolute top-4 right-4 inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 border border-orange-100 text-primary hover:bg-primary/20 transition-colors"
-                                aria-label={`LinkedIn profile of ${member.name}`}
-                            >
-                                <Linkedin className="w-4 h-4" />
-                            </a>
-                            <div className="w-14 h-14 rounded-full overflow-hidden bg-gray-100 border border-gray-200 shrink-0">
-                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+            <Section className="pb-16 pt-16 md:pb-20 md:pt-20">
+                <Reveal className="mx-auto max-w-3xl text-center">
+                    <div className="site-kicker">Shaped by real program experience</div>
+                    <h2 className="section-title mt-5 text-balance">
+                        An advisory network grounded in engineering reality.
+                    </h2>
+                    <p className="section-copy mx-auto mt-5 max-w-3xl">
+                        RapidDraft is informed by operators and technical leaders who understand how engineering software needs to perform inside real industrial environments — not just in demos.
+                    </p>
+                </Reveal>
+
+                <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3 md:items-stretch">
+                    {advisors.map((member, index) => (
+                        <Reveal key={member.name} delay={index * 0.05} className="h-full">
+                            <div className="flex h-full rounded-[1.6rem] border border-stone-200/90 bg-white p-5 shadow-[0_18px_42px_-34px_rgba(17,24,39,0.16)] sm:p-6">
+                                <div className="flex items-start justify-between gap-4">
+                                    <div className="flex min-w-0 items-center gap-4">
+                                        <div className="h-16 w-16 shrink-0 overflow-hidden rounded-[1.35rem] border border-stone-200 bg-stone-100">
+                                            <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <h3 className="text-lg font-semibold tracking-tight text-gray-950">{member.name}</h3>
+                                            <p className="mt-1 text-sm leading-6 text-gray-600">{member.role}</p>
+                                        </div>
+                                    </div>
+                                    <a
+                                        href={member.linkedin}
+                                        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-200 bg-white text-gray-700 transition hover:border-primary hover:text-primary"
+                                        aria-label={`LinkedIn profile of ${member.name}`}
+                                    >
+                                        <Linkedin className="h-4 w-4" />
+                                    </a>
+                                </div>
                             </div>
-                            <div>
-                                <div className="font-bold text-gray-900">{member.name}</div>
-                                <div className="text-sm text-gray-900">{member.role}</div>
-                            </div>
-                        </div>
+                        </Reveal>
                     ))}
                 </div>
             </Section>
 
-            <Section background="light" className="text-center py-16">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Want to build the future of engineering tooling with us?</h2>
-                <Link
-                    to="/join-us"
-                    className="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-primary hover:bg-primary-hover transition-colors"
-                >
-                    View Open Roles
-                </Link>
+            <section className="border-y border-stone-200/70 bg-[#fff8f3] py-8 md:py-10">
+                <div className="mx-auto max-w-[1180px] px-5 text-center sm:px-6 lg:px-8 xl:px-10">
+                    <Reveal>
+                        <p className="text-lg leading-8 text-gray-600 md:text-[1.35rem] md:leading-9">
+                            If this is the kind of problem space you care about, we would love to build with you.
+                        </p>
+                    </Reveal>
+                </div>
+            </section>
+
+            <section className="hero-mesh relative overflow-hidden py-16 md:py-24">
+                <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
+                    <Reveal className="warm-panel mx-auto max-w-[980px] px-5 py-12 text-center sm:px-10 sm:py-14">
+                        <h2 className="section-title text-balance">
+                            Help build better tools for how engineering release actually works.
+                        </h2>
+                        <p className="section-copy mx-auto mt-5 max-w-3xl">
+                            We are looking for people who want to work on hard, useful problems at the intersection of software, geometry, AI, and industrial execution. The work is practical, technically serious, and close to the workflows that still need better software.
+                        </p>
+                        <a href="#open-roles" className="btn-primary mt-8 w-full sm:w-auto">
+                            See Open Roles
+                        </a>
+                    </Reveal>
+                </div>
+            </section>
+
+            <Section id="open-roles" className="scroll-mt-24 pb-16 pt-16 md:pb-20 md:pt-20">
+                <Reveal className="mx-auto max-w-3xl text-center">
+                    <h2 className="section-title text-balance">
+                        Work that spans software, geometry, and engineering judgment.
+                    </h2>
+                    <p className="section-copy mx-auto mt-5 max-w-3xl">
+                        Each role is designed around product ownership and technical depth. You will work across disciplines and help shape how RapidDraft evolves.
+                    </p>
+                </Reveal>
+
+                <div className="mx-auto mt-12 max-w-5xl space-y-6">
+                    {roles.map((job, index) => (
+                        <Reveal key={job.title} delay={index * 0.05}>
+                            <div className="surface-card grid gap-5 p-5 sm:p-6 md:grid-cols-[220px_minmax(0,1fr)]">
+                                <div>
+                                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                                        {job.category}
+                                    </div>
+                                    <h3 className="card-title mt-2 text-[1.45rem] md:text-2xl">{job.title}</h3>
+                                </div>
+                                <div>
+                                    <p className="card-copy">{job.description}</p>
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        {job.tags.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-medium text-gray-600"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </Reveal>
+                    ))}
+                </div>
+            </Section>
+
+            <Section background="light" className="pb-16 pt-16 md:pb-24 md:pt-20">
+                <Reveal className="mx-auto max-w-3xl text-center">
+                    <h2 className="section-title text-balance">Send a short note about what you have built.</h2>
+                    <p className="section-copy mx-auto mt-5 max-w-3xl">
+                        We care more about good judgment, execution quality, and technical depth than a polished application package. Tell us what you have worked on, what you are proud of, and why this feels like the right problem for you.
+                    </p>
+                </Reveal>
+
+                <Reveal className="warm-panel mx-auto mt-10 max-w-2xl p-5 sm:mt-12 sm:p-8">
+                    <form name="job-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/" className="space-y-5">
+                        <input type="hidden" name="form-name" value="job-application" />
+                        <input type="hidden" name="bot-field" />
+                        <div>
+                            <label htmlFor="job-name" className="form-label">Name</label>
+                            <input type="text" name="name" id="job-name" required className="form-input" />
+                        </div>
+                        <div>
+                            <label htmlFor="job-email" className="form-label">Email</label>
+                            <input type="email" name="email" id="job-email" required className="form-input" />
+                        </div>
+                        <div>
+                            <label htmlFor="job-msg" className="form-label">What have you built / Why RapidDraft?</label>
+                            <textarea name="message" id="job-msg" rows={5} className="form-textarea" />
+                        </div>
+                        <button type="submit" className="btn-primary w-full">
+                            Apply Now <ArrowRight className="ml-2 h-4 w-4" />
+                        </button>
+                    </form>
+                </Reveal>
             </Section>
         </>
     );

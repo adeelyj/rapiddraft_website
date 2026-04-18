@@ -4,42 +4,83 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="bg-dark text-white border-t border-gray-800">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div className="col-span-1 md:col-span-1">
-                        <span className="text-xl font-bold tracking-tight">RapidDraft</span>
-                        <p className="mt-4 text-sm text-gray-400">
-                            Automated drawings and DFM reviews for modern engineering teams.
+        <footer className="border-t border-white/10 bg-dark text-white">
+            <div className="mx-auto max-w-[1180px] px-5 py-14 sm:px-6 lg:px-8 xl:px-10">
+                <div className="grid gap-10 lg:grid-cols-[1.1fr_0.8fr_0.8fr_0.8fr]">
+                    <div className="max-w-sm">
+                        <img src="/media/rd_logo.png" alt="RapidDraft" className="h-8 w-auto" />
+                        <p className="mt-5 text-sm leading-7 text-gray-400">
+                            RapidDraft helps engineering teams accelerate design reviews, generate manufacturing-ready drawings, and retain decision logic across CAD workflows.
                         </p>
+                        <div className="mt-8">
+                            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">
+                                Backed by
+                            </div>
+                            <div className="mt-4 flex items-center gap-[19px] whitespace-nowrap">
+                                <a
+                                    href="https://www.unternehmertum.de"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-flex items-center justify-start transition hover:opacity-100"
+                                    aria-label="UnternehmerTUM"
+                                >
+                                    <img
+                                        src="/media/ecosystem/unternehmertum-logo.svg"
+                                        alt="UnternehmerTUM"
+                                        className="h-auto w-[49px] object-contain opacity-90 grayscale invert"
+                                    />
+                                </a>
+                                <a
+                                    href="https://www.unternehmertum.de/angebot/xplore"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-flex items-center justify-start transition hover:opacity-100"
+                                    aria-label="XPLORE"
+                                >
+                                    <img
+                                        src="/media/ecosystem/xplore-logo.svg"
+                                        alt="XPLORE"
+                                        className="h-auto w-[220px] object-contain opacity-90 grayscale invert"
+                                    />
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="md:col-span-2">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
-                            <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-400">Product</h3>
-                            <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-400">Company</h3>
+                    <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Product</h3>
+                        <div className="mt-5 space-y-3">
+                            <Link to="/" className="block text-sm text-gray-300 transition hover:text-white">Home</Link>
+                            <Link to="/use-cases" className="block text-sm text-gray-300 transition hover:text-white">Use Cases</Link>
+                            <Link to="/book-demo" className="block text-sm text-gray-300 transition hover:text-white">Book a Demo</Link>
                         </div>
-                        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
-                            <Link to="/" className="text-base text-gray-300 hover:text-white">Features</Link>
-                            <Link to="/team" className="text-base text-gray-300 hover:text-white">Team</Link>
-                            <Link to="/use-cases" className="text-base text-gray-300 hover:text-white">Use Cases</Link>
-                            <Link to="/join-us" className="text-base text-gray-300 hover:text-white">Careers</Link>
-                            <Link to="/book-demo" className="text-base text-gray-300 hover:text-white">Book a Demo</Link>
-                            <span className="hidden sm:block" aria-hidden="true"></span>
+                    </div>
+
+                    <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Company</h3>
+                        <div className="mt-5 space-y-3">
+                            <Link to="/team" className="block text-sm text-gray-300 transition hover:text-white">Team</Link>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Contact</h3>
+                        <div className="mt-5 space-y-3">
+                            <a href="mailto:info@rapiddraft.ai" className="block text-sm text-gray-300 transition hover:text-white">
+                                info@rapiddraft.ai
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p className="text-base text-gray-500">
+                <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
+                    <p className="text-sm text-gray-500 md:justify-self-start">
                         &copy; {year} RapidDraft. All rights reserved.
                     </p>
-                    <p className="text-sm text-gray-600 mt-2 md:mt-0">
-                        <span className="inline-flex items-center gap-2">
-                            Built with
-                            <img src="/media/heart.png" alt="heart" className="h-4 w-4 inline-block" />
-                            in M&#252;nchen
-                        </span>
+                    <p className="flex items-center gap-2 text-sm text-gray-500">
+                        <span>Made with</span>
+                        <img src="/media/heart.png" alt="love" className="h-3.5 w-3.5 object-contain" />
+                        <span>in Munich</span>
                     </p>
                 </div>
             </div>

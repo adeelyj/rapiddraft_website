@@ -13,12 +13,12 @@ export default function Section({ children, className, id, background = 'white' 
         <section
             id={id}
             className={clsx(
-                'py-16 md:py-24',
-                background === 'light' ? 'bg-gray-50' : 'bg-white',
+                'py-16 md:py-28',
+                background === 'light' ? 'bg-[#fff8f3]' : 'bg-white',
                 className
             )}
         >
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
                 {children}
             </div>
         </section>
