@@ -16,7 +16,7 @@ export default function Footer() {
                             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">
                                 Backed by
                             </div>
-                            <div className="mt-4 flex items-center gap-3 whitespace-nowrap">
+                            <div className="mt-4 flex items-center gap-[19px] whitespace-nowrap">
                                 <a
                                     href="https://www.unternehmertum.de"
                                     target="_blank"
@@ -40,7 +40,7 @@ export default function Footer() {
                                     <img
                                         src="/media/ecosystem/xplore-logo.svg"
                                         alt="XPLORE"
-                                        className="h-auto w-[122px] object-contain opacity-90 grayscale invert"
+                                        className="h-auto w-[220px] object-contain opacity-90 grayscale invert"
                                     />
                                 </a>
                             </div>
@@ -50,7 +50,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Product</h3>
                         <div className="mt-5 space-y-3">
-                            <Link to="/" className="block text-sm text-gray-300 transition hover:text-white">Product</Link>
+                            <Link to="/" className="block text-sm text-gray-300 transition hover:text-white">Home</Link>
                             <Link to="/use-cases" className="block text-sm text-gray-300 transition hover:text-white">Use Cases</Link>
                             <Link to="/book-demo" className="block text-sm text-gray-300 transition hover:text-white">Book a Demo</Link>
                         </div>
@@ -66,8 +66,8 @@ export default function Footer() {
                     <div>
                         <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Contact</h3>
                         <div className="mt-5 space-y-3">
-                            <a href="mailto:adeel@rapiddraft.ai" className="block text-sm text-gray-300 transition hover:text-white">
-                                adeel@rapiddraft.ai
+                            <a href="mailto:info@rapiddraft.ai" className="block text-sm text-gray-300 transition hover:text-white">
+                                info@rapiddraft.ai
                             </a>
                         </div>
                     </div>

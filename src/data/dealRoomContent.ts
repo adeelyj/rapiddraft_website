@@ -126,7 +126,7 @@ export const defaultDealRoomContent: DealRoomContent = {
         },
         {
             label: 'Contact',
-            value: 'Hasan Raza, Co-Founder, RapidDraft, hello@rapiddraft.ai',
+            value: 'Adeel Yawar Jamil, Founder & Mechanical Engineering Lead, info@rapiddraft.ai',
             icon: UserRound,
         },
     ],
@@ -312,11 +312,11 @@ export const defaultDealRoomContent: DealRoomContent = {
         },
     ],
     contact: {
-        name: 'Hasan Raza',
-        title: 'Co-Founder, RapidDraft',
-        email: 'hello@rapiddraft.ai',
+        name: 'Adeel Yawar Jamil',
+        title: 'Founder & Mechanical Engineering Lead',
+        email: 'info@rapiddraft.ai',
         message: 'Your point of contact for pilot setup, scoping, and next steps.',
-        image: '/media/hasan.jpg',
+        image: '/media/adeel.jpg',
     },
     finalCtas: {
         primary: {
