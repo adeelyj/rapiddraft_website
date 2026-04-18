@@ -127,7 +127,6 @@ export default function NdaRequest() {
                                             : 'Thank you for sending the information. The NDA and LOI have been sent to your email address.'}
                                     </p>
                                     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                                        <Link to="/deal-room_v3" className="btn-primary w-full sm:w-auto">
                                         <Link to="/deal-room" className="btn-primary w-full sm:w-auto">
                                             Return to Deal Room
                                         </Link>

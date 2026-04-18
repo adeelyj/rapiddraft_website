@@ -116,11 +116,11 @@ export default function ProblemSolutionStory({
                                     </p>
                                     <ul className="mt-5 space-y-3">
                                         {capability.bullets.map((bullet) => (
-                                            <li key={bullet} className="flex items-start gap-3 text-sm leading-7 text-gray-700 sm:text-[15px]">
-                                                <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-50">
+                                            <li key={bullet} className="bullet-row">
+                                                <span className="bullet-icon">
                                                     <Check className="h-3 w-3 text-primary" />
                                                 </span>
-                                                <span>{bullet}</span>
+                                                <span className="bullet-copy">{bullet}</span>
                                             </li>
                                         ))}
                                     </ul>

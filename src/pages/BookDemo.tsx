@@ -43,9 +43,11 @@ export default function BookDemo() {
 
                         <div className="mt-8 max-w-[31rem] space-y-4">
                             {conversationPoints.map((point) => (
-                                <div key={point} className="flex items-start gap-3 text-gray-700">
-                                    <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                                    <span className="card-copy text-gray-700">{point}</span>
+                                <div key={point} className="bullet-row">
+                                    <span className="bullet-icon">
+                                        <Check className="h-3 w-3 text-primary" />
+                                    </span>
+                                    <span className="bullet-copy">{point}</span>
                                 </div>
                             ))}
                         </div>
@@ -77,7 +79,7 @@ export default function BookDemo() {
 
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div>
-                                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-700">
+                                    <label htmlFor="name" className="form-label">
                                         Name <span className="text-primary">*</span>
                                     </label>
                                     <input
@@ -86,11 +88,11 @@ export default function BookDemo() {
                                         id="name"
                                         required
                                         placeholder="Jane Doe"
-                                        className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white"
+                                        className="form-input"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
+                                    <label htmlFor="email" className="form-label">
                                         Work Email <span className="text-primary">*</span>
                                     </label>
                                     <input
@@ -99,38 +101,38 @@ export default function BookDemo() {
                                         id="email"
                                         required
                                         placeholder="jane@company.com"
-                                        className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white"
+                                        className="form-input"
                                     />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div>
-                                    <label htmlFor="company" className="mb-2 block text-sm font-medium text-gray-700">
+                                    <label htmlFor="company" className="form-label">
                                         Company
                                     </label>
                                     <input
                                         type="text"
                                         name="company"
                                         id="company"
-                                        className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white"
+                                        className="form-input"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="role" className="mb-2 block text-sm font-medium text-gray-700">
+                                    <label htmlFor="role" className="form-label">
                                         Role
                                     </label>
                                     <input
                                         type="text"
                                         name="role"
                                         id="role"
-                                        className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white"
+                                        className="form-input"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label htmlFor="cad-tools" className="mb-2 block text-sm font-medium text-gray-700">
+                                <label htmlFor="cad-tools" className="form-label">
                                     CAD Tools Used
                                 </label>
                                 <input
@@ -138,12 +140,12 @@ export default function BookDemo() {
                                     name="cad-tools"
                                     id="cad-tools"
                                     placeholder="e.g. NX, SolidWorks, CATIA V5"
-                                    className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white"
+                                    className="form-input"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-700">
+                                <label htmlFor="message" className="form-label">
                                     What should we focus on?
                                 </label>
                                 <textarea
@@ -151,7 +153,7 @@ export default function BookDemo() {
                                     id="message"
                                     rows={5}
                                     placeholder="Describe the workflow, release step, or review bottleneck you want to explore."
-                                    className="block w-full rounded-[1.5rem] border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white"
+                                    className="form-textarea"
                                 />
                             </div>
 
@@ -176,11 +178,11 @@ export default function BookDemo() {
 
                         <div className="mt-8 divide-y divide-stone-200/80 rounded-[2rem] border border-stone-200/90 bg-white shadow-[0_20px_50px_-38px_rgba(17,24,39,0.14)]">
                             {bestFit.map((item) => (
-                                <div key={item} className="flex items-start gap-4 px-5 py-5 sm:px-6">
-                                    <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange-50">
-                                        <Check className="h-4 w-4 text-primary" />
+                                <div key={item} className="bullet-row px-5 py-5 sm:px-6">
+                                    <div className="bullet-icon">
+                                        <Check className="h-3 w-3 text-primary" />
                                     </div>
-                                    <p className="card-copy text-gray-700">{item}</p>
+                                    <p className="bullet-copy">{item}</p>
                                 </div>
                             ))}
                         </div>

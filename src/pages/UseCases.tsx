@@ -101,9 +101,11 @@ export default function UseCases() {
 
                         <div className="mt-8 space-y-4">
                             {overviewPoints.map((point) => (
-                                <div key={point} className="flex items-start gap-3 text-gray-700">
-                                    <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                                    <span className="card-copy text-gray-700">{point}</span>
+                                <div key={point} className="bullet-row">
+                                    <span className="bullet-icon">
+                                        <Check className="h-3 w-3 text-primary" />
+                                    </span>
+                                    <span className="bullet-copy">{point}</span>
                                 </div>
                             ))}
                         </div>
@@ -185,9 +187,11 @@ export default function UseCases() {
 
                                     <div className="mt-8 space-y-4">
                                         {item.bullets.map((bullet) => (
-                                            <div key={bullet} className="flex items-start gap-3">
-                                                <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                                                <p className="card-copy text-gray-700">{bullet}</p>
+                                            <div key={bullet} className="bullet-row">
+                                                <span className="bullet-icon">
+                                                    <Check className="h-3 w-3 text-primary" />
+                                                </span>
+                                                <p className="bullet-copy">{bullet}</p>
                                             </div>
                                         ))}
                                     </div>

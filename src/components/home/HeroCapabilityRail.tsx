@@ -98,13 +98,10 @@ export default function HeroCapabilityRail({
     const [progress, setProgress] = useState(0);
     const [seekRequest, setSeekRequest] = useState<SeekRequest>({ id: 0, fraction: 0 });
 
-    useEffect(() => {
-        setProgress(0);
-    }, [activeKey]);
-
     const advanceToNext = () => {
         const currentIndex = activeIndex === -1 ? 0 : activeIndex;
         const nextIndex = (currentIndex + 1) % items.length;
+        setProgress(0);
         setSeekRequest((current) => ({ id: current.id + 1, fraction: 0 }));
         onSelect(items[nextIndex].key);
     };
@@ -116,6 +113,7 @@ export default function HeroCapabilityRail({
         setSeekRequest((current) => ({ id: current.id + 1, fraction }));
 
         if (itemKey !== activeKey) {
+            setProgress(fraction);
             onSelect(itemKey);
         } else {
             setProgress(fraction);
@@ -124,7 +122,7 @@ export default function HeroCapabilityRail({
 
     return (
         <div className="grid gap-4 sm:gap-5">
-            <div className="overflow-hidden rounded-[2rem] border border-[#262d3f] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(234,88,12,0.16),transparent_36%),linear-gradient(140deg,#171d2b_0%,#1d2435_52%,#2a2331_100%)] p-4 shadow-[0_42px_120px_-48px_rgba(17,24,39,0.58)] sm:rounded-[2.25rem] sm:p-5 md:p-6">
+            <div className="overflow-hidden rounded-[2rem] border border-[#262d3f] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(234,88,12,0.16),transparent_36%),linear-gradient(140deg,#171d2b_0%,#1d2435_52%,#2a2331_100%)] p-4 text-white shadow-[0_42px_120px_-48px_rgba(17,24,39,0.58)] sm:rounded-[2.25rem] sm:p-5 md:p-6">
                 <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
                     {items.map((item) => (
                         <div
@@ -138,6 +136,7 @@ export default function HeroCapabilityRail({
                             <button
                                 type="button"
                                 onClick={() => {
+                                    setProgress(0);
                                     setSeekRequest((current) => ({ id: current.id + 1, fraction: 0 }));
                                     onSelect(item.key);
                                 }}

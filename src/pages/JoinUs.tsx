@@ -121,16 +121,16 @@ export default function JoinUs() {
                         <input type="hidden" name="form-name" value="job-application" />
                         <input type="hidden" name="bot-field" />
                         <div>
-                            <label htmlFor="job-name" className="mb-2 block text-sm font-medium text-gray-700">Name</label>
-                            <input type="text" name="name" id="job-name" required className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white" />
+                            <label htmlFor="job-name" className="form-label">Name</label>
+                            <input type="text" name="name" id="job-name" required className="form-input" />
                         </div>
                         <div>
-                            <label htmlFor="job-email" className="mb-2 block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" name="email" id="job-email" required className="block w-full rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white" />
+                            <label htmlFor="job-email" className="form-label">Email</label>
+                            <input type="email" name="email" id="job-email" required className="form-input" />
                         </div>
                         <div>
-                            <label htmlFor="job-msg" className="mb-2 block text-sm font-medium text-gray-700">Motivation / Links</label>
-                            <textarea name="message" id="job-msg" rows={4} className="block w-full rounded-[1.5rem] border border-stone-300 bg-stone-50 px-4 py-3 text-gray-900 outline-none transition focus:border-primary focus:bg-white" />
+                            <label htmlFor="job-msg" className="form-label">Motivation / Links</label>
+                            <textarea name="message" id="job-msg" rows={4} className="form-textarea" />
                         </div>
                         <button type="submit" className="btn-primary w-full">
                             Apply Now <ArrowRight className="ml-2 h-4 w-4" />
