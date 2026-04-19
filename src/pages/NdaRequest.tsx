@@ -119,20 +119,11 @@ export default function NdaRequest() {
         } catch (error) {
             form.reset();
             setStatus('follow-up');
-            setErrorMessage(
-                error instanceof Error
-                    ? error.message
-                    : 'Your request was received, but the automated NDA/LOI send needs follow-up.'
-            );
+            setErrorMessage('');
             setSubmissionResult({
                 formCapture: {
                     captured: true,
                 },
-                warnings: [
-                    error instanceof Error
-                        ? error.message
-                        : 'The request was saved, but automation needs follow-up.',
-                ],
             });
         }
     };
@@ -200,7 +191,7 @@ export default function NdaRequest() {
                                             {errorMessage}
                                         </p>
                                     ) : null}
-                                    {submissionResult?.warnings?.length ? (
+                                    {submissionResult?.delivery?.testMode && submissionResult?.warnings?.length ? (
                                         <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-gray-700">
                                             {submissionResult.warnings.map((warning) => (
                                                 <p key={warning}>{warning}</p>
