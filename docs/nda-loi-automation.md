@@ -1,17 +1,21 @@
 # NDA + LOI Automation
 
-This site can generate and email the NDA and LOI automatically from the combined `NDA + LOI` request form at `/deal-room_v3/nda-request`.
+This site can capture, generate, and email the NDA and LOI automatically from the combined
+`NDA + LOI` request form at `/deal-room/nda-request`.
 
 ## Flow
 
-1. Customer submits the form.
-2. Netlify function `generate-nda-loi` copies both Google Docs templates.
-3. The function fills the placeholders in each copied document.
-4. The function exports both documents as PDF.
-5. The PDFs are saved as:
+1. Customer submits the combined `nda-request` form.
+2. Netlify Forms stores the submission as the intake record.
+3. The frontend calls the Netlify function `generate-nda-loi`.
+4. The function copies both Google Docs templates.
+5. The function fills the placeholders in each copied document.
+6. The function exports both documents as PDF.
+7. The PDFs are saved as:
    - `NDA_[company].pdf`
    - `LOI_[company].pdf`
-6. The PDFs are emailed to the customer and copied to `info@rapiddraft.ai`.
+8. The PDFs are emailed to the customer and copied to `info@rapiddraft.ai`.
+9. If SMTP succeeds, IMAP Sent-folder archival is attempted only when IMAP is configured.
 
 ## Required Setup
 
@@ -61,15 +65,22 @@ If `GOOGLE_OUTPUT_FOLDER_ID` is set, also share that Drive folder with the same 
 
 ### 2. Environment variables
 
-Set these in Netlify:
+Set these in Netlify.
 
-- `GOOGLE_OAUTH_CLIENT_ID`
-- `GOOGLE_OAUTH_CLIENT_SECRET`
-- `GOOGLE_OAUTH_REFRESH_TOKEN`
-- `GOOGLE_OAUTH_REDIRECT_URI`
-  - optional, defaults to `http://localhost`
-- `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+Google auth requires one mode, not both:
+
+- OAuth mode:
+  - `GOOGLE_OAUTH_CLIENT_ID`
+  - `GOOGLE_OAUTH_CLIENT_SECRET`
+  - `GOOGLE_OAUTH_REFRESH_TOKEN`
+  - `GOOGLE_OAUTH_REDIRECT_URI`
+    - optional, defaults to `http://localhost`
+- or service-account mode:
+  - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+  - `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+
+Always set:
+
 - `GOOGLE_NDA_TEMPLATE_ID`
   - optional, defaults to the current NDA template in code
 - `GOOGLE_LOI_TEMPLATE_ID`
@@ -116,7 +127,11 @@ If you want each sent NDA/LOI email to appear in the mailbox `Sent` folder, also
 - `IMAP_SENT_FOLDER`
   - optional, defaults to `Sent`
 
-After the SMTP send succeeds, the function appends the sent RFC822 message into the configured IMAP sent mailbox.
+After the SMTP send succeeds, the function tries to append the sent RFC822 message into the
+configured IMAP sent mailbox.
+
+If IMAP is not configured, email delivery still succeeds and the function reports that Sent-folder
+archival was skipped.
 
 ## Current Placeholder Schema
 
@@ -136,20 +151,25 @@ The Google Docs templates have been normalized to these merge tags:
 
 ## Trigger
 
-The frontend posts the combined NDA + LOI form directly to:
+The combined form is captured in Netlify Forms under:
+
+- `nda-request`
+
+After capture, the frontend posts the same payload to:
 
 - `/.netlify/functions/generate-nda-loi`
 
 ## Notes
 
 - The function creates filled Google Doc copies and PDF files.
+- The form submission is saved in Netlify Forms before document automation starts.
 - If OAuth credentials are present, the function uses your Google user account via refresh token.
 - If OAuth credentials are not present, the function falls back to service-account auth.
 - The filenames are sanitized from the submitted company name.
 - `{{EFFECTIVE_DATE}}` is set from the form submission timestamp on the server, using `RAPIDDRAFT_EFFECTIVE_DATE_TIMEZONE`.
 - `{{RAPIDDRAFT_EMAIL}}` is always set to `info@rapiddraft.ai`.
 - If the service account cannot access the templates or output folder, the function will fail.
-- If `AUTOMATION_TEST_MODE=true`, the function still generates the Google Docs and PDFs but skips the email send.
+- If `AUTOMATION_TEST_MODE=true`, the function still generates the Google Docs and PDFs but skips the email send and Sent-folder copy.
 
 ## Fast Local Test
 
@@ -170,7 +190,7 @@ The frontend posts the combined NDA + LOI form directly to:
 5. Start the app with:
    - `npm run dev:netlify`
 6. Open:
-   - `http://localhost:8888/deal-room_v3/nda-request`
+   - `http://localhost:8888/deal-room/nda-request`
 7. Submit the form.
 
 In test mode, the success state will show direct links to:

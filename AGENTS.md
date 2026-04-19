@@ -26,7 +26,7 @@ truth.
 The production Netlify site is connected to:
 
 - repo: `adeelyj/rapiddraft_website`
-- branch: `codex/rapiddraft-changes`
+- branch: `main`
 - site: `rapiddraft`
 
 If a change is made locally but not pushed to the tracked branch, Netlify can keep serving older

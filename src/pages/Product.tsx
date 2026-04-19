@@ -178,8 +178,8 @@ export default function Product() {
                             <Link to="/book-demo" className="btn-primary w-full sm:w-auto">
                                 Book a Demo
                             </Link>
-                            <Link to="/use-cases" className="btn-secondary w-full sm:w-auto">
-                                See Use Cases
+                            <Link to="/deal-room" className="btn-secondary w-full sm:w-auto">
+                                Explore Deal Room
                             </Link>
                         </div>
                     </Reveal>

@@ -59,6 +59,10 @@ function hasOAuthCredentials() {
     );
 }
 
+function hasImapConfiguration() {
+    return Boolean(readEnv('IMAP_HOST') && readEnv('IMAP_PORT'));
+}
+
 function sanitizeFileStem(value) {
     return value
         .trim()
@@ -134,6 +138,17 @@ async function createGoogleClients() {
             refresh_token: readEnv('GOOGLE_OAUTH_REFRESH_TOKEN', { required: true }),
         });
     } else {
+        const hasServiceAccountCredentials = Boolean(
+            readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL') &&
+            readEnv('GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY')
+        );
+
+        if (!hasServiceAccountCredentials) {
+            throw new Error(
+                'Google auth is not configured. In Netlify, set either GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET, and GOOGLE_OAUTH_REFRESH_TOKEN or GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY.'
+            );
+        }
+
         const clientEmail = readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL', { required: true });
         const privateKey = normalizePrivateKey(readEnv('GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY', { required: true }));
 
@@ -328,11 +343,26 @@ async function buildOutgoingEmail({ payload, ndaResult, loiResult }) {
 }
 
 async function appendToSentMailbox(rawMessage) {
+    if (!hasImapConfiguration()) {
+        return {
+            attempted: false,
+            appended: false,
+            skipped: true,
+            reason: 'IMAP Sent-folder archival is not configured.',
+        };
+    }
+
     const sentFolder = readEnv('IMAP_SENT_FOLDER', { fallback: 'Sent' });
     const client = await createImapClient();
 
     try {
         await client.append(sentFolder, rawMessage, ['\\Seen'], new Date());
+        return {
+            attempted: true,
+            appended: true,
+            skipped: false,
+            reason: null,
+        };
     } finally {
         await client.logout().catch(() => {});
     }
@@ -350,7 +380,28 @@ async function sendDocumentsByEmail({ transporter, payload, ndaResult, loiResult
         raw: rawMessage,
     });
 
-    await appendToSentMailbox(rawMessage);
+    try {
+        const sentCopy = await appendToSentMailbox(rawMessage);
+
+        return {
+            sentCopy,
+            warnings: [],
+        };
+    } catch (error) {
+        return {
+            sentCopy: {
+                attempted: true,
+                appended: false,
+                skipped: false,
+                reason: error instanceof Error ? error.message : 'Failed to append a Sent-folder copy.',
+            },
+            warnings: [
+                error instanceof Error
+                    ? `Email sent, but saving a Sent-folder copy failed: ${error.message}`
+                    : 'Email sent, but saving a Sent-folder copy failed.',
+            ],
+        };
+    }
 }
 
 export async function handler(event) {
@@ -373,6 +424,9 @@ export async function handler(event) {
         const placeholders = buildPlaceholderMap(payload, effectiveDate);
         const outputFolderId = readEnv('GOOGLE_OUTPUT_FOLDER_ID');
         const companyStem = sanitizeFileStem(payload.company);
+        const formCapture = {
+            captured: isTrueish(payload.__form_captured),
+        };
 
         const ndaTemplateId = readEnv('GOOGLE_NDA_TEMPLATE_ID', { fallback: DEFAULT_NDA_TEMPLATE_ID });
         const loiTemplateId = readEnv('GOOGLE_LOI_TEMPLATE_ID', { fallback: DEFAULT_LOI_TEMPLATE_ID });
@@ -395,22 +449,35 @@ export async function handler(event) {
             placeholders,
         });
 
+        const warnings = [];
+        let sentCopy = {
+            attempted: false,
+            appended: false,
+            skipped: true,
+            reason: testMode ? 'Skipped in test mode.' : null,
+        };
+
         if (transporter) {
-            await sendDocumentsByEmail({
+            const emailDelivery = await sendDocumentsByEmail({
                 transporter,
                 payload,
                 ndaResult,
                 loiResult,
             });
+            sentCopy = emailDelivery.sentCopy;
+            warnings.push(...emailDelivery.warnings);
         }
 
         return json(200, {
             ok: true,
+            formCapture,
             delivery: {
                 emailSent: !testMode,
                 testMode,
                 recipient: payload.email,
+                sentCopy,
             },
+            warnings,
             nda: {
                 documentUrl: ndaResult.documentUrl,
                 pdfUrl: ndaResult.pdfUrl,

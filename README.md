@@ -6,7 +6,7 @@ Netlify production for this site is Git-connected and should be treated as branc
 
 The source of truth is the GitHub repo branch that Netlify watches:
 
-`adeelyj/rapiddraft_website` -> `codex/rapiddraft-changes`
+`adeelyj/rapiddraft_website` -> `main`
 
 Current hosted site identity:
 
@@ -18,7 +18,7 @@ Current hosted site identity:
 Useful local paths on this machine:
 
 1. Git-backed worktree on `main`: `D:\02_Code\16_rapiddraft_website_live`
-2. Git-backed worktree used for branch edits and deploy work: `D:\02_Code\16_rapiddraft_website_codex`
+2. Secondary Git-backed worktree used for branch edits and experiments: `D:\02_Code\16_rapiddraft_website_codex`
 3. Non-git local copy that should not be treated as deploy truth: `D:\02_Code\15_RapidDraft_website`
 
 Important:
@@ -31,7 +31,7 @@ Recommended release checklist for tenant pages:
 
 1. Update the tenant config and shared page logic in the Git-backed website repo.
 2. Run `npm run build` locally.
-3. Push the change to the Netlify-watched branch.
+3. Push the change to the Netlify-watched branch, `main`.
 4. Confirm the new production deploy in Netlify.
 5. Confirm Netlify site domain aliases include the tenant hostname.
 6. Confirm Cloudflare DNS points the tenant hostname at Netlify.
