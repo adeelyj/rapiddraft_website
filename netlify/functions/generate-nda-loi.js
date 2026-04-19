@@ -1,8 +1,29 @@
 import nodemailer from 'nodemailer';
 import PDFDocument from 'pdfkit';
+import { fileURLToPath } from 'node:url';
 import { LOI_TEMPLATE, NDA_TEMPLATE, RAPIDDRAFT_EMAIL, RAPIDDRAFT_FOUNDERS } from './lib/legalTemplates.js';
 
 const DEFAULT_RECIPIENT = 'info@rapiddraft.ai';
+const SIGNATURE_ASSETS = [
+    {
+        name: 'Adeel Yawar Jamil',
+        imagePath: fileURLToPath(new URL('./data/signature-adeel.png', import.meta.url)),
+        maxWidth: 140,
+        maxHeight: 42,
+    },
+    {
+        name: 'Dr. Hasan Raza',
+        imagePath: fileURLToPath(new URL('./data/signature-hasan.png', import.meta.url)),
+        maxWidth: 120,
+        maxHeight: 36,
+    },
+    {
+        name: 'Sreekar Reddy Sajjala',
+        imagePath: fileURLToPath(new URL('./data/signature-sreekar.png', import.meta.url)),
+        maxWidth: 140,
+        maxHeight: 38,
+    },
+];
 
 const REQUIRED_FIELDS = [
     'full-name',
@@ -102,6 +123,32 @@ function renderParagraph(doc, text, { indent = 0, paragraphGap = 10 } = {}) {
         });
 }
 
+function renderFounderSignatureBlock(doc, founder, effectiveDate) {
+    const signatureAsset = SIGNATURE_ASSETS.find((asset) => asset.name === founder);
+
+    doc.font('Times-Bold').fontSize(11).text(founder);
+
+    if (signatureAsset) {
+        const startX = doc.x;
+        const startY = doc.y + 2;
+
+        doc.image(signatureAsset.imagePath, startX, startY, {
+            fit: [signatureAsset.maxWidth, signatureAsset.maxHeight],
+            align: 'left',
+            valign: 'top',
+        });
+
+        doc.moveDown(2.3);
+    } else {
+        doc.moveDown(0.5);
+    }
+
+    doc.font('Times-Roman').fontSize(11).text('Signature: ______________________________');
+    doc.font('Times-Roman').fontSize(11).text(`Date: ${effectiveDate}`, {
+        paragraphGap: 12,
+    });
+}
+
 function renderSection(doc, section, placeholders) {
     doc
         .font('Times-Bold')
@@ -135,6 +182,8 @@ function renderSection(doc, section, placeholders) {
 }
 
 function renderSignatureSection(doc, placeholders) {
+    const effectiveDate = fillTemplateText('{{EFFECTIVE_DATE}}', placeholders);
+
     doc.moveDown(0.6);
     doc
         .font('Times-Bold')
@@ -144,11 +193,7 @@ function renderSignatureSection(doc, placeholders) {
         });
 
     RAPIDDRAFT_FOUNDERS.forEach((founder) => {
-        doc.font('Times-Bold').fontSize(11).text(founder);
-        doc.font('Times-Roman').fontSize(11).text('Signature: ______________________________');
-        doc.font('Times-Roman').fontSize(11).text(`Date: ${fillTemplateText('{{EFFECTIVE_DATE}}', placeholders)}`, {
-            paragraphGap: 12,
-        });
+        renderFounderSignatureBlock(doc, founder, effectiveDate);
     });
 
     doc
