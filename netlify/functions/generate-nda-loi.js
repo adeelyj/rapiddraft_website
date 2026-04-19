@@ -8,21 +8,21 @@ const FUNCTION_DATA_DIR = path.join(process.cwd(), 'netlify', 'functions', 'data
 const SIGNATURE_ASSETS = [
     {
         name: 'Adeel Yawar Jamil',
-        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-adeel.png'),
-        maxWidth: 140,
-        maxHeight: 42,
+        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-adeel-trim.png'),
+        maxWidth: 108,
+        maxHeight: 72,
     },
     {
         name: 'Dr. Hasan Raza',
-        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-hasan.png'),
-        maxWidth: 120,
-        maxHeight: 36,
+        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-hasan-trim.png'),
+        maxWidth: 78,
+        maxHeight: 44,
     },
     {
         name: 'Sreekar Reddy Sajjala',
-        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-sreekar.png'),
-        maxWidth: 140,
-        maxHeight: 38,
+        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-sreekar-trim.png'),
+        maxWidth: 118,
+        maxHeight: 48,
     },
 ];
 
@@ -139,7 +139,7 @@ function renderFounderSignatureBlock(doc, founder, effectiveDate) {
             valign: 'top',
         });
 
-        doc.moveDown(2.3);
+        doc.y = startY + signatureAsset.maxHeight + 4;
     } else {
         doc.moveDown(0.5);
     }
