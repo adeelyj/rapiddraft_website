@@ -9,8 +9,8 @@ const SIGNATURE_ASSETS = [
     {
         name: 'Adeel Yawar Jamil',
         imagePath: path.join(FUNCTION_DATA_DIR, 'signature-adeel-trim.png'),
-        maxWidth: 108,
-        maxHeight: 72,
+        maxWidth: 80,
+        maxHeight: 48,
     },
     {
         name: 'Dr. Hasan Raza',
