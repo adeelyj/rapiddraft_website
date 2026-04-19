@@ -1,25 +1,26 @@
 import nodemailer from 'nodemailer';
 import PDFDocument from 'pdfkit';
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { LOI_TEMPLATE, NDA_TEMPLATE, RAPIDDRAFT_EMAIL, RAPIDDRAFT_FOUNDERS } from './lib/legalTemplates.js';
 
 const DEFAULT_RECIPIENT = 'info@rapiddraft.ai';
+const FUNCTION_DATA_DIR = path.join(process.cwd(), 'netlify', 'functions', 'data');
 const SIGNATURE_ASSETS = [
     {
         name: 'Adeel Yawar Jamil',
-        imagePath: fileURLToPath(new URL('./data/signature-adeel.png', import.meta.url)),
+        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-adeel.png'),
         maxWidth: 140,
         maxHeight: 42,
     },
     {
         name: 'Dr. Hasan Raza',
-        imagePath: fileURLToPath(new URL('./data/signature-hasan.png', import.meta.url)),
+        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-hasan.png'),
         maxWidth: 120,
         maxHeight: 36,
     },
     {
         name: 'Sreekar Reddy Sajjala',
-        imagePath: fileURLToPath(new URL('./data/signature-sreekar.png', import.meta.url)),
+        imagePath: path.join(FUNCTION_DATA_DIR, 'signature-sreekar.png'),
         maxWidth: 140,
         maxHeight: 38,
     },
