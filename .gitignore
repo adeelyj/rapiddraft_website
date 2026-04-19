@@ -14,6 +14,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
+auth/
 
 # Editor directories and files
 .vscode/*

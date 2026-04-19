@@ -1,13 +1,8 @@
-import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
-import { Readable } from 'node:stream';
-import MailComposer from 'nodemailer/lib/mail-composer/index.js';
-import { ImapFlow } from 'imapflow';
+import PDFDocument from 'pdfkit';
+import { LOI_TEMPLATE, NDA_TEMPLATE, RAPIDDRAFT_EMAIL, RAPIDDRAFT_FOUNDERS } from './lib/legalTemplates.js';
 
-const DEFAULT_NDA_TEMPLATE_ID = '1ru1iVhcOonH0BXJn55KU40shAIqoX4NpssL0IVX0aho';
-const DEFAULT_LOI_TEMPLATE_ID = '14i9s8J3FQWAiZKH-JyOpm6LqGmr1qe5SajDqEcBZLoI';
 const DEFAULT_RECIPIENT = 'info@rapiddraft.ai';
-const RAPIDDRAFT_EMAIL = 'info@rapiddraft.ai';
 
 const REQUIRED_FIELDS = [
     'full-name',
@@ -47,22 +42,6 @@ function isTrueish(value) {
     return ['1', 'true', 'yes', 'on'].includes(String(value ?? '').trim().toLowerCase());
 }
 
-function normalizePrivateKey(value) {
-    return value.replace(/\\n/g, '\n');
-}
-
-function hasOAuthCredentials() {
-    return Boolean(
-        process.env.GOOGLE_OAUTH_CLIENT_ID &&
-        process.env.GOOGLE_OAUTH_CLIENT_SECRET &&
-        process.env.GOOGLE_OAUTH_REFRESH_TOKEN
-    );
-}
-
-function hasImapConfiguration() {
-    return Boolean(readEnv('IMAP_HOST') && readEnv('IMAP_PORT'));
-}
-
 function sanitizeFileStem(value) {
     return value
         .trim()
@@ -79,10 +58,17 @@ function formatEffectiveDate(date, timeZone) {
     }).format(date);
 }
 
-function buildPlaceholderMap(payload, effectiveDate) {
+function validatePayload(payload) {
+    const missing = REQUIRED_FIELDS.filter((field) => !String(payload[field] ?? '').trim());
+
+    if (missing.length > 0) {
+        throw new Error(`Missing required fields: ${missing.join(', ')}`);
+    }
+}
+
+export function buildPlaceholderMap(payload, effectiveDate) {
     return {
         '{{EFFECTIVE_DATE}}': effectiveDate,
-        '{{RAPIDDRAFT_ADDRESS}}': readEnv('RAPIDDRAFT_LEGAL_ADDRESS', { required: true }),
         '{{RAPIDDRAFT_EMAIL}}': RAPIDDRAFT_EMAIL,
         '{{CUSTOMER_LEGAL_NAME}}': payload.company,
         '{{CUSTOMER_JURISDICTION}}': payload.jurisdiction,
@@ -95,74 +81,124 @@ function buildPlaceholderMap(payload, effectiveDate) {
     };
 }
 
-function describeGoogleAccessError(error) {
-    const status = error?.code ?? error?.response?.status;
-    const message = error?.response?.data?.error?.message || error?.message || 'Google Drive request failed';
+function fillTemplateText(value, placeholders) {
+    let result = value;
 
-    if (status === 404 && /File not found:/i.test(message)) {
-        if (hasOAuthCredentials()) {
-            return 'Google Drive access failed for the configured OAuth account. Confirm that the NDA template, LOI template, and output folder all exist in that Google account or are shared with it.';
-        }
+    Object.entries(placeholders).forEach(([placeholder, replacement]) => {
+        result = result.replaceAll(placeholder, replacement);
+    });
 
-        const serviceAccountEmail = readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL', { fallback: 'your Google service account' });
-        return `Google Drive access failed. Share the NDA template, LOI template, and output folder with ${serviceAccountEmail}, then try again.`;
-    }
-
-    return message;
+    return result;
 }
 
-function validatePayload(payload) {
-    const missing = REQUIRED_FIELDS.filter((field) => !String(payload[field] ?? '').trim());
-
-    if (missing.length > 0) {
-        throw new Error(`Missing required fields: ${missing.join(', ')}`);
-    }
+function renderParagraph(doc, text, { indent = 0, paragraphGap = 10 } = {}) {
+    doc
+        .font('Times-Roman')
+        .fontSize(11)
+        .text(text, {
+            align: 'left',
+            indent,
+            paragraphGap,
+        });
 }
 
-async function createGoogleClients() {
-    const scopes = [
-        'https://www.googleapis.com/auth/documents',
-        'https://www.googleapis.com/auth/drive',
-    ];
-
-    let auth;
-
-    if (hasOAuthCredentials()) {
-        auth = new google.auth.OAuth2(
-            readEnv('GOOGLE_OAUTH_CLIENT_ID', { required: true }),
-            readEnv('GOOGLE_OAUTH_CLIENT_SECRET', { required: true }),
-            readEnv('GOOGLE_OAUTH_REDIRECT_URI', { fallback: 'http://localhost' })
-        );
-
-        auth.setCredentials({
-            refresh_token: readEnv('GOOGLE_OAUTH_REFRESH_TOKEN', { required: true }),
+function renderSection(doc, section, placeholders) {
+    doc
+        .font('Times-Bold')
+        .fontSize(12)
+        .text(section.heading, {
+            paragraphGap: 8,
         });
-    } else {
-        const hasServiceAccountCredentials = Boolean(
-            readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL') &&
-            readEnv('GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY')
-        );
 
-        if (!hasServiceAccountCredentials) {
-            throw new Error(
-                'Google auth is not configured. In Netlify, set either GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET, and GOOGLE_OAUTH_REFRESH_TOKEN or GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY.'
-            );
-        }
+    (section.paragraphs ?? []).forEach((paragraph) => {
+        renderParagraph(doc, fillTemplateText(paragraph, placeholders));
+    });
 
-        const clientEmail = readEnv('GOOGLE_SERVICE_ACCOUNT_EMAIL', { required: true });
-        const privateKey = normalizePrivateKey(readEnv('GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY', { required: true }));
-
-        auth = new google.auth.JWT({
-            email: clientEmail,
-            key: privateKey,
-            scopes,
+    (section.bullets ?? []).forEach((bullet) => {
+        renderParagraph(doc, `- ${fillTemplateText(bullet, placeholders)}`, {
+            indent: 18,
+            paragraphGap: 6,
         });
-    }
+    });
 
-    return {
-        docs: google.docs({ version: 'v1', auth }),
-        drive: google.drive({ version: 'v3', auth }),
-    };
+    (section.lettered ?? []).forEach((item, index) => {
+        const label = String.fromCharCode('a'.charCodeAt(0) + index);
+        renderParagraph(doc, `${label}. ${fillTemplateText(item, placeholders)}`, {
+            indent: 18,
+            paragraphGap: 6,
+        });
+    });
+
+    (section.paragraphsAfterList ?? []).forEach((paragraph) => {
+        renderParagraph(doc, fillTemplateText(paragraph, placeholders));
+    });
+}
+
+function renderSignatureSection(doc, placeholders) {
+    doc.moveDown(0.6);
+    doc
+        .font('Times-Bold')
+        .fontSize(12)
+        .text('For the RapidDraft Founders', {
+            paragraphGap: 10,
+        });
+
+    RAPIDDRAFT_FOUNDERS.forEach((founder) => {
+        doc.font('Times-Bold').fontSize(11).text(founder);
+        doc.font('Times-Roman').fontSize(11).text('Signature: ______________________________');
+        doc.font('Times-Roman').fontSize(11).text(`Date: ${fillTemplateText('{{EFFECTIVE_DATE}}', placeholders)}`, {
+            paragraphGap: 12,
+        });
+    });
+
+    doc
+        .font('Times-Bold')
+        .fontSize(12)
+        .text(`For ${fillTemplateText('{{CUSTOMER_LEGAL_NAME}}', placeholders)}`, {
+            paragraphGap: 10,
+        });
+
+    doc.font('Times-Roman').fontSize(11).text(`Name: ${fillTemplateText('{{CUSTOMER_SIGNER_NAME}}', placeholders)}`);
+    doc.font('Times-Roman').fontSize(11).text(`Title: ${fillTemplateText('{{CUSTOMER_SIGNER_TITLE}}', placeholders)}`);
+    doc.font('Times-Roman').fontSize(11).text('Signature: ______________________________');
+    doc.font('Times-Roman').fontSize(11).text('Date: ______________________________');
+}
+
+export function renderDocumentPdf(template, placeholders) {
+    return new Promise((resolve, reject) => {
+        const doc = new PDFDocument({
+            size: 'A4',
+            margin: 54,
+            info: {
+                Title: fillTemplateText(template.title, placeholders),
+                Author: 'RapidDraft',
+            },
+        });
+        const chunks = [];
+
+        doc.on('data', (chunk) => chunks.push(chunk));
+        doc.on('end', () => resolve(Buffer.concat(chunks)));
+        doc.on('error', reject);
+
+        doc
+            .font('Times-Bold')
+            .fontSize(15)
+            .text(template.title, {
+                align: 'center',
+                paragraphGap: 16,
+            });
+
+        template.intro.forEach((paragraph) => {
+            renderParagraph(doc, fillTemplateText(paragraph, placeholders));
+        });
+
+        template.sections.forEach((section) => {
+            renderSection(doc, section, placeholders);
+        });
+
+        renderSignatureSection(doc, placeholders);
+        doc.end();
+    });
 }
 
 async function createTransporter() {
@@ -183,110 +219,6 @@ async function createTransporter() {
     });
 }
 
-async function createImapClient() {
-    const host = readEnv('IMAP_HOST', { required: true });
-    const port = Number(readEnv('IMAP_PORT', { required: true }));
-    const secure = String(process.env.IMAP_SECURE ?? '').toLowerCase() !== 'false';
-    const user = readEnv('IMAP_USER', { fallback: readEnv('SMTP_USER', { required: true }) });
-    const pass = readEnv('IMAP_PASS', { fallback: readEnv('SMTP_PASS', { required: true }) });
-
-    const client = new ImapFlow({
-        host,
-        port,
-        secure,
-        auth: {
-            user,
-            pass,
-        },
-    });
-
-    await client.connect();
-    return client;
-}
-
-async function applyPlaceholders(docs, documentId, placeholders) {
-    const requests = Object.entries(placeholders).map(([placeholder, value]) => ({
-        replaceAllText: {
-            containsText: {
-                text: placeholder,
-                matchCase: true,
-            },
-            replaceText: value,
-        },
-    }));
-
-    await docs.documents.batchUpdate({
-        documentId,
-        requestBody: { requests },
-    });
-}
-
-async function exportPdf(drive, fileId) {
-    const response = await drive.files.export(
-        {
-            fileId,
-            mimeType: 'application/pdf',
-        },
-        {
-            responseType: 'arraybuffer',
-        }
-    );
-
-    return Buffer.from(response.data);
-}
-
-async function createFilledDocument({
-    drive,
-    docs,
-    templateId,
-    outputFolderId,
-    fileStem,
-    placeholders,
-}) {
-    const copyResponse = await drive.files.copy({
-        fileId: templateId,
-        requestBody: {
-            name: fileStem,
-            ...(outputFolderId ? { parents: [outputFolderId] } : {}),
-        },
-        fields: 'id,name,webViewLink',
-    });
-
-    const documentId = copyResponse.data.id;
-
-    if (!documentId) {
-        throw new Error(`Failed to create working copy for ${fileStem}`);
-    }
-
-    await applyPlaceholders(docs, documentId, placeholders);
-
-    const pdfBuffer = await exportPdf(drive, documentId);
-    const pdfName = `${fileStem}.pdf`;
-
-    const pdfResponse = await drive.files.create({
-        requestBody: {
-            name: pdfName,
-            mimeType: 'application/pdf',
-            ...(outputFolderId ? { parents: [outputFolderId] } : {}),
-        },
-        media: {
-            mimeType: 'application/pdf',
-            body: Readable.from(pdfBuffer),
-        },
-        fields: 'id,name,webViewLink',
-    });
-
-    return {
-        documentId,
-        documentName: copyResponse.data.name,
-        documentUrl: copyResponse.data.webViewLink ?? null,
-        pdfId: pdfResponse.data.id ?? null,
-        pdfName,
-        pdfUrl: pdfResponse.data.webViewLink ?? null,
-        pdfBuffer,
-    };
-}
-
 async function buildOutgoingEmail({ payload, ndaResult, loiResult }) {
     const from = readEnv('SMTP_FROM', { required: true });
     const recipient = payload.email;
@@ -302,7 +234,7 @@ async function buildOutgoingEmail({ payload, ndaResult, loiResult }) {
         '',
         'Nach Erhalt werden wir uns zeitnah mit den naechsten Schritten bei Ihnen melden.',
         '',
-        'Mit freundlichen Grüßen',
+        'Mit freundlichen Gruessen',
         'RapidDraft Team',
         '',
         '--',
@@ -342,66 +274,20 @@ async function buildOutgoingEmail({ payload, ndaResult, loiResult }) {
     };
 }
 
-async function appendToSentMailbox(rawMessage) {
-    if (!hasImapConfiguration()) {
-        return {
+async function sendDocumentsByEmail({ transporter, payload, ndaResult, loiResult }) {
+    const mailOptions = await buildOutgoingEmail({ payload, ndaResult, loiResult });
+
+    await transporter.sendMail(mailOptions);
+
+    return {
+        sentCopy: {
             attempted: false,
             appended: false,
             skipped: true,
-            reason: 'IMAP Sent-folder archival is not configured.',
-        };
-    }
-
-    const sentFolder = readEnv('IMAP_SENT_FOLDER', { fallback: 'Sent' });
-    const client = await createImapClient();
-
-    try {
-        await client.append(sentFolder, rawMessage, ['\\Seen'], new Date());
-        return {
-            attempted: true,
-            appended: true,
-            skipped: false,
-            reason: null,
-        };
-    } finally {
-        await client.logout().catch(() => {});
-    }
-}
-
-async function sendDocumentsByEmail({ transporter, payload, ndaResult, loiResult }) {
-    const mailOptions = await buildOutgoingEmail({ payload, ndaResult, loiResult });
-    const rawMessage = await new MailComposer(mailOptions).compile().build();
-
-    await transporter.sendMail({
-        envelope: {
-            from: mailOptions.from,
-            to: [mailOptions.to].concat(mailOptions.cc ? [mailOptions.cc] : []),
+            reason: 'Sent-folder archival is not configured in the SMTP-only workflow.',
         },
-        raw: rawMessage,
-    });
-
-    try {
-        const sentCopy = await appendToSentMailbox(rawMessage);
-
-        return {
-            sentCopy,
-            warnings: [],
-        };
-    } catch (error) {
-        return {
-            sentCopy: {
-                attempted: true,
-                appended: false,
-                skipped: false,
-                reason: error instanceof Error ? error.message : 'Failed to append a Sent-folder copy.',
-            },
-            warnings: [
-                error instanceof Error
-                    ? `Email sent, but saving a Sent-folder copy failed: ${error.message}`
-                    : 'Email sent, but saving a Sent-folder copy failed.',
-            ],
-        };
-    }
+        warnings: [],
+    };
 }
 
 export async function handler(event) {
@@ -412,52 +298,38 @@ export async function handler(event) {
     try {
         const payload = JSON.parse(event.body ?? '{}');
         validatePayload(payload);
+
         const testMode = isTrueish(process.env.AUTOMATION_TEST_MODE);
         const submissionTime = new Date();
         const effectiveDate = formatEffectiveDate(
             submissionTime,
             readEnv('RAPIDDRAFT_EFFECTIVE_DATE_TIMEZONE', { fallback: 'Europe/Berlin' })
         );
-
-        const { docs, drive } = await createGoogleClients();
-        const transporter = testMode ? null : await createTransporter();
         const placeholders = buildPlaceholderMap(payload, effectiveDate);
-        const outputFolderId = readEnv('GOOGLE_OUTPUT_FOLDER_ID');
         const companyStem = sanitizeFileStem(payload.company);
         const formCapture = {
             captured: isTrueish(payload.__form_captured),
         };
 
-        const ndaTemplateId = readEnv('GOOGLE_NDA_TEMPLATE_ID', { fallback: DEFAULT_NDA_TEMPLATE_ID });
-        const loiTemplateId = readEnv('GOOGLE_LOI_TEMPLATE_ID', { fallback: DEFAULT_LOI_TEMPLATE_ID });
-
-        const ndaResult = await createFilledDocument({
-            drive,
-            docs,
-            templateId: ndaTemplateId,
-            outputFolderId,
-            fileStem: `NDA_${companyStem}`,
-            placeholders,
-        });
-
-        const loiResult = await createFilledDocument({
-            drive,
-            docs,
-            templateId: loiTemplateId,
-            outputFolderId,
-            fileStem: `LOI_${companyStem}`,
-            placeholders,
-        });
+        const ndaResult = {
+            pdfName: `NDA_${companyStem}.pdf`,
+            pdfBuffer: await renderDocumentPdf(NDA_TEMPLATE, placeholders),
+        };
+        const loiResult = {
+            pdfName: `LOI_${companyStem}.pdf`,
+            pdfBuffer: await renderDocumentPdf(LOI_TEMPLATE, placeholders),
+        };
 
         const warnings = [];
         let sentCopy = {
             attempted: false,
             appended: false,
             skipped: true,
-            reason: testMode ? 'Skipped in test mode.' : null,
+            reason: testMode ? 'Skipped in test mode.' : 'Sent-folder archival is not configured in the SMTP-only workflow.',
         };
 
-        if (transporter) {
+        if (!testMode) {
+            const transporter = await createTransporter();
             const emailDelivery = await sendDocumentsByEmail({
                 transporter,
                 payload,
@@ -479,19 +351,15 @@ export async function handler(event) {
             },
             warnings,
             nda: {
-                documentUrl: ndaResult.documentUrl,
-                pdfUrl: ndaResult.pdfUrl,
                 pdfName: ndaResult.pdfName,
             },
             loi: {
-                documentUrl: loiResult.documentUrl,
-                pdfUrl: loiResult.pdfUrl,
                 pdfName: loiResult.pdfName,
             },
         });
     } catch (error) {
         return json(500, {
-            error: describeGoogleAccessError(error),
+            error: error instanceof Error ? error.message : 'Failed to generate the NDA and LOI.',
         });
     }
 }

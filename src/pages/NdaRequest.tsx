@@ -116,7 +116,7 @@ export default function NdaRequest() {
             form.reset();
             setSubmissionResult(data);
             setStatus('success');
-        } catch (error) {
+        } catch {
             form.reset();
             setStatus('follow-up');
             setErrorMessage('');
