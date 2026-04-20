@@ -83,6 +83,7 @@ export const somicDemoConfig: CompanyDemoConfig = {
             artifactsIn: ['Search term: "pockets" or "CORAS"'],
             artifactsOut: ['Matched CORAS adapter part'],
             video: {
+                src: '/media/somic-videos/01_PartSearch.mp4',
                 placeholderTitle: 'Video 1 · Semantic part search',
                 recordingBrief:
                     'Show the engineer typing "pockets" into the search field and the CORAS adapter appearing in the results.',
@@ -102,6 +103,7 @@ export const somicDemoConfig: CompanyDemoConfig = {
             artifactsIn: ['Rev A of the CORAS adapter'],
             artifactsOut: ['DFM findings', 'Rev B with fixes applied'],
             video: {
+                src: '/media/somic-videos/02_RunDFMReview.mp4',
                 placeholderTitle: 'Video 2 · DFM review and fix',
                 recordingBrief:
                     'Open the part, open the DFM review, scroll the findings, apply a fix, save as Rev B.',
@@ -121,6 +123,7 @@ export const somicDemoConfig: CompanyDemoConfig = {
             artifactsIn: ['Rev A', 'Rev B'],
             artifactsOut: ['Revision diff', 'Plain-language change summary'],
             video: {
+                src: '/media/somic-videos/03_PartComparison.mp4',
                 placeholderTitle: 'Video 3 · Revision compare',
                 recordingBrief:
                     'Show the before/after viewer with the changed regions highlighted and the summary panel.',
@@ -140,6 +143,7 @@ export const somicDemoConfig: CompanyDemoConfig = {
             artifactsIn: ['Rev B drawing', 'Chosen standard: ISO 128 / 129 / 8015 or ASME Y14.5'],
             artifactsOut: ['DraftLint findings', 'Release-ready drawing'],
             video: {
+                src: '/media/somic-videos/04_DrawingReview.mp4',
                 placeholderTitle: 'Video 4 · DraftLint on the drawing',
                 recordingBrief:
                     'Create the drawing, pick a standard, run DraftLint, scroll findings, show the cleaned drawing.',
@@ -196,8 +200,9 @@ export const somicDemoConfig: CompanyDemoConfig = {
         },
     ],
     cta: {
-        buttonLabel: 'Book a SOMIC walkthrough',
-        buttonHref: '/book-demo',
+        buttonLabel: 'Deal room',
+        buttonHref: '/deal-room',
+        buttonNewTab: true,
         panelTitle: 'What we need from SOMIC',
         needs: [
             'One CORAS-family part (Rev A)',
@@ -232,9 +237,5 @@ export const somicDemoConfig: CompanyDemoConfig = {
         finalCtaTitle: 'See it on a real CORAS part',
         finalCtaBody:
             'If you see the search, the DFM fix, the revision compare, and the DraftLint pass on one real part, the rest of the evaluation gets much shorter.',
-        footerBody:
-            'This storyline follows the real SOMIC workflow: find the CORAS part, improve it with DFM review, compare revisions, and release a drawing that has already been linted against ISO or ASME.',
-        footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/somic_pilot/_index/',
-        footerLinkLabel: 'Open the SOMIC wiki dossier',
     },
 };

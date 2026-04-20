@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 import PageMeta from '../components/PageMeta';
 import Reveal from '../components/home/Reveal';
 import type { CompanyDemoConfig, StoryChapter } from '../companyDemos/types';
@@ -134,6 +135,30 @@ function VideoPanel({ chapter, companyName }: { chapter: StoryChapter; companyNa
     const sharedFrameClass =
         'overflow-hidden rounded-[1.7rem] border border-stone-200/80 bg-[linear-gradient(180deg,rgba(255,250,247,0.94),rgba(255,255,255,0.98))] shadow-[0_24px_70px_-42px_rgba(17,24,39,0.18)]';
 
+    if (chapter.video.src) {
+        return (
+            <div className="overflow-hidden rounded-[1.4rem] border border-stone-900/10 bg-stone-950 shadow-[0_28px_80px_-46px_rgba(17,24,39,0.45)]">
+                <div className="aspect-video bg-stone-950">
+                    <video
+                        className="h-full w-full object-contain"
+                        controls
+                        preload="metadata"
+                        playsInline
+                    >
+                        <source src={chapter.video.src} type="video/mp4" />
+                        Your browser does not support embedded video playback.
+                    </video>
+                </div>
+                <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-stone-950/95 px-4 py-3">
+                    <p className="text-sm font-medium text-white/85">{chapter.video.placeholderTitle}</p>
+                    <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-orange-200">
+                        {chapter.video.durationLabel}
+                    </span>
+                </div>
+            </div>
+        );
+    }
+
     if (chapter.video.youtubeId) {
         return (
             <div className={sharedFrameClass}>
@@ -220,9 +245,20 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                                     <a href="#storyline" className="btn-primary w-full sm:w-auto">
                                         See the storyline
                                     </a>
-                                    <Link to={config.cta.buttonHref} className="btn-secondary w-full sm:w-auto">
-                                        {config.cta.buttonLabel}
-                                    </Link>
+                                    {config.cta.buttonNewTab ? (
+                                        <a
+                                            href={config.cta.buttonHref}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="btn-secondary w-full sm:w-auto"
+                                        >
+                                            {config.cta.buttonLabel}
+                                        </a>
+                                    ) : (
+                                        <Link to={config.cta.buttonHref} className="btn-secondary w-full sm:w-auto">
+                                            {config.cta.buttonLabel}
+                                        </Link>
+                                    )}
                                 </div>
 
                                 <div className="mt-8 rounded-[1.7rem] border border-stone-200/80 bg-white/90 p-5 shadow-[0_20px_50px_-38px_rgba(17,24,39,0.14)]">
@@ -274,7 +310,7 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                                                 </h3>
                                             </div>
 
-                                            <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,0.58fr)_minmax(340px,0.42fr)]">
+                                            <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)] lg:items-center xl:grid-cols-[minmax(0,0.44fr)_minmax(420px,0.56fr)]">
                                                 <div className="space-y-4 text-[15px] leading-7 text-gray-700">
                                                     <p>{chapter.engineerAction}</p>
                                                     <p>
@@ -297,64 +333,51 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                     </div>
                 </section>
 
-                <section className="hero-mesh py-16 md:py-20">
-                    <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.56fr)_minmax(0,0.44fr)]">
-                            <Reveal>
-                                <div className="surface-card h-full p-7 sm:p-8">
-                                    <p className="site-kicker">{config.narrative.finalCtaKicker}</p>
-                                    <h2 className="section-title mt-6 max-w-[12ch]">{config.narrative.finalCtaTitle}</h2>
-                                    <p className="section-copy mt-5 max-w-2xl">{config.narrative.finalCtaBody}</p>
-                                    <div className="mt-8">
-                                        <Link to={config.cta.buttonHref} className="btn-primary">
-                                            {config.cta.buttonLabel}
-                                            <ArrowRight className="ml-2 h-4 w-4" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </Reveal>
-
-                            <Reveal delay={0.06}>
-                                <div className="rounded-[2rem] border border-[#262d3f] bg-[linear-gradient(140deg,#171d2b_0%,#1d2435_52%,#2a2331_100%)] p-7 text-white shadow-[0_42px_120px_-48px_rgba(17,24,39,0.58)] sm:p-8">
-                                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-200">
-                                        {config.cta.panelTitle}
-                                    </p>
-                                    <ul className="mt-6 space-y-4">
-                                        {config.cta.needs.map((item) => (
-                                            <li key={item} className="flex items-start gap-3 text-sm leading-7 text-white/84">
-                                                <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-orange-200" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    {config.cta.note ? (
-                                        <div className="mt-6 rounded-[1.35rem] border border-white/10 bg-white/6 px-4 py-4 text-sm leading-7 text-white/72">
-                                            {config.cta.note}
+                {config.slug !== 'somic' ? (
+                    <section className="hero-mesh py-16 md:py-20">
+                        <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
+                            <div className="grid gap-6 lg:grid-cols-[minmax(0,0.56fr)_minmax(0,0.44fr)]">
+                                <Reveal>
+                                    <div className="surface-card h-full p-7 sm:p-8">
+                                        <p className="site-kicker">{config.narrative.finalCtaKicker}</p>
+                                        <h2 className="section-title mt-6 max-w-[12ch]">{config.narrative.finalCtaTitle}</h2>
+                                        <p className="section-copy mt-5 max-w-2xl">{config.narrative.finalCtaBody}</p>
+                                        <div className="mt-8">
+                                            <Link to={config.cta.buttonHref} className="btn-primary">
+                                                {config.cta.buttonLabel}
+                                                <ArrowRight className="ml-2 h-4 w-4" />
+                                            </Link>
                                         </div>
-                                    ) : null}
-                                </div>
-                            </Reveal>
+                                    </div>
+                                </Reveal>
+
+                                <Reveal delay={0.06}>
+                                    <div className="rounded-[2rem] border border-[#262d3f] bg-[linear-gradient(140deg,#171d2b_0%,#1d2435_52%,#2a2331_100%)] p-7 text-white shadow-[0_42px_120px_-48px_rgba(17,24,39,0.58)] sm:p-8">
+                                        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-200">
+                                            {config.cta.panelTitle}
+                                        </p>
+                                        <ul className="mt-6 space-y-4">
+                                            {config.cta.needs.map((item) => (
+                                                <li key={item} className="flex items-start gap-3 text-sm leading-7 text-white/84">
+                                                    <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-orange-200" />
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        {config.cta.note ? (
+                                            <div className="mt-6 rounded-[1.35rem] border border-white/10 bg-white/6 px-4 py-4 text-sm leading-7 text-white/72">
+                                                {config.cta.note}
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                </Reveal>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                ) : null}
             </main>
 
-            <footer className="border-t border-white/10 bg-dark text-white">
-                <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-5 py-8 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 xl:px-10">
-                    <p className="max-w-3xl text-sm leading-7 text-gray-400">
-                        {config.narrative.footerBody}
-                    </p>
-                    <a
-                        href={config.narrative.footerLinkHref}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-orange-200"
-                    >
-                        {config.narrative.footerLinkLabel}
-                        <ArrowRight className="h-4 w-4" />
-                    </a>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }
