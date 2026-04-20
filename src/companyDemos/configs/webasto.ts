@@ -229,9 +229,5 @@ export const webastoDemoConfig: CompanyDemoConfig = {
         finalCtaTitle: 'See it on a real Webasto part',
         finalCtaBody:
             'If you see the search, the DFM fix, the revision compare, and the DraftLint pass on one real part, the rest of the evaluation gets much shorter.',
-        footerBody:
-            'This storyline is anchored in the Webasto pilot dossier and RapidDrafts artifact-first approval-pack wedge: ingest neutral artifacts, clarify the package, extract structured table evidence, and export the packet.',
-        footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/webasto_pilot/_index/',
-        footerLinkLabel: 'Open the Webasto wiki dossier',
     },
 };

@@ -30,6 +30,7 @@ export type FitCard = {
 
 export type StoryVideo = {
     youtubeId?: string;
+    src?: string;
     placeholderTitle: string;
     recordingBrief: string;
     durationLabel: string;
@@ -61,6 +62,7 @@ export type RolloutPhase = {
 export type DemoCtaConfig = {
     buttonLabel: string;
     buttonHref: string;
+    buttonNewTab?: boolean;
     panelTitle: string;
     needs: string[];
     note?: string;
@@ -86,9 +88,6 @@ export type CompanyDemoNarrative = {
     finalCtaKicker: string;
     finalCtaTitle: string;
     finalCtaBody: string;
-    footerBody: string;
-    footerLinkHref: string;
-    footerLinkLabel: string;
 };
 
 export type GateStatus = 'ok' | 'warn' | 'fail';
