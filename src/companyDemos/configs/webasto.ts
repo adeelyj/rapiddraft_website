@@ -6,26 +6,47 @@ export const webastoDemoConfig: CompanyDemoConfig = {
     hostnames: ['webasto.rapiddraft.ai'],
     accessLabel: 'Private Webasto pilot demo',
     summary:
-        'A Webasto artifact-first change-pack walkthrough built around JT, 3D PDF, drawing-table extraction, release-readiness checks, and an attachable approval packet.',
+        'A Webasto walkthrough: find a battery-tray part by geometry, improve it with DFM review, compare Rev A and Rev B, and release a drawing that has already been linted against ISO or ASME.',
     hero: {
         badge: 'Private Webasto pilot demo',
-        title: 'Turn a Webasto change pack into an approval-ready packet',
+        title: 'From a battery-tray part search to a release-ready drawing',
         description:
-            'RapidDraft helps Webasto review a mixed-format release package the way the workflow already works: ingest JT and 3D PDF artifacts, explain the package delta, run the release punchlist, extract table changes, and export a packet that can attach back into the approval flow.',
-        proofChips: ['JT + 3D PDF intake', 'Package delta', 'Table extraction', 'Attachable packet'],
+            'RapidDraft helps Webasto engineers find the right part across battery and thermal modules, improve it with DFM review, compare revisions, and release a drawing that has already been linted against ISO or ASME.',
+        proofChips: ['Natural-language part search', 'DFM review', 'Rev A -> Rev B', 'DraftLint ISO / ASME'],
         scenarioTitle: 'Scenario',
         scenarioBody:
-            'A Webasto engineer is preparing a battery or thermal release package and needs to understand what changed, whether the package is really ready, and which structured drawing data should travel with the approval object.',
+            "A Webasto engineer needs the bracket with pockets used on a battery thermal module. They don't remember the part number, so they search by geometry and program name, improve the part with DFM review, compare revisions, and export a clean drawing ready for release.",
+        image: {
+            src: '/media/webasto-battery.jpg',
+            alt: 'Webasto standardized battery system',
+        },
     },
     heroStoryboard: {
-        eyebrow: 'Webasto change-pack review flow',
-        title: 'From neutral artifacts to approval attachment',
+        eyebrow: 'Webasto search-to-lint flow',
+        title: 'From part search to release-ready drawing',
         revisionLabel: 'Rev A -> Rev B',
         steps: [
-            { label: '1. Ingest the package', text: 'Start from JT, 3D PDF, and drawing artifacts already used in the workflow.' },
-            { label: '2. Explain the package delta', text: 'Show what changed across the release pack before approval starts.' },
-            { label: '3. Extract structured evidence', text: 'Pull revision-table and drawing-table deltas out of the documents.' },
-            { label: '4. Export for attachment', text: 'Package the results into one approval-ready artifact.' },
+            { label: '1. Find the part', text: 'Search by geometry or program name (e.g. "pockets" or "battery tray").' },
+            { label: '2. DFM review', text: 'Apply the flagged manufacturability fixes and save Rev B.' },
+            { label: '3. Compare revisions', text: 'See exactly what changed between Rev A and Rev B.' },
+            { label: '4. Lint the drawing', text: 'Run DraftLint against ISO or ASME before release review.' },
+        ],
+    },
+    heroVisual: {
+        kind: 'artifact-pack',
+        intakeLabel: 'Package intake',
+        artifacts: [
+            { kind: 'JT', name: 'bat-mod-03.jt', size: '1.8 MB' },
+            { kind: '3D', name: 'thermal-pack.pdf', size: '482 KB' },
+            { kind: 'DWG', name: 'drw-04-r2.pdf', size: '624 KB' },
+        ],
+        deltaLabel: 'Package delta',
+        deltaSummary: '34 changed · 7 added · 2 removed',
+        tableLabel: 'Revision table · extracted',
+        tableHeaders: ['Rev', 'Date', 'Note'],
+        tableRows: [
+            { cells: ['A', '2025-05-12', 'Initial release'] },
+            { cells: ['B', '2025-09-03', 'Seal geometry + notes'], highlight: true },
         ],
     },
     fitCards: [
@@ -47,113 +68,78 @@ export const webastoDemoConfig: CompanyDemoConfig = {
     ],
     chapters: [
         {
-            id: 'open-change-pack',
+            id: 'search-part',
             stepNumber: 1,
-            title: 'Open the change pack',
+            title: "Find the battery-tray bracket by what it is, not what it's called",
             engineerAction:
-                'The engineer starts with one battery or thermal release package that already exists as JT, 3D PDF, and drawing-style artifacts.',
+                "The engineer needs the bracket with pockets used on a battery thermal module. They don't remember the part number, so they type \"pockets\" - or \"battery tray\" - into the search field.",
             rapiddraftReturn:
-                'RapidDraft frames the work as one package review instead of a scattered search across viewers, exports, and side documents.',
+                'RapidDraft matches intent across program name, geometry, and part metadata, and returns the bracket (and a few close siblings) ranked by relevance.',
             managementValue:
-                'The approval conversation begins with one bounded release object instead of fragmented artifact context.',
-            artifactsIn: ['Rev A artifact set', 'Rev B artifact set', 'Approval target'],
-            artifactsOut: ['Scoped package review'],
+                'Engineers stop hunting through program folders. New hires can find the right part on day one.',
+            artifactsIn: ['Search term: "pockets" or "battery tray"'],
+            artifactsOut: ['Matched battery-tray bracket'],
             video: {
-                placeholderTitle: 'Video 1 · Open the Webasto package',
+                placeholderTitle: 'Video 1 · Semantic part search',
                 recordingBrief:
-                    'Show the engineer opening one realistic battery or thermal release pack and selecting the revision pair that needs review.',
+                    'Show the engineer typing "pockets" into the search field and the battery-tray bracket appearing in the results.',
                 durationLabel: '1-2 min',
             },
         },
         {
-            id: 'ingest-neutral-artifacts',
+            id: 'dfm-review',
             stepNumber: 2,
-            title: 'Ingest neutral artifacts',
+            title: 'Run a DFM review and apply the fixes',
             engineerAction:
-                'The engineer uploads JT, 3D PDF, and drawing artifacts without waiting for deep CAD-native or PLM-native integration.',
+                'The engineer opens the matched part and runs a DFM review. RapidDraft lists concrete manufacturability improvements - deep pockets, sharp internal corners, thin walls, tool-access problems.',
             rapiddraftReturn:
-                'RapidDraft pairs the package artifacts and opens one review session that respects Webastos mixed-system process reality.',
+                'RapidDraft surfaces geometry-linked DFM findings with a severity and a suggested fix for each. The engineer applies the fixes and saves the result as Rev B.',
             managementValue:
-                'Pilot value appears without betting the first conversation on the wrong NX, 3DX, 4PEP, or OpenPDM assumption.',
-            artifactsIn: ['JT exports', '3D PDFs', 'Drawing PDFs'],
-            artifactsOut: ['Paired neutral-artifact review'],
+                'Manufacturability is resolved before the drawing exists - not after a supplier quote comes back.',
+            artifactsIn: ['Rev A of the bracket'],
+            artifactsOut: ['DFM findings', 'Rev B with fixes applied'],
             video: {
-                placeholderTitle: 'Video 2 · Neutral-artifact intake',
+                placeholderTitle: 'Video 2 · DFM review and fix',
                 recordingBrief:
-                    'Show the package starting from JT and 3D PDF artifacts and quickly becoming one bounded review session.',
-                durationLabel: '1-2 min',
-            },
-        },
-        {
-            id: 'explain-package-delta',
-            stepNumber: 3,
-            title: 'Explain the package delta',
-            engineerAction:
-                'Before approval, the engineer opens the diff to understand which views, notes, tables, and package elements actually changed.',
-            rapiddraftReturn:
-                'RapidDraft highlights changed content and writes a package-level summary of what shifted and what needs rechecking.',
-            managementValue:
-                'Review time shifts from assembling the story to deciding whether the package is ready.',
-            artifactsOut: ['Package-level diff', 'Plain-language change summary'],
-            video: {
-                placeholderTitle: 'Video 3 · Package diff and summary',
-                recordingBrief:
-                    'Show the package delta across mixed artifacts and read out the generated summary in Webasto-shaped approval language.',
+                    'Open the part, open the DFM review, scroll the findings, apply a fix, save as Rev B.',
                 durationLabel: '2-3 min',
             },
         },
         {
-            id: 'run-punchlist',
+            id: 'compare-revisions',
+            stepNumber: 3,
+            title: 'Compare Rev A and Rev B to confirm the change',
+            engineerAction:
+                'The engineer opens the revision compare view on Rev A and Rev B of the same bracket.',
+            rapiddraftReturn:
+                'RapidDraft highlights exactly what changed - geometry, features, tolerances - with a plain-language summary alongside the visual diff.',
+            managementValue:
+                'The reviewer sees the delta without hunting through the model tree.',
+            artifactsIn: ['Rev A', 'Rev B'],
+            artifactsOut: ['Revision diff', 'Plain-language change summary'],
+            video: {
+                placeholderTitle: 'Video 3 · Revision compare',
+                recordingBrief:
+                    'Show the before/after viewer with the changed regions highlighted and the summary panel.',
+                durationLabel: '1-2 min',
+            },
+        },
+        {
+            id: 'draftlint',
             stepNumber: 4,
-            title: 'Run the release punchlist',
+            title: 'Create the drawing and run DraftLint',
             engineerAction:
-                'The engineer runs deterministic release-readiness checks on the package to catch drawing hygiene and approval blockers.',
+                "The engineer creates the drawing of Rev B and runs DraftLint against the company's chosen standard (ISO 128 / ISO 129 / ISO 8015 or ASME Y14.5).",
             rapiddraftReturn:
-                'RapidDraft flags revision mismatches, missing notes, table issues, and other release blockers with severity and evidence.',
+                'RapidDraft flags standard-compliance issues - missing tolerances, wrong projection, non-conforming annotations, title-block gaps - with evidence linked to the drawing.',
             managementValue:
-                'Approvals become more consistent because package-readiness logic is made explicit instead of staying manual.',
-            artifactsOut: ['Release punchlist', 'Severity-ranked blockers'],
+                'The drawing arrives at review already lint-clean. Release discussion time collapses.',
+            artifactsIn: ['Rev B drawing', 'Chosen standard: ISO 128 / 129 / 8015 or ASME Y14.5'],
+            artifactsOut: ['DraftLint findings', 'Release-ready drawing'],
             video: {
-                placeholderTitle: 'Video 4 · Release-readiness punchlist',
+                placeholderTitle: 'Video 4 · DraftLint on the drawing',
                 recordingBrief:
-                    'Walk through the release findings and make clear that this is a conservative approval-readiness layer, not a PLM replacement.',
-                durationLabel: '1-2 min',
-            },
-        },
-        {
-            id: 'extract-table-deltas',
-            stepNumber: 5,
-            title: 'Extract table deltas',
-            engineerAction:
-                'The engineer selects the revision table and one second structured table from the changed drawing set and asks RapidDraft to compare them.',
-            rapiddraftReturn:
-                'RapidDraft extracts the table content, highlights the deltas, and prepares structured output instead of leaving the data trapped in documents.',
-            managementValue:
-                'This is the clearest Webasto-specific differentiator because it bridges drawing-bound information toward structured PLM-ready data.',
-            artifactsIn: ['Revision table', 'One second structured table'],
-            artifactsOut: ['Structured table diff', 'Reusable table output'],
-            video: {
-                placeholderTitle: 'Video 5 · Structured table extraction',
-                recordingBrief:
-                    'Show one revision table and one second table type so the differentiator is clearly about structured drawing data, not just OCR.',
-                durationLabel: '1-2 min',
-            },
-        },
-        {
-            id: 'export-approval-packet',
-            stepNumber: 6,
-            title: 'Export the approval packet',
-            engineerAction:
-                'Once the package is understood, the engineer exports one packet for approval attachment and downstream handoff.',
-            rapiddraftReturn:
-                'RapidDraft compiles the package summary, release punchlist, and table deltas into one attachable approval artifact.',
-            managementValue:
-                'The output can travel with the release object instead of living only inside the review UI.',
-            artifactsOut: ['Approval packet', 'Attachable summary'],
-            video: {
-                placeholderTitle: 'Video 6 · Export the attachable packet',
-                recordingBrief:
-                    'Show the final packet and briefly scan the sections: package summary, blockers, and structured table evidence.',
+                    'Create the drawing, pick a standard, run DraftLint, scroll findings, show the cleaned drawing.',
                 durationLabel: '1-2 min',
             },
         },
@@ -210,9 +196,12 @@ export const webastoDemoConfig: CompanyDemoConfig = {
         buttonLabel: 'Book a Webasto walkthrough',
         buttonHref: '/book-demo',
         panelTitle: 'What we need from Webasto',
-        needs: ['Rev A and Rev B neutral artifacts', 'A revision table plus one second table type', 'Current approval template'],
-        note:
-            'With those inputs, we can show a real Webasto-shaped change-pack review instead of a generic CAD demo.',
+        needs: [
+            'One battery-tray or thermal-module part (Rev A)',
+            'Your preferred standard (ISO 128 / 129 / 8015 or ASME Y14.5)',
+            'One drawing template',
+        ],
+        note: 'With those inputs, we can show the search, the DFM review, the revision compare, and the DraftLint pass on one real part.',
     },
     narrative: {
         hostModeNote: 'Built from the Webasto pilot dossier and RapidDraft release-review vision.',
@@ -220,26 +209,26 @@ export const webastoDemoConfig: CompanyDemoConfig = {
         fitTitle: 'Built for approval packs, not for a day-one CAD integration pitch',
         fitBody:
             'The Webasto story is narrow on purpose: start from neutral artifacts, clarify one release package, extract the structured table changes, and export something the approval flow can actually use.',
-        storylineKicker: 'Storyline chapters',
-        storylineTitle: 'A focused change-pack workflow',
+        storylineKicker: 'How the demo runs',
+        storylineTitle: 'From part search to release-ready drawing',
         storylineBody:
-            'Each chapter keeps the pilot close to Webastos real process reality: mixed artifacts in, package delta clarified, structured table evidence out.',
+            'Four steps that match how a Webasto engineer actually works: find the part, improve it with DFM review, compare revisions, and lint the drawing before release.',
         capabilityKicker: 'Capability map',
         capabilityTitle: 'What the Webasto demo is really proving',
         capabilityBody:
-            'This demo proves artifact-first approval-pack intelligence, with drawing-table extraction as the key differentiator beyond standard change review.',
+            'Semantic part search, DFM review, revision compare, and standard-based drawing lint - the four moves that shorten release review on a real battery or thermal part.',
         nonClaimsKicker: 'What this demo does not claim',
         nonClaimsTitle: 'Credibility matters more than breadth',
         nonClaimsBody:
             'This page is designed to show where RapidDraft is strongest for Webasto right now, while keeping the longer-term workflow and systems story honest.',
         rolloutKicker: 'Pilot expansion path',
-        rolloutTitle: 'Prove the package wedge first, then attach deeper',
+        rolloutTitle: 'Start narrow, then earn the right to integrate',
         rolloutBody:
-            'The first Webasto pilot should prove the artifact-first approval workflow before deeper workflow or system integration is proposed.',
-        finalCtaKicker: 'Final CTA',
-        finalCtaTitle: 'Prove the change-pack review wedge',
+            'The first Webasto pilot should prove the search-to-lint workflow on one part, then expand to more programs.',
+        finalCtaKicker: 'Book a walkthrough',
+        finalCtaTitle: 'See it on a real Webasto part',
         finalCtaBody:
-            'If Webasto sees a trustworthy package summary, a credible release punchlist, a real table-diff capability, and a clean attachable packet, the next conversation becomes much easier.',
+            'If you see the search, the DFM fix, the revision compare, and the DraftLint pass on one real part, the rest of the evaluation gets much shorter.',
         footerBody:
             'This storyline is anchored in the Webasto pilot dossier and RapidDrafts artifact-first approval-pack wedge: ingest neutral artifacts, clarify the package, extract structured table evidence, and export the packet.',
         footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/webasto_pilot/_index/',
