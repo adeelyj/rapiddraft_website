@@ -1,3 +1,8 @@
+export type HeroImage = {
+    src: string;
+    alt: string;
+};
+
 export type HeroConfig = {
     badge: string;
     title: string;
@@ -5,6 +10,7 @@ export type HeroConfig = {
     proofChips: string[];
     scenarioTitle: string;
     scenarioBody: string;
+    image?: HeroImage;
 };
 
 export type HeroStoryboard = {
@@ -85,6 +91,34 @@ export type CompanyDemoNarrative = {
     footerLinkLabel: string;
 };
 
+export type GateStatus = 'ok' | 'warn' | 'fail';
+
+export type RevisionGateVisual = {
+    kind: 'revision-gate';
+    pairLabel: string;
+    revA: { tag: string; label: string; meta: string };
+    revB: { tag: string; label: string; meta: string };
+    diffSummary: string;
+    gateLabel: string;
+    gateChecks: { label: string; status: GateStatus }[];
+    partLabel: string;
+    partName: string;
+    partFindings: { label: string; status: GateStatus }[];
+};
+
+export type ArtifactPackVisual = {
+    kind: 'artifact-pack';
+    intakeLabel: string;
+    artifacts: { kind: string; name: string; size: string }[];
+    deltaLabel: string;
+    deltaSummary: string;
+    tableLabel: string;
+    tableHeaders: string[];
+    tableRows: { cells: string[]; highlight?: boolean }[];
+};
+
+export type CompanyDemoHeroVisual = RevisionGateVisual | ArtifactPackVisual;
+
 export type CompanyDemoConfig = {
     slug: string;
     companyName: string;
@@ -93,6 +127,7 @@ export type CompanyDemoConfig = {
     summary: string;
     hero: HeroConfig;
     heroStoryboard: HeroStoryboard;
+    heroVisual: CompanyDemoHeroVisual;
     fitCards: FitCard[];
     chapters: StoryChapter[];
     capabilities: CapabilityCard[];

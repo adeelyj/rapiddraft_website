@@ -1,15 +1,13 @@
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, ClipboardCheck, Factory, FileSearch, FolderOpen, Layers, ShieldCheck, Workflow } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import Reveal from '../components/home/Reveal';
-import type { CapabilityCard, CompanyDemoConfig, StoryChapter } from '../companyDemos/types';
+import type { CompanyDemoConfig, StoryChapter } from '../companyDemos/types';
 
 type CompanyDemoPageProps = {
     config: CompanyDemoConfig;
     isHostMode?: boolean;
 };
-
-const capabilityIcons = [FileSearch, ClipboardCheck, Layers, Factory] as const;
 
 function DemoHeader({ config, isHostMode }: { config: CompanyDemoConfig; isHostMode: boolean }) {
     return (
@@ -113,18 +111,21 @@ function ChapterRail({ chapters }: { chapters: StoryChapter[] }) {
     );
 }
 
-function ArtifactList({ title, items }: { title: string; items: string[] }) {
+function ArtifactFlow({ inputs, outputs }: { inputs?: string[]; outputs?: string[] }) {
+    if (!inputs?.length && !outputs?.length) return null;
     return (
-        <div className="rounded-[1.4rem] border border-stone-200/80 bg-[#fffaf7] p-4 sm:p-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">{title}</p>
-            <ul className="mt-4 space-y-3">
-                {items.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm leading-6 text-gray-700">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        <span>{item}</span>
-                    </li>
-                ))}
-            </ul>
+        <div className="flex flex-wrap items-center gap-2 pt-1 text-[13px]">
+            {inputs?.map((item) => (
+                <span key={`in-${item}`} className="rounded-full border border-stone-200 bg-white px-3 py-1 text-gray-600">
+                    {item}
+                </span>
+            ))}
+            {inputs?.length && outputs?.length ? <ArrowRight className="h-3.5 w-3.5 text-gray-400" /> : null}
+            {outputs?.map((item) => (
+                <span key={`out-${item}`} className="rounded-full bg-orange-50 px-3 py-1 font-medium text-primary">
+                    {item}
+                </span>
+            ))}
         </div>
     );
 }
@@ -162,41 +163,20 @@ function VideoPanel({ chapter, companyName }: { chapter: StoryChapter; companyNa
             <div className="aspect-[16/10] bg-[linear-gradient(145deg,#fffaf7_0%,#ffffff_55%,#fff7ed_100%)] p-5 sm:aspect-video sm:p-6">
                 <div className="flex h-full flex-col justify-between rounded-[1.4rem] border border-dashed border-orange-200 bg-white/78 p-5">
                     <div className="flex items-center justify-between gap-3">
-                        <div className="inline-flex items-center rounded-full border border-orange-200/80 bg-orange-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-                            Video slot
-                        </div>
+                        <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">
+                            Video {chapter.stepNumber}
+                        </span>
                         <span className="rounded-full border border-stone-200 bg-white px-3 py-1 text-xs font-medium text-gray-600">
                             {chapter.video.durationLabel}
                         </span>
                     </div>
 
-                    <div className="mt-6">
+                    <div>
                         <h4 className="text-xl font-semibold tracking-tight text-gray-950">{chapter.video.placeholderTitle}</h4>
-                        <p className="mt-4 text-sm leading-7 text-gray-600">{chapter.video.recordingBrief}</p>
-                    </div>
-
-                    <div className="mt-6 rounded-[1.2rem] border border-stone-200/80 bg-[#fffaf7] px-4 py-3">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">Suggested capture</p>
-                        <p className="mt-2 text-sm leading-6 text-gray-600">
-                            Keep the chapter tight and concrete. Show the exact engineer action, the RapidDraft output, and the release decision it unlocks.
-                        </p>
+                        <p className="mt-3 text-sm leading-7 text-gray-600">{chapter.video.recordingBrief}</p>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
-
-function CapabilityTile({ capability, index }: { capability: CapabilityCard; index: number }) {
-    const Icon = capabilityIcons[index % capabilityIcons.length];
-
-    return (
-        <div className="surface-card p-6 sm:p-7">
-            <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-50 text-primary">
-                <Icon className="h-5 w-5" />
-            </div>
-            <h3 className="mt-5 text-[1.45rem] font-semibold tracking-tight text-gray-950">{capability.title}</h3>
-            <p className="mt-3 text-[15px] leading-7 text-gray-600">{capability.body}</p>
         </div>
     );
 }
@@ -252,30 +232,19 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                             </Reveal>
 
                             <Reveal delay={0.08}>
-                                <HeroStoryboard config={config} />
-                            </Reveal>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="border-b border-stone-200/70 bg-white py-16 md:py-20">
-                    <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                        <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">{config.narrative.fitKicker}</p>
-                            <h2 className="section-title mt-6">{config.narrative.fitTitle}</h2>
-                            <p className="section-copy mt-5">{config.narrative.fitBody}</p>
-                        </Reveal>
-
-                        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-                            {config.fitCards.map((card, index) => (
-                                <Reveal key={card.title} delay={0.06 * index}>
-                                    <div className="surface-card h-full p-6 sm:p-7">
-                                        <p className="card-index">0{index + 1}</p>
-                                        <h3 className="card-title mt-4">{card.title}</h3>
-                                        <p className="card-copy mt-4">{card.body}</p>
+                                {config.hero.image ? (
+                                    <div className="overflow-hidden rounded-[1.9rem] border border-stone-200/80 bg-stone-100 shadow-[0_42px_120px_-48px_rgba(17,24,39,0.35)]">
+                                        <img
+                                            src={config.hero.image.src}
+                                            alt={config.hero.image.alt}
+                                            className="aspect-[16/10] w-full object-cover object-center lg:aspect-[4/5]"
+                                            loading="eager"
+                                        />
                                     </div>
-                                </Reveal>
-                            ))}
+                                ) : (
+                                    <HeroStoryboard config={config} />
+                                )}
+                            </Reveal>
                         </div>
                     </div>
                 </section>
@@ -298,48 +267,24 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                                             id={chapter.id}
                                             className="surface-card scroll-mt-28 overflow-hidden p-6 sm:p-8"
                                         >
-                                            <div className="flex flex-wrap items-center gap-3">
-                                                <span className="inline-flex items-center rounded-full bg-orange-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-                                                    Step {chapter.stepNumber}
-                                                </span>
-                                                <h3 className="text-[1.85rem] font-semibold leading-tight tracking-tight text-gray-950">
+                                            <div className="flex items-baseline gap-3">
+                                                <span className="text-sm font-semibold text-primary">Step {chapter.stepNumber}</span>
+                                                <h3 className="text-[1.6rem] font-semibold leading-tight tracking-tight text-gray-950 sm:text-[1.85rem]">
                                                     {chapter.title}
                                                 </h3>
                                             </div>
 
                                             <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,0.58fr)_minmax(340px,0.42fr)]">
-                                                <div className="space-y-5">
-                                                    <div className="rounded-[1.5rem] border border-stone-200/80 bg-[#fffaf7] p-5">
-                                                        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">
-                                                            What the engineer does
-                                                        </p>
-                                                        <p className="mt-3 text-[15px] leading-7 text-gray-700">{chapter.engineerAction}</p>
-                                                    </div>
-
-                                                    <div className="rounded-[1.5rem] border border-stone-200/80 bg-white p-5">
-                                                        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">
-                                                            What RapidDraft returns
-                                                        </p>
-                                                        <p className="mt-3 text-[15px] leading-7 text-gray-700">{chapter.rapiddraftReturn}</p>
-                                                    </div>
-
-                                                    <div className="rounded-[1.5rem] border border-stone-200/80 bg-white p-5">
-                                                        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">
-                                                            Why management cares
-                                                        </p>
-                                                        <p className="mt-3 text-[15px] leading-7 text-gray-700">{chapter.managementValue}</p>
-                                                    </div>
-
-                                                    {chapter.artifactsIn || chapter.artifactsOut ? (
-                                                        <div className="grid gap-4 md:grid-cols-2">
-                                                            {chapter.artifactsIn ? (
-                                                                <ArtifactList title="Artifacts in" items={chapter.artifactsIn} />
-                                                            ) : null}
-                                                            {chapter.artifactsOut ? (
-                                                                <ArtifactList title="Artifacts out" items={chapter.artifactsOut} />
-                                                            ) : null}
-                                                        </div>
-                                                    ) : null}
+                                                <div className="space-y-4 text-[15px] leading-7 text-gray-700">
+                                                    <p>{chapter.engineerAction}</p>
+                                                    <p>
+                                                        <span className="font-semibold text-gray-900">RapidDraft</span>{' '}
+                                                        {chapter.rapiddraftReturn.replace(/^RapidDraft\s+/, '')}
+                                                    </p>
+                                                    <p className="border-l-2 border-primary/40 pl-4 italic text-gray-600">
+                                                        {chapter.managementValue}
+                                                    </p>
+                                                    <ArtifactFlow inputs={chapter.artifactsIn} outputs={chapter.artifactsOut} />
                                                 </div>
 
                                                 <VideoPanel chapter={chapter} companyName={config.companyName} />
@@ -348,84 +293,6 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                                     </Reveal>
                                 ))}
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="border-y border-stone-200/70 bg-white py-16 md:py-20">
-                    <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                        <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">{config.narrative.capabilityKicker}</p>
-                            <h2 className="section-title mt-6">{config.narrative.capabilityTitle}</h2>
-                            <p className="section-copy mt-5">{config.narrative.capabilityBody}</p>
-                        </Reveal>
-
-                        <div className="mt-10 grid gap-5 md:grid-cols-2">
-                            {config.capabilities.map((capability, index) => (
-                                <Reveal key={capability.title} delay={0.05 * index}>
-                                    <CapabilityTile capability={capability} index={index} />
-                                </Reveal>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="bg-[#fff8f3] py-16 md:py-20">
-                    <div className="mx-auto grid max-w-[1180px] gap-10 px-5 sm:px-6 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:px-8 xl:px-10">
-                        <Reveal>
-                            <p className="site-kicker">{config.narrative.nonClaimsKicker}</p>
-                            <h2 className="section-title mt-6 max-w-[12ch]">{config.narrative.nonClaimsTitle}</h2>
-                            <p className="section-copy mt-5">{config.narrative.nonClaimsBody}</p>
-                        </Reveal>
-
-                        <div className="space-y-4">
-                            {config.nonClaims.map((item, index) => (
-                                <Reveal key={item} delay={0.04 * index}>
-                                    <div className="surface-card p-5 sm:p-6">
-                                        <div className="flex items-start gap-4">
-                                            <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_16px_34px_-22px_rgba(17,24,39,0.16)] ring-1 ring-stone-200/80">
-                                                <ShieldCheck className="h-5 w-5 text-primary" />
-                                            </div>
-                                            <p className="text-[15px] leading-7 text-gray-700">{item}</p>
-                                        </div>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="border-y border-stone-200/70 bg-white py-16 md:py-20">
-                    <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                        <Reveal className="mx-auto max-w-3xl text-center">
-                            <p className="site-kicker">{config.narrative.rolloutKicker}</p>
-                            <h2 className="section-title mt-6">{config.narrative.rolloutTitle}</h2>
-                            <p className="section-copy mt-5">{config.narrative.rolloutBody}</p>
-                        </Reveal>
-
-                        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-                            {config.rolloutPhases.map((phase, index) => (
-                                <Reveal key={phase.title} delay={0.05 * index}>
-                                    <div className="surface-card h-full p-6 sm:p-7">
-                                        <div className="flex items-center gap-3">
-                                            <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-50 text-primary">
-                                                {index === 0 ? (
-                                                    <FolderOpen className="h-5 w-5" />
-                                                ) : index === 1 ? (
-                                                    <Workflow className="h-5 w-5" />
-                                                ) : (
-                                                    <Factory className="h-5 w-5" />
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/70">{phase.phase}</p>
-                                                <h3 className="mt-1 text-[1.3rem] font-semibold tracking-tight text-gray-950">{phase.title}</h3>
-                                            </div>
-                                        </div>
-                                        <p className="mt-5 text-[15px] leading-7 text-gray-600">{phase.body}</p>
-                                    </div>
-                                </Reveal>
-                            ))}
                         </div>
                     </div>
                 </section>
@@ -491,5 +358,3 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
         </div>
     );
 }
-
-

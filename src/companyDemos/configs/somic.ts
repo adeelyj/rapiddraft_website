@@ -6,26 +6,50 @@ export const somicDemoConfig: CompanyDemoConfig = {
     hostnames: ['somic.rapiddraft.ai'],
     accessLabel: 'Private SOMIC pilot demo',
     summary:
-        'A SOMIC revision-before-release walkthrough that turns Rev A and Rev B into a change summary, release gate, changed-part DFM pass, and exportable evidence packet.',
+        'A SOMIC walkthrough: find a CORAS part by geometry, improve it with DFM review, compare Rev A and Rev B, and release a drawing that has already been linted against ISO or ASME.',
     hero: {
         badge: 'Private SOMIC pilot demo',
-        title: 'Turn a SOMIC revision pair into a release-ready review',
+        title: 'From a CORAS part search to a release-ready drawing',
         description:
-            'RapidDraft helps SOMIC review one machine change the way the team actually works: compare Rev A and Rev B, explain what changed, run the release gate, check one changed part, and export the evidence packet.',
-        proofChips: ['Rev A -> Rev B', 'Change summary', 'Release gate', 'Changed-part DFM'],
+            'RapidDraft helps SOMIC engineers find the right part across machines like CORAS, improve it with DFM review, compare revisions, and release a drawing that has already been linted against ISO or ASME.',
+        proofChips: ['Natural-language part search', 'DFM review', 'Rev A -> Rev B', 'DraftLint ISO / ASME'],
         scenarioTitle: 'Scenario',
         scenarioBody:
-            'A SOMIC engineer is preparing a customer-driven format change on a 434-style machine and needs the release discussion focused on what changed, what blocks Freigabe, and whether the changed part is still manufacturable.',
+            "A SOMIC engineer needs the pocket-and-slot adapter used on the CORAS line. They don't remember the part number, so they search by geometry and machine name, improve the part with DFM review, compare revisions, and export a clean drawing ready for release.",
+        image: {
+            src: '/media/somic-coras.jpg',
+            alt: 'SOMIC CORAS collating and grouping system in operation',
+        },
     },
     heroStoryboard: {
-        eyebrow: 'SOMIC revision-before-release flow',
-        title: 'From format change to Freigabe packet',
+        eyebrow: 'SOMIC search-to-lint flow',
+        title: 'From part search to release-ready drawing',
         revisionLabel: 'Rev A -> Rev B',
         steps: [
-            { label: '1. Pair the revisions', text: 'Start from the released baseline and the candidate change package.' },
-            { label: '2. Explain the delta', text: 'Show exactly what changed before the approval discussion starts.' },
-            { label: '3. Gate the release', text: 'Run deterministic release-readiness checks on the candidate package.' },
-            { label: '4. Check the changed part', text: 'Validate one representative changed part before export.' },
+            { label: '1. Find the part', text: 'Search by geometry or machine name (e.g. "pockets" or "CORAS").' },
+            { label: '2. DFM review', text: 'Apply the flagged manufacturability fixes and save Rev B.' },
+            { label: '3. Compare revisions', text: 'See exactly what changed between Rev A and Rev B.' },
+            { label: '4. Lint the drawing', text: 'Run DraftLint against ISO or ASME before release review.' },
+        ],
+    },
+    heroVisual: {
+        kind: 'revision-gate',
+        pairLabel: 'Revision pair',
+        revA: { tag: 'Rev A', label: '434-format · released', meta: '2025-05-12' },
+        revB: { tag: 'Rev B', label: '434-format · candidate', meta: '2025-09-03' },
+        diffSummary: '12 changed · 2 added · 1 removed',
+        gateLabel: 'Release gate',
+        gateChecks: [
+            { label: 'Revision table', status: 'ok' },
+            { label: 'Title block', status: 'ok' },
+            { label: 'Dimensions', status: 'ok' },
+            { label: 'Notes', status: 'warn' },
+        ],
+        partLabel: 'Changed part · DFM',
+        partName: '434-format cam insert',
+        partFindings: [
+            { label: 'Geometry watertight', status: 'ok' },
+            { label: 'Tap depth margin tight', status: 'warn' },
         ],
     },
     fitCards: [
@@ -47,113 +71,79 @@ export const somicDemoConfig: CompanyDemoConfig = {
     ],
     chapters: [
         {
-            id: 'scope-revision',
+            id: 'search-part',
             stepNumber: 1,
-            title: 'Scope the revision pair',
+            title: "Find the CORAS adapter by what it is, not what it's called",
             engineerAction:
-                'The engineer selects the released package and the candidate package for one customer-driven format change on a SOMIC machine.',
+                "The engineer needs the adapter for CORAS that has pockets and slots. They don't remember the part number, so they type \"pockets\" - or \"CORAS\" - into the search field.",
             rapiddraftReturn:
-                'RapidDraft opens one bounded review session around the exact Rev A and Rev B pair that needs approval.',
+                'RapidDraft matches intent across machine name, geometry, and part metadata, and returns the adapter (and a few close siblings) ranked by relevance.',
             managementValue:
-                'The meeting starts from one explicit revision scope instead of a vague handoff to check the new version.',
-            artifactsIn: ['Released Rev A package', 'Candidate Rev B package', 'Basic change context'],
-            artifactsOut: ['Scoped review session'],
+                'Engineers stop hunting through folders. New hires can find the right part on day one.',
+            artifactsIn: ['Search term: "pockets" or "CORAS"'],
+            artifactsOut: ['Matched CORAS adapter part'],
             video: {
-                placeholderTitle: 'Video 1 · Scope the SOMIC revision',
+                placeholderTitle: 'Video 1 · Semantic part search',
                 recordingBrief:
-                    'Show the engineer selecting Rev A and Rev B for a believable format change on a SOMIC 434-style machine.',
+                    'Show the engineer typing "pockets" into the search field and the CORAS adapter appearing in the results.',
                 durationLabel: '1-2 min',
             },
         },
         {
-            id: 'explain-change',
+            id: 'dfm-review',
             stepNumber: 2,
-            title: 'Explain what changed',
+            title: 'Run a DFM review and apply the fixes',
             engineerAction:
-                'Before the approval discussion, the engineer opens the diff to understand which views, notes, dimensions, and geometry changed.',
+                'The engineer opens the matched part and runs a DFM review. RapidDraft lists concrete manufacturability improvements - deep pockets, sharp internal corners, thin walls, tool-access problems.',
             rapiddraftReturn:
-                'RapidDraft highlights changed content and writes a plain-language summary of what must be rechecked.',
+                'RapidDraft surfaces geometry-linked DFM findings with a severity and a suggested fix for each. The engineer applies the fixes and saves the result as Rev B.',
             managementValue:
-                'Review time shifts from detective work to decision work, which is the exact wedge SOMIC already signaled.',
-            artifactsOut: ['Revision diff', 'Plain-language change summary'],
+                'Manufacturability is resolved before the drawing exists - not after a supplier quote comes back.',
+            artifactsIn: ['Rev A of the CORAS adapter'],
+            artifactsOut: ['DFM findings', 'Rev B with fixes applied'],
             video: {
-                placeholderTitle: 'Video 2 · Revision diff and summary',
+                placeholderTitle: 'Video 2 · DFM review and fix',
                 recordingBrief:
-                    'Make this the hero moment: compare Rev A and Rev B, highlight the changed region, and read out the generated summary.',
+                    'Open the part, open the DFM review, scroll the findings, apply a fix, save as Rev B.',
                 durationLabel: '2-3 min',
             },
         },
         {
-            id: 'run-release-gate',
+            id: 'compare-revisions',
             stepNumber: 3,
-            title: 'Run the release gate',
+            title: 'Compare Rev A and Rev B to confirm the change',
             engineerAction:
-                'The engineer runs deterministic release-readiness checks on the candidate package before Freigabe.',
+                'The engineer opens the revision compare view on Rev A and Rev B of the same adapter.',
             rapiddraftReturn:
-                'RapidDraft flags revision-table issues, title-block mismatches, missing notes, dangling dimensions, and other release blockers with severity and evidence.',
+                'RapidDraft highlights exactly what changed - geometry, features, tolerances - with a plain-language summary alongside the visual diff.',
             managementValue:
-                'Approval becomes more consistent because checklist logic no longer lives only in reviewer memory.',
-            artifactsOut: ['Release checklist results', 'Severity-ranked blockers'],
+                'The reviewer sees the delta without hunting through the model tree.',
+            artifactsIn: ['Rev A', 'Rev B'],
+            artifactsOut: ['Revision diff', 'Plain-language change summary'],
             video: {
-                placeholderTitle: 'Video 3 · Deterministic release gate',
+                placeholderTitle: 'Video 3 · Revision compare',
                 recordingBrief:
-                    'Walk through the findings and make clear that RapidDraft is a release-review intelligence layer, not a CAD replacement.',
+                    'Show the before/after viewer with the changed regions highlighted and the summary panel.',
                 durationLabel: '1-2 min',
             },
         },
         {
-            id: 'check-changed-part',
+            id: 'draftlint',
             stepNumber: 4,
-            title: 'Check one changed part',
+            title: 'Create the drawing and run DraftLint',
             engineerAction:
-                'The engineer selects one representative changed part or format tool that matters to the release and runs a focused manufacturability check.',
+                "The engineer creates the drawing of Rev B and runs DraftLint against the company's chosen standard (ISO 128 / ISO 129 / ISO 8015 or ASME Y14.5).",
             rapiddraftReturn:
-                'RapidDraft produces geometry-linked DFM findings on the changed part and summarizes the manufacturing risk clearly.',
+                'RapidDraft flags standard-compliance issues - missing tolerances, wrong projection, non-conforming annotations, title-block gaps - with evidence linked to the drawing.',
             managementValue:
-                'This is the SOMIC-specific extension beyond paperwork: the review packet also says something useful about the changed hardware.',
-            artifactsIn: ['Changed STEP part', 'Selected manufacturing route'],
-            artifactsOut: ['Changed-part DFM findings', 'Manufacturing summary'],
+                'The drawing arrives at review already lint-clean. Release discussion time collapses.',
+            artifactsIn: ['Rev B drawing', 'Chosen standard: ISO 128 / 129 / 8015 or ASME Y14.5'],
+            artifactsOut: ['DraftLint findings', 'Release-ready drawing'],
             video: {
-                placeholderTitle: 'Video 4 · Changed-part manufacturability',
+                placeholderTitle: 'Video 4 · DraftLint on the drawing',
                 recordingBrief:
-                    'Use one believable SOMIC-style machined part or format tool and show a tight changed-part DFM slice.',
+                    'Create the drawing, pick a standard, run DraftLint, scroll findings, show the cleaned drawing.',
                 durationLabel: '1-2 min',
-            },
-        },
-        {
-            id: 'export-packet',
-            stepNumber: 5,
-            title: 'Export the Freigabe packet',
-            engineerAction:
-                'Once the revision is understood, the engineer exports one packet for approval and downstream handoff.',
-            rapiddraftReturn:
-                'RapidDraft compiles the change summary, release-gate results, and changed-part DFM evidence into one review packet.',
-            managementValue:
-                'The result travels with the revision instead of being scattered across screenshots, PDFs, and meeting notes.',
-            artifactsOut: ['Release evidence packet', 'Approval-ready summary'],
-            video: {
-                placeholderTitle: 'Video 5 · Export the evidence packet',
-                recordingBrief:
-                    'Show the exported packet and briefly scan the sections: change summary, blockers, and changed-part manufacturability.',
-                durationLabel: '1-2 min',
-            },
-        },
-        {
-            id: 'show-next-step',
-            stepNumber: 6,
-            title: 'Show the next step, not the whole roadmap',
-            engineerAction:
-                'After the core workflow lands, the team looks at the most believable follow-on intake path.',
-            rapiddraftReturn:
-                'RapidDraft shows how this can move from export-based intake today toward workflow-triggered execution later.',
-            managementValue:
-                'SOMIC sees a credible adoption path without the first meeting turning into a speculative PDM integration pitch.',
-            artifactsOut: ['Pilot roadmap'],
-            video: {
-                placeholderTitle: 'Video 6 · Practical expansion path',
-                recordingBrief:
-                    'Close with the narrow roadmap: export-first now, workflow trigger later, deeper system coupling only after the wedge is proven.',
-                durationLabel: '1 min',
             },
         },
     ],
@@ -209,9 +199,12 @@ export const somicDemoConfig: CompanyDemoConfig = {
         buttonLabel: 'Book a SOMIC walkthrough',
         buttonHref: '/book-demo',
         panelTitle: 'What we need from SOMIC',
-        needs: ['Rev A and Rev B artifacts', '1-2 drawing PDFs', 'One representative changed part'],
-        note:
-            'With those inputs, we can show a real revision-before-release review instead of a generic CAD demo.',
+        needs: [
+            'One CORAS-family part (Rev A)',
+            'Your preferred standard (ISO 128 / 129 / 8015 or ASME Y14.5)',
+            'One drawing template',
+        ],
+        note: 'With those inputs, we can show the search, the DFM review, the revision compare, and the DraftLint pass on one real part.',
     },
     narrative: {
         hostModeNote: 'Built from the SOMIC pilot dossier and RapidDraft review vision.',
@@ -219,14 +212,14 @@ export const somicDemoConfig: CompanyDemoConfig = {
         fitTitle: 'Built for revision-before-release on modular machine variants',
         fitBody:
             'The SOMIC story is narrow on purpose: compare one revision pair, surface release blockers, and check one changed part before Freigabe.',
-        storylineKicker: 'Storyline chapters',
-        storylineTitle: 'A focused release-review workflow',
+        storylineKicker: 'How the demo runs',
+        storylineTitle: 'From part search to release-ready drawing',
         storylineBody:
-            'Each chapter keeps the pilot close to SOMICs real approval pressure: what changed, what blocks release, and whether the changed part is still safe to make.',
+            'Four steps that match how a SOMIC engineer actually works: find the part, improve it with DFM review, compare revisions, and lint the drawing before release.',
         capabilityKicker: 'Capability map',
         capabilityTitle: 'What the SOMIC demo is really proving',
         capabilityBody:
-            'This demo proves revision-before-release intelligence, with changed-part manufacturability as the supporting second layer.',
+            'Semantic part search, DFM review, revision compare, and standard-based drawing lint - the four moves that shorten release review on a real machine part.',
         nonClaimsKicker: 'What this demo does not claim',
         nonClaimsTitle: 'Credibility matters more than breadth',
         nonClaimsBody:
@@ -234,13 +227,13 @@ export const somicDemoConfig: CompanyDemoConfig = {
         rolloutKicker: 'Pilot expansion path',
         rolloutTitle: 'Start narrow, then earn the right to integrate',
         rolloutBody:
-            'The first SOMIC pilot should prove the release-review wedge first and only then move toward deeper workflow attachment.',
-        finalCtaKicker: 'Final CTA',
-        finalCtaTitle: 'Prove the revision-before-release wedge',
+            'The first SOMIC pilot should prove the search-to-lint workflow on one part, then expand to more machines.',
+        finalCtaKicker: 'Book a walkthrough',
+        finalCtaTitle: 'See it on a real CORAS part',
         finalCtaBody:
-            'If SOMIC sees a trustworthy change summary, a credible release gate, a believable changed-part DFM slice, and a clean evidence packet, the next conversation becomes much easier.',
+            'If you see the search, the DFM fix, the revision compare, and the DraftLint pass on one real part, the rest of the evaluation gets much shorter.',
         footerBody:
-            'This storyline is anchored in the SOMIC pilot dossier and RapidDrafts revision-before-release wedge: compare revisions, gate release, validate the changed part, and export the evidence.',
+            'This storyline follows the real SOMIC workflow: find the CORAS part, improve it with DFM review, compare revisions, and release a drawing that has already been linted against ISO or ASME.',
         footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/somic_pilot/_index/',
         footerLinkLabel: 'Open the SOMIC wiki dossier',
     },
