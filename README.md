@@ -13,7 +13,7 @@ Current hosted site identity:
 - Netlify site: `rapiddraft`
 - Netlify site id: `9b777f3c-0133-45ac-bfbd-d275bc7642e3`
 - custom domain: `rapiddraft.ai`
-- domain aliases: `rapiddraft.io`, `pitch.rapiddraft.ai`, `somic.rapiddraft.ai`, `webasto.rapiddraft.ai`
+- domain aliases: `rapiddraft.io`, `pitch.rapiddraft.ai`, `somic.rapiddraft.ai`, `webasto.rapiddraft.ai`, `demo.rapiddraft.ai`
 
 Useful local paths on this machine:
 
@@ -24,7 +24,7 @@ Useful local paths on this machine:
 Important:
 
 1. Do not assume `D:\02_Code\15_RapidDraft_website` is the live source of truth. That local copy can be useful for inspection, but Netlify will keep serving whatever is on the watched Git branch.
-2. When a subdomain tenant page like `somic.rapiddraft.ai` or `webasto.rapiddraft.ai` is added or updated, make the code change in the Git-backed website worktree, push the watched branch, then verify the deploy.
+2. When a subdomain tenant page like `somic.rapiddraft.ai`, `webasto.rapiddraft.ai`, or `demo.rapiddraft.ai` is added or updated, make the code change in the Git-backed website worktree, push the watched branch, then verify the deploy.
 3. Custom-domain setup is a separate step from content deploy. A tenant page will still show stale or generic content if DNS is correct but the watched branch does not contain the tenant config.
 
 Recommended release checklist for tenant pages:
