@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import PageMeta from '../components/PageMeta';
@@ -206,6 +207,29 @@ function VideoPanel({ chapter, companyName }: { chapter: StoryChapter; companyNa
     );
 }
 
+function DemoCtaLink({ config, className, children }: { config: CompanyDemoConfig; className: string; children: ReactNode }) {
+    const isExternal = /^https?:\/\//i.test(config.cta.buttonHref);
+
+    if (isExternal || config.cta.buttonNewTab) {
+        return (
+            <a
+                href={config.cta.buttonHref}
+                target={config.cta.buttonNewTab ? '_blank' : undefined}
+                rel={config.cta.buttonNewTab ? 'noreferrer' : undefined}
+                className={className}
+            >
+                {children}
+            </a>
+        );
+    }
+
+    return (
+        <Link to={config.cta.buttonHref} className={className}>
+            {children}
+        </Link>
+    );
+}
+
 export default function CompanyDemoPage({ config, isHostMode = false }: CompanyDemoPageProps) {
     const metaPath = isHostMode ? '/' : `/pilots/${config.slug}`;
 
@@ -245,20 +269,9 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                                     <a href="#storyline" className="btn-primary w-full sm:w-auto">
                                         See the storyline
                                     </a>
-                                    {config.cta.buttonNewTab ? (
-                                        <a
-                                            href={config.cta.buttonHref}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="btn-secondary w-full sm:w-auto"
-                                        >
-                                            {config.cta.buttonLabel}
-                                        </a>
-                                    ) : (
-                                        <Link to={config.cta.buttonHref} className="btn-secondary w-full sm:w-auto">
-                                            {config.cta.buttonLabel}
-                                        </Link>
-                                    )}
+                                    <DemoCtaLink config={config} className="btn-secondary w-full sm:w-auto">
+                                        {config.cta.buttonLabel}
+                                    </DemoCtaLink>
                                 </div>
 
                                 <div className="mt-8 rounded-[1.7rem] border border-stone-200/80 bg-white/90 p-5 shadow-[0_20px_50px_-38px_rgba(17,24,39,0.14)]">
@@ -343,10 +356,10 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                                         <h2 className="section-title mt-6 max-w-[12ch]">{config.narrative.finalCtaTitle}</h2>
                                         <p className="section-copy mt-5 max-w-2xl">{config.narrative.finalCtaBody}</p>
                                         <div className="mt-8">
-                                            <Link to={config.cta.buttonHref} className="btn-primary">
+                                            <DemoCtaLink config={config} className="btn-primary">
                                                 {config.cta.buttonLabel}
                                                 <ArrowRight className="ml-2 h-4 w-4" />
-                                            </Link>
+                                            </DemoCtaLink>
                                         </div>
                                     </div>
                                 </Reveal>

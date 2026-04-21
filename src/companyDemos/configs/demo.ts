@@ -199,7 +199,7 @@ export const demoDemoConfig: CompanyDemoConfig = {
     ],
     cta: {
         buttonLabel: 'Book a walkthrough',
-        buttonHref: '/book-demo',
+        buttonHref: 'https://rapiddraft.ai/book-demo',
         panelTitle: 'What we need for a tailored walkthrough',
         needs: [
             'One representative machined part (Rev A)',
