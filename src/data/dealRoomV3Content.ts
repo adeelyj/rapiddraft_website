@@ -16,6 +16,11 @@ export type OnboardingOffer = {
     recommended?: boolean;
 };
 
+export type ScopeItem = {
+    title: string;
+    description: string;
+};
+
 export type OnboardingStepKind = 'document' | 'discussion' | 'offers' | 'execution';
 
 export type OnboardingStep = {
@@ -31,6 +36,12 @@ export type OnboardingStep = {
     bullets?: string[];
     sequence?: string[];
     microcopy?: string;
+    scopeTitle?: string;
+    scopeBody?: string;
+    scopeItems?: ScopeItem[];
+    scopeNote?: string;
+    finalCtaCopy?: string;
+    finalCtaLabel?: string;
 };
 
 export type DealRoomV3Content = {
@@ -91,58 +102,91 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
         {
             id: 'offer-selection',
             title: 'Offer Selection',
-            summary: 'Review the pilot options and align on the right one.',
-            detailTitle: 'Select the right pilot structure.',
+            summary: 'Start with the level of commitment that matches your readiness.',
+            detailTitle: 'Start with one workflow. Prove value before rollout.',
             detailBody:
-                'We keep the first engagement structured. The options below are designed to match different levels of readiness, scope, and urgency.',
+                'Every engagement is scoped around a priority engineering workflow, agreed success metrics, required inputs, and a clear decision point. Start with the level of commitment that matches your readiness.',
             kind: 'offers',
-            note: 'We align on the preferred option after the workflow discussion.',
             offers: [
                 {
-                    title: 'Discovery & Feasibility Sprint',
-                    subtext: 'Best for early qualification.',
+                    title: 'Assess',
+                    subtext: 'Best for teams exploring whether RapidDraft fits their engineering workflow.',
                     description:
-                        'A short engagement to assess technical fit, workflow suitability, and pilot readiness before committing to a full pilot.',
+                        'A short diagnostic engagement to understand your use case, review available drawings or engineering inputs, assess workflow fit, and define the right pilot scope before committing to a proof-of-value pilot.',
                     details: [
-                        'Use-case assessment',
-                        'Sample and standards review',
-                        'Feasibility analysis',
+                        'Use-case and workflow assessment',
+                        'Drawing/sample review',
+                        'Technical and operational feasibility check',
                         'Success metric proposal',
                         'Recommended pilot scope',
                     ],
-                    footer: 'Typical duration: 2-3 weeks',
+                    footer: 'Typical duration: 2–3 weeks',
                 },
                 {
-                    title: 'Structured Pilot',
-                    subtext: 'Best for proving value in one workflow.',
+                    title: 'Proof-of-Value Pilot',
+                    subtext: 'Best for teams ready to validate measurable value in one defined workflow.',
                     description:
-                        'A focused pilot to validate measurable business value on one defined workflow with clear scope, working sessions, and outcome review.',
+                        'A focused pilot to configure RapidDraft for one priority workflow, run structured working sessions, review real engineering inputs, and measure impact against agreed KPIs.',
                     details: [
                         'Scoped pilot setup',
                         'Use-case-specific configuration',
+                        'Review of real workflow samples',
                         'Weekly working sessions',
                         'KPI measurement',
-                        'Final evaluation and recommendation',
+                        'Final value assessment',
+                        'Recommended next step',
                     ],
-                    footer: 'Typical duration: 6-10 weeks',
+                    footer: 'Typical duration: 6–10 weeks',
                     badge: 'Recommended',
                     recommended: true,
                 },
                 {
-                    title: 'Pilot + Production Readiness',
-                    subtext: 'Best for teams preparing for rollout.',
+                    title: 'Production Rollout',
+                    subtext: 'Best for teams preparing to move from pilot validation to recurring production use.',
                     description:
-                        'A structured pilot combined with the planning needed for deployment, governance, and broader operational rollout.',
+                        'A pilot-to-production engagement that turns validated workflow value into a rollout plan, including deployment scope, governance, stakeholder alignment, integration planning, and production readiness.',
                     details: [
-                        'Everything in Structured Pilot',
+                        'Everything in Proof-of-Value Pilot',
                         'Rollout design',
                         'Integration planning',
                         'Governance alignment',
                         'Deployment roadmap',
+                        'Production readiness review',
+                        'Expansion plan',
                     ],
-                    footer: 'Typical duration: 8-12 weeks',
+                    footer: 'Typical duration: 8–12 weeks',
                 },
             ],
+            scopeTitle: 'Every engagement starts with a clear scope.',
+            scopeBody:
+                'Before work begins, we align on the priority workflow, success metrics, required inputs, stakeholder roles, and expected decision point. This keeps the engagement focused, measurable, and useful for deciding the next step.',
+            scopeItems: [
+                {
+                    title: 'Priority workflow',
+                    description: 'Defines where RapidDraft will be applied.',
+                },
+                {
+                    title: 'Success metrics',
+                    description: 'Makes value measurable.',
+                },
+                {
+                    title: 'Required inputs',
+                    description: 'Confirms drawings, models, rules, or samples are available.',
+                },
+                {
+                    title: 'Stakeholder roles',
+                    description: 'Clarifies ownership and feedback loops.',
+                },
+                {
+                    title: 'Decision point',
+                    description: 'Defines what happens after the engagement.',
+                },
+            ],
+            scopeNote:
+                'After the pilot, we define the right production path based on the validated workflow, rollout scope, and deployment needs.',
+            finalCtaCopy:
+                'Not sure where to start? We’ll help identify the right workflow and recommend the best starting point after a short demo.',
+            finalCtaLabel: 'Book a Demo',
         },
         {
             id: 'agreement',

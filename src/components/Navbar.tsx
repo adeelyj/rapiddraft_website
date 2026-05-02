@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import clsx from 'clsx';
+import BrandMark from './BrandMark';
 
 export default function Navbar() {
     const [openPath, setOpenPath] = useState<string | null>(null);
@@ -40,11 +41,7 @@ export default function Navbar() {
                                 isCadConcept && 'rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 hover:bg-white/[0.06]'
                             )}
                         >
-                            <img
-                                src="/media/rd_logo.png"
-                                alt="RapidDraft"
-                                className="h-7 w-auto sm:h-8"
-                            />
+                            <BrandMark theme={isCadConcept ? 'dark' : 'light'} size="sm" />
                         </Link>
                     </div>
 

@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import BrandMark from '../components/BrandMark';
 import PageMeta from '../components/PageMeta';
 import Reveal from '../components/home/Reveal';
 import type { CompanyDemoConfig, StoryChapter } from '../companyDemos/types';
@@ -14,7 +15,7 @@ function DemoHeader({ config, isHostMode }: { config: CompanyDemoConfig; isHostM
         <header className="sticky top-0 z-50 border-b border-stone-200/70 bg-white/90 backdrop-blur-xl">
             <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-5 py-4 sm:px-6 lg:px-8 xl:px-10">
                 <div className="flex items-center gap-4">
-                    <img src="/media/rd_logo.png" alt="RapidDraft" className="h-8 w-auto" />
+                    <BrandMark theme="light" size="sm" />
                     <span className="inline-flex items-center rounded-full border border-orange-200/80 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary shadow-[0_14px_30px_-24px_rgba(234,88,12,0.55)]">
                         {config.accessLabel}
                     </span>
