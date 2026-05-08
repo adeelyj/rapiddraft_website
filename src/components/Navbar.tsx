@@ -38,7 +38,7 @@ export default function Navbar() {
                             to="/"
                             className={clsx(
                                 'flex items-center transition',
-                                isCadConcept && 'rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 hover:bg-white/[0.06]'
+                                isCadConcept && 'hover:opacity-90'
                             )}
                         >
                             <BrandMark theme={isCadConcept ? 'dark' : 'light'} size="sm" />
