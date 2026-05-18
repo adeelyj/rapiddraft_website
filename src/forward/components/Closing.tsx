@@ -18,22 +18,24 @@ const DISCUSSION_NOTES: DiscussionNote[] = [
       {
         title: 'Next steps',
         bullets: [
-          'Align around starting with an Assess-style entry point before a broader proof-of-value pilot.',
-          'Define pilot scope for the next 2-3 months and confirm the first workflow to test.',
+          'Adeel to share the notes with Forward.',
+          'Adeel to propose simulation related agentic workflow.',
+          'Dennis to come back on the agentic design review demos.',
         ],
       },
       {
         title: 'Forward Engineering',
         bullets: [
-          'Share the relevant drawings, samples, and workflow context needed for the initial assessment.',
-          'Clarify data access expectations and the preferred cloud or collaboration boundary early.',
+          'Simulation workflows bigger issue.',
+          'Dennis and Dawei interested in model check, preprocessing and post-processing agentic workflows.',
+          'Concern on where data will be stored.',
         ],
       },
       {
         title: 'RapidDraft',
         bullets: [
-          'Frame the pilot around design review, collaboration, and documentation outcomes.',
-          'Prepare for an on-site meeting to shape the working cadence and initial execution plan.',
+          'Can someone from FE design team asses the product-fit?',
+          'Data to be stored on-prem, either locally in Forwards servers or Forwards cloud provider.',
         ],
       },
     ],
