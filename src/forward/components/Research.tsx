@@ -17,7 +17,7 @@ export function Research() {
       <div className="mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-32">
         <div className="max-w-2xl">
           <h2 className="text-[2rem] font-semibold leading-[1.1] tracking-tight text-ink sm:text-[2.5rem]">
-            Walking in with the work done.
+            Background & Research
           </h2>
         </div>
 
