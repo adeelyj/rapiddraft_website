@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 
-type Props = {
-  onOpenBank: () => void
-}
-
 const ANCHORS = [
   { id: 'where-we-fit', label: 'Where we fit' },
   { id: 'forward-fit', label: 'ROI' },
-  { id: 'closing', label: 'Discussion notes' },
+  { id: 'closing', label: 'Discussion' },
   { id: 'research', label: 'Background & Research' },
 ]
 
-export function Nav({ onOpenBank }: Props) {
+export function Nav() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -50,25 +46,7 @@ export function Nav({ onOpenBank }: Props) {
               </a>
             </li>
           ))}
-          <li>
-            <button
-              type="button"
-              onClick={onOpenBank}
-              className="text-meta font-semibold text-primary underline-offset-4 hover:underline"
-            >
-              Question bank
-            </button>
-          </li>
         </ul>
-
-        {/* Mobile question bank */}
-        <button
-          type="button"
-          onClick={onOpenBank}
-          className="text-meta font-semibold text-primary md:hidden"
-        >
-          Question bank
-        </button>
       </div>
     </nav>
   )

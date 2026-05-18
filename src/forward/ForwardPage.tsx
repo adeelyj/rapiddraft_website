@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Closing, Footer } from './components/Closing';
 import { Hero } from './components/Hero';
 import { Nav } from './components/Nav';
 import { PilotOptions } from './components/PilotOptions';
-import { QuestionBank } from './components/QuestionBank';
 import { Research } from './components/Research';
 import { ROICalculator } from './components/ROICalculator';
 import './forward.css';
 
 export default function ForwardPage() {
-  const [bankOpen, setBankOpen] = useState(false);
-
   useEffect(() => {
     const previousTitle = document.title;
     const description = document.querySelector('meta[name="description"]');
@@ -43,14 +40,13 @@ export default function ForwardPage() {
 
   return (
     <main className="forward-page">
-      <Nav onOpenBank={() => setBankOpen(true)} />
+      <Nav />
       <Hero />
       <ROICalculator />
       <Closing />
       <PilotOptions />
       <Research />
       <Footer />
-      {bankOpen ? <QuestionBank onClose={() => setBankOpen(false)} /> : null}
     </main>
   );
 }
