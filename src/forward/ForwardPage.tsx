@@ -46,8 +46,8 @@ export default function ForwardPage() {
       <Nav onOpenBank={() => setBankOpen(true)} />
       <Hero />
       <ROICalculator />
-      <PilotOptions />
       <Closing />
+      <PilotOptions />
       <Research />
       <Footer />
       {bankOpen ? <QuestionBank onClose={() => setBankOpen(false)} /> : null}

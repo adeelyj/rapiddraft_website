@@ -19,37 +19,11 @@ const DISCUSSION_NOTES: DiscussionNote[] = [
   },
 ]
 
-const CALL_TO_ACTION_ITEMS = [
-  'Define pilot scope for the next 2-3 months',
-  'Data access and cloud strategy',
-  'Problem scope (design review, collaboration, documentation)',
-  'On-site meeting',
-]
-
 export function Closing() {
   return (
     <section id="closing" className="relative scroll-mt-16">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-32">
-        <div className="max-w-4xl rounded-[1.75rem] border border-stone-200/90 bg-white px-6 py-8 shadow-[0_20px_50px_-38px_rgba(17,24,39,0.2)] sm:px-8">
-          <span className="inline-block font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-            Call to action
-          </span>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {CALL_TO_ACTION_ITEMS.map((item, index) => (
-              <div
-                key={item}
-                className="rounded-[1.25rem] border border-stone-200/80 bg-[#fffaf7] px-4 py-4"
-              >
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-40">
-                  {`0${index + 1}`}
-                </p>
-                <p className="mt-2 text-body font-semibold text-ink">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-16 max-w-2xl">
+        <div className="max-w-2xl">
           <span className="inline-block font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
             Forward x RapidDraft
           </span>
