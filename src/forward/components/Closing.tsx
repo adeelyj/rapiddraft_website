@@ -1,64 +1,21 @@
-// Forward x RapidDraft - questions for the meeting, drawn from our own deep
-// research (perplexity + GPT). Each question carries a one-line italic
-// subtitle explaining what a candid answer would surface, plus a small
-// source citation visible on hover.
+import { ChevronDown } from 'lucide-react'
 
-type Question = {
-  text: string
-  subtitle: string
-  source: string
+type DiscussionNote = {
+  date: string
+  title: string
+  bullets: string[]
 }
 
-const QUESTIONS: Question[] = [
+const DISCUSSION_NOTES: DiscussionNote[] = [
   {
-    text:
-      'Both your SMC and Megamolding battery enclosures look stuck around TRL 6-7. Which single demonstrator is closest to an OEM SOP nomination, and what specifically is still blocking it?',
-    subtitle:
-      'Reveals whether FE is genuinely converting demonstrators into series wins - the place a review / collaboration tool earns or loses relevance.',
-    source:
-      'GPT deep-research report - multiple battery enclosures publicly "validated for series feasibility" but no disclosed SOP awards.',
-  },
-  {
-    text:
-      'Your 2024 deck calls poor FRP crash material cards the reason designers default to metals. Where in that card pipeline are your engineers still rebuilding from scratch each project?',
-    subtitle:
-      'Forces a candid answer on reuse vs. bespoke work - exactly where a RapidDraft-style knowledge layer over CAE artefacts has the highest leverage.',
-    source: "GPT deep-research report - FE's 2024 SPE ACCE deck on material-card maturity as the root bottleneck.",
-  },
-  {
-    text:
-      'The 2025 Global Fire-Safety Test Program tore down eight packs from VW to Xiaomi. Is that intelligence a paid subscription, or still feeding one-off engineering RFPs?',
-    subtitle:
-      "Tests whether FE's most productizable asset - bulk teardown data - is a recurring product line yet, or trapped inside consulting hours.",
-    source: 'Perplexity research - 2025 Global EV Battery Fire Safety Test Program comparing eight OEM packs.',
-  },
-  {
-    text:
-      'GB 38031-2025 takes effect July 1, 2026. How many of your current OEM conversations are pulled by that deadline versus by cost or weight targets?',
-    subtitle:
-      'A high regulation-pull number means FE has a narrow, time-boxed window to productize compliance - a clear opening for clause-level review workflow.',
-    source: 'Both reports - GB 38031-2025 flagged as the strongest near-term commercial pull.',
-  },
-  {
-    text:
-      'With ~26 people across Munich, Nagoya, Shanghai and Detroit, how do you keep CAE assumptions, material cards, and DFM rules consistent across sites - or do you not yet?',
-    subtitle:
-      'Exposes whether FE has internal tooling or is held together by a handful of senior experts - directly frames where a shared review platform fits.',
-    source: 'Perplexity research - global coordination pain point across four offices with a small team.',
-  },
-  {
-    text:
-      "You lead Design-for-Circularity inside BMW's FSCM consortium. When has an LCA result actually changed an architecture decision early, versus arriving as a slide at the end?",
-    subtitle:
-      'Separates real DfS engineering from CSR theater - indicates whether sustainability data is a live design input the CO2 agent should surface at concept stage.',
-    source: 'Perplexity research - FSCM role and DfS positioning, with the risk LCA stays "marketing rather than design input."',
-  },
-  {
-    text:
-      'Mitsui has been a strategic shareholder since 2016. What does it unlock for you today beyond ownership legacy - Japanese OEM access, capital for productization, or something else?',
-    subtitle:
-      'Probes whether FE has real capital and channel leverage to scale into productized offerings, or remains a boutique plateaued under its anchor investor.',
-    source: "GPT deep-research report - Mitsui's 2016 stake confirmed; the commercial yield is undefined.",
+    date: '2026-05-18',
+    title: 'Forward discussion',
+    bullets: [
+      'Aligned around starting with an Assess-style entry point before a broader proof-of-value pilot.',
+      'Discussed pilot scope for the next 2-3 months, including design review, collaboration, and documentation.',
+      'Flagged data access and cloud strategy as an early decision needed before execution planning.',
+      'Agreed that an on-site meeting should help define the initial workflow and working cadence.',
+    ],
   },
 ]
 
@@ -97,32 +54,42 @@ export function Closing() {
             Forward x RapidDraft
           </span>
           <h2 className="mt-4 text-[2rem] font-semibold leading-[1.1] tracking-tight text-ink sm:text-[2.5rem]">
-            Questions for the meeting.
+            Discussion notes
           </h2>
           <p className="mt-4 text-meta text-ink-60">
-            Drawn from our own deep-research and perplexity reports on Forward Engineering - the seven questions most likely to surface a sharp answer.
+            Every meeting note can live here as a dated running list, expandable when we want the detail and collapsible when we want the overview.
           </p>
         </div>
 
-        <ol className="mt-12 max-w-4xl space-y-8">
-          {QUESTIONS.map((q, i) => (
-            <li key={q.text} className="group">
-              <div className="flex gap-6">
-                <span className="font-mono text-meta tabular-nums text-ink-40">{`0${i + 1}`}</span>
-                <div className="flex-1">
-                  <p className="text-body text-ink">{q.text}</p>
-                  <p className="mt-2 text-meta italic text-ink-60">{q.subtitle}</p>
-                  <p
-                    title={q.source}
-                    className="mt-2 line-clamp-1 cursor-help text-[11px] text-ink-40 underline-offset-4 group-hover:underline"
-                  >
-                    Source · {q.source}
+        <div className="mt-12 max-w-4xl space-y-4">
+          {DISCUSSION_NOTES.map((note, index) => (
+            <details
+              key={`${note.date}-${note.title}`}
+              open={index === 0}
+              className="warm-panel group p-5 transition duration-300 hover:-translate-y-1 sm:p-6"
+            >
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
+                    {note.date}
                   </p>
+                  <h3 className="mt-2 text-lg font-semibold tracking-tight text-gray-950 sm:text-xl">{note.title}</h3>
                 </div>
-              </div>
-            </li>
+                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-200 bg-stone-50 text-gray-500 transition group-open:border-orange-200 group-open:bg-orange-50 group-open:text-primary">
+                  <ChevronDown className="h-4 w-4 transition duration-300 group-open:rotate-180" />
+                </span>
+              </summary>
+              <ul className="mt-5 space-y-3">
+                {note.bullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <p className="text-[15px] leading-7 text-gray-700 sm:text-base">{bullet}</p>
+                  </li>
+                ))}
+              </ul>
+            </details>
           ))}
-        </ol>
+        </div>
 
         <div className="mt-16 max-w-3xl">
           <p className="text-body text-ink">
@@ -140,7 +107,6 @@ export function Closing() {
   )
 }
 
-// Minimal footer.
 export function Footer() {
   return (
     <footer className="border-t border-stone-200/80">

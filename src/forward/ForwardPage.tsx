@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Closing, Footer } from './components/Closing';
 import { Hero } from './components/Hero';
 import { Nav } from './components/Nav';
+import { PilotOptions } from './components/PilotOptions';
 import { QuestionBank } from './components/QuestionBank';
 import { Research } from './components/Research';
 import { ROICalculator } from './components/ROICalculator';
@@ -45,6 +46,7 @@ export default function ForwardPage() {
       <Nav onOpenBank={() => setBankOpen(true)} />
       <Hero />
       <ROICalculator />
+      <PilotOptions />
       <Closing />
       <Research />
       <Footer />
