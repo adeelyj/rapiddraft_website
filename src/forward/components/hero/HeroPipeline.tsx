@@ -8,8 +8,42 @@
 //   2) Perimeter dot — orbits the box edges (iteration signal),
 //   3) OUT dot — short rail from the box to Manufacturing.
 
-import { HERO_MODULES } from '../../data/modules'
+import { ArrowDown, ArrowUp } from 'lucide-react'
+import { HERO_MODULES, type Module } from '../../data/modules'
 import { ModuleTile } from '../ModuleTile'
+
+const SIMULATION_MODULES: Module[] = [
+  {
+    id: 'simulation-preprocessing',
+    title: 'Preprocessing (Model Setup)',
+    shortTitle: 'Preprocessing',
+    verb: 'Sets up models.',
+    blurb: 'Dummy simulation entry for material cards, meshing assumptions, and boundary setup.',
+    href: '#',
+    poster: '/media/pitch/launcher-poster.png',
+    steps: ['Placeholder simulation workflow entry.'],
+  },
+  {
+    id: 'simulation-check',
+    title: 'Model check',
+    shortTitle: 'Model check',
+    verb: 'Checks models.',
+    blurb: 'Dummy simulation entry for mesh quality, contact definitions, and solver-readiness checks.',
+    href: '#',
+    poster: '/media/pitch/pitch-dfm-checks.png',
+    steps: ['Placeholder simulation workflow entry.'],
+  },
+  {
+    id: 'simulation-postprocessing',
+    title: 'Postprocessing (Visualization)',
+    shortTitle: 'Postprocessing',
+    verb: 'Visualizes results.',
+    blurb: 'Dummy simulation entry for result review, hotspot visualization, and design feedback.',
+    href: '#',
+    poster: '/media/pitch/pitch-collaboration.png',
+    steps: ['Placeholder simulation workflow entry.'],
+  },
+]
 
 export function HeroPipeline() {
   return (
@@ -32,11 +66,28 @@ export function HeroPipeline() {
           {/* Perimeter dot — orbits the four edges of this box */}
           <span className="pipeline-perimeter-dot" aria-hidden />
 
-          {/* 5 stages */}
-          <div className="grid grid-cols-5 items-start gap-3 sm:gap-4">
-            {HERO_MODULES.map((m, i) => (
-              <PipelineStage key={m.id} module={m} index={i + 1} />
-            ))}
+          <div className="space-y-8">
+            <div className="grid grid-cols-5 items-start gap-3 sm:gap-4">
+              {HERO_MODULES.map((m, i) => (
+                <PipelineStage key={m.id} module={m} index={i + 1} />
+              ))}
+            </div>
+
+            <div className="flex items-center justify-center gap-3 text-primary">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-white/85">
+                <ArrowDown size={16} />
+              </span>
+              <span className="h-px w-10 bg-primary/30" />
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-white/85">
+                <ArrowUp size={16} />
+              </span>
+            </div>
+
+            <div className="mx-auto grid max-w-3xl grid-cols-3 items-start gap-3 sm:gap-4">
+              {SIMULATION_MODULES.map((m, i) => (
+                <PipelineStage key={m.id} module={m} index={i + 6} />
+              ))}
+            </div>
           </div>
         </div>
 
