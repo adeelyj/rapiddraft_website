@@ -4,18 +4,38 @@ import { ChevronRight } from 'lucide-react'
 type DiscussionNote = {
   date: string
   title: string
-  bullets: string[]
+  sections: {
+    title: string
+    bullets: string[]
+  }[]
 }
 
 const DISCUSSION_NOTES: DiscussionNote[] = [
   {
     date: '2026-05-18',
     title: 'First meeting',
-    bullets: [
-      'Aligned around starting with an Assess-style entry point before a broader proof-of-value pilot.',
-      'Discussed pilot scope for the next 2-3 months, including design review, collaboration, and documentation.',
-      'Flagged data access and cloud strategy as an early decision needed before execution planning.',
-      'Agreed that an on-site meeting should help define the initial workflow and working cadence.',
+    sections: [
+      {
+        title: 'Next steps',
+        bullets: [
+          'Align around starting with an Assess-style entry point before a broader proof-of-value pilot.',
+          'Define pilot scope for the next 2-3 months and confirm the first workflow to test.',
+        ],
+      },
+      {
+        title: 'Forward Engineering',
+        bullets: [
+          'Share the relevant drawings, samples, and workflow context needed for the initial assessment.',
+          'Clarify data access expectations and the preferred cloud or collaboration boundary early.',
+        ],
+      },
+      {
+        title: 'RapidDraft',
+        bullets: [
+          'Frame the pilot around design review, collaboration, and documentation outcomes.',
+          'Prepare for an on-site meeting to shape the working cadence and initial execution plan.',
+        ],
+      },
     ],
   },
 ]
@@ -74,10 +94,19 @@ export function Closing() {
                     id={`discussion-note-${id}`}
                     className="mt-5 space-y-3 border-l border-stone-300 pl-4"
                   >
-                    {note.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                        <p className="text-[15px] leading-7 text-gray-700 sm:text-base">{bullet}</p>
+                    {note.sections.map((section) => (
+                      <li key={section.title} className="space-y-2">
+                        <p className="text-[15px] font-semibold leading-7 text-gray-950 sm:text-base">
+                          {section.title}
+                        </p>
+                        <ul className="space-y-3">
+                          {section.bullets.map((bullet) => (
+                            <li key={bullet} className="flex items-start gap-3">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                              <p className="text-[15px] leading-7 text-gray-700 sm:text-base">{bullet}</p>
+                            </li>
+                          ))}
+                        </ul>
                       </li>
                     ))}
                   </ul>
