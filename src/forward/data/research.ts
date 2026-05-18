@@ -69,7 +69,7 @@ export const RESEARCH: ResearchItem[] = [
     title: 'Forward strategy & competition map',
     kicker: 'Where FE wins, where it doesn’t',
     summary: 'Repeat business vs. one-off demonstrators, Munich vs. Shanghai positioning, where larger engineering houses overlap and where FE has a specialist edge.',
-    href: '/forward/strategy/',
+    href: '/forward/strategy/#/company',
     icon: 'strategy',
     details: [
       'Revenue streams mapped: engineering services, benchmark intelligence, testing/pre-compliance, sustainability consulting.',
