@@ -10,8 +10,8 @@ export function Hero() {
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-32 sm:px-8 lg:px-12 lg:pt-40">
         {/* Hero copy */}
         <div className="max-w-3xl">
-          <h1 className="text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[3.25rem] lg:text-[4.25rem]">
-            An agentic layer for engineering review and collaboration.
+          <h1 className="text-[2.25rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[3rem] lg:text-[3.75rem]">
+            An agentic layer for engineering review, analysis and collaboration.
           </h1>
           <p className="mt-6 max-w-2xl text-body text-ink-60">
             Drawing release, design review, and manufacturing feedback — kept on the CAD model, re-run every revision.
