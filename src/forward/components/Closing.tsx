@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 type DiscussionNote = {
@@ -20,6 +21,8 @@ const DISCUSSION_NOTES: DiscussionNote[] = [
 ]
 
 export function Closing() {
+  const [openId, setOpenId] = useState<string | null>(null)
+
   return (
     <section id="closing" className="relative scroll-mt-16">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-32">
@@ -35,34 +38,60 @@ export function Closing() {
           </p>
         </div>
 
-        <div className="mt-12 max-w-4xl space-y-4">
-          {DISCUSSION_NOTES.map((note, index) => (
-            <details
-              key={`${note.date}-${note.title}`}
-              open={index === 0}
-              className="warm-panel group p-5 transition duration-300 hover:-translate-y-1 sm:p-6"
-            >
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
-                <div>
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
-                    {note.date}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold tracking-tight text-gray-950 sm:text-xl">{note.title}</h3>
+        <div className="mt-12 max-w-4xl space-y-5">
+          {DISCUSSION_NOTES.map((note) => {
+            const id = `${note.date}-${note.title}`
+            const isOpen = openId === id
+
+            return (
+              <article key={id} className="group block">
+                <div className="flex items-start justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setOpenId((cur) => (cur === id ? null : id))}
+                    aria-expanded={isOpen}
+                    aria-controls={`discussion-note-${id}`}
+                    className="flex-1 text-left"
+                  >
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
+                      {note.date}
+                    </p>
+                    <h3 className="mt-2 text-lg font-semibold tracking-tight text-gray-950 sm:text-xl">
+                      {note.title}
+                    </h3>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setOpenId((cur) => (cur === id ? null : id))}
+                    aria-label={isOpen ? `Collapse ${note.title}` : `Expand ${note.title}`}
+                    aria-expanded={isOpen}
+                    aria-controls={`discussion-note-${id}`}
+                    className="mt-1 shrink-0 text-ink-40 transition hover:text-ink"
+                  >
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
                 </div>
-                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-200 bg-stone-50 text-gray-500 transition group-open:border-orange-200 group-open:bg-orange-50 group-open:text-primary">
-                  <ChevronDown className="h-4 w-4 transition duration-300 group-open:rotate-180" />
-                </span>
-              </summary>
-              <ul className="mt-5 space-y-3">
-                {note.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    <p className="text-[15px] leading-7 text-gray-700 sm:text-base">{bullet}</p>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ))}
+
+                {isOpen ? (
+                  <ul
+                    id={`discussion-note-${id}`}
+                    className="mt-5 space-y-3 border-l border-stone-300 pl-4"
+                  >
+                    {note.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                        <p className="text-[15px] leading-7 text-gray-700 sm:text-base">{bullet}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            )
+          })}
         </div>
 
         <div className="mt-16 max-w-3xl">
