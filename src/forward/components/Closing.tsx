@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 type DiscussionNote = {
   date: string
@@ -69,9 +69,9 @@ export function Closing() {
                     aria-controls={`discussion-note-${id}`}
                     className="mt-1 shrink-0 text-ink-40 transition hover:text-ink"
                   >
-                    <ChevronDown
+                    <ChevronRight
                       size={16}
-                      className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                      className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
                     />
                   </button>
                 </div>
