@@ -7,8 +7,8 @@ type Props = {
 const ANCHORS = [
   { id: 'where-we-fit', label: 'Where we fit' },
   { id: 'forward-fit', label: 'ROI' },
-  { id: 'closing', label: 'Questions' },
-  { id: 'research', label: 'Research' },
+  { id: 'closing', label: 'Discussion notes' },
+  { id: 'research', label: 'Background & Research' },
 ]
 
 export function Nav({ onOpenBank }: Props) {
@@ -56,18 +56,18 @@ export function Nav({ onOpenBank }: Props) {
               onClick={onOpenBank}
               className="text-meta font-semibold text-primary underline-offset-4 hover:underline"
             >
-              Q&amp;A
+              Question bank
             </button>
           </li>
         </ul>
 
-        {/* Mobile Q&A */}
+        {/* Mobile question bank */}
         <button
           type="button"
           onClick={onOpenBank}
           className="text-meta font-semibold text-primary md:hidden"
         >
-          Q&amp;A
+          Question bank
         </button>
       </div>
     </nav>
