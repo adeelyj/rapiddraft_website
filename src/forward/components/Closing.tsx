@@ -10,7 +10,7 @@ type DiscussionNote = {
 const DISCUSSION_NOTES: DiscussionNote[] = [
   {
     date: '2026-05-18',
-    title: 'Forward discussion',
+    title: 'First meeting',
     bullets: [
       'Aligned around starting with an Assess-style entry point before a broader proof-of-value pilot.',
       'Discussed pilot scope for the next 2-3 months, including design review, collaboration, and documentation.',
@@ -34,7 +34,8 @@ export function Closing() {
             Discussion notes
           </h2>
           <p className="mt-4 text-meta text-ink-60">
-            Every meeting note can live here as a dated running list, expandable when we want the detail and collapsible when we want the overview.
+            Every meeting note can live here as a dated running list, expandable when we want the
+            detail and collapsible when we want the overview.
           </p>
         </div>
 
@@ -45,36 +46,28 @@ export function Closing() {
 
             return (
               <article key={id} className="group block">
-                <div className="flex items-start justify-between gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setOpenId((cur) => (cur === id ? null : id))}
-                    aria-expanded={isOpen}
-                    aria-controls={`discussion-note-${id}`}
-                    className="flex-1 text-left"
-                  >
+                <button
+                  type="button"
+                  onClick={() => setOpenId((cur) => (cur === id ? null : id))}
+                  aria-expanded={isOpen}
+                  aria-controls={`discussion-note-${id}`}
+                  className="flex w-full items-start gap-3 text-left"
+                >
+                  <span className="mt-[18px] shrink-0 text-ink-40">
+                    <ChevronRight
+                      size={16}
+                      className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
+                    />
+                  </span>
+                  <span>
                     <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
                       {note.date}
                     </p>
                     <h3 className="mt-2 text-lg font-semibold tracking-tight text-gray-950 sm:text-xl">
                       {note.title}
                     </h3>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setOpenId((cur) => (cur === id ? null : id))}
-                    aria-label={isOpen ? `Collapse ${note.title}` : `Expand ${note.title}`}
-                    aria-expanded={isOpen}
-                    aria-controls={`discussion-note-${id}`}
-                    className="mt-1 shrink-0 text-ink-40 transition hover:text-ink"
-                  >
-                    <ChevronRight
-                      size={16}
-                      className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
-                    />
-                  </button>
-                </div>
+                  </span>
+                </button>
 
                 {isOpen ? (
                   <ul
@@ -92,18 +85,6 @@ export function Closing() {
               </article>
             )
           })}
-        </div>
-
-        <div className="mt-16 max-w-3xl">
-          <p className="text-body text-ink">
-            Pick one enclosure program. We test this workflow on it next week.
-          </p>
-          <a
-            href="mailto:adeel@rapiddraft.ai?subject=Forward%20%C3%97%20RapidDraft%20%E2%80%94%20pilot%20program"
-            className="mt-4 inline-flex items-center gap-2 text-meta font-semibold text-primary underline-offset-4 hover:underline"
-          >
-            Start a one-program pilot <span aria-hidden>→</span>
-          </a>
         </div>
       </div>
     </section>
