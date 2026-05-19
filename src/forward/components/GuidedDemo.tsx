@@ -11,6 +11,9 @@ import { CollaborateAnimation } from './animations/CollaborateAnimation'
 import { DfmAnimation } from './animations/DfmAnimation'
 import { BulkReviewAnimation } from './animations/BulkReviewAnimation'
 import { Co2Animation } from './animations/Co2Animation'
+import { PreprocessingAnimation } from './animations/PreprocessingAnimation'
+import { ModelCheckAnimation } from './animations/ModelCheckAnimation'
+import { PostprocessingAnimation } from './animations/PostprocessingAnimation'
 import type { AnimationProps } from './animations/types'
 
 type Props = {
@@ -24,6 +27,9 @@ const ANIMATIONS: Partial<Record<string, (p: AnimationProps) => React.ReactNode>
   dfm: DfmAnimation,
   batch: BulkReviewAnimation,
   co2: Co2Animation,
+  'simulation-preprocessing': PreprocessingAnimation,
+  'simulation-check': ModelCheckAnimation,
+  'simulation-postprocessing': PostprocessingAnimation,
 }
 
 const AUTO_ADVANCE_MS = 3200

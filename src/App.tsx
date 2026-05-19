@@ -46,7 +46,13 @@ function App() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const normalizedHostname = normalizeHostname(hostname);
   const isPitchHostname = normalizedHostname === PITCH_HOSTNAME;
-  const isForwardHostname = normalizedHostname === FORWARD_HOSTNAME;
+  // Dev-only escape hatch: ?forward=1 in dev mode forces the Forward page so
+  // it can be previewed on plain localhost. Stripped from prod by Vite.
+  const isForwardDevPreview =
+    import.meta.env.DEV &&
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('forward') === '1';
+  const isForwardHostname = normalizedHostname === FORWARD_HOSTNAME || isForwardDevPreview;
   const companyDemoFromHostname = hostname ? getCompanyDemoByHostname(hostname) : undefined;
 
   if (isPitchHostname) {

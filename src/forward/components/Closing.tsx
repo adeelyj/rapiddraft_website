@@ -34,8 +34,8 @@ const DISCUSSION_NOTES: DiscussionNote[] = [
       {
         title: 'RapidDraft',
         bullets: [
-          'Can someone from FE design team asses the product-fit?',
-          'Data to be stored on-prem, either locally in Forwards servers or Forwards cloud provider.',
+          'Can someone from the FE design team assess the product-fit?',
+          'Data to be stored on-prem, either locally in Forward\'s servers or Forward\'s cloud provider.',
           '1 person from FE teams can get access to RapidDraft. Please provide their full name and email id.',
         ],
       },

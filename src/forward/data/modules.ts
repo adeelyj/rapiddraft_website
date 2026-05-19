@@ -23,6 +23,12 @@ export type Module = {
   forwardOnly?: boolean
   /** Activity figure for the live counter ("1,247 reviews this month"). Illustrative. */
   activity?: number
+  /**
+   * Shipping status. `available` shows an "Available now" badge in green.
+   * `roadmap` shows a "Roadmap" badge in neutral. Does NOT change interactivity
+   * — every tile still opens its guided demo on click.
+   */
+  availability: 'available' | 'roadmap'
 }
 
 export const HERO_MODULES: Module[] = [
@@ -34,6 +40,7 @@ export const HERO_MODULES: Module[] = [
     blurb: 'Threaded and version-aware, pinned to geometry.',
     href: `${APP_BASE}/?${DEMO_QS}&mode=collaboration`,
     poster: '/media/pitch/pitch-collaboration.png',
+    availability: 'available',
     pitch: 'CAE, mold-flow, cost, and validation looking at the same part — without a meeting.',
     activity: 198,
     steps: [
@@ -52,6 +59,7 @@ export const HERO_MODULES: Module[] = [
     blurb: 'Part-level LCA with recycled content visible.',
     href: `${APP_BASE}/?${DEMO_QS}&mode=co2-preview`,
     poster: '/media/pitch/launcher-poster.png',
+    availability: 'available',
     forwardOnly: true,
     activity: 24,
     pitch: 'Sustainability decisions surfaced where the architecture is still cheap to change.',
@@ -72,6 +80,7 @@ export const HERO_MODULES: Module[] = [
     href: `${APP_BASE}/?${DEMO_QS}&mode=design-review`,
     poster: '/media/pitch/pitch-dfm-checks.png',
     loop: '/media/pitch/design-review-expert-mode.mp4',
+    availability: 'available',
     pitch: 'DFM findings the model itself can defend — not a PDF that has to be re-explained per supplier.',
     activity: 311,
     steps: [
@@ -90,6 +99,7 @@ export const HERO_MODULES: Module[] = [
     blurb: 'GD&T, datums, and stackups read on the sheet.',
     href: `${APP_BASE}/?${DEMO_QS}&mode=drawing`,
     poster: '/media/pitch/pitch-drawing-memory.png',
+    availability: 'available',
     pitch: 'Drawing release without the back-and-forth on datums and tolerances that eats two weeks.',
     activity: 412,
     steps: [
@@ -107,6 +117,7 @@ export const HERO_MODULES: Module[] = [
     blurb: 'Dozens of STEP files reviewed in one traceable pass.',
     href: `${APP_BASE}/?${DEMO_QS}&mode=batch`,
     poster: '/media/pitch/launcher-poster.png',
+    availability: 'available',
     pitch: 'A teardown or benchmark backlog turned into traceable findings — not a folder of STEPs.',
     activity: 142,
     steps: [
@@ -130,6 +141,7 @@ export const SECONDARY_MODULES: Module[] = [
     blurb: 'Full workspace: rails for files, DFM, knowledge, requirements, vision.',
     href: `${APP_BASE}/?${DEMO_QS}&mode=expert`,
     poster: '/media/pitch/launcher-poster.png',
+    availability: 'available',
   },
   {
     id: 'launcher',
@@ -138,5 +150,6 @@ export const SECONDARY_MODULES: Module[] = [
     blurb: 'Mode selector and entry point into the workspace.',
     href: `${APP_BASE}/?${DEMO_QS}`,
     poster: '/media/pitch/launcher-poster.png',
+    availability: 'available',
   },
 ]

@@ -18,30 +18,57 @@ const SIMULATION_MODULES: Module[] = [
     title: 'Preprocessing (Model Setup)',
     shortTitle: 'Preprocessing',
     verb: 'Sets up models.',
-    blurb: 'Dummy simulation entry for material cards, meshing assumptions, and boundary setup.',
-    href: '#',
+    blurb: 'Mesh, material cards, BCs — one part, three solver decks (OptiStruct linear / nonlinear, LS-DYNA crash).',
+    href: 'https://app.rapiddraft.ai/?demo=fe&mode=preprocessing-preview',
     poster: '/media/pitch/launcher-poster.png',
-    steps: ['Placeholder simulation workflow entry.'],
+    availability: 'roadmap',
+    forwardOnly: true,
+    pitch: 'Solver-ready setup the model can defend — same part, three solver decks, one click.',
+    steps: [
+      'Geometry imported. Solver not chosen yet — that drives the mesh, element type, and contact strategy.',
+      'Pick LS-DYNA explicit crash. Element formulation, mesh target, and contact card auto-fill from the profile.',
+      'Mesh generated — 184k elements, 0.84 avg quality. 0.6% fail Jacobian; worst warpage 6.2°.',
+      'Material *MAT_024 assigned from the library. Property and section cards built. Mass matches CAD at 1.24 kg.',
+      'BCs and load case applied. enclosure_lid_v05.key written, 280 MB. Compare against OptiStruct linear and nonlinear decks.',
+    ],
   },
   {
     id: 'simulation-check',
     title: 'Model check',
     shortTitle: 'Model check',
     verb: 'Checks models.',
-    blurb: 'Dummy simulation entry for mesh quality, contact definitions, and solver-readiness checks.',
-    href: '#',
+    blurb: 'OptiStruct deck validation with composite PCOMP layups — 28 checks across mesh, layup, solver, and optimization.',
+    href: 'https://app.rapiddraft.ai/?demo=fe&mode=modelcheck-preview',
     poster: '/media/pitch/pitch-dfm-checks.png',
-    steps: ['Placeholder simulation workflow entry.'],
+    availability: 'roadmap',
+    forwardOnly: true,
+    pitch: 'Solver readiness the deck can defend — every PCOMP plumbing issue surfaced with a one-line fix.',
+    steps: [
+      'OptiStruct deck loaded — enclosure_lid_v05.fem, PCOMP composite layups, sizing pass. No checks run yet.',
+      '28 checks across mesh, composite, solver, and optimization. 23 pass · 3 warn · 2 fail.',
+      'Plies 8/12 missing CORDM — material orientation undefined. 24 CHEXA8 reference MAT8 — should be MAT9 for 3D anisotropy.',
+      'Proposed fixes inline. One card edit per finding; pre-applied in a side branch, original deck untouched.',
+      'Apply all 5 → 0 blockers, 0 warnings. Deck ready to submit. Findings package attached to the part.',
+    ],
   },
   {
     id: 'simulation-postprocessing',
     title: 'Postprocessing (Visualization)',
     shortTitle: 'Postprocessing',
     verb: 'Visualizes results.',
-    blurb: 'Dummy simulation entry for result review, hotspot visualization, and design feedback.',
-    href: '#',
+    blurb: 'Composite failure per ply — Puck, Hashin, Tsai-Wu, Max-stress on one chart. Critical mode pinned to the part.',
+    href: 'https://app.rapiddraft.ai/?demo=fe&mode=postprocessing-preview',
     poster: '/media/pitch/pitch-collaboration.png',
-    steps: ['Placeholder simulation workflow entry.'],
+    availability: 'roadmap',
+    forwardOnly: true,
+    pitch: 'The criterion that catches matrix-tension failure other criteria miss — pinned to the ply and the element.',
+    steps: [
+      'Results loaded — LS-DYNA d3plot, 16-ply CFRP layup [0/45/-45/90]₂s. Criterion not selected.',
+      'Pick Puck 2D action-plane. Strength card (XT, XC, YT, YC, S12) and inclination parameters auto-fill.',
+      'Failure indices across all 16 plies. Max FI = 0.92 in ply 8 (90°), Mode A — matrix tension.',
+      'Through-thickness profile: FI per ply for the critical element, colored by dominant failure mode.',
+      'Hashin and Tsai-Wu would have passed it. Puck flags MoS = 0.09 — below the 0.15 target. Findings attached to the part.',
+    ],
   },
 ]
 
@@ -171,7 +198,8 @@ function FlowSegment({ kind }: { kind: 'in' | 'out' }) {
 }
 
 // One stage inside the orange box: stage number, ModuleTile.
-// No stage-tick dot anymore (per feedback).
+// No stage-tick dot anymore (per feedback). Availability badge is rendered
+// inside ModuleTile, not here.
 function PipelineStage({
   module,
   index,

@@ -66,17 +66,17 @@ export const RESEARCH: ResearchItem[] = [
   },
   {
     id: 'strategy',
-    title: 'Forward strategy & competition map',
-    kicker: 'Where FE wins, where it doesn’t',
-    summary: 'Repeat business vs. one-off demonstrators, Munich vs. Shanghai positioning, where larger engineering houses overlap and where FE has a specialist edge.',
+    title: 'Pre-meeting research notes',
+    kicker: 'Our homework, shared in full',
+    summary: 'The notes we built before this conversation — Forward Engineering\'s public footprint, the battery-housing landscape, the regulations pulling the timeline, and the growth angles we\'d like to explore together. Open-book, not summarized.',
     href: '/forward/strategy/#/company',
     icon: 'strategy',
     details: [
-      'Revenue streams mapped: engineering services, benchmark intelligence, testing/pre-compliance, sustainability consulting.',
-      'Where FE wins repeatedly vs. larger houses — and the moats that don\'t hold up.',
-      'Demonstrator → series-mandate conversion as the key commercial bottleneck.',
-      'Munich vs. Shanghai: what changed commercially with the Shanghai office, and what didn\'t.',
-      'Mitsui relationship framing: market access, commercial leverage, or ownership legacy.',
+      'Regulatory pull from GB 38031-2025 (July 2026) and the EU Battery Regulation as the most concrete near-term wedge for review/collaboration tooling.',
+      'Where we see RapidDraft fitting alongside Forward\'s existing services: engineering reviews, benchmark intelligence, testing/pre-compliance, sustainability decisions at concept stage.',
+      'Demonstrator-to-series conversion as the commercial bottleneck a review/collaboration layer can help shorten.',
+      'Material-card maturity, joining and sealing failure modes, bottom-impact load paths — the technical gates worth productizing review around.',
+      'Three concrete growth angles called out below, ready to discuss whether any of them are worth a joint pilot.',
     ],
     growthOpportunities: [
       {
