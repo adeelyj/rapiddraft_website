@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { ArrowUpRight, ChevronDown } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { RESEARCH } from '../data/research'
 
 // Cream palette, no inversion. Two tiles: the wiki and the strategy map.
@@ -9,7 +8,6 @@ import { RESEARCH } from '../data/research'
 const KEPT_IDS = new Set(['gb38031', 'strategy'])
 
 export function Research() {
-  const [openId, setOpenId] = useState<string | null>(null)
   const items = RESEARCH.filter((r) => KEPT_IDS.has(r.id))
 
   return (
@@ -23,34 +21,11 @@ export function Research() {
 
         <ul className="mt-12 grid gap-12 sm:grid-cols-2">
           {items.map((item) => {
-            const isOpen = openId === item.id
             return (
               <li key={item.id}>
                 <div className="group block">
                   <div className="flex items-start justify-between gap-3">
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 text-body font-semibold text-ink underline-offset-4 hover:underline"
-                    >
-                      {item.title}
-                      <ArrowUpRight size={16} className="shrink-0 text-ink-40 group-hover:text-primary" />
-                    </a>
-
-                    {item.details && (
-                      <button
-                        type="button"
-                        onClick={() => setOpenId((cur) => (cur === item.id ? null : item.id))}
-                        aria-label={isOpen ? 'Hide details' : 'Show details'}
-                        className="mt-1 shrink-0 text-ink-40 transition hover:text-ink"
-                      >
-                        <ChevronDown
-                          size={16}
-                          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                        />
-                      </button>
-                    )}
+                    <p className="text-body font-semibold text-ink">{item.title}</p>
                   </div>
 
                   <p className="mt-2 text-meta text-ink-60">{item.summary}</p>
@@ -88,16 +63,6 @@ export function Research() {
                         ))}
                       </ul>
                     </div>
-                  )}
-
-                  {isOpen && item.details && (
-                    <ul className="mt-5 space-y-2 border-l border-stone-300 pl-4">
-                      {item.details.map((d, i) => (
-                        <li key={i} className="text-meta text-ink-60">
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
                   )}
                 </div>
               </li>
