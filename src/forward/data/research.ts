@@ -66,17 +66,16 @@ export const RESEARCH: ResearchItem[] = [
   },
   {
     id: 'strategy',
-    title: 'Pre-meeting research notes',
+    title: 'Notes on Forward Engineering',
     kicker: 'Our homework, shared in full',
-    summary: 'The notes we built before this conversation — Forward Engineering\'s public footprint, the battery-housing landscape, the regulations pulling the timeline, and the growth angles we\'d like to explore together. Open-book, not summarized.',
+    summary: 'Forward Engineering is a composite-structures and EV battery-enclosure specialist, running three material routes in parallel - SMC, thermoplastic Megamolding, and hybrid composite. They are positioning themselves as the material-neutral expert who turns simulation into decisions a factory can build. The growth direction looks productized - compliance work and China teardown intelligence as recurring offerings, not one-off projects.',
     href: '/forward/strategy/#/company',
     icon: 'strategy',
     details: [
-      'Regulatory pull from GB 38031-2025 (July 2026) and the EU Battery Regulation as the most concrete near-term wedge for review/collaboration tooling.',
-      'Where we see RapidDraft fitting alongside Forward\'s existing services: engineering reviews, benchmark intelligence, testing/pre-compliance, sustainability decisions at concept stage.',
-      'Demonstrator-to-series conversion as the commercial bottleneck a review/collaboration layer can help shorten.',
-      'Material-card maturity, joining and sealing failure modes, bottom-impact load paths — the technical gates worth productizing review around.',
-      'Three concrete growth angles called out below, ready to discuss whether any of them are worth a joint pilot.',
+      'Architecture playbook is unusually concrete: morphology-box concept tool, modular crash material-card program, staged de-risking — mold flow → warpage → push-down → vent sealing → IP validation → PFMEA → subsystem testing.',
+      'Where the moat sits: upstream architecture definition, material- and process-neutral option generation, simulation-led screening, partner orchestration. Larger houses outscale you; Tier-1s out-execute on SOP; you out-translate new materials into OEM-relevant decisions faster than either.',
+      'Sustainability is part of the commercial argument for new materials, not side marketing — LCA / circularity / PEF defending lightweight composites against CO₂ and ELV scrutiny.',
+      'Productization question worth discussing live: of the candidate recurring offerings — compliance audit, China teardown subscription, material-card database, AI-CAE workflows — which one earns recurring revenue first.',
     ],
     growthOpportunities: [
       {
