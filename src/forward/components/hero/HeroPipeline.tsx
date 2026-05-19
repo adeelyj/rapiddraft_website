@@ -1,6 +1,6 @@
 // Pipeline variant — per sketch.
 //
-// Layout: Design — IN line — [ orange box of 5 stages, labeled
+// Layout: Design — IN line — [ orange box of 4 stages, labeled
 // "RapidDraft Agent" ] — OUT line — Manufacturing.
 //
 // Three independent orange dots flow simultaneously:
@@ -80,7 +80,7 @@ export function HeroPipeline() {
 
         <FlowSegment kind="in" />
 
-        {/* Orange box wrapping the 5 stages */}
+        {/* Orange box wrapping the design and simulation stages */}
         <div className="relative flex-1 rounded-2xl border-2 border-primary/90 px-5 py-9 sm:px-7 sm:py-10">
           {/* "RAPIDDRAFT AGENT" label sits on the top edge, cream backing
               creates a tab cut through the orange border. */}
@@ -94,7 +94,7 @@ export function HeroPipeline() {
           <span className="pipeline-perimeter-dot" aria-hidden />
 
           <div className="space-y-8">
-            <div className="grid grid-cols-5 items-start gap-3 sm:gap-4">
+            <div className="grid grid-cols-4 items-start gap-3 sm:gap-4">
               {HERO_MODULES.map((m, i) => (
                 <PipelineStage key={m.id} module={m} index={i + 1} />
               ))}
@@ -112,7 +112,7 @@ export function HeroPipeline() {
 
             <div className="mx-auto grid max-w-3xl grid-cols-3 items-start gap-3 sm:gap-4">
               {SIMULATION_MODULES.map((m, i) => (
-                <PipelineStage key={m.id} module={m} index={i + 6} />
+                <PipelineStage key={m.id} module={m} index={i + 5} />
               ))}
             </div>
           </div>
