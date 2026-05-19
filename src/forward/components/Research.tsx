@@ -25,7 +25,19 @@ export function Research() {
               <li key={item.id}>
                 <div className="group block">
                   <div className="flex items-start justify-between gap-3">
-                    <p className="text-body font-semibold text-ink">{item.title}</p>
+                    {item.id === 'gb38031' && item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 text-body font-semibold text-ink underline-offset-4 hover:underline"
+                      >
+                        {item.title}
+                        <ArrowUpRight size={16} className="shrink-0 text-ink-40 group-hover:text-primary" />
+                      </a>
+                    ) : (
+                      <p className="text-body font-semibold text-ink">{item.title}</p>
+                    )}
                   </div>
 
                   <p className="mt-2 text-meta text-ink-60">{item.summary}</p>
