@@ -45,7 +45,7 @@ export const HERO_MODULES: Module[] = [
     blurb: 'Part-level LCA with recycled content visible.',
     href: `${APP_BASE}/?${DEMO_QS}&mode=co2-preview`,
     poster: '/media/pitch/launcher-poster.png',
-    availability: 'available',
+    availability: 'roadmap',
     forwardOnly: true,
     activity: 24,
     pitch: 'Sustainability decisions surfaced where the architecture is still cheap to change.',
