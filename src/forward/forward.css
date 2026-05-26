@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2');
+}
+
+.forward-page {
+  min-height: 100vh;
+  background: #fffaf7;
+  color: #111111;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  text-rendering: optimizeLegibility;
+}
+
+.forward-page .tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.forward-page .app-look {
+  --app-font-body: 'Segoe UI', system-ui, sans-serif;
+  --app-font-heading: 'Segoe UI', system-ui, sans-serif;
+  --app-surface-0: #f6f8fb;
+  --app-surface-1: #ffffff;
+  --app-surface-2: #f3f7fb;
+  --app-surface-3: #e8eef6;
+  --app-text-1: #122033;
+  --app-text-2: #4d617c;
+  --app-text-3: #7c8aa1;
+  --app-accent-1: #2563eb;
+  --app-accent-2: #1a2941;
+  --app-danger-1: #dc2626;
+  --app-warning-1: #d97706;
+  --app-success-1: #0f8f5e;
+  --app-border-1: #d9e1ea;
+  --app-border-2: #bcc8d8;
+  background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
+  color: var(--app-text-1);
+  font-family: var(--app-font-body);
+}
+
+.forward-page .app-look .app-panel {
+  border: 1px solid var(--app-border-1);
+  border-radius: 10px;
+  background: var(--app-surface-1);
+}
+
+.forward-page .app-look .app-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid var(--app-border-1);
+  border-radius: 999px;
+  background: var(--app-surface-2);
+  color: var(--app-text-2);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.forward-page .app-look .app-pulse {
+  animation: forward-app-pulse 1.4s ease-out infinite;
+}
+
+.forward-page .app-look .app-fade-in {
+  animation: forward-app-fade-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes forward-app-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.45);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgba(37, 99, 235, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+@keyframes forward-app-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

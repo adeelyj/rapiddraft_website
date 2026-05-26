@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import BrandMark from './BrandMark';
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -8,7 +9,7 @@ export default function Footer() {
             <div className="mx-auto max-w-[1180px] px-5 py-14 sm:px-6 lg:px-8 xl:px-10">
                 <div className="grid gap-10 lg:grid-cols-[1.1fr_0.8fr_0.8fr_0.8fr]">
                     <div className="max-w-sm">
-                        <img src="/media/rd_logo.png" alt="RapidDraft" className="h-8 w-auto" />
+                        <BrandMark theme="dark" size="sm" />
                         <p className="mt-5 text-sm leading-7 text-gray-400">
                             RapidDraft helps engineering teams accelerate design reviews, generate manufacturing-ready drawings, and retain decision logic across CAD workflows.
                         </p>

@@ -237,5 +237,9 @@ export const somicDemoConfig: CompanyDemoConfig = {
         finalCtaTitle: 'See it on a real CORAS part',
         finalCtaBody:
             'If you see the search, the DFM fix, the revision compare, and the DraftLint pass on one real part, the rest of the evaluation gets much shorter.',
+        footerBody:
+            'This storyline follows the real SOMIC workflow: find the CORAS part, improve it with DFM review, compare revisions, and release a drawing that has already been linted against ISO or ASME.',
+        footerLinkHref: 'https://wiki.rapiddraft.ai/10_pilots/somic_pilot/_index/',
+        footerLinkLabel: 'Open the SOMIC wiki dossier',
     },
 };

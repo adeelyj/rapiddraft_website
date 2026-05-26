@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forward Engineering — Meeting Briefing</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Meeting briefing wiki for Forward Engineering GmbH — May 2026.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root {
+      --theme-color: #1f6feb;
+      --theme-color-secondary: #0b3d91;
+    }
+    body { font-feature-settings: "ss01", "cv11"; }
+    .markdown-section { max-width: 920px; }
+    .markdown-section table { display: table; width: 100%; }
+    .markdown-section th { background: #f4f6fb; }
+    .sidebar { font-size: 14px; }
+    .sidebar-nav > ul > li > p { font-weight: 600; color: #1f2328; margin-top: 1.2rem; }
+    .cover-main h1 { font-size: 2.6rem; }
+    .cover-main blockquote p { font-size: 1.05rem; color: #475569; }
+    .markdown-section blockquote {
+      border-left: 4px solid var(--theme-color);
+      background: #f4f8ff;
+    }
+    kbd { background: #eef1f6; border: 1px solid #cbd2dc; border-radius: 3px; padding: 1px 6px; font-size: 0.85em; }
+    .badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 0.75em; font-weight: 600; }
+    .badge-confirmed { background: #dcfce7; color: #166534; }
+    .badge-likely { background: #fef9c3; color: #854d0e; }
+    .badge-speculative { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <div id="app">Loading the briefing…</div>
+  <script>
+    window.$docsify = {
+      name: 'Forward Engineering',
+      nameLink: '#/',
+      loadSidebar: true,
+      loadNavbar: false,
+      coverpage: true,
+      onlyCover: false,
+      auto2top: true,
+      maxLevel: 3,
+      subMaxLevel: 2,
+      relativePath: false,
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search the briefing…',
+        noData: 'No matches.',
+        depth: 4,
+        hideOtherSidebarContent: false
+      },
+      pagination: {
+        previousText: '← Previous',
+        nextText: 'Next →',
+        crossChapter: true,
+        crossChapterText: true
+      },
+      copyCode: {
+        buttonText: 'Copy',
+        successText: 'Copied'
+      }
+    };
+    window.$docsify.plugins = [
+      function (hook) {
+        hook.doneEach(function () {
+          const coverLinks = Array.from(document.querySelectorAll('.cover-main a'));
+          const openBriefingLink = coverLinks.find(function (link) {
+            return link.textContent && link.textContent.trim() === 'Open the briefing';
+          });
+          if (openBriefingLink) {
+            openBriefingLink.setAttribute('href', '#/company');
+            openBriefingLink.onclick = function (event) {
+              event.preventDefault();
+              window.location.hash = '#/company';
+            };
+          }
+        });
+      }
+    ].concat(window.$docsify.plugins || []);
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+</body>
+</html>

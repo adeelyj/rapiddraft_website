@@ -88,6 +88,9 @@ export type CompanyDemoNarrative = {
     finalCtaKicker: string;
     finalCtaTitle: string;
     finalCtaBody: string;
+    footerBody?: string;
+    footerLinkHref?: string;
+    footerLinkLabel?: string;
 };
 
 export type GateStatus = 'ok' | 'warn' | 'fail';

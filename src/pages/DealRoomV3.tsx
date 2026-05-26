@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { Check, ChevronDown, Mail } from 'lucide-react';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import Section from '../components/Section';
 import Reveal from '../components/home/Reveal';
@@ -36,7 +36,7 @@ function DisclosureCard({ item, defaultOpen = false }: { item: DisclosureItem; d
     return (
         <details
             open={defaultOpen}
-            className="group rounded-[1.8rem] border border-stone-200/90 bg-[linear-gradient(180deg,rgba(255,250,247,0.98),rgba(255,255,255,0.98))] p-5 shadow-[0_22px_58px_-42px_rgba(17,24,39,0.18)] transition duration-300 hover:-translate-y-1 sm:p-6"
+            className="warm-panel group p-5 transition duration-300 hover:-translate-y-1 sm:p-6"
         >
             <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
                 <h3 className="text-lg font-semibold tracking-tight text-gray-950 sm:text-xl">{item.question}</h3>
@@ -55,22 +55,22 @@ function OfferPanel({ offer }: { offer: OnboardingOffer }) {
             whileHover={{ y: -5 }}
             transition={{ type: 'spring', stiffness: 260, damping: 24 }}
             className={clsx(
-                'rounded-[1.55rem] border p-5 shadow-[0_24px_56px_-40px_rgba(17,24,39,0.16)] sm:p-6',
+                'flex h-full flex-col rounded-[2rem] p-5 sm:p-6',
                 offer.recommended
-                    ? 'border-orange-300 bg-[linear-gradient(180deg,rgba(255,244,235,0.98),rgba(255,250,247,0.98))]'
-                    : 'border-stone-200/90 bg-[linear-gradient(180deg,rgba(255,250,247,0.96),rgba(255,255,255,0.98))]'
+                    ? 'warm-panel border-orange-200/90 bg-[linear-gradient(180deg,rgba(255,244,235,0.98),rgba(255,255,255,0.98))] shadow-[0_30px_72px_-42px_rgba(234,88,12,0.24)]'
+                    : 'surface-card'
             )}
         >
             <div className="flex items-start justify-between gap-3">
-                <h4 className="text-lg font-semibold tracking-tight text-gray-950">{offer.title}</h4>
+                <h4 className="card-title text-[1.2rem] sm:text-[1.35rem]">{offer.title}</h4>
                 {offer.badge ? (
                     <span className="inline-flex items-center rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
                         {offer.badge}
                     </span>
                 ) : null}
             </div>
-            <p className="mt-3 text-sm font-medium leading-7 text-primary">{offer.subtext}</p>
-            <p className="mt-3 text-sm leading-7 text-gray-700">{offer.description}</p>
+            <p className="mt-3 text-[13px] font-semibold leading-6 text-primary sm:text-sm">{offer.subtext}</p>
+            <p className="card-copy mt-3">{offer.description}</p>
             <ul className="mt-4 space-y-2">
                 {offer.details.map((item) => (
                     <li key={item} className="bullet-row">
@@ -81,8 +81,10 @@ function OfferPanel({ offer }: { offer: OnboardingOffer }) {
                     </li>
                 ))}
             </ul>
-            <div className="mt-5 rounded-[1.1rem] border border-stone-200/90 bg-[#fff8f3] p-3">
-                <p className="text-sm font-semibold leading-6 text-gray-900">{offer.footer}</p>
+            <div className="mt-auto pt-5">
+                <div className="inline-flex rounded-full border border-orange-200/70 bg-orange-50/70 px-4 py-2 text-[13px] font-semibold leading-6 text-gray-900">
+                    {offer.footer}
+                </div>
             </div>
         </motion.article>
     );
@@ -127,10 +129,49 @@ function StepSection({
                                         <OfferPanel key={offer.title} offer={offer} />
                                     ))}
                                 </div>
-                                {step.note ? (
-                                    <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-7 text-gray-500">
-                                        {step.note}
+
+                                {step.scopeTitle && step.scopeBody && step.scopeItems?.length ? (
+                                    <div className="warm-panel mt-8 p-6 sm:p-8">
+                                        <div className="mx-auto max-w-3xl text-center">
+                                            <h3 className="text-[1.4rem] font-semibold tracking-tight text-gray-950 sm:text-[1.65rem]">
+                                                {step.scopeTitle}
+                                            </h3>
+                                            <p className="card-copy mt-4">{step.scopeBody}</p>
+                                        </div>
+
+                                        <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+                                            {step.scopeItems.map((item) => (
+                                                <div
+                                                    key={item.title}
+                                                    className="surface-card h-full p-4 text-left"
+                                                >
+                                                    <p className="text-sm font-semibold tracking-tight text-gray-950">
+                                                        {item.title}
+                                                    </p>
+                                                    <p className="mt-2 text-sm leading-6 text-gray-600">
+                                                        {item.description}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : null}
+
+                                {step.scopeNote ? (
+                                    <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-7 text-gray-500">
+                                        {step.scopeNote}
                                     </p>
+                                ) : null}
+
+                                {step.finalCtaCopy && step.finalCtaLabel ? (
+                                    <div className="mx-auto mt-8 max-w-3xl text-center">
+                                        <p className="section-copy text-base sm:text-lg">{step.finalCtaCopy}</p>
+                                        <div className="mt-5">
+                                            <Link to="/book-demo" className="btn-primary w-full sm:inline-flex sm:w-auto">
+                                                {step.finalCtaLabel}
+                                            </Link>
+                                        </div>
+                                    </div>
                                 ) : null}
                             </>
                         </Reveal>
@@ -442,7 +483,7 @@ export default function DealRoomV3({ content = defaultDealRoomV3Content }: { con
                                 </div>
                                 <a
                                     href={`mailto:${content.contact.email}`}
-                                    className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-[#fff8f3] px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-primary hover:text-primary"
+                                    className="btn-secondary inline-flex w-full gap-2 sm:w-auto"
                                 >
                                     <Mail className="h-4 w-4" />
                                     {content.contactCtaLabel ?? content.contact.email}

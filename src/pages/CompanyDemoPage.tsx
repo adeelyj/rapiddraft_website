@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import BrandMark from '../components/BrandMark';
 import Footer from '../components/Footer';
 import PageMeta from '../components/PageMeta';
 import Reveal from '../components/home/Reveal';
@@ -16,7 +17,7 @@ function DemoHeader({ config, isHostMode }: { config: CompanyDemoConfig; isHostM
         <header className="sticky top-0 z-50 border-b border-stone-200/70 bg-white/90 backdrop-blur-xl">
             <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-5 py-4 sm:px-6 lg:px-8 xl:px-10">
                 <div className="flex items-center gap-4">
-                    <img src="/media/rd_logo.png" alt="RapidDraft" className="h-8 w-auto" />
+                    <BrandMark theme="light" size="sm" />
                     <span className="inline-flex items-center rounded-full border border-orange-200/80 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary shadow-[0_14px_30px_-24px_rgba(234,88,12,0.55)]">
                         {config.accessLabel}
                     </span>
@@ -389,6 +390,30 @@ export default function CompanyDemoPage({ config, isHostMode = false }: CompanyD
                     </section>
                 ) : null}
             </main>
+
+            {config.narrative.footerBody && config.narrative.footerLinkHref && config.narrative.footerLinkLabel ? (
+                <section className="border-t border-stone-200/80 bg-[#fff8f3] py-12">
+                    <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
+                        <div className="surface-card flex flex-col gap-6 p-6 sm:p-7 lg:flex-row lg:items-center lg:justify-between">
+                            <div className="max-w-3xl">
+                                <p className="site-kicker">Pilot dossier</p>
+                                <p className="mt-4 text-sm leading-7 text-gray-600 sm:text-base">
+                                    {config.narrative.footerBody}
+                                </p>
+                            </div>
+                            <a
+                                href={config.narrative.footerLinkHref}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="btn-secondary w-full shrink-0 sm:w-auto"
+                            >
+                                {config.narrative.footerLinkLabel}
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            ) : null}
 
             <Footer />
         </div>

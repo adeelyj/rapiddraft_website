@@ -13,9 +13,15 @@ import DealRoomV2 from './pages/DealRoomV2';
 import DealRoomV3 from './pages/DealRoomV3';
 import NdaRequest from './pages/NdaRequest';
 import LoiRequest from './pages/LoiRequest';
+import ForwardPage from './forward/ForwardPage';
 
 const PITCH_HOSTNAME = 'pitch.rapiddraft.ai';
+const FORWARD_HOSTNAME = 'forward.rapiddraft.ai';
 const MAIN_SITE_ORIGIN = 'https://rapiddraft.ai';
+
+function normalizeHostname(hostname: string) {
+  return hostname.trim().toLowerCase().replace(/\.$/, '');
+}
 
 function ExternalRedirect({ to }: { to: string }) {
   useEffect(() => {
@@ -38,7 +44,15 @@ function CompanyDemoRoute() {
 
 function App() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const isPitchHostname = hostname === PITCH_HOSTNAME;
+  const normalizedHostname = normalizeHostname(hostname);
+  const isPitchHostname = normalizedHostname === PITCH_HOSTNAME;
+  // Dev-only escape hatch: ?forward=1 in dev mode forces the Forward page so
+  // it can be previewed on plain localhost. Stripped from prod by Vite.
+  const isForwardDevPreview =
+    import.meta.env.DEV &&
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('forward') === '1';
+  const isForwardHostname = normalizedHostname === FORWARD_HOSTNAME || isForwardDevPreview;
   const companyDemoFromHostname = hostname ? getCompanyDemoByHostname(hostname) : undefined;
 
   if (isPitchHostname) {
@@ -57,6 +71,10 @@ function App() {
 
   if (companyDemoFromHostname && typeof window !== 'undefined' && window.location.pathname === '/') {
     return <CompanyDemoPage config={companyDemoFromHostname} isHostMode />;
+  }
+
+  if (isForwardHostname && typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname === '/index.html')) {
+    return <ForwardPage />;
   }
 
   return (
