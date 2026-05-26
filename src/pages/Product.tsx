@@ -229,7 +229,10 @@ function RoiCalculatorSection() {
     ];
 
     return (
-        <section className="relative overflow-hidden border-b border-stone-200/70 bg-white py-16 md:py-24">
+        <section
+            id="roi-calculator"
+            className="relative scroll-mt-24 overflow-hidden border-b border-stone-200/70 bg-white py-16 md:py-24"
+        >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top_left,rgba(255,237,213,0.52),transparent_34%)]" />
             <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
                 <Reveal className="mx-auto max-w-3xl text-center">

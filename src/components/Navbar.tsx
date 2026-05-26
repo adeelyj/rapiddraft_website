@@ -12,13 +12,17 @@ export default function Navbar() {
 
     const navLinks = [
         { name: 'Home', path: '/' },
-        { name: 'Deal Room', path: '/deal-room' },
+        { name: 'ROI', path: '/#roi-calculator' },
         { name: 'Use Cases', path: '/use-cases' },
         { name: 'Team', path: '/team' },
     ];
 
     const isActive = (path: string) => {
-        const pathname = path.split('#')[0];
+        const [pathname, hash] = path.split('#');
+        if (hash) {
+            return location.pathname === pathname && location.hash === `#${hash}`;
+        }
+        if (pathname === '/' && location.pathname === '/') return location.hash === '';
         if (pathname === '/' && location.pathname !== '/') return false;
         return location.pathname.startsWith(pathname);
     };
@@ -107,6 +111,7 @@ export default function Navbar() {
                         <Link
                             key={link.path}
                             to={link.path}
+                            onClick={() => setOpenPath(null)}
                             className={clsx(
                                 'block rounded-2xl px-4 py-3 text-base font-medium',
                                 isActive(link.path)

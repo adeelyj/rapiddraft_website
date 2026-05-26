@@ -7,8 +7,20 @@ export default function Layout() {
     const location = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location.pathname]);
+        if (!location.hash) {
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        const id = location.hash.replace('#', '');
+        const timer = window.setTimeout(() => {
+            const element = document.getElementById(id);
+            if (!element) return;
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 0);
+
+        return () => window.clearTimeout(timer);
+    }, [location.pathname, location.hash]);
 
     return (
         <div className="flex min-h-screen flex-col bg-white text-gray-900">
