@@ -52,6 +52,7 @@ export default function Footer() {
                         <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Product</h3>
                         <div className="mt-5 space-y-3">
                             <Link to="/" className="block text-sm text-gray-300 transition hover:text-white">Home</Link>
+                            <Link to="/#roi-calculator" className="block text-sm text-gray-300 transition hover:text-white">ROI Calculator</Link>
                             <Link to="/use-cases" className="block text-sm text-gray-300 transition hover:text-white">Use Cases</Link>
                             <Link to="/book-demo" className="block text-sm text-gray-300 transition hover:text-white">Book a Demo</Link>
                         </div>
