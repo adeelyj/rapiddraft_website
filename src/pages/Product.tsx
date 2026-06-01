@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import Section from '../components/Section';
@@ -139,7 +139,43 @@ const solutionBlocks = [
     },
 ];
 
-const integrations = ['Siemens NX', 'SolidWorks', 'CATIA'];
+const integrationPillar = {
+    title: 'Works with your engineering stack',
+    body: 'Connect review context from CAD models, manufacturing drawings, BOMs, PLM/PDM records, and internal review rules.',
+    tags: ['Siemens NX', 'SolidWorks', 'CATIA', 'PLM / PDM', 'Drawings', 'BOMs'],
+};
+
+const sovereigntyPillar = {
+    title: 'Designed for data sovereignty',
+    body: 'Keep sensitive engineering data inside approved environments with scoped access, controlled AI workflows, and engineer-reviewed outputs.',
+    tags: [
+        'GDPR-Compliant',
+        'On-prem AI',
+        'Local/EU Cloud',
+        'SSO',
+        'IP protection',
+        'Human approval',
+    ],
+};
+
+const trustCards = [
+    {
+        title: 'No tool replacement',
+        body: 'Works around your current CAD, PDM, PLM, and release process.',
+    },
+    {
+        title: 'No uncontrolled data movement',
+        body: 'Sensitive files stay within approved environments and access boundaries.',
+    },
+    {
+        title: 'Engineer-controlled AI',
+        body: 'Findings remain reviewable, explainable, and tied to human approval.',
+    },
+    {
+        title: 'Cleaner release data',
+        body: 'Reduce inconsistencies across drawings, BOMs, part data, and review records.',
+    },
+];
 
 const WORKING_WEEKS_PER_YEAR = 42;
 const AVOIDED_COST_PER_ISSUE = 5000;
@@ -413,39 +449,88 @@ export default function Product() {
 
             <section className="relative overflow-hidden border-y border-stone-200/70 bg-[#fff8f3] py-16 md:py-24">
                 <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                    <div className="grid gap-10 lg:grid-cols-[minmax(0,0.55fr)_minmax(0,0.45fr)] lg:items-center">
-                        <Reveal className="max-w-2xl">
-                            <h2 className="section-title text-balance">
-                                Works with the CAD and PLM systems your team already uses
-                            </h2>
-                            <p className="section-copy mt-5">
-                                RapidDraft integrates into existing engineering workflows so teams can improve reviews, drawing release, and manufacturing feedback without disrupting established tools and processes.
-                            </p>
-                        </Reveal>
+                    <Reveal className="mx-auto max-w-[980px] text-center">
+                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                            ENTERPRISE-READY AI REVIEW
+                        </p>
+                        <h2 className="section-title mx-auto mt-5 max-w-4xl text-balance">
+                            Works with your stack. Keeps your data secure.
+                        </h2>
+                        <p className="section-copy mx-auto mt-5 max-w-4xl">
+                            RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM workflows while keeping tools, approval gates, and sensitive engineering data under your control.
+                        </p>
+                    </Reveal>
 
-                        <Reveal delay={0.08}>
-                            <div className="grid gap-5">
-                                <div className="grid gap-3 sm:grid-cols-3">
-                                    {integrations.map((item) => (
-                                        <div
-                                            key={item}
-                                            className="rounded-[1.25rem] border border-stone-300 bg-white px-4 py-4 text-center text-sm font-semibold text-gray-900 shadow-[0_18px_40px_-34px_rgba(17,24,39,0.16)]"
-                                        >
-                                            {item}
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="flex items-start gap-3 rounded-[1.5rem] border border-stone-200/90 bg-white px-5 py-5 shadow-[0_20px_50px_-38px_rgba(17,24,39,0.16)]">
-                                    <div className="rounded-full bg-orange-50 p-2 text-primary">
-                                        <ShieldCheck className="h-4 w-4" />
-                                    </div>
-                                    <p className="text-sm leading-7 text-gray-600">
-                                        Designed for review-heavy engineering environments where CAD, PDM, and PLM context needs to stay connected from first check to final release.
+                    <Reveal delay={0.06} className="mt-10 grid gap-5 md:grid-cols-2 lg:mt-12">
+                        {[integrationPillar, sovereigntyPillar].map((pillar) => {
+                            const isSovereignty = pillar.title === sovereigntyPillar.title;
+
+                            return (
+                                <article
+                                    key={pillar.title}
+                                    className={[
+                                        'flex h-full flex-col rounded-[2rem] border p-6 shadow-[0_24px_70px_-54px_rgba(15,23,42,0.18)] sm:p-7 lg:p-8',
+                                        isSovereignty
+                                            ? 'border-orange-200/70 bg-[linear-gradient(180deg,rgba(255,247,237,0.86),rgba(255,255,255,0.96))]'
+                                            : 'border-stone-200/80 bg-white/80',
+                                    ].join(' ')}
+                                >
+                                    <span className="mb-5 block h-1.5 w-10 rounded-full bg-primary" aria-hidden="true" />
+                                    <h3 className="text-2xl font-semibold tracking-tight text-gray-950 sm:text-[1.7rem]">
+                                        {pillar.title}
+                                    </h3>
+                                    <p className="mt-4 text-base leading-8 text-gray-600">
+                                        {pillar.body}
                                     </p>
-                                </div>
-                            </div>
-                        </Reveal>
-                    </div>
+                                    <div className="mt-6 flex flex-wrap gap-2.5">
+                                        {pillar.tags.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                className={[
+                                                    'rounded-full border px-3 py-2 text-[13px] font-medium leading-none',
+                                                    tag === 'GDPR-Compliant'
+                                                        ? 'border-orange-200 bg-orange-50/80 text-primary'
+                                                        : 'border-stone-200/80 bg-white/80 text-gray-700',
+                                                ].join(' ')}
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </article>
+                            );
+                        })}
+                    </Reveal>
+
+                    <Reveal delay={0.1} className="mt-5">
+                        <div className="rounded-[1.7rem] border border-[#262d3f] bg-[linear-gradient(140deg,#171d2b_0%,#1d2435_56%,#2a2331_100%)] px-6 py-5 text-white shadow-[0_18px_45px_-34px_rgba(17,24,39,0.55)] sm:px-7 md:flex md:items-center md:justify-between md:gap-8">
+                            <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">
+                                RapidDraft AI review layer
+                            </h3>
+                            <p className="mt-2 max-w-2xl text-sm leading-7 text-white/70 md:mt-0 md:text-right sm:text-base">
+                                Analyze drawings · apply rules · surface issues · capture decisions
+                            </p>
+                        </div>
+                    </Reveal>
+
+                    <Reveal delay={0.14} className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                        {trustCards.map((card) => (
+                            <article
+                                key={card.title}
+                                className="rounded-[1.35rem] border border-stone-200/75 bg-white/75 p-5 shadow-[0_18px_48px_-42px_rgba(15,23,42,0.18)]"
+                            >
+                                <span className="mb-4 flex h-6 w-6 items-center justify-center rounded-full bg-orange-50 text-primary" aria-hidden="true">
+                                    <Check className="h-3.5 w-3.5" />
+                                </span>
+                                <h3 className="text-base font-semibold text-gray-950">
+                                    {card.title}
+                                </h3>
+                                <p className="mt-2 text-sm leading-6 text-gray-600">
+                                    {card.body}
+                                </p>
+                            </article>
+                        ))}
+                    </Reveal>
                 </div>
             </section>
 
