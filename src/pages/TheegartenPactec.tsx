@@ -114,7 +114,7 @@ function LocalAiDeploymentDiagram() {
             aria-label="Local-AI deployment architecture from Theegarten release package to engineer-approved CIM Database release"
         >
             <svg
-                viewBox="0 0 1120 420"
+                viewBox="0 0 1120 430"
                 role="img"
                 aria-label="Local-AI deployment architecture for RapidDraft at Theegarten-Pactec"
                 className="block h-auto w-full overflow-visible"
@@ -232,34 +232,66 @@ function LocalAiDeploymentDiagram() {
                 <circle cx="458" cy="336" r="4.5" fill={C.orange} className="rd3-pip" />
                 <text x="474" y="341" fontFamily={MONO} fontSize="11" fill={C.gray}>Reasoning · orchestration · evidence</text>
 
-                {/* col 3 — engineer & release */}
-                <g filter="url(#rd3-soft)">
-                    <rect x="802" y="42" width="258" height="90" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
-                </g>
-                <text x="824" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>AGENT OUTPUT</text>
-                <text x="824" y="94" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
-                <text x="824" y="118" fontFamily={MONO} fontSize="13" fill={C.gray}>BOM · DFM · citations · release notes</text>
+                {/* col 3 — animated cards */}
 
-                <g filter="url(#rd3-soft)">
-                    <rect x="802" y="152" width="258" height="100" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
-                </g>
-                <text x="824" y="178" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.orangeText}>HUMAN IN THE LOOP</text>
-                <g transform="translate(1016,158)">
-                    <rect x="0" y="0" width="28" height="28" rx="8" fill="none" stroke={C.orangeBorder} />
-                    <g stroke={C.orange} strokeWidth="1.6" fill="none">
-                        <circle cx="14" cy="11" r="4" />
-                        <path d="M6 25 c0-4.5 3.8-7 8-7 s8 2.5 8 7" strokeLinecap="round" />
+                {/* Card 1: Evidence-linked results — fades out in step 1 */}
+                <g>
+                    <animate attributeName="opacity"
+                        values="1;1;0;0;1;1"
+                        keyTimes="0;0.18;0.22;0.78;0.82;1"
+                        dur="10s" repeatCount="indefinite" />
+                    <g filter="url(#rd3-soft)">
+                        <rect x="802" y="42" width="258" height="106" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                     </g>
+                    <text x="824" y="68" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>AGENT OUTPUT</text>
+                    <text x="824" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
+                    <text x="824" y="122" fontFamily={MONO} fontSize="13" fill={C.gray}>BOM · DFM · citations · release notes</text>
                 </g>
-                <text x="824" y="210" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Engineer approval</text>
-                <text x="824" y="234" fontFamily={MONO} fontSize="13" fill={C.gray}>Reviews &amp; approves before release</text>
 
-                <g filter="url(#rd3-soft)">
-                    <rect x="802" y="272" width="258" height="88" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                {/* Card 2: Engineer approval — slides up 116px in step 1, fades in step 2 */}
+                <g>
+                    {/* @ts-ignore */}
+                    <animateTransform attributeName="transform" type="translate"
+                        values="0,0;0,0;0,-116;0,-116;0,0;0,0"
+                        keyTimes="0;0.18;0.22;0.42;0.43;1"
+                        dur="10s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="opacity"
+                        values="1;1;0;0;0;1;1"
+                        keyTimes="0;0.38;0.42;0.62;0.78;0.82;1"
+                        dur="10s" repeatCount="indefinite" />
+                    <g filter="url(#rd3-soft)">
+                        <rect x="802" y="164" width="258" height="114" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    </g>
+                    <text x="824" y="190" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.orangeText}>HUMAN IN THE LOOP</text>
+                    <g transform="translate(1016,170)">
+                        <rect x="0" y="0" width="28" height="28" rx="8" fill="none" stroke={C.orangeBorder} />
+                        <g stroke={C.orange} strokeWidth="1.6" fill="none">
+                            <circle cx="14" cy="11" r="4" />
+                            <path d="M6 25 c0-4.5 3.8-7 8-7 s8 2.5 8 7" strokeLinecap="round" />
+                        </g>
+                    </g>
+                    <text x="824" y="222" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Engineer approval</text>
+                    <text x="824" y="248" fontFamily={MONO} fontSize="13" fill={C.gray}>Reviews &amp; approves before release</text>
                 </g>
-                <text x="824" y="298" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>PLM INTEGRATION</text>
-                <text x="824" y="324" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
-                <text x="824" y="348" fontFamily={MONO} fontSize="13" fill={C.gray}>Written back to PLM</text>
+
+                {/* Card 3: Release → CIM Database — slides up twice, fades in step 3 */}
+                <g>
+                    {/* @ts-ignore */}
+                    <animateTransform attributeName="transform" type="translate"
+                        values="0,0;0,0;0,-116;0,-116;0,-246;0,-246;0,0;0,0"
+                        keyTimes="0;0.18;0.22;0.38;0.42;0.62;0.63;1"
+                        dur="10s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="opacity"
+                        values="1;1;0;0;1;1"
+                        keyTimes="0;0.58;0.62;0.78;0.82;1"
+                        dur="10s" repeatCount="indefinite" />
+                    <g filter="url(#rd3-soft)">
+                        <rect x="802" y="294" width="258" height="106" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    </g>
+                    <text x="824" y="320" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>PLM INTEGRATION</text>
+                    <text x="824" y="348" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
+                    <text x="824" y="374" fontFamily={MONO} fontSize="13" fill={C.gray}>Written back to PLM</text>
+                </g>
 
                 {/* connectors */}
                 <g fill="none">
@@ -267,19 +299,13 @@ function LocalAiDeploymentDiagram() {
                     <path d="M320 92 H432" className="rd3-flow" />
                     <path d="M320 274 H432" className="rd3-flow-base" />
                     <path d="M320 274 H432" className="rd3-flow rd3-flow-d" />
-                    <path d="M690 87 H802" className="rd3-flow-base" />
-                    <path d="M690 87 H802" className="rd3-flow rd3-flow-d" />
-                    <path d="M931 132 V152" className="rd3-flow-base" />
-                    <path d="M931 132 V152" className="rd3-flow" />
-                    <path d="M931 252 V272" className="rd3-flow-base" />
-                    <path d="M931 252 V272" className="rd3-flow rd3-flow-d" />
+                    <path d="M690 95 H802" className="rd3-flow-base" />
+                    <path d="M690 95 H802" className="rd3-flow rd3-flow-d" />
                 </g>
                 <g fill="rgba(75,85,99,0.62)">
                     <path d="M432 92 l-7 -3.5 l0 7 z" />
                     <path d="M432 274 l-7 -3.5 l0 7 z" />
-                    <path d="M802 87 l-7 -3.5 l0 7 z" />
-                    <path d="M931 152 l-3.5 -7 l7 0 z" />
-                    <path d="M931 272 l-3.5 -7 l7 0 z" />
+                    <path d="M802 95 l-7 -3.5 l0 7 z" />
                 </g>
 
                 {/* boundary gate */}
@@ -622,16 +648,6 @@ export default function TheegartenPactec() {
                         <p className="mt-5 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
                             RapidDraft agent runs locally on-prem and is optimized for AI-specialized hardware like NVIDIA DGX Spark.
                         </p>
-                        <div className="mt-7 flex flex-wrap gap-2.5">
-                            {['Local-AI pilot', 'No silent training', 'Engineer-approved release'].map((chip) => (
-                                <span
-                                    key={chip}
-                                    className="rounded-full border border-orange-200/80 bg-orange-50/70 px-3.5 py-1.5 text-xs font-semibold text-primary shadow-[0_10px_26px_-24px_rgba(234,88,12,0.5)]"
-                                >
-                                    {chip}
-                                </span>
-                            ))}
-                        </div>
                     </Reveal>
 
                     <Reveal delay={0.08}>
