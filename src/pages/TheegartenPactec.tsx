@@ -101,11 +101,11 @@ function LocalAiDeploymentDiagram() {
     ];
 
     const tools = [
-        { label: 'BOM', x: 454, y: 238, w: 42 },
-        { label: 'DFM', x: 502, y: 238, w: 42 },
-        { label: 'Model / Canvas', x: 550, y: 238, w: 104 },
-        { label: 'Knowledge', x: 454, y: 270, w: 78 },
-        { label: 'Artifacts', x: 538, y: 270, w: 66 },
+        { label: 'BOM', x: 454, y: 206, w: 46 },
+        { label: 'DFM', x: 506, y: 206, w: 46 },
+        { label: 'Model / Canvas', x: 558, y: 206, w: 112 },
+        { label: 'Knowledge', x: 454, y: 242, w: 84 },
+        { label: 'Artifacts', x: 544, y: 242, w: 72 },
     ];
 
     return (
@@ -114,7 +114,7 @@ function LocalAiDeploymentDiagram() {
             aria-label="Local-AI deployment architecture from Theegarten release package to engineer-approved CIM Database release"
         >
             <svg
-                viewBox="0 0 1120 430"
+                viewBox="0 0 1120 420"
                 role="img"
                 aria-label="Local-AI deployment architecture for RapidDraft at Theegarten-Pactec"
                 className="block h-auto w-full overflow-visible"
@@ -182,119 +182,115 @@ function LocalAiDeploymentDiagram() {
                 </defs>
 
                 {/* core glow behind agent */}
-                <ellipse cx="561" cy="220" rx="240" ry="180" fill="url(#rd3-core-glow)" />
+                <ellipse cx="561" cy="200" rx="240" ry="200" fill="url(#rd3-core-glow)" />
 
                 {/* zones */}
                 {zones.map((z) => (
                     <g key={z.n}>
-                        <rect x={z.x} y="58" width="290" height="360" rx="22" fill="rgba(255,255,255,0.42)" stroke={C.borderSoft} />
-                        <text x={z.x + 6} y="46" fontFamily={MONO} fontSize="10.5" letterSpacing="2.4">
-                            <tspan fill={C.ink} fontWeight="600">{z.n}</tspan>
-                            <tspan fill={C.faint}>{'  ' + z.t}</tspan>
-                        </text>
+                        <rect x={z.x} y="20" width="290" height="390" rx="22" fill="rgba(255,255,255,0.42)" stroke={C.borderSoft} />
                     </g>
                 ))}
 
                 {/* col 1 — input */}
                 <g filter="url(#rd3-soft)">
-                    <rect x="62" y="92" width="258" height="92" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <rect x="62" y="42" width="258" height="100" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
-                <text x="84" y="120" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>THEEGARTEN-PACTEC DATA</text>
-                <text x="84" y="146" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Release Package</text>
-                <text x="84" y="168" fontFamily={MONO} fontSize="11" fill={C.gray}>CAD · Drawing · BOM · EPLAN</text>
+                <text x="84" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>THEEGARTEN-PACTEC DATA</text>
+                <text x="84" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release Package</text>
+                <text x="84" y="122" fontFamily={MONO} fontSize="13" fill={C.gray}>CAD · Drawing · BOM · EPLAN</text>
 
                 <g filter="url(#rd3-soft)">
-                    <rect x="62" y="200" width="258" height="195" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <rect x="62" y="160" width="258" height="228" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
-                <text x="84" y="224" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>ON-PREM HARDWARE</text>
-                <image href="/media/NVIDIA-DGX-SPARK.png" x="132" y="232" width="118" height="118" preserveAspectRatio="xMidYMid meet" />
-                <text x="84" y="370" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>NVIDIA DGX Spark</text>
-                <text x="84" y="388" fontFamily={MONO} fontSize="11" fill={C.gray}>Runs on-site · company network</text>
+                <text x="84" y="184" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>ON-PREM HARDWARE</text>
+                <image href="/media/NVIDIA-DGX-SPARK.png" x="125" y="194" width="130" height="130" preserveAspectRatio="xMidYMid meet" />
+                <text x="84" y="346" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>NVIDIA DGX Spark</text>
+                <text x="84" y="372" fontFamily={MONO} fontSize="13" fill={C.gray}>Runs on-site · company network</text>
 
                 {/* col 2 — agent (orange core) */}
                 <g filter="url(#rd3-orange-soft)">
-                    <rect x="432" y="92" width="258" height="272" rx="18" fill={C.orangeFill} stroke={C.orangeBorder} strokeWidth="1.3" />
+                    <rect x="432" y="42" width="258" height="340" rx="18" fill={C.orangeFill} stroke={C.orangeBorder} strokeWidth="1.3" />
                 </g>
-                <g transform="translate(454,104)">
-                    <rect width="26" height="26" rx="8" fill="url(#rd3-logo)" />
-                    <rect x="7" y="8.4" width="12" height="2.6" rx="1.3" fill="#ffffff" opacity="0.95" />
-                    <rect x="7" y="12.9" width="8.5" height="2.6" rx="1.3" fill="#ffffff" opacity="0.78" />
-                    <rect x="7" y="17.4" width="12" height="2.6" rx="1.3" fill="#ffffff" opacity="0.95" />
+                <g transform="translate(454,54)">
+                    <rect width="30" height="30" rx="9" fill="url(#rd3-logo)" />
+                    <rect x="8" y="9.5" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.95" />
+                    <rect x="8" y="14.8" width="10" height="3" rx="1.5" fill="#ffffff" opacity="0.78" />
+                    <rect x="8" y="20.1" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.95" />
                 </g>
-                <text x="490" y="122" fontFamily={MONO} fontSize="9.5" letterSpacing="2.2" fill={C.orangeText}>RAPIDDRAFT WORKSPACE</text>
-                <text x="454" y="158" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Agent inside the product</text>
-                <text x="454" y="180" fontFamily={MONO} fontSize="10.5" fill={C.gray}>Orchestrates tools, not a chatbot</text>
-                <text x="454" y="226" fontFamily={MONO} fontSize="9.5" letterSpacing="2.6" fill={C.faint}>AGENT TOOL LAYER</text>
+                <text x="496" y="74" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.orangeText}>RAPIDDRAFT WORKSPACE</text>
+                <text x="454" y="112" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Agent inside the product</text>
+                <text x="454" y="138" fontFamily={MONO} fontSize="13" fill={C.gray}>Orchestrates tools, not a chatbot</text>
+                <text x="454" y="190" fontFamily={MONO} fontSize="12" letterSpacing="2.6" fill={C.faint}>AGENT TOOL LAYER</text>
                 {tools.map((t) => (
                     <g key={t.label}>
-                        <rect x={t.x} y={t.y} width={t.w} height="24" rx="8" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.32)" />
-                        <text x={t.x + t.w / 2} y={t.y + 16} textAnchor="middle" fontFamily={MONO} fontSize="10" fill={C.orangeText}>
+                        <rect x={t.x} y={t.y} width={t.w} height="26" rx="8" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.32)" />
+                        <text x={t.x + t.w / 2} y={t.y + 17} textAnchor="middle" fontFamily={MONO} fontSize="11" fill={C.orangeText}>
                             {t.label}
                         </text>
                     </g>
                 ))}
-                <circle cx="458" cy="324" r="4" fill={C.orange} className="rd3-pip" />
-                <text x="472" y="328" fontFamily={MONO} fontSize="8" fill={C.gray}>Reasoning · orchestration · evidence</text>
+                <circle cx="458" cy="336" r="4.5" fill={C.orange} className="rd3-pip" />
+                <text x="474" y="341" fontFamily={MONO} fontSize="11" fill={C.gray}>Reasoning · orchestration · evidence</text>
 
                 {/* col 3 — engineer & release */}
                 <g filter="url(#rd3-soft)">
-                    <rect x="802" y="92" width="258" height="80" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <rect x="802" y="42" width="258" height="90" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
-                <text x="824" y="118" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>AGENT OUTPUT</text>
-                <text x="824" y="142" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
-                <text x="824" y="161" fontFamily={MONO} fontSize="9.5" fill={C.gray}>BOM · DFM · citations · release notes</text>
+                <text x="824" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>AGENT OUTPUT</text>
+                <text x="824" y="94" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
+                <text x="824" y="118" fontFamily={MONO} fontSize="13" fill={C.gray}>BOM · DFM · citations · release notes</text>
 
                 <g filter="url(#rd3-soft)">
-                    <rect x="802" y="198" width="258" height="88" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <rect x="802" y="152" width="258" height="100" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
-                <text x="824" y="226" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.orangeText}>HUMAN IN THE LOOP</text>
-                <g transform="translate(1016,206)">
-                    <rect x="0" y="0" width="26" height="26" rx="8" fill="none" stroke={C.orangeBorder} />
-                    <g stroke={C.orange} strokeWidth="1.5" fill="none">
-                        <circle cx="13" cy="10" r="3.6" />
-                        <path d="M6 22 c0-4 3.5-6.5 7-6.5 s7 2.5 7 6.5" strokeLinecap="round" />
+                <text x="824" y="178" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.orangeText}>HUMAN IN THE LOOP</text>
+                <g transform="translate(1016,158)">
+                    <rect x="0" y="0" width="28" height="28" rx="8" fill="none" stroke={C.orangeBorder} />
+                    <g stroke={C.orange} strokeWidth="1.6" fill="none">
+                        <circle cx="14" cy="11" r="4" />
+                        <path d="M6 25 c0-4.5 3.8-7 8-7 s8 2.5 8 7" strokeLinecap="round" />
                     </g>
                 </g>
-                <text x="824" y="252" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Engineer approval</text>
-                <text x="824" y="272" fontFamily={MONO} fontSize="9.5" fill={C.gray}>Reviews &amp; approves before release</text>
+                <text x="824" y="210" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Engineer approval</text>
+                <text x="824" y="234" fontFamily={MONO} fontSize="13" fill={C.gray}>Reviews &amp; approves before release</text>
 
                 <g filter="url(#rd3-soft)">
-                    <rect x="802" y="312" width="258" height="72" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <rect x="802" y="272" width="258" height="88" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
-                <text x="824" y="338" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>PLM INTEGRATION</text>
-                <text x="824" y="360" fontFamily={DISPLAY} fontSize="16" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
-                <text x="824" y="377" fontFamily={MONO} fontSize="9" fill={C.gray}>Written back to PLM</text>
+                <text x="824" y="298" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>PLM INTEGRATION</text>
+                <text x="824" y="324" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
+                <text x="824" y="348" fontFamily={MONO} fontSize="13" fill={C.gray}>Written back to PLM</text>
 
                 {/* connectors */}
                 <g fill="none">
-                    <path d="M320 138 H432" className="rd3-flow-base" />
-                    <path d="M320 138 H432" className="rd3-flow" />
-                    <path d="M320 297 H432" className="rd3-flow-base" />
-                    <path d="M320 297 H432" className="rd3-flow rd3-flow-d" />
-                    <path d="M690 132 H802" className="rd3-flow-base" />
-                    <path d="M690 132 H802" className="rd3-flow rd3-flow-d" />
-                    <path d="M931 172 V198" className="rd3-flow-base" />
-                    <path d="M931 172 V198" className="rd3-flow" />
-                    <path d="M931 286 V312" className="rd3-flow-base" />
-                    <path d="M931 286 V312" className="rd3-flow rd3-flow-d" />
+                    <path d="M320 92 H432" className="rd3-flow-base" />
+                    <path d="M320 92 H432" className="rd3-flow" />
+                    <path d="M320 274 H432" className="rd3-flow-base" />
+                    <path d="M320 274 H432" className="rd3-flow rd3-flow-d" />
+                    <path d="M690 87 H802" className="rd3-flow-base" />
+                    <path d="M690 87 H802" className="rd3-flow rd3-flow-d" />
+                    <path d="M931 132 V152" className="rd3-flow-base" />
+                    <path d="M931 132 V152" className="rd3-flow" />
+                    <path d="M931 252 V272" className="rd3-flow-base" />
+                    <path d="M931 252 V272" className="rd3-flow rd3-flow-d" />
                 </g>
                 <g fill="rgba(75,85,99,0.62)">
-                    <path d="M432 138 l-7 -3.5 l0 7 z" />
-                    <path d="M432 297 l-7 -3.5 l0 7 z" />
-                    <path d="M802 132 l-7 -3.5 l0 7 z" />
-                    <path d="M931 198 l-3.5 -7 l7 0 z" />
-                    <path d="M931 312 l-3.5 -7 l7 0 z" />
+                    <path d="M432 92 l-7 -3.5 l0 7 z" />
+                    <path d="M432 274 l-7 -3.5 l0 7 z" />
+                    <path d="M802 87 l-7 -3.5 l0 7 z" />
+                    <path d="M931 152 l-3.5 -7 l7 0 z" />
+                    <path d="M931 272 l-3.5 -7 l7 0 z" />
                 </g>
 
                 {/* boundary gate */}
                 <g filter="url(#rd3-soft)">
-                    <rect x="352" y="168" width="48" height="48" rx="14" fill="rgba(255,255,255,0.92)" stroke={C.orangeBorder} strokeWidth="1.2" />
+                    <rect x="352" y="124" width="48" height="48" rx="14" fill="rgba(255,255,255,0.92)" stroke={C.orangeBorder} strokeWidth="1.2" />
                 </g>
                 <g stroke={C.orange} strokeWidth="1.6" fill="none" strokeLinecap="round">
-                    <rect x="368" y="191" width="16" height="11" rx="2.5" />
-                    <path d="M370 191 V187 a6 6 0 0 1 12 0 V191" />
+                    <rect x="368" y="147" width="16" height="11" rx="2.5" />
+                    <path d="M370 147 V143 a6 6 0 0 1 12 0 V147" />
                 </g>
-                <circle cx="376" cy="196" r="1.5" fill={C.orange} />
+                <circle cx="376" cy="152" r="1.5" fill={C.orange} />
             </svg>
         </div>
     );
@@ -620,7 +616,7 @@ export default function TheegartenPactec() {
                         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
                             Security First
                         </p>
-                        <h2 className="mt-5 text-balance text-[2rem] font-semibold leading-tight tracking-tight text-gray-950 sm:text-4xl md:text-5xl">
+                        <h2 className="mt-4 text-balance text-2xl font-semibold leading-tight tracking-tight text-gray-950 sm:text-3xl md:text-[2rem]">
                             Data security and transparency come first
                         </h2>
                         <p className="mt-5 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
