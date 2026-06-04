@@ -87,42 +87,37 @@ function LocalAiDeploymentDiagram() {
         faint: '#9CA3AF',
         border: '#D1D5DB',
         borderSoft: '#E5E7EB',
-        card: 'rgba(255,255,255,0.74)',
+        card: 'rgba(255,255,255,0.84)',
         orange: '#EA580C',
         orangeText: '#C2410C',
         orangeBorder: '#FDBA74',
-        orangeFill: 'rgba(255,247,237,0.85)',
+        orangeFill: 'rgba(255,247,237,0.9)',
     };
 
-    const zones = [
-        { x: 46, n: '01', t: 'INPUT · DATA & HARDWARE' },
-        { x: 416, n: '02', t: 'RAPIDDRAFT AGENT' },
-        { x: 786, n: '03', t: 'ENGINEER & RELEASE' },
-    ];
-
     const tools = [
-        { label: 'BOM', x: 454, y: 206, w: 46 },
-        { label: 'DFM', x: 506, y: 206, w: 46 },
-        { label: 'Model / Canvas', x: 558, y: 206, w: 112 },
-        { label: 'Knowledge', x: 454, y: 242, w: 84 },
-        { label: 'Artifacts', x: 544, y: 242, w: 72 },
+        { label: 'BOM', x: 442, y: 206, w: 46 },
+        { label: 'DFM', x: 494, y: 206, w: 46 },
+        { label: 'Model / Canvas', x: 546, y: 206, w: 112 },
+        { label: 'Knowledge', x: 442, y: 242, w: 84 },
+        { label: 'Artifacts', x: 532, y: 242, w: 72 },
     ];
 
     return (
         <div
-            className="relative mx-auto w-full max-w-[980px] lg:w-full lg:max-w-none"
+            className="relative w-full"
             aria-label="Local-AI deployment architecture from Theegarten release package to engineer-approved CIM Database release"
         >
             <svg
-                viewBox="0 0 1120 430"
+                viewBox="0 0 1200 420"
                 role="img"
-                aria-label="Local-AI deployment architecture for RapidDraft at Theegarten-Pactec"
+                aria-labelledby="rd3-title"
                 className="block h-auto w-full overflow-visible"
             >
+                <title id="rd3-title">Local-AI deployment architecture for RapidDraft at Theegarten-Pactec</title>
                 <defs>
                     <radialGradient id="rd3-core-glow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#FB923C" stopOpacity="0.22" />
-                        <stop offset="60%" stopColor="#FB923C" stopOpacity="0.06" />
+                        <stop offset="0%" stopColor="#FB923C" stopOpacity="0.18" />
+                        <stop offset="60%" stopColor="#FB923C" stopOpacity="0.05" />
                         <stop offset="100%" stopColor="#FB923C" stopOpacity="0" />
                     </radialGradient>
                     <linearGradient id="rd3-logo" x1="0" y1="0" x2="1" y2="1">
@@ -130,97 +125,80 @@ function LocalAiDeploymentDiagram() {
                         <stop offset="1" stopColor="#C2410C" />
                     </linearGradient>
                     <filter id="rd3-soft" x="-40%" y="-40%" width="180%" height="180%">
-                        <feDropShadow dx="0" dy="14" stdDeviation="18" floodColor="#111827" floodOpacity="0.08" />
+                        <feDropShadow dx="0" dy="10" stdDeviation="16" floodColor="#111827" floodOpacity="0.07" />
                     </filter>
                     <filter id="rd3-orange-soft" x="-50%" y="-50%" width="200%" height="200%">
-                        <feDropShadow dx="0" dy="16" stdDeviation="22" floodColor="#EA580C" floodOpacity="0.18" />
+                        <feDropShadow dx="0" dy="12" stdDeviation="20" floodColor="#EA580C" floodOpacity="0.14" />
                     </filter>
                     <style>
                         {`
                             .rd3-flow-base {
-                                stroke: rgba(75, 85, 99, 0.32);
-                                stroke-width: 1.45;
+                                stroke: rgba(75,85,99,0.28);
+                                stroke-width: 1.4;
                                 stroke-linecap: round;
                                 stroke-dasharray: 2 8;
                             }
-
                             .rd3-flow {
-                                stroke: rgba(75, 85, 99, 0.5);
-                                stroke-width: 1.6;
+                                stroke: rgba(75,85,99,0.48);
+                                stroke-width: 1.55;
                                 stroke-linecap: round;
                                 stroke-dasharray: 2 11;
-                                animation: rd3-dash 2.6s linear infinite;
+                                animation: rd3-dash 2.8s linear infinite;
                             }
-
-                            .rd3-flow-d {
-                                animation-delay: 0.9s;
-                            }
-
-                            @keyframes rd3-dash {
-                                to {
-                                    stroke-dashoffset: -84;
-                                }
-                            }
-
-                            .rd3-pip {
-                                animation: rd3-pip 2.8s ease-in-out infinite;
-                            }
-
-                            @keyframes rd3-pip {
-                                0%, 100% { opacity: 0.5; }
-                                50% { opacity: 1; }
-                            }
-
-                            @media (prefers-reduced-motion: reduce) {
-                                .rd3-flow,
-                                .rd3-pip {
-                                    animation: none;
-                                }
-                            }
+                            .rd3-flow-d { animation-delay: 0.9s; }
+                            @keyframes rd3-dash { to { stroke-dashoffset: -84; } }
+                            .rd3-pip { animation: rd3-pip 2.8s ease-in-out infinite; }
+                            @keyframes rd3-pip { 0%,100%{opacity:.45} 50%{opacity:1} }
+                            @media (prefers-reduced-motion:reduce) { .rd3-flow,.rd3-pip { animation:none; } }
                         `}
                     </style>
                 </defs>
 
-                {/* core glow behind agent */}
-                <ellipse cx="561" cy="200" rx="240" ry="200" fill="url(#rd3-core-glow)" />
+                {/* ambient glow behind agent column */}
+                <ellipse cx="580" cy="210" rx="280" ry="210" fill="url(#rd3-core-glow)" />
 
-                {/* zones */}
-                {zones.map((z) => (
-                    <g key={z.n}>
-                        <rect x={z.x} y="20" width="290" height="390" rx="22" fill="rgba(255,255,255,0.42)" stroke={C.borderSoft} />
-                    </g>
-                ))}
-
-                {/* col 1 — input */}
-                <g filter="url(#rd3-soft)">
-                    <rect x="62" y="42" width="258" height="100" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
-                </g>
-                <text x="84" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>THEEGARTEN-PACTEC DATA</text>
-                <text x="84" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release Package</text>
-                <text x="84" y="122" fontFamily={MONO} fontSize="13" fill={C.gray}>CAD · Drawing · BOM · EPLAN</text>
+                {/* ── COL 1: INPUT ─────────────────────────────────────── */}
 
                 <g filter="url(#rd3-soft)">
-                    <rect x="62" y="160" width="258" height="228" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <rect x="20" y="40" width="300" height="104" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
-                <text x="84" y="184" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>ON-PREM HARDWARE</text>
-                <image href="/media/NVIDIA-DGX-SPARK.png" x="125" y="194" width="130" height="130" preserveAspectRatio="xMidYMid meet" />
-                <text x="84" y="346" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>NVIDIA DGX Spark</text>
-                <text x="84" y="372" fontFamily={MONO} fontSize="13" fill={C.gray}>Runs on-site · company network</text>
+                <text x="42" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>THEEGARTEN-PACTEC DATA</text>
+                <text x="42" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release Package</text>
+                <text x="42" y="120" fontFamily={MONO} fontSize="13" fill={C.gray}>CAD · Drawing · BOM · EPLAN</text>
 
-                {/* col 2 — agent (orange core) */}
+                <g filter="url(#rd3-soft)">
+                    <rect x="20" y="160" width="300" height="242" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                </g>
+                <text x="42" y="184" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>ON-PREM HARDWARE</text>
+                <image href="/media/NVIDIA-DGX-SPARK.png" x="100" y="196" width="140" height="140" preserveAspectRatio="xMidYMid meet" />
+                <text x="42" y="362" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>NVIDIA DGX Spark</text>
+                <text x="42" y="386" fontFamily={MONO} fontSize="13" fill={C.gray}>Runs on-site · company network</text>
+
+                {/* boundary gate — sits between the two col-1 cards */}
+                <g filter="url(#rd3-soft)">
+                    <rect x="346" y="128" width="50" height="50" rx="14" fill="rgba(255,255,255,0.92)" stroke={C.orangeBorder} strokeWidth="1.2" />
+                </g>
+                <g stroke={C.orange} strokeWidth="1.6" fill="none" strokeLinecap="round">
+                    <rect x="363" y="152" width="18" height="13" rx="2.5" />
+                    <path d="M365 152 V147 a6.5 6.5 0 0 1 13 0 V152" />
+                </g>
+                <circle cx="372" cy="159" r="1.8" fill={C.orange} />
+
+                {/* ── COL 2: AGENT ─────────────────────────────────────── */}
+
                 <g filter="url(#rd3-orange-soft)">
-                    <rect x="432" y="42" width="258" height="340" rx="18" fill={C.orangeFill} stroke={C.orangeBorder} strokeWidth="1.3" />
+                    <rect x="420" y="40" width="320" height="362" rx="18" fill={C.orangeFill} stroke={C.orangeBorder} strokeWidth="1.3" />
                 </g>
-                <g transform="translate(454,54)">
+                <g transform="translate(442,54)">
                     <rect width="30" height="30" rx="9" fill="url(#rd3-logo)" />
                     <rect x="8" y="9.5" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.95" />
                     <rect x="8" y="14.8" width="10" height="3" rx="1.5" fill="#ffffff" opacity="0.78" />
                     <rect x="8" y="20.1" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.95" />
                 </g>
-                <text x="496" y="74" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.orangeText}>RAPIDDRAFT WORKSPACE</text>
-                <text x="454" y="112" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Agent inside the product</text>
-                <text x="454" y="138" fontFamily={MONO} fontSize="13" fill={C.gray}>Orchestrates tools, not a chatbot</text>
-                <text x="454" y="190" fontFamily={MONO} fontSize="12" letterSpacing="2.6" fill={C.faint}>AGENT TOOL LAYER</text>
+                <text x="484" y="74" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.orangeText}>RAPIDDRAFT WORKSPACE</text>
+                <text x="442" y="112" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Agent inside the product</text>
+                <text x="442" y="138" fontFamily={MONO} fontSize="13" fill={C.gray}>Orchestrates tools, not a chatbot</text>
+                <text x="442" y="188" fontFamily={MONO} fontSize="12" letterSpacing="2.6" fill={C.faint}>AGENT TOOL LAYER</text>
                 {tools.map((t) => (
                     <g key={t.label}>
                         <rect x={t.x} y={t.y} width={t.w} height="26" rx="8" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.32)" />
@@ -229,30 +207,30 @@ function LocalAiDeploymentDiagram() {
                         </text>
                     </g>
                 ))}
-                <circle cx="458" cy="336" r="4.5" fill={C.orange} className="rd3-pip" />
-                <text x="474" y="341" fontFamily={MONO} fontSize="11" fill={C.gray}>Reasoning · orchestration · evidence</text>
+                <circle cx="446" cy="346" r="4.5" fill={C.orange} className="rd3-pip" />
+                <text x="462" y="350" fontFamily={MONO} fontSize="11" fill={C.gray}>Reasoning · orchestration · evidence</text>
 
-                {/* col 3 — animated cards */}
+                {/* ── COL 3: OUTPUT (animated) ─────────────────────────── */}
 
-                {/* Card 1: Evidence-linked results — fades out in step 1 */}
+                {/* Card 1 — fades out at step 1 */}
                 <g>
                     <animate attributeName="opacity"
                         values="1;1;0;0;1;1"
                         keyTimes="0;0.18;0.22;0.78;0.82;1"
                         dur="10s" repeatCount="indefinite" />
                     <g filter="url(#rd3-soft)">
-                        <rect x="802" y="42" width="258" height="106" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                        <rect x="848" y="40" width="332" height="108" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                     </g>
-                    <text x="824" y="68" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>AGENT OUTPUT</text>
-                    <text x="824" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
-                    <text x="824" y="122" fontFamily={MONO} fontSize="13" fill={C.gray}>BOM · DFM · citations · release notes</text>
+                    <text x="870" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>AGENT OUTPUT</text>
+                    <text x="870" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
+                    <text x="870" y="122" fontFamily={MONO} fontSize="13" fill={C.gray}>BOM · DFM · citations · release notes</text>
                 </g>
 
-                {/* Card 2: Engineer approval — slides up 116px in step 1, fades in step 2 */}
+                {/* Card 2 — slides up 124px then fades */}
                 <g>
                     {/* @ts-ignore */}
                     <animateTransform attributeName="transform" type="translate"
-                        values="0,0;0,0;0,-116;0,-116;0,0;0,0"
+                        values="0,0;0,0;0,-124;0,-124;0,0;0,0"
                         keyTimes="0;0.18;0.22;0.42;0.43;1"
                         dur="10s" repeatCount="indefinite" calcMode="linear" />
                     <animate attributeName="opacity"
@@ -260,25 +238,25 @@ function LocalAiDeploymentDiagram() {
                         keyTimes="0;0.38;0.42;0.62;0.78;0.82;1"
                         dur="10s" repeatCount="indefinite" />
                     <g filter="url(#rd3-soft)">
-                        <rect x="802" y="164" width="258" height="114" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                        <rect x="848" y="164" width="332" height="116" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                     </g>
-                    <text x="824" y="190" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.orangeText}>HUMAN IN THE LOOP</text>
-                    <g transform="translate(1016,170)">
-                        <rect x="0" y="0" width="28" height="28" rx="8" fill="none" stroke={C.orangeBorder} />
+                    <text x="870" y="190" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.orangeText}>HUMAN IN THE LOOP</text>
+                    <g transform="translate(1120,170)">
+                        <rect width="28" height="28" rx="8" fill="none" stroke={C.orangeBorder} />
                         <g stroke={C.orange} strokeWidth="1.6" fill="none">
                             <circle cx="14" cy="11" r="4" />
                             <path d="M6 25 c0-4.5 3.8-7 8-7 s8 2.5 8 7" strokeLinecap="round" />
                         </g>
                     </g>
-                    <text x="824" y="222" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Engineer approval</text>
-                    <text x="824" y="248" fontFamily={MONO} fontSize="13" fill={C.gray}>Reviews &amp; approves before release</text>
+                    <text x="870" y="224" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Engineer approval</text>
+                    <text x="870" y="250" fontFamily={MONO} fontSize="13" fill={C.gray}>Reviews &amp; approves before release</text>
                 </g>
 
-                {/* Card 3: Release → CIM Database — slides up twice, fades in step 3 */}
+                {/* Card 3 — slides up 256px total then fades */}
                 <g>
                     {/* @ts-ignore */}
                     <animateTransform attributeName="transform" type="translate"
-                        values="0,0;0,0;0,-116;0,-116;0,-246;0,-246;0,0;0,0"
+                        values="0,0;0,0;0,-124;0,-124;0,-256;0,-256;0,0;0,0"
                         keyTimes="0;0.18;0.22;0.38;0.42;0.62;0.63;1"
                         dur="10s" repeatCount="indefinite" calcMode="linear" />
                     <animate attributeName="opacity"
@@ -286,37 +264,27 @@ function LocalAiDeploymentDiagram() {
                         keyTimes="0;0.58;0.62;0.78;0.82;1"
                         dur="10s" repeatCount="indefinite" />
                     <g filter="url(#rd3-soft)">
-                        <rect x="802" y="294" width="258" height="106" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                        <rect x="848" y="296" width="332" height="108" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                     </g>
-                    <text x="824" y="320" fontFamily={MONO} fontSize="12" letterSpacing="2.4" fill={C.faint}>PLM INTEGRATION</text>
-                    <text x="824" y="348" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
-                    <text x="824" y="374" fontFamily={MONO} fontSize="13" fill={C.gray}>Written back to PLM</text>
+                    <text x="870" y="322" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>PLM INTEGRATION</text>
+                    <text x="870" y="350" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
+                    <text x="870" y="374" fontFamily={MONO} fontSize="13" fill={C.gray}>Written back to PLM</text>
                 </g>
 
-                {/* connectors */}
+                {/* ── CONNECTORS ───────────────────────────────────────── */}
                 <g fill="none">
-                    <path d="M320 92 H432" className="rd3-flow-base" />
-                    <path d="M320 92 H432" className="rd3-flow" />
-                    <path d="M320 274 H432" className="rd3-flow-base" />
-                    <path d="M320 274 H432" className="rd3-flow rd3-flow-d" />
-                    <path d="M690 95 H802" className="rd3-flow-base" />
-                    <path d="M690 95 H802" className="rd3-flow rd3-flow-d" />
+                    <path d="M320 92 H420" className="rd3-flow-base" />
+                    <path d="M320 92 H420" className="rd3-flow" />
+                    <path d="M320 281 H420" className="rd3-flow-base" />
+                    <path d="M320 281 H420" className="rd3-flow rd3-flow-d" />
+                    <path d="M740 94 H848" className="rd3-flow-base" />
+                    <path d="M740 94 H848" className="rd3-flow rd3-flow-d" />
                 </g>
-                <g fill="rgba(75,85,99,0.62)">
-                    <path d="M432 92 l-7 -3.5 l0 7 z" />
-                    <path d="M432 274 l-7 -3.5 l0 7 z" />
-                    <path d="M802 95 l-7 -3.5 l0 7 z" />
+                <g fill="rgba(75,85,99,0.55)">
+                    <path d="M420 92 l-7 -3.5 l0 7 z" />
+                    <path d="M420 281 l-7 -3.5 l0 7 z" />
+                    <path d="M848 94 l-7 -3.5 l0 7 z" />
                 </g>
-
-                {/* boundary gate */}
-                <g filter="url(#rd3-soft)">
-                    <rect x="352" y="124" width="48" height="48" rx="14" fill="rgba(255,255,255,0.92)" stroke={C.orangeBorder} strokeWidth="1.2" />
-                </g>
-                <g stroke={C.orange} strokeWidth="1.6" fill="none" strokeLinecap="round">
-                    <rect x="368" y="147" width="16" height="11" rx="2.5" />
-                    <path d="M370 147 V143 a6 6 0 0 1 12 0 V147" />
-                </g>
-                <circle cx="376" cy="152" r="1.5" fill={C.orange} />
             </svg>
         </div>
     );
@@ -636,20 +604,23 @@ export default function TheegartenPactec() {
             </section>
 
             <section className="hero-mesh relative overflow-hidden border-y border-stone-200/70 py-14 md:py-20">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(255,237,213,0.5),transparent_42%)]" />
-                <div className="relative mx-auto grid max-w-[1440px] gap-10 px-5 sm:px-6 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] lg:items-center lg:px-8 xl:px-10">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_68%_38%,rgba(255,237,213,0.55),transparent_44%)]" />
+                <div className="relative mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 xl:px-10">
                     <Reveal>
-                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
-                            Security First
-                        </p>
-                        <h2 className="mt-4 text-balance text-2xl font-semibold leading-tight tracking-tight text-gray-950 sm:text-3xl md:text-[2rem]">
-                            Data security and transparency come first
-                        </h2>
-                        <p className="mt-5 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
-                            RapidDraft agent runs locally on-prem and is optimized for AI-specialized hardware like NVIDIA DGX Spark.
-                        </p>
+                        <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                            <div className="max-w-lg">
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                                    Security First
+                                </p>
+                                <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight text-gray-950 sm:text-4xl">
+                                    Data security and transparency come first
+                                </h2>
+                            </div>
+                            <p className="max-w-xs text-sm leading-7 text-gray-500 md:text-right">
+                                Runs locally on-prem, optimized for AI hardware like NVIDIA DGX Spark. No data leaves your infrastructure.
+                            </p>
+                        </div>
                     </Reveal>
-
                     <Reveal delay={0.08}>
                         <LocalAiDeploymentDiagram />
                     </Reveal>
