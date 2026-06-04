@@ -603,20 +603,18 @@ export default function TheegartenPactec() {
                 </div>
             </section>
 
-            <section className="hero-mesh relative overflow-hidden border-y border-stone-200/70 py-14 md:py-20">
+            <section className="hero-mesh relative overflow-hidden border-y border-stone-200/70 py-16 md:py-24">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_68%_38%,rgba(255,237,213,0.55),transparent_44%)]" />
-                <div className="relative mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-8 xl:px-10">
+                <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
                     <Reveal>
-                        <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                        <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                             <div className="max-w-lg">
-                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
-                                    Security First
-                                </p>
-                                <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight text-gray-950 sm:text-4xl">
+                                <div className="site-kicker">Security First</div>
+                                <h2 className="section-title mt-5 text-balance">
                                     Data security and transparency come first
                                 </h2>
                             </div>
-                            <p className="max-w-xs text-sm leading-7 text-gray-500 md:text-right">
+                            <p className="section-copy max-w-sm">
                                 Runs locally on-prem, optimized for AI hardware like NVIDIA DGX Spark. No data leaves your infrastructure.
                             </p>
                         </div>
@@ -627,10 +625,11 @@ export default function TheegartenPactec() {
                 </div>
             </section>
 
-            <Section className="!py-14 md:!py-20" background="light">
+            <Section className="!py-16 md:!py-24" background="light">
                 <div className="grid gap-9 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-stretch">
                     <Reveal className="lg:flex lg:h-full lg:flex-col">
-                        <h2 className="section-title text-balance">Live demo: release check for a real module-change workflow</h2>
+                        <div className="site-kicker">Live Demo</div>
+                        <h2 className="section-title mt-5 text-balance">Release check for a real module-change workflow</h2>
                         <p className="section-copy mt-5">
                             We will demonstrate the release logic on a representative Theegarten workflow: drawing update, BOM impact, optional EPLAN context, and CIM Database release review.
                         </p>
@@ -665,10 +664,11 @@ export default function TheegartenPactec() {
                 </div>
             </Section>
 
-            <section className="hero-mesh relative overflow-hidden border-t border-stone-200/70 py-14 md:py-20">
-                <div className="mx-auto max-w-[1680px] px-5 sm:px-6 lg:px-8 xl:px-10">
+            <section className="hero-mesh relative overflow-hidden border-t border-stone-200/70 py-16 md:py-24">
+                <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
                     <Reveal className="mx-auto max-w-3xl text-center">
-                        <h2 className="section-title text-balance">Proof of value before production deployment</h2>
+                        <div className="site-kicker mx-auto w-fit">Pilot Programme</div>
+                        <h2 className="section-title mt-5 text-balance">Proof of value before production deployment</h2>
                         <p className="section-copy mx-auto mt-5">
                             Validate RapidDraft on one representative release workflow, prove findings quality with Theegarten engineers, and decide on production only after the value and security fit are clear.
                         </p>
@@ -700,11 +700,11 @@ export default function TheegartenPactec() {
                         <div className="warm-panel overflow-hidden p-5 sm:p-7 lg:p-8">
                             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.35fr)_minmax(0,0.65fr)] lg:items-center">
                                 <div>
-                                    <p className="site-kicker">The team behind RapidDraft</p>
-                                    <h2 className="mt-5 text-balance text-[2rem] font-semibold leading-tight tracking-tight text-gray-950 sm:text-4xl">
+                                    <div className="site-kicker">The team behind RapidDraft</div>
+                                    <h2 className="section-title mt-5 text-balance">
                                         Engineering depth, AI capability, and industrial execution.
                                     </h2>
-                                    <p className="mt-5 text-base leading-8 text-gray-600">
+                                    <p className="section-copy mt-5">
                                         Theegarten-Pactec would work directly with founders who understand mechanical release workflows, controlled deployment, and production AI systems.
                                     </p>
                                     <div className="mt-7">
