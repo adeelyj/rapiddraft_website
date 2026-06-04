@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import Section from '../components/Section';
 import Reveal from '../components/home/Reveal';
