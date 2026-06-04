@@ -581,9 +581,12 @@ export default function TheegartenPactec() {
                             RapidDraft helps hardware teams catch design and drawing issues earlier, automate repetitive review checks, and preserve decision context across CAD models, manufacturing drawings, and release workflows.
                         </p>
                         <div className="mt-8">
-                            <Link to="/book-demo" className="btn-primary w-full sm:w-auto">
-                                Book a Demo
-                            </Link>
+                            <a
+                                href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai,hasan@rapiddraft.ai"
+                                className="btn-primary w-full sm:w-auto"
+                            >
+                                Contact Us
+                            </a>
                         </div>
                         <div className="mt-6 flex max-w-3xl flex-wrap gap-2.5">
                             {['GDPR Compliant', 'On-prem AI', 'Local/EU Cloud', 'SSO'].map((chip) => (
@@ -708,9 +711,12 @@ export default function TheegartenPactec() {
                                         Theegarten-Pactec would work directly with founders who understand mechanical release workflows, controlled deployment, and production AI systems.
                                     </p>
                                     <div className="mt-7">
-                                        <Link to="/book-demo" className="btn-primary w-full sm:w-auto">
-                                            Book a Demo
-                                        </Link>
+                                        <a
+                                            href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai,hasan@rapiddraft.ai"
+                                            className="btn-primary w-full sm:w-auto"
+                                        >
+                                            Contact Us
+                                        </a>
                                     </div>
                                 </div>
 
