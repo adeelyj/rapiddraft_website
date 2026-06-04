@@ -636,11 +636,6 @@ export default function TheegartenPactec() {
                         <p className="section-copy mt-5">
                             We will demonstrate the release logic on a representative Theegarten workflow: drawing update, BOM impact, optional EPLAN context, and CIM Database release review.
                         </p>
-                        <div className="mt-7 lg:mt-auto lg:pt-8">
-                            <Link to="/book-demo" className="btn-primary w-full sm:w-auto">
-                                Book a Demo
-                            </Link>
-                        </div>
                     </Reveal>
 
                     <div className="grid gap-3 sm:grid-cols-2 lg:h-full lg:auto-rows-fr">
