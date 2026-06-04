@@ -79,12 +79,33 @@ const pilotPhases = [
 ];
 
 function LocalAiDeploymentDiagram() {
-    const trustChips = [
-        { label: 'No auto-release', x: 112, width: 134 },
-        { label: 'No silent training', x: 262, width: 148 },
-        { label: 'No direct browser model calls', x: 426, width: 190 },
-        { label: 'Evidence-first', x: 632, width: 132 },
-        { label: 'Customer-controlled in pilot', x: 780, width: 188 },
+    const MONO = "'IBM Plex Mono', monospace";
+    const DISPLAY = "'Space Grotesk', 'Manrope', sans-serif";
+    const C = {
+        ink: '#111827',
+        gray: '#6B7280',
+        faint: '#9CA3AF',
+        border: '#D1D5DB',
+        borderSoft: '#E5E7EB',
+        card: 'rgba(255,255,255,0.74)',
+        orange: '#EA580C',
+        orangeText: '#C2410C',
+        orangeBorder: '#FDBA74',
+        orangeFill: 'rgba(255,247,237,0.85)',
+    };
+
+    const zones = [
+        { x: 46, n: '01', t: 'INPUT · DATA & HARDWARE' },
+        { x: 416, n: '02', t: 'RAPIDDRAFT AGENT' },
+        { x: 786, n: '03', t: 'ENGINEER & RELEASE' },
+    ];
+
+    const tools = [
+        { label: 'BOM', x: 454, y: 238, w: 42 },
+        { label: 'DFM', x: 502, y: 238, w: 42 },
+        { label: 'Model / Canvas', x: 550, y: 238, w: 104 },
+        { label: 'Knowledge', x: 454, y: 270, w: 78 },
+        { label: 'Artifacts', x: 538, y: 270, w: 66 },
     ];
 
     return (
@@ -93,56 +114,66 @@ function LocalAiDeploymentDiagram() {
             aria-label="Local-AI deployment architecture from Theegarten release package to engineer-approved CIM Database release"
         >
             <svg
-                viewBox="0 0 1120 610"
+                viewBox="0 0 1120 430"
                 role="img"
-                aria-labelledby="local-ai-architecture-title"
+                aria-label="Local-AI deployment architecture for RapidDraft at Theegarten-Pactec"
                 className="block h-auto w-full overflow-visible"
             >
-                <title id="local-ai-architecture-title">
-                    Local-AI deployment architecture for RapidDraft at Theegarten-Pactec
-                </title>
                 <defs>
-                    <radialGradient id="security-ambient" cx="48%" cy="44%" r="64%">
-                        <stop offset="0%" stopColor="#EA580C" stopOpacity="0.16" />
-                        <stop offset="48%" stopColor="#111827" stopOpacity="0.52" />
-                        <stop offset="100%" stopColor="#020617" stopOpacity="0" />
+                    <radialGradient id="rd3-core-glow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="#FB923C" stopOpacity="0.22" />
+                        <stop offset="60%" stopColor="#FB923C" stopOpacity="0.06" />
+                        <stop offset="100%" stopColor="#FB923C" stopOpacity="0" />
                     </radialGradient>
-                    <linearGradient id="security-panel" x1="0" y1="0" x2="1" y2="1">
-                        <stop stopColor="#111827" stopOpacity="0.88" />
-                        <stop offset="1" stopColor="#020617" stopOpacity="0.68" />
+                    <linearGradient id="rd3-logo" x1="0" y1="0" x2="1" y2="1">
+                        <stop stopColor="#F97316" />
+                        <stop offset="1" stopColor="#C2410C" />
                     </linearGradient>
-                    <linearGradient id="security-agent" x1="0" y1="0" x2="1" y2="1">
-                        <stop stopColor="#1F2937" stopOpacity="0.94" />
-                        <stop offset="1" stopColor="#0F172A" stopOpacity="0.78" />
-                    </linearGradient>
-                    <filter id="security-card-shadow" x="-30%" y="-30%" width="160%" height="160%">
-                        <feDropShadow dx="0" dy="18" stdDeviation="24" floodColor="#000000" floodOpacity="0.32" />
+                    <filter id="rd3-soft" x="-40%" y="-40%" width="180%" height="180%">
+                        <feDropShadow dx="0" dy="14" stdDeviation="18" floodColor="#111827" floodOpacity="0.08" />
                     </filter>
-                    <filter id="security-agent-glow" x="-80%" y="-80%" width="260%" height="260%">
-                        <feGaussianBlur stdDeviation="18" result="blur" />
-                        <feFlood floodColor="#EA580C" floodOpacity="0.3" result="color" />
-                        <feComposite in="color" in2="blur" operator="in" result="glow" />
-                        <feMerge><feMergeNode in="glow" /><feMergeNode in="SourceGraphic" /></feMerge>
+                    <filter id="rd3-orange-soft" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="0" dy="16" stdDeviation="22" floodColor="#EA580C" floodOpacity="0.18" />
                     </filter>
                     <style>
                         {`
-                            .security-flow {
-                                stroke-dasharray: 3 11;
-                                animation: security-flow 3s linear infinite;
+                            .rd3-flow-base {
+                                stroke: rgba(75, 85, 99, 0.32);
+                                stroke-width: 1.45;
+                                stroke-linecap: round;
+                                stroke-dasharray: 2 8;
                             }
 
-                            .security-flow-delay {
-                                animation-delay: 0.85s;
+                            .rd3-flow {
+                                stroke: rgba(75, 85, 99, 0.5);
+                                stroke-width: 1.6;
+                                stroke-linecap: round;
+                                stroke-dasharray: 2 11;
+                                animation: rd3-dash 2.6s linear infinite;
                             }
 
-                            @keyframes security-flow {
+                            .rd3-flow-d {
+                                animation-delay: 0.9s;
+                            }
+
+                            @keyframes rd3-dash {
                                 to {
                                     stroke-dashoffset: -84;
                                 }
                             }
 
+                            .rd3-pip {
+                                animation: rd3-pip 2.8s ease-in-out infinite;
+                            }
+
+                            @keyframes rd3-pip {
+                                0%, 100% { opacity: 0.5; }
+                                50% { opacity: 1; }
+                            }
+
                             @media (prefers-reduced-motion: reduce) {
-                                .security-flow {
+                                .rd3-flow,
+                                .rd3-pip {
                                     animation: none;
                                 }
                             }
@@ -150,196 +181,120 @@ function LocalAiDeploymentDiagram() {
                     </style>
                 </defs>
 
-                <rect width="1120" height="610" rx="34" fill="#030712" />
-                <rect width="1120" height="610" rx="34" fill="url(#security-ambient)" />
-                <rect x="30" y="28" width="1060" height="554" rx="28" fill="rgba(15,23,42,0.24)" stroke="rgba(255,255,255,0.08)" />
+                {/* core glow behind agent */}
+                <ellipse cx="561" cy="220" rx="240" ry="180" fill="url(#rd3-core-glow)" />
 
-                <g>
-                    <text x="58" y="58" fill="#F8FAFC" fontSize="18" fontWeight="800">
-                        Rapid<tspan fill="#EA580C">Draft</tspan>
-                    </text>
-                    <text x="58" y="80" fill="#64748B" fontSize="10" fontWeight="700" letterSpacing="5.5">
-                        REFERENCE ARCHITECTURE
-                    </text>
-                    <rect x="910" y="42" width="174" height="30" rx="15" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.16)" />
-                    <text x="997" y="62" textAnchor="middle" fill="#E5E7EB" fontSize="10" fontWeight="700" letterSpacing="2.5">
-                        PILOT · THEEGARTEN
-                    </text>
-                    <text x="997" y="84" textAnchor="middle" fill="#64748B" fontSize="8" fontWeight="700" letterSpacing="3">
-                        CONFIDENTIAL
-                    </text>
+                {/* zones */}
+                {zones.map((z) => (
+                    <g key={z.n}>
+                        <rect x={z.x} y="58" width="290" height="360" rx="22" fill="rgba(255,255,255,0.42)" stroke={C.borderSoft} />
+                        <text x={z.x + 6} y="46" fontFamily={MONO} fontSize="10.5" letterSpacing="2.4">
+                            <tspan fill={C.ink} fontWeight="600">{z.n}</tspan>
+                            <tspan fill={C.faint}>{'  ' + z.t}</tspan>
+                        </text>
+                    </g>
+                ))}
+
+                {/* col 1 — input */}
+                <g filter="url(#rd3-soft)">
+                    <rect x="62" y="92" width="258" height="92" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
+                <text x="84" y="120" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>THEEGARTEN-PACTEC DATA</text>
+                <text x="84" y="146" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Release Package</text>
+                <text x="84" y="168" fontFamily={MONO} fontSize="11" fill={C.gray}>CAD · Drawing · BOM · EPLAN</text>
 
-                <g textAnchor="middle">
-                    <text x="612" y="86" fill="#FED7AA" fontSize="11" fontWeight="700" letterSpacing="6">
-                        INPUT  →  AGENT  →  RELEASE
-                    </text>
-                    <text x="612" y="118" fill="#F8FAFC" fontSize="28" fontWeight="800">
-                        Local-AI deployment architecture
-                    </text>
-                    <text x="612" y="143" fill="#94A3B8" fontSize="13" fontWeight="500">
-                        From engineering data to an engineer-approved CIM Database release.
-                    </text>
+                <g filter="url(#rd3-soft)">
+                    <rect x="62" y="200" width="258" height="195" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
+                <text x="84" y="224" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>ON-PREM HARDWARE</text>
+                <image href="/media/NVIDIA-DGX-SPARK.png" x="132" y="232" width="118" height="118" preserveAspectRatio="xMidYMid meet" />
+                <text x="84" y="370" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>NVIDIA DGX Spark</text>
+                <text x="84" y="388" fontFamily={MONO} fontSize="11" fill={C.gray}>Runs on-site · company network</text>
 
-                <g>
-                    <rect x="56" y="192" width="306" height="344" rx="24" fill="rgba(15,23,42,0.44)" stroke="rgba(255,255,255,0.12)" />
-                    <text x="82" y="188" fill="#E5E7EB" fontSize="11" fontWeight="800" letterSpacing="2.5">
-                        01  INPUT · DATA & HARDWARE
-                    </text>
-
-                    <rect x="86" y="238" width="246" height="86" rx="18" fill="url(#security-panel)" stroke="rgba(234,88,12,0.34)" filter="url(#security-card-shadow)" />
-                    <text x="108" y="272" fill="#94A3B8" fontSize="10" fontWeight="700" letterSpacing="3">
-                        INPUT · DATA
-                    </text>
-                    <text x="108" y="296" fill="#F8FAFC" fontSize="19" fontWeight="800">
-                        Release package
-                    </text>
-                    <text x="108" y="318" fill="#94A3B8" fontSize="12" fontWeight="600" letterSpacing="1.3">
-                        CAD · Drawing · BOM · EPLAN
-                    </text>
-
-                    <rect x="86" y="374" width="246" height="128" rx="18" fill="url(#security-panel)" stroke="rgba(255,255,255,0.12)" filter="url(#security-card-shadow)" />
-                    <text x="108" y="413" fill="#94A3B8" fontSize="10" fontWeight="700" letterSpacing="3">
-                        LOCAL RUNTIME
-                    </text>
-                    <rect x="108" y="430" width="88" height="28" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(251,146,60,0.32)" />
-                    <rect x="117" y="437" width="15" height="14" rx="3" fill="rgba(251,146,60,0.34)" />
-                    <rect x="139" y="437" width="46" height="14" rx="3" fill="rgba(255,255,255,0.12)" />
-                    <text x="108" y="476" fill="#F8FAFC" fontSize="19" fontWeight="800">
-                        Local-AI runtime
-                    </text>
-                    <text x="108" y="497" fill="#94A3B8" fontSize="12" fontWeight="600" letterSpacing="1.3">
-                        Runs on-site · private network · pilot controls
-                    </text>
+                {/* col 2 — agent (orange core) */}
+                <g filter="url(#rd3-orange-soft)">
+                    <rect x="432" y="92" width="258" height="272" rx="18" fill={C.orangeFill} stroke={C.orangeBorder} strokeWidth="1.3" />
                 </g>
-
-                <g>
-                    <rect x="412" y="192" width="298" height="344" rx="24" fill="rgba(15,23,42,0.48)" stroke="rgba(255,255,255,0.12)" />
-                    <text x="436" y="188" fill="#E5E7EB" fontSize="11" fontWeight="800" letterSpacing="2.5">
-                        02  RAPIDDRAFT AGENT
-                    </text>
-
-                    <rect x="442" y="244" width="238" height="254" rx="20" fill="url(#security-agent)" stroke="rgba(234,88,12,0.52)" filter="url(#security-card-shadow)" />
-                    <path d="M456 270 V258 H468" stroke="#F8FAFC" strokeWidth="1.2" opacity="0.72" />
-                    <path d="M666 270 V258 H654" stroke="#F8FAFC" strokeWidth="1.2" opacity="0.72" />
-                    <path d="M456 472 V484 H468" stroke="#F8FAFC" strokeWidth="1.2" opacity="0.72" />
-                    <path d="M666 472 V484 H654" stroke="#F8FAFC" strokeWidth="1.2" opacity="0.72" />
-                    <text x="474" y="286" fill="#64748B" fontSize="10" fontWeight="700" letterSpacing="4">
-                        RAPIDDRAFT WORKSPACE
-                    </text>
-                    <text x="474" y="318" fill="#F8FAFC" fontSize="21" fontWeight="800">
-                        Agent inside the product
-                    </text>
-                    <text x="474" y="342" fill="#94A3B8" fontSize="12" fontWeight="600" letterSpacing="1.2">
-                        Orchestrates approved tools, not a chatbot
-                    </text>
-
-                    <text x="474" y="396" fill="#64748B" fontSize="10" fontWeight="700" letterSpacing="4">
-                        AGENT TOOL LAYER
-                    </text>
-                    {['BOM', 'DFM', 'Model / Canvas', 'Knowledge', 'Artifacts'].map((tool, index) => {
-                        const positions = [
-                            [474, 414, 40],
-                            [520, 414, 42],
-                            [568, 414, 82],
-                            [474, 448, 68],
-                            [546, 448, 58],
-                        ];
-                        const [x, y, width] = positions[index];
-
-                        return (
-                            <g key={tool}>
-                                <rect x={x} y={y} width={width} height="24" rx="8" fill="rgba(234,88,12,0.12)" stroke="rgba(234,88,12,0.34)" />
-                                <text x={x + width / 2} y={y + 16} textAnchor="middle" fill="#E5E7EB" fontSize="10" fontWeight="700">
-                                    {tool}
-                                </text>
-                            </g>
-                        );
-                    })}
-                    <circle cx="474" cy="486" r="4" fill="#FB923C" filter="url(#security-agent-glow)" />
-                    <text x="490" y="491" fill="#64748B" fontSize="10" fontWeight="600">
-                        Reasoning · tool orchestration · evidence assembly
-                    </text>
+                <g transform="translate(454,104)">
+                    <rect width="26" height="26" rx="8" fill="url(#rd3-logo)" />
+                    <rect x="7" y="8.4" width="12" height="2.6" rx="1.3" fill="#ffffff" opacity="0.95" />
+                    <rect x="7" y="12.9" width="8.5" height="2.6" rx="1.3" fill="#ffffff" opacity="0.78" />
+                    <rect x="7" y="17.4" width="12" height="2.6" rx="1.3" fill="#ffffff" opacity="0.95" />
                 </g>
+                <text x="490" y="122" fontFamily={MONO} fontSize="9.5" letterSpacing="2.2" fill={C.orangeText}>RAPIDDRAFT WORKSPACE</text>
+                <text x="454" y="158" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Agent inside the product</text>
+                <text x="454" y="180" fontFamily={MONO} fontSize="10.5" fill={C.gray}>Orchestrates tools, not a chatbot</text>
+                <text x="454" y="226" fontFamily={MONO} fontSize="9.5" letterSpacing="2.6" fill={C.faint}>AGENT TOOL LAYER</text>
+                {tools.map((t) => (
+                    <g key={t.label}>
+                        <rect x={t.x} y={t.y} width={t.w} height="24" rx="8" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.32)" />
+                        <text x={t.x + t.w / 2} y={t.y + 16} textAnchor="middle" fontFamily={MONO} fontSize="10" fill={C.orangeText}>
+                            {t.label}
+                        </text>
+                    </g>
+                ))}
+                <circle cx="458" cy="324" r="4" fill={C.orange} className="rd3-pip" />
+                <text x="472" y="328" fontFamily={MONO} fontSize="8" fill={C.gray}>Reasoning · orchestration · evidence</text>
 
-                <g>
-                    <rect x="764" y="192" width="306" height="344" rx="24" fill="rgba(15,23,42,0.44)" stroke="rgba(255,255,255,0.12)" />
-                    <text x="790" y="188" fill="#E5E7EB" fontSize="11" fontWeight="800" letterSpacing="2.5">
-                        03  ENGINEER & RELEASE
-                    </text>
-
-                    <rect x="794" y="238" width="246" height="82" rx="18" fill="url(#security-panel)" stroke="rgba(234,88,12,0.34)" filter="url(#security-card-shadow)" />
-                    <text x="816" y="271" fill="#94A3B8" fontSize="10" fontWeight="700" letterSpacing="3">
-                        OUTPUT
-                    </text>
-                    <text x="816" y="295" fill="#F8FAFC" fontSize="19" fontWeight="800">
-                        Evidence-linked results
-                    </text>
-                    <text x="816" y="316" fill="#94A3B8" fontSize="12" fontWeight="600" letterSpacing="1.3">
-                        BOM · DFM · citations · release notes
-                    </text>
-
-                    <rect x="794" y="356" width="246" height="90" rx="18" fill="rgba(234,88,12,0.08)" stroke="rgba(251,146,60,0.38)" filter="url(#security-card-shadow)" />
-                    <text x="816" y="389" fill="#FED7AA" fontSize="10" fontWeight="700" letterSpacing="3">
-                        HUMAN IN THE LOOP
-                    </text>
-                    <text x="816" y="413" fill="#F8FAFC" fontSize="19" fontWeight="800">
-                        Engineer approval
-                    </text>
-                    <text x="816" y="433" fill="#94A3B8" fontSize="12" fontWeight="600">
-                        Reviews and approves before release
-                    </text>
-
-                    <rect x="794" y="474" width="246" height="76" rx="18" fill="url(#security-panel)" stroke="rgba(234,88,12,0.34)" filter="url(#security-card-shadow)" />
-                    <text x="816" y="506" fill="#94A3B8" fontSize="10" fontWeight="700" letterSpacing="3">
-                        SYSTEM OF RECORD
-                    </text>
-                    <text x="816" y="530" fill="#F8FAFC" fontSize="19" fontWeight="800">
-                        Release → CIM Database
-                    </text>
-                    <text x="816" y="548" fill="#94A3B8" fontSize="11" fontWeight="600">
-                        Approved release written back to PLM
-                    </text>
+                {/* col 3 — engineer & release */}
+                <g filter="url(#rd3-soft)">
+                    <rect x="802" y="92" width="258" height="80" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
                 </g>
+                <text x="824" y="118" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>AGENT OUTPUT</text>
+                <text x="824" y="142" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
+                <text x="824" y="161" fontFamily={MONO} fontSize="9.5" fill={C.gray}>BOM · DFM · citations · release notes</text>
 
+                <g filter="url(#rd3-soft)">
+                    <rect x="802" y="198" width="258" height="88" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                </g>
+                <text x="824" y="226" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.orangeText}>HUMAN IN THE LOOP</text>
+                <g transform="translate(1016,206)">
+                    <rect x="0" y="0" width="26" height="26" rx="8" fill="none" stroke={C.orangeBorder} />
+                    <g stroke={C.orange} strokeWidth="1.5" fill="none">
+                        <circle cx="13" cy="10" r="3.6" />
+                        <path d="M6 22 c0-4 3.5-6.5 7-6.5 s7 2.5 7 6.5" strokeLinecap="round" />
+                    </g>
+                </g>
+                <text x="824" y="252" fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill={C.ink}>Engineer approval</text>
+                <text x="824" y="272" fontFamily={MONO} fontSize="9.5" fill={C.gray}>Reviews &amp; approves before release</text>
+
+                <g filter="url(#rd3-soft)">
+                    <rect x="802" y="312" width="258" height="72" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                </g>
+                <text x="824" y="338" fontFamily={MONO} fontSize="9.5" letterSpacing="2.4" fill={C.faint}>PLM INTEGRATION</text>
+                <text x="824" y="360" fontFamily={DISPLAY} fontSize="16" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
+                <text x="824" y="377" fontFamily={MONO} fontSize="9" fill={C.gray}>Written back to PLM</text>
+
+                {/* connectors */}
                 <g fill="none">
-                    <path d="M332 281 H442" stroke="rgba(251,146,60,0.74)" strokeWidth="1.45" className="security-flow" />
-                    <path d="M332 438 H388 H442" stroke="rgba(251,146,60,0.48)" strokeWidth="1.45" className="security-flow" />
-                    <path d="M680 279 H794" stroke="rgba(251,146,60,0.74)" strokeWidth="1.45" className="security-flow security-flow-delay" />
-                    <path d="M917 320 V356" stroke="rgba(251,146,60,0.58)" strokeWidth="1.45" className="security-flow security-flow-delay" />
-                    <path d="M917 446 V474" stroke="rgba(251,146,60,0.58)" strokeWidth="1.45" className="security-flow security-flow-delay" />
+                    <path d="M320 138 H432" className="rd3-flow-base" />
+                    <path d="M320 138 H432" className="rd3-flow" />
+                    <path d="M320 297 H432" className="rd3-flow-base" />
+                    <path d="M320 297 H432" className="rd3-flow rd3-flow-d" />
+                    <path d="M690 132 H802" className="rd3-flow-base" />
+                    <path d="M690 132 H802" className="rd3-flow rd3-flow-d" />
+                    <path d="M931 172 V198" className="rd3-flow-base" />
+                    <path d="M931 172 V198" className="rd3-flow" />
+                    <path d="M931 286 V312" className="rd3-flow-base" />
+                    <path d="M931 286 V312" className="rd3-flow rd3-flow-d" />
+                </g>
+                <g fill="rgba(75,85,99,0.62)">
+                    <path d="M432 138 l-7 -3.5 l0 7 z" />
+                    <path d="M432 297 l-7 -3.5 l0 7 z" />
+                    <path d="M802 132 l-7 -3.5 l0 7 z" />
+                    <path d="M931 198 l-3.5 -7 l7 0 z" />
+                    <path d="M931 312 l-3.5 -7 l7 0 z" />
                 </g>
 
-                <g>
-                    <rect x="366" y="397" width="52" height="60" rx="16" fill="rgba(234,88,12,0.08)" stroke="rgba(251,146,60,0.38)" />
-                    <text x="392" y="430" textAnchor="middle" fill="#FB923C" fontSize="22" fontWeight="800">
-                        ↯
-                    </text>
-                    <text x="392" y="477" textAnchor="middle" fill="#E5E7EB" fontSize="9" fontWeight="800" letterSpacing="2">
-                        PROTECTED
-                    </text>
-                    <text x="392" y="492" textAnchor="middle" fill="#94A3B8" fontSize="8" fontWeight="700" letterSpacing="1.1">
-                        CLOUDFLARE · BEARER KEYS
-                    </text>
-                    <text x="392" y="508" textAnchor="middle" fill="#FB923C" fontSize="9" fontWeight="800" letterSpacing="2">
-                        SECURED
-                    </text>
+                {/* boundary gate */}
+                <g filter="url(#rd3-soft)">
+                    <rect x="352" y="168" width="48" height="48" rx="14" fill="rgba(255,255,255,0.92)" stroke={C.orangeBorder} strokeWidth="1.2" />
                 </g>
-
-                <g>
-                    {trustChips.map((chip) => (
-                        <g key={chip.label}>
-                            <rect x={chip.x} y="562" width={chip.width} height="24" rx="12" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.09)" />
-                            <text x={chip.x + 14} y="578" fill="#FED7AA" fontSize="9" fontWeight="800">
-                                ✓
-                            </text>
-                            <text x={chip.x + 32} y="578" fill="#94A3B8" fontSize="9" fontWeight="700">
-                                {chip.label}
-                            </text>
-                        </g>
-                    ))}
+                <g stroke={C.orange} strokeWidth="1.6" fill="none" strokeLinecap="round">
+                    <rect x="368" y="191" width="16" height="11" rx="2.5" />
+                    <path d="M370 191 V187 a6 6 0 0 1 12 0 V191" />
                 </g>
+                <circle cx="376" cy="196" r="1.5" fill={C.orange} />
             </svg>
         </div>
     );
@@ -658,24 +613,24 @@ export default function TheegartenPactec() {
                 </div>
             </section>
 
-            <section className="relative overflow-hidden bg-[#111827] py-14 text-white md:py-20">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(234,88,12,0.18),transparent_30%)]" />
+            <section className="hero-mesh relative overflow-hidden border-y border-stone-200/70 py-14 md:py-20">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(255,237,213,0.5),transparent_42%)]" />
                 <div className="relative mx-auto grid max-w-[1440px] gap-10 px-5 sm:px-6 lg:grid-cols-[minmax(0,0.32fr)_minmax(0,0.68fr)] lg:items-center lg:px-8 xl:px-10">
                     <Reveal>
                         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
                             Security First
                         </p>
-                        <h2 className="mt-5 text-balance text-[2rem] font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+                        <h2 className="mt-5 text-balance text-[2rem] font-semibold leading-tight tracking-tight text-gray-950 sm:text-4xl md:text-5xl">
                             Data security and transparency come first
                         </h2>
-                        <p className="mt-5 max-w-xl text-base leading-8 text-white/70 sm:text-lg">
+                        <p className="mt-5 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
                             RapidDraft agent runs locally on-prem and is optimized for AI-specialized hardware like NVIDIA DGX Spark.
                         </p>
                         <div className="mt-7 flex flex-wrap gap-2.5">
                             {['Local-AI pilot', 'No silent training', 'Engineer-approved release'].map((chip) => (
                                 <span
                                     key={chip}
-                                    className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-semibold text-white/72"
+                                    className="rounded-full border border-orange-200/80 bg-orange-50/70 px-3.5 py-1.5 text-xs font-semibold text-primary shadow-[0_10px_26px_-24px_rgba(234,88,12,0.5)]"
                                 >
                                     {chip}
                                 </span>
