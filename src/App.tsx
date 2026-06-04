@@ -14,6 +14,7 @@ import DealRoomV3 from './pages/DealRoomV3';
 import NdaRequest from './pages/NdaRequest';
 import LoiRequest from './pages/LoiRequest';
 import ForwardPage from './forward/ForwardPage';
+import TheegartenPactec from './pages/TheegartenPactec';
 
 const PITCH_HOSTNAME = 'pitch.rapiddraft.ai';
 const FORWARD_HOSTNAME = 'forward.rapiddraft.ai';
@@ -97,6 +98,7 @@ function App() {
         <Route path="team" element={<Team />} />
         <Route path="book-demo" element={<BookDemo />} />
         <Route path="join-us" element={<Navigate to="/team#open-roles" replace />} />
+        <Route path="theegarten-pactec" element={<TheegartenPactec />} />
       </Route>
     </Routes>
   );
