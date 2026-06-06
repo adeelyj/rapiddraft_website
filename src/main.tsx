@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { initCloudflareWebAnalytics } from './cloudflareWebAnalytics'
 import './index.css'
+import './rd2.css'
 
 initCloudflareWebAnalytics()
 
