@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
+import Home from './pages/Home';
+import StubPage from './pages/StubPage';
 import Product from './pages/Product';
 import CadConcept from './pages/CadConcept';
 import UseCases from './pages/UseCases';
@@ -82,7 +84,71 @@ function App() {
     <Routes>
       <Route path="/pilots/:slug" element={<CompanyDemoRoute />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<Product />} />
+        <Route index element={<Home />} />
+        {/* Legacy home kept (unlisted) for side-by-side comparison */}
+        <Route path="home-v1" element={<Product />} />
+        <Route
+          path="platform"
+          element={
+            <StubPage
+              eyebrow="Platform"
+              title="One agentic review layer for your entire drawing-release process"
+              metaTitle="Platform | RapidDraft"
+              metaDescription="RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model."
+              path="/platform"
+            />
+          }
+        />
+        <Route
+          path="security"
+          element={
+            <StubPage
+              eyebrow="Security and sovereignty"
+              title="Enterprise AI that never leaves your control"
+              metaTitle="Security and sovereignty | RapidDraft"
+              metaDescription="Models run on your infrastructure, training stays governed, and your engineers keep the final say."
+              path="/security"
+            />
+          }
+        />
+        <Route
+          path="company"
+          element={
+            <StubPage
+              eyebrow="Company"
+              title="Built by engineers who have felt the release bottleneck firsthand"
+              metaTitle="Company | RapidDraft"
+              metaDescription="RapidDraft exists because technical drawings and design reviews still slow down real hardware programs."
+              path="/company"
+            />
+          }
+        />
+        <Route
+          path="impressum"
+          element={
+            <StubPage
+              eyebrow="Legal"
+              title="Impressum"
+              note="Our Impressum is being finalized. For company and legal details, contact info@rapiddraft.ai."
+              metaTitle="Impressum | RapidDraft"
+              metaDescription="RapidDraft company and legal information."
+              path="/impressum"
+            />
+          }
+        />
+        <Route
+          path="privacy"
+          element={
+            <StubPage
+              eyebrow="Legal"
+              title="Privacy"
+              note="Our privacy policy is being finalized. For data-protection questions, contact info@rapiddraft.ai."
+              metaTitle="Privacy | RapidDraft"
+              metaDescription="How RapidDraft handles your data."
+              path="/privacy"
+            />
+          }
+        />
         <Route path="cad-concept" element={<CadConcept />} />
         <Route path="how-it-works" element={<Navigate to="/" replace />} />
         <Route path="pitch" element={<Navigate to="/" replace />} />
