@@ -23,7 +23,7 @@ export default function Layout() {
     }, [location.pathname, location.hash]);
 
     return (
-        <div className="flex min-h-screen flex-col bg-white text-gray-900">
+        <div className="flex min-h-screen flex-col bg-[var(--rd-bg)] text-[var(--rd-fg)]">
             <Navbar />
             <main className="flex-grow overflow-hidden">
                 <Outlet />

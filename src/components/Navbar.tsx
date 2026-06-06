@@ -4,139 +4,111 @@ import { Menu, X } from 'lucide-react';
 import clsx from 'clsx';
 import BrandMark from './BrandMark';
 
+const NAV_LINKS = [
+  { name: 'Platform', to: '/platform' },
+  { name: 'Use cases', to: '/use-cases' },
+  { name: 'Security', to: '/security' },
+  { name: 'Company', to: '/company' },
+];
+
 export default function Navbar() {
-    const [openPath, setOpenPath] = useState<string | null>(null);
-    const location = useLocation();
-    const isCadConcept = location.pathname === '/cad-concept';
-    const isOpen = openPath === location.pathname;
+  const [openPath, setOpenPath] = useState<string | null>(null);
+  const location = useLocation();
+  const isOpen = openPath === location.pathname;
 
-    const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'ROI', path: '/#roi-calculator' },
-        { name: 'Use Cases', path: '/use-cases' },
-        { name: 'Team', path: '/team' },
-    ];
+  const isActive = (to: string) =>
+    to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 
-    const isActive = (path: string) => {
-        const [pathname, hash] = path.split('#');
-        if (hash) {
-            return location.pathname === pathname && location.hash === `#${hash}`;
-        }
-        if (pathname === '/' && location.pathname === '/') return location.hash === '';
-        if (pathname === '/' && location.pathname !== '/') return false;
-        return location.pathname.startsWith(pathname);
-    };
+  return (
+    <nav className="sticky top-0 z-50 border-b border-[var(--rd-hair)] bg-[var(--rd-bg)]">
+      <div className="rd-container">
+        <div className="flex h-20 items-center justify-between gap-6">
+          <Link to="/" className="flex items-center" aria-label="RapidDraft home">
+            <BrandMark theme="light" size="sm" />
+          </Link>
 
-    return (
-        <nav
-            className={clsx(
-                'sticky top-0 z-50 border-b backdrop-blur-xl',
-                isCadConcept
-                    ? 'border-white/10 bg-[#09111b]/78 text-white'
-                    : 'border-stone-200/70 bg-white/88'
-            )}
-        >
-            <div className="mx-auto max-w-[1180px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                <div className="flex h-16 items-center justify-between gap-4 sm:gap-6">
-                    <div className="flex items-center">
-                        <Link
-                            to="/"
-                            className={clsx(
-                                'flex items-center transition',
-                                isCadConcept && 'hover:opacity-90'
-                            )}
-                        >
-                            <BrandMark theme={isCadConcept ? 'dark' : 'light'} size="sm" />
-                        </Link>
-                    </div>
-
-                    <div className="hidden md:flex md:items-center md:gap-7">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.path}
-                                to={link.path}
-                                className={clsx(
-                                    'text-sm font-medium transition-colors duration-200',
-                                    isActive(link.path)
-                                        ? (isCadConcept ? 'text-[#deac49]' : 'text-primary')
-                                        : (isCadConcept ? 'text-[#d8d3cb] hover:text-white' : 'text-gray-600 hover:text-gray-950')
-                                )}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <Link
-                            to="/book-demo"
-                            className={clsx(
-                                'inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5',
-                                isCadConcept
-                                    ? 'bg-[#ea580c] shadow-[0_18px_40px_-22px_rgba(234,88,12,0.8)] hover:bg-[#de6349]'
-                                    : 'bg-primary shadow-[0_14px_34px_-18px_rgba(234,88,12,0.8)] hover:bg-primary-hover'
-                            )}
-                        >
-                            Book a Demo
-                        </Link>
-                    </div>
-
-                    <div className="flex items-center md:hidden">
-                        <button
-                            onClick={() => {
-                                setOpenPath((current) => (current === location.pathname ? null : location.pathname));
-                            }}
-                            className={clsx(
-                                'inline-flex items-center justify-center rounded-full p-2 transition focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary',
-                                isCadConcept
-                                    ? 'border border-white/10 bg-white/[0.05] text-[#d8d3cb] hover:border-white/20 hover:bg-white/[0.08] hover:text-white'
-                                    : 'border border-stone-200 bg-white text-gray-500 hover:border-stone-300 hover:text-gray-900'
-                            )}
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div
+          <div className="hidden items-center gap-8 md:flex">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
                 className={clsx(
-                    'backdrop-blur-xl md:hidden',
-                    isCadConcept
-                        ? 'border-b border-white/10 bg-[#09111b]/96'
-                        : 'border-b border-stone-200/70 bg-white/95',
-                    isOpen ? 'block' : 'hidden'
+                  'group inline-flex items-center gap-1 font-[var(--rd-meta)] text-[13.5px] transition-colors duration-150',
+                  isActive(link.to)
+                    ? 'text-[var(--rd-accent)]'
+                    : 'text-[var(--rd-head)] hover:text-[var(--rd-accent)]',
                 )}
+                style={{ fontFamily: 'var(--rd-meta)' }}
+              >
+                <span
+                  className={clsx(
+                    'font-[var(--rd-mono)] transition-colors',
+                    isActive(link.to)
+                      ? 'text-[var(--rd-accent)]'
+                      : 'text-[var(--rd-accent)] opacity-0 group-hover:opacity-100',
+                  )}
+                  style={{ fontFamily: 'var(--rd-mono)' }}
+                  aria-hidden="true"
+                >
+                  /
+                </span>
+                {link.name}
+              </Link>
+            ))}
+            <Link to="/book-demo" className="rd-btn rd-btn--primary h-10 px-5 text-[13.5px]">
+              Book a demo
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              setOpenPath((current) => (current === location.pathname ? null : location.pathname))
+            }
+            className="inline-flex items-center justify-center rounded-[var(--rd-r-md)] border border-[var(--rd-edge)] p-2 text-[var(--rd-head)] transition hover:border-[var(--rd-accent)] hover:text-[var(--rd-accent)] md:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={clsx(
+          'border-t border-[var(--rd-hair)] bg-[var(--rd-bg)] md:hidden',
+          isOpen ? 'block' : 'hidden',
+        )}
+      >
+        <div className="rd-container flex flex-col gap-1 py-4">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => setOpenPath(null)}
+              className={clsx(
+                'rounded-[var(--rd-r-md)] px-3 py-3 text-[15px] transition',
+                isActive(link.to)
+                  ? 'text-[var(--rd-accent)]'
+                  : 'text-[var(--rd-head)] hover:text-[var(--rd-accent)]',
+              )}
+              style={{ fontFamily: 'var(--rd-meta)' }}
             >
-                <div className="mx-auto max-w-[1180px] space-y-1 px-5 pb-4 pt-2">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            onClick={() => setOpenPath(null)}
-                            className={clsx(
-                                'block rounded-2xl px-4 py-3 text-base font-medium',
-                                isActive(link.path)
-                                    ? (isCadConcept ? 'bg-white/[0.07] text-[#deac49]' : 'bg-orange-50 text-primary')
-                                    : (isCadConcept ? 'text-[#d8d3cb] hover:bg-white/[0.04] hover:text-white' : 'text-gray-700 hover:bg-stone-50 hover:text-gray-900')
-                            )}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                    <div className="pt-3">
-                        <Link
-                            to="/book-demo"
-                            className={clsx(
-                                'block w-full rounded-full px-4 py-3 text-center text-base font-semibold text-white transition',
-                                isCadConcept
-                                    ? 'bg-[#ea580c] shadow-[0_18px_40px_-22px_rgba(234,88,12,0.8)] hover:bg-[#de6349]'
-                                    : 'bg-primary shadow-[0_14px_34px_-18px_rgba(234,88,12,0.8)] hover:bg-primary-hover'
-                            )}
-                        >
-                            Book a Demo
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
+              <span className="mr-1.5 text-[var(--rd-accent)]" style={{ fontFamily: 'var(--rd-mono)' }}>
+                /
+              </span>
+              {link.name}
+            </Link>
+          ))}
+          <Link
+            to="/book-demo"
+            onClick={() => setOpenPath(null)}
+            className="rd-btn rd-btn--primary mt-2 w-full"
+          >
+            Book a demo
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
 }
