@@ -37,7 +37,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="rd-dark border-t border-[var(--rd-hair)] bg-[var(--rd-bg)] text-[var(--rd-fg)]">
+    <footer className="rd-dark relative z-[1] border-t border-[var(--rd-hair)] bg-[var(--rd-bg)] text-[var(--rd-fg)]">
       <div className="rd-container py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr]">
           <div className="max-w-sm">

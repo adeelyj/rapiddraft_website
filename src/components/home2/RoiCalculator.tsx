@@ -1,7 +1,7 @@
 /* ROI calculator (RapidDraft v2) — restyled to the flat hairline design language.
    Math is preserved verbatim from the original Product page implementation. */
 import { useState } from 'react';
-import { Eyebrow, H2, Body } from '../ui/primitives';
+import { Eyebrow, H2, Intro, Body } from '../ui/primitives';
 
 const WORKING_WEEKS_PER_YEAR = 42;
 const AVOIDED_COST_PER_ISSUE = 5000;
@@ -51,10 +51,10 @@ export default function RoiCalculator() {
         <div className="max-w-2xl">
           <Eyebrow className="mb-5">ROI calculator</Eyebrow>
           <H2>Estimate the annual value of faster engineering review</H2>
-          <Body soft className="mt-5">
+          <Intro className="mt-5">
             Adjust the core assumptions to see how reduced review effort and fewer late issues turn
             into annual value.
-          </Body>
+          </Intro>
         </div>
 
         <div className="mt-10 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] lg:grid-cols-[1.05fr_0.95fr]">
@@ -123,7 +123,7 @@ export default function RoiCalculator() {
           </div>
         </div>
 
-        <Body soft className="mt-6 max-w-3xl text-[14px]">
+        <Body soft sm className="mt-6 max-w-3xl">
           Conservative by design. Time saved is the higher of 3 hours per engineer per week or 30% of
           current effort. Each engineer avoids at least one issue per year, at an average avoided cost
           of about {formatEuro(AVOIDED_COST_PER_ISSUE)}. The model assumes {WORKING_WEEKS_PER_YEAR}{' '}

@@ -25,7 +25,6 @@ export default function StubPage({
     <div className="rd2">
       <PageMeta title={metaTitle} description={metaDescription} path={path} robots="noindex" />
       <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
-        <div className="pointer-events-none absolute inset-0 rd-gridlines" aria-hidden="true" />
         <Container className="relative py-24 sm:py-28">
           <div className="max-w-3xl">
             <Eyebrow className="mb-6">{eyebrow}</Eyebrow>

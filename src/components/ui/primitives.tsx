@@ -66,7 +66,7 @@ export function SectionHead({
       <div className={clsx('max-w-3xl', className)}>
         {eyebrow && <Eyebrow num={eyebrowNum} className="mb-5">{eyebrow}</Eyebrow>}
         <H2>{title}</H2>
-        {lede && <p className="rd-sub mt-5 max-w-2xl">{lede}</p>}
+        {lede && <p className="rd-intro mt-5 max-w-2xl">{lede}</p>}
       </div>
     );
   }
@@ -114,8 +114,16 @@ export function Subhead({ children, className }: Div) {
 export function Lede({ children, className }: Div) {
   return <p className={clsx('rd-lede', className)}>{children}</p>;
 }
-export function Body({ children, className, soft }: Div & { soft?: boolean }) {
-  return <p className={clsx('rd-body', soft && 'rd-body--soft', className)}>{children}</p>;
+/* Intro = the standard paragraph that sits directly under a section H2 */
+export function Intro({ children, className }: Div) {
+  return <p className={clsx('rd-intro', className)}>{children}</p>;
+}
+export function Body({ children, className, soft, sm }: Div & { soft?: boolean; sm?: boolean }) {
+  return (
+    <p className={clsx('rd-body', soft && 'rd-body--soft', sm && 'rd-body--sm', className)}>
+      {children}
+    </p>
+  );
 }
 
 /* ---------- Meta row (middot-separated) ---------- */
