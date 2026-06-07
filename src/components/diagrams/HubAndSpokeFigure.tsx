@@ -1,12 +1,12 @@
-/* Figure 2 — Hub and spoke (Home, Solution section).
-   Horizontal hub: engineering inputs on the left, RapidDraft at the center,
+/* Hub and spoke: engineering inputs on the left, RapidDraft at the center,
    release-ready outputs on the right. Flat, hairline, single accent,
-   theme-aware via --rd-* tokens. All text Inter. Content per docs/website-spec.md. */
+   theme-aware via --rd-* tokens. All text Inter. Labels are passed in so the
+   same figure can carry different stacks (Home vs Platform). */
 
-const INPUTS = ['SOLIDWORKS', 'EPLAN', '2D Drawings', 'CIM Database', 'Release Package', 'Supplier QA'];
-const OUTPUTS = ['DFM Findings', 'Inspection Readiness', 'BOM Consistency', 'Release Gates', 'Audit Trail'];
+const DEFAULT_INPUTS = ['SOLIDWORKS', 'EPLAN', '2D Drawings', 'CIM Database', 'Release Package', 'Supplier QA'];
+const DEFAULT_OUTPUTS = ['DFM Findings', 'Inspection Readiness', 'BOM Consistency', 'Release Gates', 'Audit Trail'];
 
-const ALT =
+const DEFAULT_ALT =
   'Engineering inputs (SOLIDWORKS, EPLAN, 2D drawings, CIM Database, release package, supplier QA) ' +
   'feed into RapidDraft at the center, which produces DFM findings, inspection readiness, ' +
   'BOM consistency, release gates, and an audit trail.';
@@ -25,12 +25,22 @@ const COL_BOT = 490; // center of the last pill in each column
 const yAt = (count: number, i: number) =>
   count === 1 ? (COL_TOP + COL_BOT) / 2 : COL_TOP + ((COL_BOT - COL_TOP) * i) / (count - 1);
 
-const inY = (i: number) => yAt(INPUTS.length, i);
-const outY = (i: number) => yAt(OUTPUTS.length, i);
+type Props = {
+  inputs?: readonly string[];
+  outputs?: readonly string[];
+  alt?: string;
+};
 
-export default function HubAndSpokeFigure() {
+export default function HubAndSpokeFigure({
+  inputs = DEFAULT_INPUTS,
+  outputs = DEFAULT_OUTPUTS,
+  alt = DEFAULT_ALT,
+}: Props = {}) {
+  const inY = (i: number) => yAt(inputs.length, i);
+  const outY = (i: number) => yAt(outputs.length, i);
+
   return (
-    <div className="w-full" role="img" aria-label={ALT}>
+    <div className="w-full" role="img" aria-label={alt}>
       <svg viewBox="0 0 1200 560" className="block h-auto w-full overflow-visible" aria-hidden="true">
         <style>{`
           .hs-pill { fill: var(--rd-surface); stroke: var(--rd-edge); stroke-width: 1; }
@@ -57,12 +67,12 @@ export default function HubAndSpokeFigure() {
 
         {/* connectors */}
         <g>
-          {INPUTS.map((label, i) => {
+          {inputs.map((label, i) => {
             const y = inY(i);
             const d = `M ${L_X + PILL_W} ${y} C ${L_X + PILL_W + 130} ${y}, ${HUB_CX - HUB_R - 70} ${HUB_CY}, ${HUB_CX - HUB_R} ${HUB_CY}`;
             return <path key={`il-${label}`} d={d} className="hs-flow" />;
           })}
-          {OUTPUTS.map((label, i) => {
+          {outputs.map((label, i) => {
             const y = outY(i);
             const d = `M ${HUB_CX + HUB_R} ${HUB_CY} C ${HUB_CX + HUB_R + 70} ${HUB_CY}, ${R_X - 130} ${y}, ${R_X} ${y}`;
             return <path key={`ol-${label}`} d={d} className="hs-flow" />;
@@ -74,7 +84,7 @@ export default function HubAndSpokeFigure() {
         <text x={R_X + PILL_W / 2} y={48} textAnchor="middle" className="hs-cap">RELEASE-READY OUTPUTS</text>
 
         {/* input pills */}
-        {INPUTS.map((label, i) => {
+        {inputs.map((label, i) => {
           const y = inY(i);
           return (
             <g key={`i-${label}`}>
@@ -87,7 +97,7 @@ export default function HubAndSpokeFigure() {
         })}
 
         {/* output pills */}
-        {OUTPUTS.map((label, i) => {
+        {outputs.map((label, i) => {
           const y = outY(i);
           return (
             <g key={`o-${label}`}>

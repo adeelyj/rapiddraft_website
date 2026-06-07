@@ -12,10 +12,20 @@ import {
   Intro,
   Body,
   Button,
+  Figure,
 } from '../components/ui/primitives';
 import StackAndSovereignty from '../components/platform/StackAndSovereignty';
-import EngineeringStackFigure from '../components/diagrams/EngineeringStackFigure';
+import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
 import FaqAccordion from '../components/FaqAccordion';
+
+// The Platform stack carries the more grounded labels (NX/CATIA/SW, PDM/PLM,
+// FAIR, VDA/EMPB) in the same hub-and-spoke figure the Home page uses.
+const STACK_INPUTS = ['NX / CATIA / SW', '2D Drawings', 'PDM / PLM', 'Release Package', 'Supplier QA'] as const;
+const STACK_OUTPUTS = ['DFM Findings', 'FAIR Readiness', 'BOM Consistency', 'Release Gate', 'Audit (VDA, EMPB)'] as const;
+const STACK_ALT =
+  'Engineering inputs (NX/CATIA/SolidWorks, 2D drawings, PDM/PLM, release package, supplier QA) ' +
+  'feed into RapidDraft at the center, which produces DFM findings, FAIR readiness, BOM consistency, ' +
+  'a release gate, and a VDA/EMPB audit trail.';
 import { useLang } from '../i18n/LanguageContext';
 
 const CONTENT = {
@@ -38,6 +48,8 @@ const CONTENT = {
       title: 'A reviewed release, not a verdict from a black box',
       intro:
         'Reviews scatter across email, PDFs, and spreadsheets, cut off from the CAD. RapidDraft keeps the check on the model, grounded in your rules.',
+      figureCaption:
+        'RapidDraft sits between your engineering stack and an auditable release gate, with human-in-the-loop review at the center.',
     },
     howItWorks: {
       title: 'How it works',
@@ -144,6 +156,8 @@ const CONTENT = {
       title: 'Ein geprüftes Review, kein Urteil aus der Blackbox',
       intro:
         'Reviews verteilen sich über E-Mails und Tabellen, weg vom CAD. RapidDraft hält die Prüfung am Modell, verankert in Ihren Regeln.',
+      figureCaption:
+        'RapidDraft sitzt zwischen Ihrem Engineering-Stack und einem auditierbaren Release-Gate, mit Human-in-the-Loop-Review im Zentrum.',
     },
     howItWorks: {
       title: 'So funktioniert es',
@@ -300,8 +314,10 @@ export default function Platform() {
           title={t.sourceOfTruth.title}
           intro={t.sourceOfTruth.intro}
         />
-        <div className="mx-auto mt-12 hidden w-full max-w-[1080px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 sm:p-8 md:block">
-          <EngineeringStackFigure />
+        <div className="mx-auto mt-10 w-full max-w-[880px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
+          <Figure caption={t.sourceOfTruth.figureCaption}>
+            <HubAndSpokeFigure inputs={STACK_INPUTS} outputs={STACK_OUTPUTS} alt={STACK_ALT} />
+          </Figure>
         </div>
       </Section>
 
