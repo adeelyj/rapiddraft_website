@@ -74,19 +74,22 @@ function CheckIcon() {
 function FounderCard({ name, role, bio }: { name: string; role: string; bio: string }) {
   const media = PEOPLE[name];
   return (
-    <div className="overflow-hidden rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] rd-lift">
+    <div className="flex flex-col items-center rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-7 text-center rd-lift sm:p-8">
       {media?.image && (
-        <img src={media.image} alt={name} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+        <img
+          src={media.image}
+          alt={name}
+          loading="lazy"
+          className="h-28 w-28 rounded-full object-cover ring-1 ring-[var(--rd-hair)] shadow-[0_8px_24px_-12px_rgba(17,24,39,0.28)]"
+        />
       )}
-      <div className="p-6 text-center">
-        <H3>{name}</H3>
-        <AccentLabel className="mt-2">{role}</AccentLabel>
-        <Body soft sm className="mt-3">
-          {bio}
-        </Body>
-        <div className="mt-4 flex justify-center">
-          <LinkedInLink name={name} />
-        </div>
+      <H3 className="mt-5">{name}</H3>
+      <AccentLabel className="mt-2">{role}</AccentLabel>
+      <Body soft sm className="mt-3">
+        {bio}
+      </Body>
+      <div className="mt-auto flex justify-center pt-5">
+        <LinkedInLink name={name} />
       </div>
     </div>
   );
