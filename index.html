@@ -16,6 +16,18 @@
     <meta name="twitter:description" content="RapidDraft keeps drawing release, design review, and manufacturing feedback attached to the CAD model." />
     <meta name="twitter:image" content="/media/rd_social.png" />
     <title>RapidDraft | AI for drawing release and design review</title>
+    <script>
+      // Set theme before paint to avoid a flash. Saved preference wins, else system.
+      (function () {
+        try {
+          var t = localStorage.getItem('rd-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PageMeta from '../components/PageMeta';
 import {
   Section,
@@ -102,6 +103,13 @@ const KPIS = [
 ];
 
 export default function Home() {
+  // Apple-style full-screen section snapping, only while Home is mounted.
+  useEffect(() => {
+    const el = document.documentElement;
+    el.classList.add('rd-snap');
+    return () => el.classList.remove('rd-snap');
+  }, []);
+
   return (
     <div className="rd2">
       <PageMeta
@@ -111,13 +119,13 @@ export default function Home() {
       />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
+      <header className="rd-screen relative overflow-hidden border-b border-[var(--rd-hair)]">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
           style={{ background: 'radial-gradient(62% 52% at 50% -8%, var(--rd-accent-soft), transparent 70%)' }}
         />
-        <Container className="relative py-16 text-center sm:py-20 lg:py-24">
+        <Container className="relative w-full py-16 text-center sm:py-20">
           <div className="mx-auto max-w-[920px]">
             <Eyebrow className="justify-center">
               Agentic drawing release and design review for engineering teams
@@ -154,7 +162,7 @@ export default function Home() {
       </header>
 
       {/* ── Credibility ──────────────────────────────────── */}
-      <Section>
+      <Section screen>
         <div className="max-w-2xl">
           <H2>Reduce repeated work before it delays release</H2>
           <Intro className="mt-5">
@@ -183,7 +191,7 @@ export default function Home() {
       </Section>
 
       {/* ── Problem (sanctioned display heading) ─────────── */}
-      <Section divider>
+      <Section divider screen>
         <div className="max-w-4xl">
           <H2 display>
             Design intent lives in CAD. Requirements live in drawings. The review logic lives in
@@ -209,7 +217,7 @@ export default function Home() {
       </Section>
 
       {/* ── Solution + figure 2 ──────────────────────────── */}
-      <Section divider>
+      <Section divider screen>
         <div className="max-w-3xl">
           <Eyebrow className="mb-5">Solution</Eyebrow>
           <H2>Turn fragmented review work into a connected release workflow</H2>
@@ -230,7 +238,7 @@ export default function Home() {
       </Section>
 
       {/* ── Capabilities ─────────────────────────────────── */}
-      <Section divider>
+      <Section divider screen>
         <SectionHead
           title="One review layer, four core capabilities"
           lede="The same review layer generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
@@ -254,7 +262,7 @@ export default function Home() {
       </Section>
 
       {/* ── Security teaser ──────────────────────────────── */}
-      <Section divider>
+      <Section divider screen>
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
           <div>
             <Eyebrow className="mb-5">Security</Eyebrow>
@@ -297,7 +305,7 @@ export default function Home() {
       <RoiCalculator />
 
       {/* ── Final CTA ────────────────────────────────────── */}
-      <Section divider className="text-center">
+      <Section divider screen className="text-center">
         <div className="mx-auto max-w-2xl">
           <H2>Bring speed and traceability to drawing release</H2>
           <Intro className="mx-auto mt-6 max-w-xl">

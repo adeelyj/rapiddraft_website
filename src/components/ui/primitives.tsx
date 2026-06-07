@@ -33,14 +33,28 @@ export function Section({
   id,
   tight = false,
   divider = false,
+  screen = false,
   width = 'default',
-}: Div & { tight?: boolean; divider?: boolean; width?: 'default' | 'wide' | 'narrow' }) {
+}: Div & {
+  tight?: boolean;
+  divider?: boolean;
+  screen?: boolean;
+  width?: 'default' | 'wide' | 'narrow';
+}) {
   return (
     <section
       id={id}
-      className={clsx('rd-section', tight && 'rd-section--tight', divider && 'rd-divider', className)}
+      className={clsx(
+        'rd-section',
+        tight && 'rd-section--tight',
+        divider && 'rd-divider',
+        screen && 'rd-screen',
+        className,
+      )}
     >
-      <Container width={width}>{children}</Container>
+      <Container width={width} className="w-full">
+        {children}
+      </Container>
     </section>
   );
 }

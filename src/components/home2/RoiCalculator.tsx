@@ -46,7 +46,7 @@ export default function RoiCalculator() {
   ];
 
   return (
-    <section id="roi-calculator" className="rd-section scroll-mt-24 rd-divider">
+    <section id="roi-calculator" className="rd-section rd-screen rd-divider">
       <div className="rd-container">
         <div className="max-w-2xl">
           <Eyebrow className="mb-5">ROI calculator</Eyebrow>

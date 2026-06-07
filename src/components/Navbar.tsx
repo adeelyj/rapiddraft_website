@@ -1,8 +1,33 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import clsx from 'clsx';
 import BrandMark from './BrandMark';
+import { useTheme, type Theme } from '../hooks/useTheme';
+
+function ThemeToggle({
+  theme,
+  onToggle,
+  className,
+}: {
+  theme: Theme;
+  onToggle: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      className={clsx(
+        'inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--rd-edge)] text-[var(--rd-head)] transition hover:border-[var(--rd-accent)] hover:text-[var(--rd-accent)]',
+        className,
+      )}
+    >
+      {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+    </button>
+  );
+}
 
 const NAV_LINKS = [
   { name: 'Platform', to: '/platform' },
@@ -15,6 +40,7 @@ export default function Navbar() {
   const [openPath, setOpenPath] = useState<string | null>(null);
   const location = useLocation();
   const isOpen = openPath === location.pathname;
+  const { theme, toggle } = useTheme();
 
   const isActive = (to: string) =>
     to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
@@ -24,7 +50,7 @@ export default function Navbar() {
       <div className="rd-container">
         <div className="flex h-20 items-center justify-between gap-6">
           <Link to="/" className="flex items-center" aria-label="RapidDraft home">
-            <BrandMark theme="light" size="sm" />
+            <BrandMark theme={theme} size="sm" />
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -33,7 +59,7 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={clsx(
-                  'group inline-flex items-center gap-1 font-[var(--rd-meta)] text-[13.5px] transition-colors duration-150',
+                  'group inline-flex items-center gap-1 whitespace-nowrap text-[13.5px] transition-colors duration-150',
                   isActive(link.to)
                     ? 'text-[var(--rd-accent)]'
                     : 'text-[var(--rd-head)] hover:text-[var(--rd-accent)]',
@@ -55,14 +81,17 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <ThemeToggle theme={theme} onToggle={toggle} />
             <Link to="/book-demo" className="rd-btn rd-btn--primary h-10 px-5 text-[13.5px]">
               Book a demo
             </Link>
           </div>
 
-          <button
-            type="button"
-            onClick={() =>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle theme={theme} onToggle={toggle} />
+            <button
+              type="button"
+              onClick={() =>
               setOpenPath((current) => (current === location.pathname ? null : location.pathname))
             }
             className="inline-flex items-center justify-center rounded-[var(--rd-r-md)] border border-[var(--rd-edge)] p-2 text-[var(--rd-head)] transition hover:border-[var(--rd-accent)] hover:text-[var(--rd-accent)] md:hidden"
@@ -70,7 +99,8 @@ export default function Navbar() {
             aria-expanded={isOpen}
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            </button>
+          </div>
         </div>
       </div>
 

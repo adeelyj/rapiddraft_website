@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import GridBackdrop from './GridBackdrop';
 
 export default function Layout() {
     const location = useLocation();
@@ -24,7 +25,7 @@ export default function Layout() {
 
     return (
         <div className="rd-app flex min-h-screen flex-col bg-[var(--rd-bg)] text-[var(--rd-fg)]">
-            <div className="rd-app__grid" aria-hidden="true" />
+            <GridBackdrop />
             <Navbar />
             <main className="relative z-[1] flex-grow overflow-hidden">
                 <Outlet />
