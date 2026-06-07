@@ -88,7 +88,7 @@ export default function Footer() {
                   <img
                     src="/media/ecosystem/unternehmertum-logo.svg"
                     alt="UnternehmerTUM"
-                    className="h-auto w-[46px] object-contain opacity-80 grayscale invert"
+                    className="h-8 w-auto object-contain opacity-80 grayscale invert"
                   />
                 </a>
                 <a
@@ -100,7 +100,7 @@ export default function Footer() {
                   <img
                     src="/media/ecosystem/xplore-logo.svg"
                     alt="XPLORE"
-                    className="h-auto w-[200px] object-contain opacity-80 grayscale invert"
+                    className="h-8 w-auto object-contain opacity-80 grayscale invert"
                   />
                 </a>
               </div>

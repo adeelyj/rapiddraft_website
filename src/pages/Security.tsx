@@ -272,42 +272,31 @@ export default function Security() {
         </div>
       </Section>
 
-      {/* ── Deployment and data handling ─────────────────── */}
+      {/* ── How it runs: deployment, governance, standards, compliance ── */}
       <Section>
-        <SectionHeader
-          eyebrow={t.deployment.eyebrow}
-          title={t.deployment.title}
-          intro={t.deployment.intro}
-        />
-      </Section>
-
-      {/* ── AI governance ────────────────────────────────── */}
-      <Section>
-        <SectionHeader
-          eyebrow={t.governance.eyebrow}
-          title={t.governance.title}
-          intro={t.governance.intro}
-        />
-      </Section>
-
-      {/* ── Standards and audit ──────────────────────────── */}
-      <Section>
-        <SectionHeader
-          eyebrow={t.standards.eyebrow}
-          title={t.standards.title}
-          intro={t.standards.intro}
-        />
-      </Section>
-
-      {/* ── Compliance ───────────────────────────────────── */}
-      <Section>
-        <SectionHeader
-          eyebrow={t.compliance.eyebrow}
-          title={t.compliance.title}
-          intro={t.compliance.intro}
-        />
-        <div className="mt-8 flex justify-center">
-          <Tag accent>{t.compliance.todoTag}</Tag>
+        <div className="mx-auto grid max-w-[1120px] gap-4 sm:grid-cols-2">
+          {[t.deployment, t.governance, t.standards, t.compliance].map((s, i) => (
+            <div
+              key={s.title}
+              className="rd-lift rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-7 text-left sm:p-8"
+            >
+              <div
+                className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--rd-accent)]"
+                style={{ fontFamily: 'var(--rd-meta)' }}
+              >
+                {s.eyebrow}
+              </div>
+              <H3 className="mt-2.5">{s.title}</H3>
+              <Body soft sm className="mt-3">
+                {s.intro}
+              </Body>
+              {i === 3 && (
+                <div className="mt-4">
+                  <Tag accent>{t.compliance.todoTag}</Tag>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button to="/deal-room/nda-request" variant="primary">

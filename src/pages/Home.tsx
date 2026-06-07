@@ -33,9 +33,9 @@ const CONTENT = {
     },
     heroBadges: ['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'Human-in-the-loop'],
     kpis: [
-      { value: '~30%', label: 'ROI from better design review' },
-      { value: 'On-prem', label: 'Your IP never leaves the building' },
-      { value: 'VDA/EMPB', label: 'Findings traced to your rules' },
+      { value: '30%', label: 'Fewer change cycles' },
+      { value: '10x', label: 'Faster feedback' },
+      { value: '50%', label: 'Less checking time' },
     ],
     problemCards: [
       {
@@ -152,9 +152,9 @@ const CONTENT = {
     },
     heroBadges: ['On-Prem-KI', 'Lokale/EU-Cloud', 'DSGVO-konform', 'Human-in-the-Loop'],
     kpis: [
-      { value: '~30%', label: 'ROI aus besserem Design-Review' },
-      { value: 'On-Prem', label: 'Ihr IP verlässt nie das Haus' },
-      { value: 'VDA/EMPB', label: 'Befunde auf Ihre Regeln zurückverfolgbar' },
+      { value: '30%', label: 'Weniger Änderungszyklen' },
+      { value: '10x', label: 'Schnelleres Feedback' },
+      { value: '50%', label: 'Weniger Prüfzeit' },
     ],
     problemCards: [
       {

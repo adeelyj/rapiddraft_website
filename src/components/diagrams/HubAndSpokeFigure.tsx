@@ -36,14 +36,15 @@ export default function HubAndSpokeFigure() {
           .hs-pill { fill: var(--rd-surface); stroke: var(--rd-edge); stroke-width: 1; }
           .hs-label { fill: var(--rd-head); font-family: 'Inter',sans-serif; font-size: 22px; font-weight: 500; }
           .hs-cap { fill: var(--rd-fg-3); font-family: 'Inter',sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.1em; }
-          .hs-flow { stroke: var(--rd-edge); stroke-width: 1.2; fill: none; }
-          .hs-flow-live { stroke: var(--rd-accent); stroke-width: 1.4; fill: none; stroke-dasharray: 2 9; opacity: 0.75; animation: hs-dash 3s linear infinite; }
+          .hs-flow { fill: none; stroke: var(--rd-accent); stroke-width: 1.7; stroke-linecap: round; stroke-dasharray: 1 9; opacity: 0.5; animation: hs-flow 3s linear infinite; }
           .hs-hub-ring { fill: none; stroke: var(--rd-accent); stroke-width: 1.5; }
           .hs-hub-disk { fill: var(--rd-surface); stroke: var(--rd-edge); stroke-width: 1; }
           .hs-hub-name { fill: var(--rd-fg-strong); font-family: 'Inter',sans-serif; font-weight: 600; font-size: 30px; }
           .hs-hub-sub { fill: var(--rd-fg-3); font-family: 'Inter',sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.1em; }
-          @keyframes hs-dash { to { stroke-dashoffset: -88; } }
-          @media (prefers-reduced-motion: reduce) { .hs-flow-live { animation: none; } }
+          /* inputs are drawn pill->hub, outputs hub->pill, so one negative-offset
+             flow makes inputs drift toward the center and outputs drift outward. */
+          @keyframes hs-flow { to { stroke-dashoffset: -90; } }
+          @media (prefers-reduced-motion: reduce) { .hs-flow { animation: none; } }
         `}</style>
 
         {/* connectors */}
@@ -58,14 +59,6 @@ export default function HubAndSpokeFigure() {
             const d = `M ${HUB_CX + HUB_R} ${HUB_CY} C ${HUB_CX + HUB_R + 70} ${HUB_CY}, ${R_X - 130} ${y}, ${R_X} ${y}`;
             return <path key={`ol-${label}`} d={d} className="hs-flow" />;
           })}
-          <path
-            d={`M ${L_X + PILL_W} ${inY(2)} C ${L_X + PILL_W + 130} ${inY(2)}, ${HUB_CX - HUB_R - 70} ${HUB_CY}, ${HUB_CX - HUB_R} ${HUB_CY}`}
-            className="hs-flow-live"
-          />
-          <path
-            d={`M ${HUB_CX + HUB_R} ${HUB_CY} C ${HUB_CX + HUB_R + 70} ${HUB_CY}, ${R_X - 130} ${outY(2)}, ${R_X} ${outY(2)}`}
-            className="hs-flow-live"
-          />
         </g>
 
         {/* column captions — aligned (same y), clear of the first pill */}
