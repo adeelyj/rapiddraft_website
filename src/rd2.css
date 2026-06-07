@@ -363,6 +363,33 @@ html.rd-snap .rd-screen.is-in .rd-container {
 }
 .rd-tile:hover { border-color: var(--rd-edge); }
 
+/* Problem cards — vertical list with a "dim until hover" focus effect.
+   The card background stays opaque (no grid bleed); only the content dims.
+   Cards fade in one after another as the section enters (keyed to .is-in). */
+.rd-problemcard__inner {
+  opacity: 0.56;
+  transition: opacity 0.5s var(--rd-ease);
+}
+.rd-problemcard:hover .rd-problemcard__inner { opacity: 1; }
+
+/* Staggered entrance while Home is in snap mode. */
+html.rd-snap .rd-screen .rd-problemcard__inner { opacity: 0; }
+html.rd-snap .rd-screen.is-in .rd-problemcard__inner { opacity: 0.56; }
+html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(1) .rd-problemcard__inner { transition-delay: 0.06s; }
+html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(2) .rd-problemcard__inner { transition-delay: 0.15s; }
+html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(3) .rd-problemcard__inner { transition-delay: 0.24s; }
+html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(4) .rd-problemcard__inner { transition-delay: 0.33s; }
+/* Hover stays instant regardless of stagger (placed last to win on equal specificity). */
+html.rd-snap .rd-screen.is-in .rd-problemcard:hover .rd-problemcard__inner {
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.rd-snap .rd-screen .rd-problemcard__inner { opacity: 0.56; transition: none; }
+  html.rd-snap .rd-screen.is-in .rd-problemcard:hover .rd-problemcard__inner { opacity: 1; }
+}
+
 .rd-tag {
   display: inline-flex;
   align-items: center;
