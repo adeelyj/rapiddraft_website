@@ -125,7 +125,7 @@ const CONTENT = {
       eyebrow: 'Company',
       heading: 'Built by engineers who have felt the release bottleneck firsthand',
       subhead:
-        'We have cut the rev, owned the title block, and waited on the serial multi-signature chain. So we built RapidDraft on the buyer’s terms: a traceable, human-in-the-loop second set of eyes that catches drawing and design issues before release and before the EMPB. Skepticism welcome. That is exactly why everything shows its work, runs on-prem, and keeps your sign-off in your hands.',
+        'We cut the rev and waited on the signature chain, so we built a human-in-the-loop check that runs on-prem and keeps your sign-off yours.',
     },
     visionMission: {
       title: 'Vision and mission',
@@ -144,7 +144,7 @@ const CONTENT = {
     team: {
       title: 'Engineering depth, AI capability, and industrial execution in one team',
       intro:
-        'The founding team brings the shop-floor understanding to see where the release bottleneck lives, the capability to build a grounded, traceable check around it, and the operational discipline to make it useful inside real programs.',
+        'Shop-floor understanding to see where the release bottleneck lives, and the discipline to build a grounded, traceable check around it.',
     },
     advisors: {
       title: 'Advisory board',
@@ -241,9 +241,9 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Unternehmen',
-      heading: 'Entwickelt von Ingenieuren, die den Freigabe-Engpass selbst erlebt haben',
+      heading: 'Gebaut von Ingenieuren, die den Engpass selbst erlebt haben',
       subhead:
-        'Wir haben selbst Revs gezogen, den Schriftkopf verantwortet und auf die serielle Mehrfach-Signatur gewartet. Darum bauen wir RapidDraft auf den Bedingungen des Käufers: ein nachvollziehbares Human-in-the-Loop-Zweitaugenpaar, das Zeichnungs- und Designprobleme vor der Freigabe und vor dem EMPB findet. Skepsis ist willkommen. Genau deshalb zeigt alles seine Quelle, läuft On-Prem und lässt die Freigabe in Ihrer Hand.',
+        'Wir zogen Revs und warteten auf die Signaturkette. Darum bauen wir eine On-Prem-Prüfung, Human-in-the-Loop, Freigabe bei Ihnen.',
     },
     visionMission: {
       title: 'Vision und Mission',
@@ -262,7 +262,7 @@ const CONTENT = {
     team: {
       title: 'Engineering-Tiefe, KI-Kompetenz und industrielle Umsetzung in einem Team',
       intro:
-        'Das Gründungsteam vereint das Verständnis von der Werkbank, um zu sehen, wo der Freigabe-Engpass liegt, die Kompetenz, eine fundierte, nachvollziehbare Prüfung darum herum zu bauen, und die operative Disziplin, es in realen Programmen nützlich zu machen.',
+        'Werkstattnahes Wissen, wo der Freigabe-Engpass liegt, und die Disziplin, eine fundierte, nachvollziehbare Prüfung darum zu bauen.',
     },
     advisors: {
       title: 'Beirat',

@@ -65,6 +65,13 @@ export default function EngineeringStackFigure() {
           .es-bar-label { fill: var(--rd-head); font-family: 'Inter',sans-serif; font-weight: 600; font-size: 22px; }
           @keyframes es-dash { to { stroke-dashoffset: -88; } }
           @media (prefers-reduced-motion: reduce) { .es-flow-live { animation: none; } }
+          /* The figure shows from md up and scales down with its container, so
+             bump viewBox type on tablet widths to keep labels legible. */
+          @media (max-width: 1024px) {
+            .es-label { font-size: 22px; }
+            .es-cap { font-size: 20px; }
+            .es-bar-label { font-size: 27px; }
+          }
         `}</style>
 
         {/* connectors: inputs -> bar, bar -> outputs */}

@@ -14,6 +14,7 @@ import {
   Button,
 } from '../components/ui/primitives';
 import StackAndSovereignty from '../components/platform/StackAndSovereignty';
+import EngineeringStackFigure from '../components/diagrams/EngineeringStackFigure';
 import FaqAccordion from '../components/FaqAccordion';
 import { useLang } from '../i18n/LanguageContext';
 
@@ -26,17 +27,17 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Platform',
-      headingLead: 'A grounded second set of eyes for your ',
-      headingMark: 'drawing-release process',
+      headingLead: 'A grounded second set of eyes for ',
+      headingMark: 'drawing release',
       subhead:
-        'RapidDraft checks the drawing against engineering, manufacturing, and your own rules, then shows its work. Every finding links back to the rule, standard, or drawing note it came from. The engineer keeps the sign-off.',
+        'RapidDraft checks the drawing against engineering, manufacturing, and your own rules, and shows its work. The engineer keeps the sign-off.',
       primaryCta: 'Book a demo',
       secondaryCta: 'See it on your drawings',
     },
     sourceOfTruth: {
       title: 'A reviewed release, not a verdict from a black box',
       intro:
-        'Drawings, reviews, and feedback scatter across email, PDFs, and spreadsheets, cut off from the CAD they describe. RapidDraft keeps the check attached to the model and grounded in your rules, so every finding traces back to its source and every release carries a complete, auditable review behind it.',
+        'Reviews scatter across email, PDFs, and spreadsheets, cut off from the CAD. RapidDraft keeps the check on the model, grounded in your rules.',
     },
     howItWorks: {
       title: 'How it works',
@@ -132,17 +133,17 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Plattform',
-      headingLead: 'Ein fundiertes Vier-Augen-Prinzip für Ihren ',
-      headingMark: 'Zeichnungsfreigabe-Prozess',
+      headingLead: 'Ein fundiertes Vier-Augen-Prinzip vor der ',
+      headingMark: 'Freigabe',
       subhead:
-        'RapidDraft prüft die Zeichnung gegen Konstruktions-, Fertigungs- und Ihre eigenen Regeln und legt seine Arbeit offen. Jeder Befund verweist zurück auf die Regel, Norm oder Zeichnungsnotiz, aus der er stammt. Die Freigabe bleibt beim Ingenieur.',
+        'RapidDraft prüft die Zeichnung gegen Ihre Regeln und legt seine Arbeit offen. Die Freigabe bleibt beim Ingenieur.',
       primaryCta: 'Demo buchen',
       secondaryCta: 'An Ihren Zeichnungen erleben',
     },
     sourceOfTruth: {
       title: 'Ein geprüftes Review, kein Urteil aus der Blackbox',
       intro:
-        'Zeichnungen, Reviews und Feedback verteilen sich über E-Mails, PDFs und Tabellen, abgeschnitten vom CAD, das sie beschreiben. RapidDraft hält die Prüfung mit dem Modell verbunden und in Ihren Regeln verankert, sodass jeder Befund auf seine Quelle zurückführt und hinter jeder Freigabe ein vollständiges, auditierbares Review steht.',
+        'Reviews verteilen sich über E-Mails und Tabellen, weg vom CAD. RapidDraft hält die Prüfung am Modell, verankert in Ihren Regeln.',
     },
     howItWorks: {
       title: 'So funktioniert es',
@@ -299,6 +300,9 @@ export default function Platform() {
           title={t.sourceOfTruth.title}
           intro={t.sourceOfTruth.intro}
         />
+        <div className="mx-auto mt-12 hidden w-full max-w-[1080px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 sm:p-8 md:block">
+          <EngineeringStackFigure />
+        </div>
       </Section>
 
       {/* ── How it works (three numbered steps) ──────────── */}

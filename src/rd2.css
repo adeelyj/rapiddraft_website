@@ -419,6 +419,13 @@ html.rd-snap .rd-screen.is-in .rd-container {
   transform: translateY(-4px);
   box-shadow: var(--rd-shadow-hover);
 }
+/* Static tile: same surface/padding/radius, but no hover lift — for non-interactive
+   panels (forms, info blocks), so the lift stays a signal for "interactive". */
+.rd-tile.rd-tile--static:hover {
+  border-color: var(--rd-hair);
+  transform: none;
+  box-shadow: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .rd-tile:hover,
   .rd-lift:hover { transform: none; }

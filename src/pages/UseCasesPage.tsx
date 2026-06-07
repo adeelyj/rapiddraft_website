@@ -36,7 +36,7 @@ const CONTENT = {
       eyebrow: 'Use cases',
       heading: 'Where RapidDraft catches issues before release',
       subhead:
-        'The review jobs every drawing-release team knows: checking the drawing, building the inspection documents, the DFM pass, the supplier handoff, and the churn after a change. RapidDraft does the first pass on each, grounded in your rules, and you keep the sign-off.',
+        'The review jobs every drawing-release team knows. RapidDraft does the first pass on each, grounded in your rules, and you keep the sign-off.',
       overviewItems: [
         'Drawings checked against your rules before you cut the rev',
         'DFM questions surfaced before the EMPB, not after a rejection',
@@ -48,7 +48,7 @@ const CONTENT = {
     lead: {
       title: 'Built for the review work, not an abstract CAD demo',
       intro:
-        'Design intent lives in CAD, the manufacturing requirements live in the drawing, and the review logic is tribal knowledge. RapidDraft runs the repetitive first pass across all of them, links every finding back to the rule or note it came from, and leaves the judgment to you.',
+        'Design intent in CAD, requirements in the drawing, logic in people’s heads. RapidDraft runs the first pass, each finding traced to source.',
     },
     workflows: [
       {
@@ -105,7 +105,7 @@ const CONTENT = {
     closing: {
       heading: 'Bring a drawing that is hard to release',
       intro:
-        'If one of these is your bottleneck, start there. Bring one drawing-release process and a drawing that is hard to release, and we show the findings traced back to your own rules. Scoped, low-risk, on your infrastructure.',
+        'Bring a drawing that is hard to release, and we show the findings traced back to your own rules. Scoped, low-risk, on your infrastructure.',
       ctaPrimary: 'Book a demo',
       ctaSecondary: 'Platform',
     },
@@ -120,7 +120,7 @@ const CONTENT = {
       eyebrow: 'Anwendungsfälle',
       heading: 'Wo RapidDraft Fehler vor der Freigabe findet',
       subhead:
-        'Die Prüfaufgaben, die jedes Freigabeteam kennt: die Zeichnung prüfen, die Prüfdokumente erstellen, der DFM-Durchgang, die Lieferantenübergabe und der Aufwand nach einer Änderung. RapidDraft übernimmt bei jeder den ersten Durchgang, verankert in Ihren Regeln, und die Freigabe behalten Sie.',
+        'Die Prüfaufgaben, die jedes Freigabeteam kennt. RapidDraft macht den ersten Durchgang, verankert in Ihren Regeln. Sie geben frei.',
       overviewItems: [
         'Zeichnungen werden gegen Ihre Regeln geprüft, bevor Sie eine Revision ziehen',
         'DFM-Fragen werden vor dem EMPB sichtbar, nicht nach einer Reklamation',
@@ -132,7 +132,7 @@ const CONTENT = {
     lead: {
       title: 'Gebaut für die Prüfarbeit, nicht für eine abstrakte CAD-Demo',
       intro:
-        'Die Designabsicht steckt im CAD, die Fertigungsanforderungen stecken in der Zeichnung, und die Prüflogik ist Erfahrungswissen. RapidDraft übernimmt den wiederkehrenden ersten Durchgang über alle hinweg, verknüpft jeden Befund mit der Regel oder dem Hinweis, aus dem er stammt, und überlässt Ihnen das Urteil.',
+        'Designabsicht im CAD, Anforderungen in der Zeichnung, Logik im Kopf. RapidDraft macht den ersten Durchgang, jeder Befund belegt.',
     },
     workflows: [
       {
@@ -189,7 +189,7 @@ const CONTENT = {
     closing: {
       heading: 'Bringen Sie eine Zeichnung mit, die schwer freizugeben ist',
       intro:
-        'Wenn einer davon Ihr Engpass ist, beginnen wir genau dort. Bringen Sie einen Freigabeprozess und eine Zeichnung mit, die schwer freizugeben ist, und wir zeigen die Befunde, zurückverfolgt zu Ihren eigenen Regeln. Eng gefasst, risikoarm, auf Ihrer Infrastruktur.',
+        'Bringen Sie eine schwer freizugebende Zeichnung mit. Wir zeigen die Befunde, zurückverfolgt zu Ihren Regeln. Eng gefasst.',
       ctaPrimary: 'Demo buchen',
       ctaSecondary: 'Plattform',
     },

@@ -24,7 +24,7 @@ const CONTENT = {
       eyebrow: 'Book a demo',
       heading: 'Bring a drawing that is hard to release',
       subhead:
-        'Skip the generic product tour. Pick one product family and one drawing-release process, bring a drawing that keeps getting kicked back, and we show the findings traced back to your rules: missing dimensions, tolerance conflicts, datum-scheme gaps, caught before you cut the rev and before the EMPB.',
+        'Bring a drawing that keeps getting kicked back, and we trace each finding to your rules, caught before you cut the rev.',
       inTheCall: [
         'Walk through one recurring drawing-release bottleneck',
         'See where RapidDraft fits your CAD, PDM/PLM, and release gate',
@@ -47,7 +47,7 @@ const CONTENT = {
     pilot: {
       title: 'How a pilot works',
       intro:
-        'Start narrow: one product family, one drawing-release process, one recurring review bottleneck. We agree on the workflow, the success metric, the inputs, and the decision point up front, so you know what a result looks like and what happens next before we begin. It runs on your infrastructure, so your IP never leaves the building.',
+        'Start narrow: one product family, one drawing-release process, one recurring bottleneck, scoped up front and run on-prem.',
       steps: [
         'Measure review effort, repeated findings, and time to release against the metric we agreed on.',
         'Expand team by team once the workflow proves itself, with every finding still traced to its source.',
@@ -72,7 +72,7 @@ const CONTENT = {
       eyebrow: 'Demo buchen',
       heading: 'Bringen Sie eine Zeichnung mit, die sich schwer freigeben lässt',
       subhead:
-        'Keine generische Produkttour. Wählen Sie eine Produktfamilie und einen Zeichnungs-Freigabeprozess, bringen Sie eine Zeichnung mit, die immer wieder zurückkommt, und wir zeigen die Befunde zurückverfolgt auf Ihre Regeln: fehlende Maße, Toleranzkonflikte, Lücken im Bezugssystem, erkannt bevor Sie die Revision ziehen und vor dem EMPB.',
+        'Bringen Sie eine Zeichnung mit, die zurückkommt, und wir verfolgen jeden Befund auf Ihre Regeln, erkannt vor der Revision.',
       inTheCall: [
         'Einen wiederkehrenden Engpass in der Zeichnungsfreigabe gemeinsam durchgehen',
         'Sehen, wo RapidDraft in Ihre CAD-, PDM/PLM-Landschaft und Ihren Freigabeprozess passt',
@@ -95,7 +95,7 @@ const CONTENT = {
     pilot: {
       title: 'So läuft ein Pilotprojekt ab',
       intro:
-        'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess, ein wiederkehrender Review-Engpass. Wir legen Workflow, Erfolgskennzahl, benötigte Eingaben und den Entscheidungspunkt vorab fest, damit Sie wissen, wie ein Ergebnis aussieht und was danach passiert, bevor wir beginnen. Es läuft auf Ihrer Infrastruktur, Ihr geistiges Eigentum verlässt das Haus nicht.',
+        'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess, ein wiederkehrender Engpass, vorab gefasst und On-Prem.',
       steps: [
         'Review-Aufwand, wiederkehrende Befunde und Zeit bis zur Freigabe an der vereinbarten Kennzahl messen.',
         'Team für Team ausweiten, sobald sich der Workflow bewährt hat, jeder Befund weiterhin auf seine Quelle zurückverfolgbar.',
@@ -183,7 +183,7 @@ export default function BookDemoPage() {
       {/* ── Request form ─────────────────────────────────── */}
       <Section>
         <SectionHeader title={t.form.title} intro={t.form.intro} />
-        <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile">
+        <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile rd-tile--static">
           <form
             name="bookdemo"
             method="POST"
@@ -270,7 +270,7 @@ export default function BookDemoPage() {
       {/* ── How a pilot works ────────────────────────────── */}
       <Section>
         <SectionHeader title={t.pilot.title} intro={t.pilot.intro} />
-        <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile">
+        <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile rd-tile--static">
           <BulletList items={t.pilot.steps} />
         </div>
       </Section>
@@ -278,7 +278,7 @@ export default function BookDemoPage() {
       {/* ── Best fit ─────────────────────────────────────── */}
       <Section>
         <SectionHeader title={t.bestFit.title} />
-        <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile">
+        <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile rd-tile--static">
           <BulletList items={t.bestFit.items} />
         </div>
       </Section>

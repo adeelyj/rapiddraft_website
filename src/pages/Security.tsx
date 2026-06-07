@@ -30,7 +30,7 @@ const CONTENT = {
       eyebrow: 'Security and sovereignty',
       heading: 'Your drawings never leave the building',
       subhead:
-        'If your company will not let engineers paste anything into a public AI, that is the right instinct, and RapidDraft is built for it. Models run locally, on your infrastructure. We do not train on your IP, and your engineers keep the sign-off.',
+        'If your company will not let engineers paste into a public AI, that instinct is right. RapidDraft runs locally and never trains on your IP.',
       requestNda: 'Request an NDA',
       bookDemo: 'Book a demo',
       figureCaption:
@@ -41,7 +41,7 @@ const CONTENT = {
       eyebrow: 'Why it matters',
       title: 'Bring AI to your most sensitive drawings without moving them',
       intro:
-        'In automotive and precision manufacturing, your drawings and BOMs are some of your most sensitive IP, and the reflex is to keep them off any third-party cloud. RapidDraft brings AI to that work without moving the data out of approved environments or out of your engineers’ hands.',
+        'Your drawings and BOMs are among your most sensitive IP. RapidDraft brings AI to them without moving the data out of approved environments.',
     },
     pillarsSection: {
       eyebrow: 'The four pillars',
@@ -105,7 +105,7 @@ const CONTENT = {
       eyebrow: 'Sicherheit und Souveränität',
       heading: 'Ihre Zeichnungen verlassen das Haus nie',
       subhead:
-        'Wenn Ihr Unternehmen es Ingenieuren verbietet, etwas in eine öffentliche KI einzufügen, ist das der richtige Reflex, und genau dafür ist RapidDraft gebaut. Modelle laufen lokal, auf Ihrer Infrastruktur. Wir trainieren nicht auf Ihrem IP, und Ihre Ingenieure behalten die Freigabe.',
+        'Darf niemand etwas in eine öffentliche KI einfügen? Der Reflex stimmt. RapidDraft läuft lokal und trainiert nie auf Ihrem IP.',
       requestNda: 'NDA anfragen',
       bookDemo: 'Demo buchen',
       figureCaption:
@@ -116,7 +116,7 @@ const CONTENT = {
       eyebrow: 'Warum es zählt',
       title: 'KI auf Ihre sensibelsten Zeichnungen bringen, ohne sie zu verschieben',
       intro:
-        'In der Automobil- und Präzisionsfertigung gehören Ihre Zeichnungen und Stücklisten zu Ihrem sensibelsten IP, und der Reflex ist, sie aus jeder Drittanbieter-Cloud herauszuhalten. RapidDraft bringt KI in diese Arbeit, ohne die Daten aus freigegebenen Umgebungen oder aus den Händen Ihrer Ingenieure zu bewegen.',
+        'Zeichnungen und Stücklisten sind Ihr sensibelstes IP. RapidDraft bringt KI dazu, ohne sie aus freigegebenen Umgebungen zu bewegen.',
     },
     pillarsSection: {
       eyebrow: 'Die vier Säulen',

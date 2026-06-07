@@ -11,7 +11,7 @@ const CONTENT = {
     eyebrow: 'Data sovereignty, built in',
     heading: 'Works with your stack, keeps your data secure',
     intro:
-      'RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM workflows. Models run on your infrastructure, your IP never leaves the building, and we do not train on it.',
+      'RapidDraft brings AI-assisted review into your CAD, drawing, BOM, and PLM workflows. It runs on your infrastructure and never trains on your IP.',
     stack: {
       title: 'Works with your engineering stack',
       body: 'Connect review context from CAD models, manufacturing drawings, BOMs, PLM/PDM records, and internal review rules.',
@@ -38,7 +38,7 @@ const CONTENT = {
     eyebrow: 'Datensouveränität, von Anfang an',
     heading: 'Arbeitet mit Ihrem Stack, schützt Ihre Daten',
     intro:
-      'RapidDraft bringt KI-gestützte Prüfung in Ihre bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows. Die Modelle laufen auf Ihrer Infrastruktur, Ihr IP verlässt das Haus nicht, und wir trainieren nicht darauf.',
+      'KI-gestützte Prüfung in Ihren CAD-, Zeichnungs-, BOM- und PLM-Workflows, auf Ihrer Infrastruktur und ohne Training auf Ihrem IP.',
     stack: {
       title: 'Arbeitet mit Ihrem Engineering-Stack',
       body: 'Verbindet Review-Kontext aus CAD-Modellen, Fertigungszeichnungen, Stücklisten, PLM/PDM-Daten und internen Prüfregeln.',
