@@ -321,34 +321,123 @@ export default function Home() {
     alt: t.railAlts[item.key],
   }));
 
-  // Full-screen section snapping + card-style reveal, only while Home is mounted.
+  // Deliberate, one-section-per-gesture scrolling (only while Home is mounted).
+  // On a trackpad/wheel, each swipe animates exactly one section up into place,
+  // like a card settling. Content reveals as it lands. Touch + reduced-motion
+  // fall back to native scrolling.
   useEffect(() => {
     const el = document.documentElement;
-    // Always open at the hero; prevent the browser from restoring a prior
-    // scroll position before mandatory snap engages.
     const prevRestoration = history.scrollRestoration;
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
     el.classList.add('rd-snap');
+
     const screens = Array.from(document.querySelectorAll<HTMLElement>('.rd-screen'));
-    const vh = window.innerHeight;
+    const vh0 = window.innerHeight;
     screens.forEach((s) => {
       const r = s.getBoundingClientRect();
-      if (r.top < vh * 0.75 && r.bottom > vh * 0.25) s.classList.add('is-in');
+      if (r.top < vh0 * 0.6 && r.bottom > vh0 * 0.4) s.classList.add('is-in');
     });
     const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('is-in');
-        });
-      },
-      { threshold: 0.3 },
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-in')),
+      { threshold: 0.35 },
     );
     screens.forEach((s) => io.observe(s));
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarse = window.matchMedia('(pointer: coarse)').matches;
+
+    let teardown = () => {};
+    if (!reduce && !coarse) {
+      const stops = () => {
+        const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const tops = screens.map((s) =>
+          Math.min(maxY, Math.round(s.getBoundingClientRect().top + window.scrollY)),
+        );
+        tops[0] = 0; // hero sits at the page top (with the nav visible)
+        if (maxY - tops[tops.length - 1] > 48) tops.push(maxY); // closing CTA + footer
+        return tops;
+      };
+      const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const nearest = (pts: number[]) => {
+        const y = window.scrollY;
+        let bi = 0, bd = Infinity;
+        pts.forEach((p, i) => { const d = Math.abs(p - y); if (d < bd) { bd = d; bi = i; } });
+        return bi;
+      };
+
+      let animating = false; // an eased move is currently in flight
+      let cooling = false; // brief settle after a move, kept alive by momentum
+      let raf = 0;
+      let coolT: number | undefined;
+      const isLocked = () => animating || cooling;
+      const startCooldown = () => {
+        cooling = true;
+        window.clearTimeout(coolT);
+        coolT = window.setTimeout(() => { cooling = false; }, 160);
+      };
+
+      const animateTo = (targetY: number) => {
+        cancelAnimationFrame(raf);
+        const startY = window.scrollY;
+        const dist = targetY - startY;
+        if (Math.abs(dist) < 2) return;
+        const dur = Math.min(820, Math.max(420, Math.abs(dist) * 0.62));
+        const t0 = performance.now();
+        animating = true;
+        const step = (now: number) => {
+          const t = Math.min(1, (now - t0) / dur);
+          window.scrollTo(0, Math.round(startY + dist * ease(t)));
+          if (t < 1) raf = requestAnimationFrame(step);
+          else { animating = false; startCooldown(); }
+        };
+        raf = requestAnimationFrame(step);
+      };
+
+      const go = (dir: number) => {
+        const pts = stops();
+        const cur = nearest(pts);
+        const target = Math.max(0, Math.min(pts.length - 1, cur + dir));
+        if (target === cur) return; // already at the first/last stop
+        animateTo(pts[target]);
+      };
+
+      const onWheel = (e: WheelEvent) => {
+        e.preventDefault();
+        // One physical swipe = one section. While a move is in flight or settling,
+        // keep absorbing the trackpad's momentum tail (extend the cooldown) so the
+        // decelerating scroll never bleeds into a second jump.
+        if (isLocked()) { if (cooling) startCooldown(); return; }
+        if (Math.abs(e.deltaY) < 4) return;
+        go(e.deltaY > 0 ? 1 : -1);
+      };
+
+      const onKey = (e: KeyboardEvent) => {
+        const node = e.target as HTMLElement | null;
+        if (node && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA' || node.isContentEditable)) return;
+        if (isLocked()) { if (e.key.startsWith('Arrow') || e.key === 'PageDown' || e.key === 'PageUp' || e.key === ' ') e.preventDefault(); return; }
+        const pts = stops();
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+        else if (e.key === 'Home') { e.preventDefault(); animateTo(pts[0]); }
+        else if (e.key === 'End') { e.preventDefault(); animateTo(pts[pts.length - 1]); }
+      };
+
+      window.addEventListener('wheel', onWheel, { passive: false });
+      window.addEventListener('keydown', onKey);
+      teardown = () => {
+        window.removeEventListener('wheel', onWheel);
+        window.removeEventListener('keydown', onKey);
+        cancelAnimationFrame(raf);
+        window.clearTimeout(coolT);
+      };
+    }
+
     return () => {
       el.classList.remove('rd-snap');
       io.disconnect();
       screens.forEach((s) => s.classList.remove('is-in'));
+      teardown();
       if ('scrollRestoration' in history) history.scrollRestoration = prevRestoration;
     };
   }, []);
@@ -362,7 +451,7 @@ export default function Home() {
       />
 
       {/* ── Hero (slightly larger, centered) ─────────────── */}
-      <header className="rd-screen relative overflow-hidden">
+      <header className="rd-screen rd-screen--hero relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
