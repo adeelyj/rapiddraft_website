@@ -3,7 +3,6 @@ import PageMeta from '../components/PageMeta';
 import {
   Section,
   Container,
-  SectionHead,
   Eyebrow,
   H1,
   H2,
@@ -103,11 +102,33 @@ const KPIS = [
 ];
 
 export default function Home() {
-  // Apple-style full-screen section snapping, only while Home is mounted.
+  // Apple-style full-screen section snapping + card-style reveal, only while
+  // Home is mounted.
   useEffect(() => {
     const el = document.documentElement;
     el.classList.add('rd-snap');
-    return () => el.classList.remove('rd-snap');
+    const screens = Array.from(document.querySelectorAll<HTMLElement>('.rd-screen'));
+    // Reveal anything already on screen immediately (reliable on load), then let
+    // the observer reveal the rest as they scroll into view.
+    const vh = window.innerHeight;
+    screens.forEach((s) => {
+      const r = s.getBoundingClientRect();
+      if (r.top < vh * 0.75 && r.bottom > vh * 0.25) s.classList.add('is-in');
+    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-in');
+        });
+      },
+      { threshold: 0.3 },
+    );
+    screens.forEach((s) => io.observe(s));
+    return () => {
+      el.classList.remove('rd-snap');
+      io.disconnect();
+      screens.forEach((s) => s.classList.remove('is-in'));
+    };
   }, []);
 
   return (
@@ -126,8 +147,8 @@ export default function Home() {
           style={{ background: 'radial-gradient(55% 60% at 12% 2%, var(--rd-accent-soft), transparent 60%)' }}
         />
         <Container className="relative w-full">
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-            <div className="max-w-xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-16">
+            <div className="max-w-2xl">
               <Eyebrow>Agentic drawing release and design review for engineering teams</Eyebrow>
               <H1 className="mt-5">
                 Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
@@ -191,11 +212,12 @@ export default function Home() {
       {/* ── Problem (sanctioned display heading) ─────────── */}
       <Section screen>
         <div className="max-w-4xl">
+          <Eyebrow className="mb-5">Problem</Eyebrow>
           <H2 display>
             Design intent lives in CAD. Requirements live in drawings. The review logic lives in
-            people&rsquo;s heads.
+            people&rsquo;s heads
           </H2>
-          <Intro className="mt-6 max-w-2xl">
+          <Intro className="mt-5 max-w-2xl">
             Collaboration is inefficient, drawing review is error-prone, and quality inspection is
             slow and tedious. Good designs stall in documentation and review.
           </Intro>
@@ -214,12 +236,12 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ── Solution + figure 2 ──────────────────────────── */}
+      {/* ── Solution + figure 2 (centered showcase) ──────── */}
       <Section screen>
-        <div className="max-w-3xl">
+        <div className="mx-auto max-w-3xl text-center">
           <Eyebrow className="mb-5">Solution</Eyebrow>
           <H2>Turn fragmented review work into a connected release workflow</H2>
-          <Intro className="mt-6">
+          <Intro className="mt-5">
             RapidDraft is human-in-the-loop AI, grounded in your rules. Drafting intent, review
             decisions, and manufacturing feedback stay attached to the design, with the 3D model as
             the single source of truth and engineers in control of every release. Teams redo less
@@ -228,7 +250,7 @@ export default function Home() {
           </Intro>
         </div>
 
-        <div className="mt-6 w-full max-w-[820px] rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-4 sm:p-5">
+        <div className="mx-auto mt-8 w-full max-w-[820px] rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-4 sm:p-5">
           <Figure caption="RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.">
             <HubAndSpokeFigure />
           </Figure>
@@ -237,11 +259,15 @@ export default function Home() {
 
       {/* ── Capabilities ─────────────────────────────────── */}
       <Section screen>
-        <SectionHead
-          title="One review layer, four core capabilities"
-          lede="The same review layer generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
-        />
-        <div className="grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
+        <div className="max-w-3xl">
+          <Eyebrow className="mb-5">Capabilities</Eyebrow>
+          <H2>One review layer, four core capabilities</H2>
+          <Intro className="mt-5">
+            The same review layer generates documents, automates checks, keeps collaboration on the
+            model, and preserves what teams learn.
+          </Intro>
+        </div>
+        <div className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
           {CAPABILITIES.map((cap, i) => (
             <div key={cap.title} className="bg-[var(--rd-surface)] p-6 sm:p-7">
               <div className="rd-index">0{i + 1}</div>
@@ -265,7 +291,7 @@ export default function Home() {
           <div>
             <Eyebrow className="mb-5">Security</Eyebrow>
             <H2>Works with your stack, keeps your data in-house</H2>
-            <Intro className="mt-6 max-w-xl">
+            <Intro className="mt-5 max-w-xl">
               RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM
               workflows. Your tools, approval gates, and sensitive engineering data stay under your
               control.
@@ -277,7 +303,7 @@ export default function Home() {
             </div>
           </div>
           <Card className="bg-[var(--rd-surface)]">
-            <div className="rd-kpi-label">The four pillars</div>
+            <div className="rd-microlabel">The four pillars</div>
             <div className="mt-4 grid grid-cols-2 gap-3">
               {['Data sovereignty', 'IP protection', 'Employee trust', 'Data quality'].map((p) => (
                 <div
@@ -302,8 +328,9 @@ export default function Home() {
       {/* ── ROI ──────────────────────────────────────────── */}
       <RoiCalculator />
 
-      {/* ── Final CTA ────────────────────────────────────── */}
-      <Section screen>
+      {/* ── Final CTA (closing block; not a snap screen so the footer stays
+           reachable under mandatory snapping) ─────────────── */}
+      <Section>
         <div className="max-w-2xl">
           <H2>Bring speed and traceability to drawing release</H2>
           <Intro className="mt-5 max-w-xl">

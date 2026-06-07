@@ -53,7 +53,7 @@
   --rd-dur-slow: 260ms;
   --rd-ease: cubic-bezier(0.2, 0, 0.2, 1);
 
-  --rd-gutter: clamp(24px, 5.5vw, 80px);
+  --rd-gutter: clamp(20px, 3vw, 56px);
 }
 
 /* ---------- Tokens: dark mode (global toggle) + dark band ---------- */
@@ -104,12 +104,12 @@
 /* ---------- Layout ---------- */
 .rd-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-inline: auto;
   padding-inline: var(--rd-gutter);
 }
-.rd-container--wide { max-width: 1320px; }
-.rd-container--narrow { max-width: 920px; }
+.rd-container--wide { max-width: 1560px; }
+.rd-container--narrow { max-width: 900px; }
 
 .rd-section { padding-block: clamp(56px, 9vw, 120px); }
 .rd-section--tight { padding-block: clamp(40px, 6vw, 80px); }
@@ -130,11 +130,23 @@
   scroll-snap-align: start;
 }
 html.rd-snap {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
+}
+/* Card-style reveal: each section's content fades and slides up as it
+   takes over the viewport (toggled by an IntersectionObserver in Home). */
+html.rd-snap .rd-screen .rd-container {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.55s var(--rd-ease), transform 0.55s var(--rd-ease);
+}
+html.rd-snap .rd-screen.is-in .rd-container {
+  opacity: 1;
+  transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
   html.rd-snap { scroll-snap-type: none; }
+  html.rd-snap .rd-screen .rd-container { opacity: 1; transform: none; transition: none; }
 }
 
 /* Two-column section header: heading left, lede right */
@@ -373,6 +385,16 @@ html.rd-snap {
   font-weight: 600;
   letter-spacing: 0;
   color: var(--rd-accent);
+}
+
+/* Micro-label — small uppercase label inside cards/panels (no // prefix) */
+.rd-microlabel {
+  font-family: var(--rd-meta);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rd-fg-3);
 }
 
 /* ---------- Figure ---------- */

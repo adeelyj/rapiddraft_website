@@ -48,7 +48,7 @@ export default function RoiCalculator() {
   return (
     <section id="roi-calculator" className="rd-section rd-screen">
       <div className="rd-container">
-        <div className="max-w-2xl">
+        <div className="mx-auto max-w-2xl text-center">
           <Eyebrow className="mb-5">ROI calculator</Eyebrow>
           <H2>Estimate the annual value of faster engineering review</H2>
           <Intro className="mt-5">
@@ -57,15 +57,10 @@ export default function RoiCalculator() {
           </Intro>
         </div>
 
-        <div className="mt-7 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mx-auto mt-8 grid w-full max-w-[960px] gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] text-left lg:grid-cols-[1.05fr_0.95fr]">
           {/* Parameters */}
           <div className="bg-[var(--rd-surface)] p-6 sm:p-8">
-            <div
-              className="text-[12px] uppercase tracking-[0.12em] text-[var(--rd-fg-3)]"
-              style={{ fontFamily: 'var(--rd-meta)' }}
-            >
-              Parameters
-            </div>
+            <div className="rd-microlabel">Parameters</div>
             <div className="mt-7 flex flex-col gap-7">
               {roiInputs.map((input) => {
                 const value = roi[input.key];
@@ -123,7 +118,7 @@ export default function RoiCalculator() {
           </div>
         </div>
 
-        <Body soft sm className="mt-6 max-w-3xl">
+        <Body soft sm className="mx-auto mt-6 max-w-3xl text-center">
           Conservative by design. Time saved is the higher of 3 hours per engineer per week or 30% of
           current effort. Each engineer avoids at least one issue per year, at an average avoided cost
           of about {formatEuro(AVOIDED_COST_PER_ISSUE)}. The model assumes {WORKING_WEEKS_PER_YEAR}{' '}
