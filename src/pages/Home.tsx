@@ -314,6 +314,11 @@ export default function Home() {
   // Full-screen section snapping + card-style reveal, only while Home is mounted.
   useEffect(() => {
     const el = document.documentElement;
+    // Always open at the hero; prevent the browser from restoring a prior
+    // scroll position before mandatory snap engages.
+    const prevRestoration = history.scrollRestoration;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
     el.classList.add('rd-snap');
     const screens = Array.from(document.querySelectorAll<HTMLElement>('.rd-screen'));
     const vh = window.innerHeight;
@@ -334,6 +339,7 @@ export default function Home() {
       el.classList.remove('rd-snap');
       io.disconnect();
       screens.forEach((s) => s.classList.remove('is-in'));
+      if ('scrollRestoration' in history) history.scrollRestoration = prevRestoration;
     };
   }, []);
 
@@ -346,13 +352,13 @@ export default function Home() {
       />
 
       {/* ── Hero (slightly larger, centered) ─────────────── */}
-      <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
+      <header className="rd-screen relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
           style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
         />
-        <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
+        <Container className="relative w-full">
           <div className="mx-auto max-w-[820px] text-center">
             <Eyebrow>{t.hero.eyebrow}</Eyebrow>
             <H1 className="mt-5">

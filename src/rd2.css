@@ -136,12 +136,9 @@ html.rd-snap {
   scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
 }
-/* The closing CTA + footer form the final stop, aligned to the viewport end so
-   the very bottom stays reachable under mandatory snap (no footer trap). */
-html.rd-snap footer {
-  scroll-snap-align: end;
-  scroll-snap-stop: always;
-}
+/* The closing CTA is the last snap stop; the footer flows beneath it as the
+   document tail (no snap target at the very bottom, which would otherwise pull
+   the initial load position to the end). */
 /* Card-style reveal: each section's content fades and slides up as it
    takes over the viewport (toggled by an IntersectionObserver in Home). */
 html.rd-snap .rd-screen .rd-container {
