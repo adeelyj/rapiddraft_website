@@ -39,20 +39,20 @@ const CONTENT = {
     ],
     problemCards: [
       {
-        title: 'Design intent and drawings drift apart',
-        body: 'Intent lives in CAD, requirements in the drawing.',
+        title: 'Drawings restart on every revision',
+        body: 'Documentation gets rebuilt on every geometry change, even when the underlying intent is unchanged.',
       },
       {
-        title: 'Constraints live outside CAD',
-        body: 'DFM notes and supplier feedback hide in email.',
+        title: 'Manufacturing constraints live outside CAD',
+        body: 'DFM notes, supplier feedback, and release caveats stay buried in PDFs and email, not on the part.',
       },
       {
-        title: 'The review logic is tribal knowledge',
-        body: 'The reasoning lives in a checker’s head, not the file.',
+        title: 'Review decisions lose their model context',
+        body: 'Comments and approvals are hard to trace back to the exact change that triggered them.',
       },
       {
-        title: 'The release chain is a serial bottleneck',
-        body: 'Drawings wait on a serial sign-off chain.',
+        title: 'Lessons learned rarely reach the next cycle',
+        body: 'Teams keep rediscovering the same issues because past decisions are not kept with the model.',
       },
     ],
     capabilities: [
@@ -158,20 +158,20 @@ const CONTENT = {
     ],
     problemCards: [
       {
-        title: 'Absicht und Zeichnung driften',
-        body: 'Absicht im CAD, Vorgaben in der Zeichnung.',
+        title: 'Zeichnungen starten bei jeder Revision neu',
+        body: 'Die Dokumentation wird bei jeder Geometrieänderung neu erstellt, auch wenn die Absicht gleich bleibt.',
       },
       {
-        title: 'Vorgaben liegen außerhalb des CAD',
-        body: 'DFM-Hinweise und Feedback liegen in E-Mails.',
+        title: 'Fertigungsvorgaben liegen außerhalb des CAD',
+        body: 'DFM-Hinweise, Lieferantenfeedback und Freigabevorbehalte bleiben in PDFs und E-Mails, nicht am Bauteil.',
       },
       {
-        title: 'Die Prüflogik ist tribales Wissen',
-        body: 'Die Begründung steckt im Kopf des Prüfers.',
+        title: 'Review-Entscheidungen verlieren den Modellbezug',
+        body: 'Kommentare und Freigaben lassen sich schwer auf die auslösende Änderung zurückführen.',
       },
       {
-        title: 'Die Freigabekette ist ein serieller Engpass',
-        body: 'Zeichnungen warten auf serielle Unterschriften.',
+        title: 'Erkenntnisse erreichen selten den nächsten Zyklus',
+        body: 'Teams entdecken dieselben Probleme erneut, weil frühere Entscheidungen nicht am Modell bleiben.',
       },
     ],
     capabilities: [
