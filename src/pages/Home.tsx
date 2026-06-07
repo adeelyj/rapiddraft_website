@@ -160,13 +160,13 @@ export default function Home() {
       />
 
       {/* ── Hero (slightly larger, centered) ─────────────── */}
-      <header className="rd-screen relative overflow-hidden">
+      <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
           style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
         />
-        <Container className="relative w-full">
+        <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
           <div className="mx-auto max-w-[820px] text-center">
             <Eyebrow>Agentic drawing release and design review for engineering teams</Eyebrow>
             <H1 className="mt-5">
@@ -191,7 +191,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mx-auto mt-6 w-full max-w-[940px]">
+          <div className="mx-auto mt-10 w-full max-w-[820px]">
             <CapabilityRail items={RAIL_ITEMS} />
           </div>
         </Container>

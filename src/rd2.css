@@ -130,7 +130,7 @@
   scroll-snap-align: start;
 }
 html.rd-snap {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scroll-padding-top: 0;
 }
 /* Card-style reveal: each section's content fades and slides up as it

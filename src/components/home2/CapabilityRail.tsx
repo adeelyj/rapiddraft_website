@@ -148,8 +148,7 @@ export default function CapabilityRail({ items }: { items: RailItem[] }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.24 }}
-            className="bg-[var(--rd-sunken)]"
-            style={{ height: 'clamp(140px, 16vh, 210px)' }}
+            className="aspect-[16/10] bg-[var(--rd-sunken)]"
           >
             <VideoStage
               item={activeItem}
