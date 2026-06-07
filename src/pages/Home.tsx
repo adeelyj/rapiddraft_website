@@ -140,7 +140,7 @@ export default function Home() {
             </div>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
               {HERO_BADGES.map((b) => (
-                <Tag key={b} mono>
+                <Tag key={b}>
                   {b}
                 </Tag>
               ))}
@@ -284,7 +284,7 @@ export default function Home() {
             </div>
             <div className="mt-6 flex flex-wrap gap-2">
               {['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'SSO', 'Human approval'].map((b) => (
-                <Tag key={b} mono>
+                <Tag key={b}>
                   {b}
                 </Tag>
               ))}

@@ -33,13 +33,13 @@ export default function HubAndSpokeFigure() {
       <svg viewBox="0 0 1200 520" className="block h-auto w-full overflow-visible" aria-hidden="true">
         <style>{`
           .hs-pill { fill: var(--rd-surface); stroke: var(--rd-edge); stroke-width: 1; }
-          .hs-label { fill: var(--rd-head); font-family: 'Satoshi','Geist',sans-serif; font-size: 15px; font-weight: 500; }
+          .hs-label { fill: var(--rd-head); font-family: 'Inter',sans-serif; font-size: 15px; font-weight: 500; }
           .hs-cap { fill: var(--rd-fg-3); font-family: 'Geist Mono',monospace; font-size: 11px; letter-spacing: 0.12em; }
           .hs-flow { stroke: var(--rd-edge); stroke-width: 1; fill: none; }
           .hs-flow-live { stroke: var(--rd-accent); stroke-width: 1.2; fill: none; stroke-dasharray: 2 9; opacity: 0.7; animation: hs-dash 3s linear infinite; }
           .hs-hub-ring { fill: none; stroke: var(--rd-accent); stroke-width: 1.4; }
           .hs-hub-disk { fill: var(--rd-surface); stroke: var(--rd-edge); stroke-width: 1; }
-          .hs-hub-name { fill: var(--rd-fg-strong); font-family: 'Satoshi','Geist',sans-serif; font-weight: 600; font-size: 21px; }
+          .hs-hub-name { fill: var(--rd-fg-strong); font-family: 'Inter',sans-serif; font-weight: 600; font-size: 21px; }
           .hs-hub-sub { fill: var(--rd-fg-3); font-family: 'Geist Mono',monospace; font-size: 10.5px; letter-spacing: 0.14em; }
           @keyframes hs-dash { to { stroke-dashoffset: -88; } }
           @media (prefers-reduced-motion: reduce) { .hs-flow-live { animation: none; } }

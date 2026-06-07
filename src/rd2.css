@@ -7,8 +7,7 @@
    · tight radii · light-weight type · mono "//" labels.
    ============================================================ */
 
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Geist+Mono:wght@400;500&display=swap');
 
 /* ---------- Tokens: light (canonical) ---------- */
 :root {
@@ -35,9 +34,13 @@
   --rd-focus:         #ea580c;
   --rd-grid-line:     rgba(17, 17, 17, 0.05);
 
-  --rd-sans: 'Satoshi', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --rd-meta: 'Geist', 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  /* All reading + UI text is Inter. All numerics use --rd-num (Manrope, the
+     credibility-KPI font from the earlier site). Geist Mono is kept only for
+     the // and / accent marks. */
+  --rd-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --rd-meta: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --rd-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --rd-num:  'Manrope', 'Inter', ui-sans-serif, system-ui, sans-serif;
 
   --rd-r-xs: 2px;
   --rd-r-sm: 4px;
@@ -144,7 +147,8 @@
 }
 .rd-eyebrow .rd-num {
   color: var(--rd-accent);
-  font-family: var(--rd-mono);
+  font-family: var(--rd-num);
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum';
 }
@@ -327,11 +331,11 @@
 
 /* ---------- KPI ---------- */
 .rd-kpi-num {
-  font-family: var(--rd-sans);
+  font-family: var(--rd-num);
   font-size: clamp(36px, 4vw, 50px);
   line-height: 1;
   letter-spacing: -0.02em;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--rd-accent);
 }
 .rd-kpi-label {
@@ -339,11 +343,12 @@
   font-size: 13px;
   color: var(--rd-fg-3);
 }
-/* Mono index marker (01 / 02 …) — accent */
+/* Numeric index marker (01 / 02 …) — Manrope, accent */
 .rd-index {
-  font-family: var(--rd-mono);
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-family: var(--rd-num);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
   color: var(--rd-accent);
 }
 

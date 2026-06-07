@@ -79,11 +79,15 @@ keeps figures mostly monochrome + accent, with these muted tints reserved for ca
 
 ## Typography
 
-| Role | inxm | RapidDraft substitution |
+| Role | inxm | RapidDraft (per RapidDraft brand direction) |
 |---|---|---|
-| Display / marketing / body | **Satoshi** 400-700 (Fontshare) | **Satoshi** (Fontshare CDN, free for commercial use) — same family, legitimately licensed |
-| Meta / UI labels | Geist | **Geist** (open source, OFL) |
-| Mono (IDs, chips, dates, `//`) | Geist Mono | **Geist Mono** (open source) |
+| All text (display, headings, body, UI labels) | Satoshi / Geist | **Inter** (Google Fonts, OFL) — chosen by RapidDraft for all reading and UI text |
+| Numbers (KPIs, section/card index, ROI values) | Geist / Geist Mono | **Manrope** (Google Fonts, OFL) — the credibility-KPI font from the earlier RapidDraft site, kept as the numeric voice |
+| `//` and `/` accent marks | Geist Mono | **Geist Mono** (open source) — decorative marks only |
+
+> Font note: inxm uses Satoshi + Geist. RapidDraft's brand direction is **Inter for all
+> text and Manrope for all numbers** (KPIs, section numbers, card numbers, ROI values), which
+> gives a clear text/number contrast while staying in the same restrained, technical spirit.
 
 Type scale (px / line-height / weight / tracking), light-canonical:
 
@@ -181,9 +185,10 @@ A small set of primitives (`Eyebrow`, `H1`, `Subhead`, `H2`, `H3`, `Body`, `Meta
    keeping, so accent marks and the logo stay coherent. Everything else (monochrome surfaces,
    black buttons, hairlines) follows inxm. If you'd rather match inxm's exact `#FF5900`, it's a
    one-line token change.
-2. **Fonts — substituting to Satoshi (sans/display) + Geist Mono (mono).** Both are free for
-   commercial use (Fontshare ITF license / OFL), so this is a legitimate match to the inxm feel,
-   replacing the current Manrope / Space Grotesk / IBM Plex Mono. Loaded via the same public CDNs.
+2. **Fonts — Inter for all text, Manrope for all numbers** (per RapidDraft direction), with
+   Geist Mono kept only for the `//` / `/` accent marks. All are free for commercial use (OFL),
+   loaded via Google Fonts. Manrope is the same font the earlier RapidDraft site used for its
+   credibility KPIs, so the numeric voice carries over.
 3. **Light-canonical, not dark-canonical.** inxm defaults to dark; the spec wants Home/Platform/
    Use cases/Company/Book-a-demo light and only Security on a dark band. RapidDraft inverts inxm's
    default accordingly.

@@ -74,8 +74,8 @@ export default function RoiCalculator() {
                     <div className="flex items-baseline justify-between gap-4">
                       <span className="text-[15px] text-[var(--rd-fg)]">{input.label}</span>
                       <span
-                        className="text-[15px] text-[var(--rd-accent)]"
-                        style={{ fontFamily: 'var(--rd-mono)' }}
+                        className="text-[15px] font-semibold text-[var(--rd-accent)]"
+                        style={{ fontFamily: 'var(--rd-num)' }}
                       >
                         {input.format(value)}
                       </span>
@@ -110,8 +110,8 @@ export default function RoiCalculator() {
                 <div
                   className="text-[26px] sm:text-[30px]"
                   style={{
-                    fontFamily: 'var(--rd-sans)',
-                    fontWeight: 500,
+                    fontFamily: 'var(--rd-num)',
+                    fontWeight: 600,
                     letterSpacing: '-0.02em',
                     color: r.highlight ? 'var(--rd-accent)' : 'var(--rd-fg-strong)',
                   }}
