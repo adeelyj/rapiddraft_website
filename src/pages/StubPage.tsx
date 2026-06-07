@@ -22,22 +22,27 @@ export default function StubPage({
   path,
 }: StubPageProps) {
   return (
-    <div className="rd2">
+    <div className="rd2 rd-page">
       <PageMeta title={metaTitle} description={metaDescription} path={path} robots="noindex" />
       <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
-        <Container className="relative py-24 sm:py-28">
-          <div className="max-w-3xl">
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
+        />
+        <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
+          <div className="mx-auto max-w-[820px] text-center">
             <Eyebrow className="mb-6">{eyebrow}</Eyebrow>
             <H1>{title}</H1>
-            <Subhead className="mt-6 max-w-2xl">
+            <Subhead className="mx-auto mt-5 max-w-[760px]">
               {note ?? 'This section is being built on the major-changes-hasan branch and will follow shortly.'}
             </Subhead>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button to="/" variant="secondary" arrow>
-                Back to home
-              </Button>
+            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button to="/book-demo" variant="primary">
                 Book a demo
+              </Button>
+              <Button to="/" variant="secondary" arrow>
+                Back to home
               </Button>
             </div>
           </div>

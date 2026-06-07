@@ -396,7 +396,7 @@ export default function Home() {
           title={t.credibility.title}
           intro={t.credibility.intro}
         />
-        <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.kpis.map((k) => (
             <div key={k.label} className="rd-tile">
               <div className="rd-kpi-num">{k.value}</div>
@@ -479,7 +479,7 @@ export default function Home() {
           title={t.security.title}
           intro={t.security.intro}
         />
-        <div className="mx-auto mt-10 grid max-w-[1040px] grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-[1120px] grid-cols-2 gap-4 sm:grid-cols-4">
           {t.pillars.map((p) => (
             <div
               key={p}
