@@ -171,7 +171,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
   display: inline-flex;
   align-items: baseline;
   gap: 10px;
-  margin: 0;
+  margin-block: 0;
 }
 .rd-eyebrow::before {
   content: '//';
@@ -202,7 +202,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
   font-weight: 500;
   color: var(--rd-fg-strong);
   text-wrap: balance;
-  margin: 0;
+  margin-block: 0;
 }
 .rd-h2 {
   font-family: var(--rd-sans);
@@ -212,7 +212,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
   font-weight: 500;
   color: var(--rd-head);
   text-wrap: balance;
-  margin: 0;
+  margin-block: 0;
 }
 /* Display heading (problem statement) — same size, slightly looser leading */
 .rd-h2--display {
@@ -225,7 +225,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
   letter-spacing: -0.005em;
   font-weight: 500;
   color: var(--rd-head);
-  margin: 0;
+  margin-block: 0;
 }
 
 /* Hero subhead — the single largest paragraph */
@@ -234,7 +234,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
   line-height: 1.55;
   color: var(--rd-fg-2);
   font-weight: 400;
-  margin: 0;
+  margin-block: 0;
 }
 /* Section intro / lede — every paragraph that sits directly under a section H2 */
 .rd-intro,
@@ -243,13 +243,13 @@ html.rd-snap .rd-screen.is-in .rd-container {
   line-height: 1.6;
   color: var(--rd-fg-2);
   font-weight: 400;
-  margin: 0;
+  margin-block: 0;
 }
 .rd-body {
   font-size: 16px;
   line-height: 1.65;
   color: var(--rd-fg);
-  margin: 0;
+  margin-block: 0;
 }
 .rd-body--sm {
   font-size: 15px;
