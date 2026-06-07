@@ -13,6 +13,7 @@ import {
   Body,
   Button,
   Figure,
+  Tag,
 } from '../components/ui/primitives';
 import StackAndSovereignty from '../components/platform/StackAndSovereignty';
 import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
@@ -57,15 +58,18 @@ const CONTENT = {
     steps: [
       {
         title: 'Connect',
-        body: 'Point RapidDraft at your CAD and PLM: Siemens NX, CATIA, SolidWorks, EPLAN, and your PDM or CIM Database. Your IP stays in your governed systems. No tools or workflow to swap out.',
+        body: 'Point RapidDraft at your existing CAD and PLM. Your IP stays in your governed systems, with nothing to swap out.',
+        tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PDM / CIM'],
       },
       {
         title: 'Check',
-        body: 'RapidDraft does the first pass: it reads the drawing and tests it against your engineering, manufacturing, and company rules. It flags missing dimensions, tolerance and GD&T conflicts, datum-scheme gaps, standards violations, and manufacturability risks, each one linked to the rule it came from.',
+        body: 'The first pass against your engineering, manufacturing, and company rules, every finding linked to its source.',
+        tags: ['Missing dimensions', 'GD&T & tolerances', 'Datum schemes', 'Standards', 'Manufacturability'],
       },
       {
         title: 'Release',
-        body: 'The engineer reviews the findings, decides, and releases through a clear gate. Every decision feeds an audit trail (VDA, EMPB) and stays as reusable company knowledge for the next reviewer.',
+        body: 'The engineer reviews the findings, decides, and releases through a clear gate.',
+        tags: ['Audit trail (VDA, EMPB)', 'Reusable knowledge'],
       },
     ],
     inside: {
@@ -165,15 +169,18 @@ const CONTENT = {
     steps: [
       {
         title: 'Verbinden',
-        body: 'Richten Sie RapidDraft auf Ihr CAD und PLM aus: Siemens NX, CATIA, SolidWorks, EPLAN sowie Ihr PDM oder CIM Database. Ihr IP bleibt in Ihren geregelten Systemen. Keine Werkzeuge oder Workflows zum Austauschen.',
+        body: 'Richten Sie RapidDraft auf Ihr bestehendes CAD und PLM aus. Ihr IP bleibt in Ihren geregelten Systemen, nichts zum Austauschen.',
+        tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PDM / CIM'],
       },
       {
         title: 'Prüfen',
-        body: 'RapidDraft übernimmt den ersten Durchgang: Es liest die Zeichnung und prüft sie gegen Ihre Konstruktions-, Fertigungs- und Unternehmensregeln. Es markiert fehlende Bemaßungen, Toleranz- und GD&T-Konflikte, Lücken im Bezugssystem, Normverstöße und Fertigungsrisiken, jeden Befund verknüpft mit der Regel, aus der er stammt.',
+        body: 'Der erste Durchgang gegen Ihre Konstruktions-, Fertigungs- und Unternehmensregeln, jeder Befund mit seiner Quelle verknüpft.',
+        tags: ['Fehlende Maße', 'GD&T & Toleranzen', 'Bezugssysteme', 'Normen', 'Fertigbarkeit'],
       },
       {
         title: 'Freigeben',
-        body: 'Der Ingenieur prüft die Befunde, entscheidet und gibt über ein klares Gate frei. Jede Entscheidung fließt in einen Audit-Trail (VDA, EMPB) und bleibt als wiederverwendbares Unternehmenswissen für den nächsten Prüfer erhalten.',
+        body: 'Der Ingenieur prüft die Befunde, entscheidet und gibt über ein klares Gate frei.',
+        tags: ['Audit-Trail (VDA, EMPB)', 'Wiederverwendbares Wissen'],
       },
     ],
     inside: {
@@ -326,12 +333,17 @@ export default function Platform() {
         <SectionHeader title={t.howItWorks.title} />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.steps.map((step, i) => (
-            <div key={step.title} className="rd-tile">
+            <div key={step.title} className="rd-tile rd-tile--left flex flex-col">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-3">{step.title}</H3>
               <Body soft sm className="mt-2.5">
                 {step.body}
               </Body>
+              <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                {step.tags.map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </div>
             </div>
           ))}
         </div>

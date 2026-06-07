@@ -71,25 +71,47 @@ const CONTENT = {
       eyebrow: 'Deployment and data handling',
       title: 'Run it on-prem or in a private EU cloud',
       intro:
-        'Run it on-prem for full sovereignty, or in a private or EU-hosted cloud if you would rather we operate it, scaled to your release volume. It works around your current CAD, PDM, PLM, and release process rather than replacing them. Either way you get scoped access, SSO, role-based permissions, encryption, and a full audit trail, with no uncontrolled data movement.',
+        'Run it on-prem for full sovereignty, or in a private or EU-hosted cloud we operate, scaled to your release volume.',
+      points: [
+        'Works around your CAD, PDM, PLM, and release process',
+        'Scoped access, SSO, and role-based permissions',
+        'Encryption and a full audit trail',
+        'No uncontrolled data movement',
+      ],
     },
     governance: {
       eyebrow: 'AI governance',
       title: 'Show-your-work agents, engineers in control',
       intro:
-        'Models run locally and learn only from anonymized or approved data. The agentic workflow shows its work, so you can see why each finding was raised and trace it back to the rule, standard, or drawing note it came from. Engineers, not the AI, make every release decision.',
+        'Models run locally and learn only from anonymized or approved data, and the agentic workflow shows its work.',
+      points: [
+        'See why each finding was raised',
+        'Trace it to the rule, standard, or drawing note',
+        'Engineers, not the AI, make every release decision',
+      ],
     },
     standards: {
       eyebrow: 'Standards and audit',
       title: 'Outputs that line up with your quality processes',
       intro:
-        'Outputs follow your drawing standards, ISO and ASME. Release gates, first-article inspection (FAIR and EMPB), BOM consistency, and a full audit trail line up with VDA Band 2 and the rigor your quality team already works to.',
+        'Outputs follow your drawing standards, ISO and ASME, at the rigor your quality team already works to.',
+      points: [
+        'Release gates',
+        'First-article inspection (FAIR, EMPB)',
+        'BOM consistency',
+        'Full audit trail',
+        'Aligned with VDA Band 2',
+      ],
     },
     compliance: {
       eyebrow: 'Compliance',
       title: 'GDPR-compliant by design',
-      intro:
-        'RapidDraft is GDPR-compliant by design, with EU data residency, a DPA available on request, and subprocessor transparency.',
+      intro: 'GDPR-compliant by design.',
+      points: [
+        'EU data residency',
+        'DPA available on request',
+        'Subprocessor transparency',
+      ],
       requestNda: 'Request an NDA',
       bookDemo: 'Book a demo',
     },
@@ -146,25 +168,47 @@ const CONTENT = {
       eyebrow: 'Bereitstellung und Datenverarbeitung',
       title: 'Betreiben Sie es On-Prem oder in einer privaten EU-Cloud',
       intro:
-        'Betreiben Sie es On-Prem für volle Souveränität oder in einer privaten bzw. EU-gehosteten Cloud, wenn wir es lieber für Sie betreiben sollen, skaliert auf Ihr Freigabevolumen. Es fügt sich in Ihre bestehenden CAD-, PDM-, PLM- und Freigabeprozesse ein, statt sie zu ersetzen. So oder so erhalten Sie eingeschränkten Zugriff, SSO, rollenbasierte Berechtigungen, Verschlüsselung und einen vollständigen Audit-Trail, ohne unkontrollierte Datenbewegung.',
+        'Betreiben Sie es On-Prem für volle Souveränität oder in einer privaten bzw. EU-gehosteten Cloud, die wir betreiben, skaliert auf Ihr Freigabevolumen.',
+      points: [
+        'Fügt sich in Ihr CAD, PDM, PLM und Ihren Freigabeprozess ein',
+        'Eingeschränkter Zugriff, SSO und rollenbasierte Berechtigungen',
+        'Verschlüsselung und ein vollständiger Audit-Trail',
+        'Keine unkontrollierte Datenbewegung',
+      ],
     },
     governance: {
       eyebrow: 'KI-Governance',
       title: 'Agenten, die ihre Arbeit zeigen, Ingenieure in Kontrolle',
       intro:
-        'Modelle laufen lokal und lernen nur aus anonymisierten oder freigegebenen Daten. Der agentische Workflow zeigt seine Arbeit, sodass Sie sehen, warum jeder Befund entstanden ist, und ihn auf die Regel, den Standard oder die Zeichnungsnotiz zurückführen können. Ingenieure, nicht die KI, treffen jede Freigabeentscheidung.',
+        'Modelle laufen lokal und lernen nur aus anonymisierten oder freigegebenen Daten, und der agentische Workflow legt seine Arbeit offen.',
+      points: [
+        'Sehen, warum jeder Befund entstanden ist',
+        'Auf die Regel, Norm oder Zeichnungsnotiz zurückverfolgen',
+        'Ingenieure, nicht die KI, treffen jede Freigabeentscheidung',
+      ],
     },
     standards: {
       eyebrow: 'Standards und Audit',
       title: 'Ergebnisse, die zu Ihren Qualitätsprozessen passen',
       intro:
-        'Ergebnisse folgen Ihren Zeichnungsstandards, ISO und ASME. Freigabe-Gates, Erstmusterprüfung (FAIR und EMPB), Stücklisten-Konsistenz und ein vollständiger Audit-Trail passen zu VDA Band 2 und der Sorgfalt, mit der Ihr Qualitätsteam ohnehin arbeitet.',
+        'Ergebnisse folgen Ihren Zeichnungsstandards, ISO und ASME, in der Sorgfalt, mit der Ihr Qualitätsteam ohnehin arbeitet.',
+      points: [
+        'Freigabe-Gates',
+        'Erstmusterprüfung (FAIR, EMPB)',
+        'Stücklisten-Konsistenz',
+        'Vollständiger Audit-Trail',
+        'Konform mit VDA Band 2',
+      ],
     },
     compliance: {
       eyebrow: 'Compliance',
       title: 'DSGVO-konform von Grund auf',
-      intro:
-        'RapidDraft ist DSGVO-konform von Grund auf, mit EU-Datenresidenz, einem auf Anfrage verfügbaren AVV und Transparenz über Unterauftragsverarbeiter.',
+      intro: 'DSGVO-konform von Grund auf.',
+      points: [
+        'EU-Datenresidenz',
+        'AVV auf Anfrage',
+        'Transparenz über Unterauftragsverarbeiter',
+      ],
       requestNda: 'NDA anfragen',
       bookDemo: 'Demo buchen',
     },
@@ -289,6 +333,19 @@ export default function Security() {
               </div>
               <div>
                 <Body soft>{s.intro}</Body>
+                <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                  {s.points.map((p) => (
+                    <li key={p} className="flex gap-2.5">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 h-1 w-1 flex-none rounded-full bg-[var(--rd-accent)]"
+                      />
+                      <Body soft sm>
+                        {p}
+                      </Body>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
