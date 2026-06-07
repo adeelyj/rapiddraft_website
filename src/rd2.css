@@ -157,17 +157,16 @@
   }
   .rd-screen--hero { min-height: auto; }
 }
-/* Desktop: JavaScript drives a deliberate, buttery section glide (see Home).
-   scroll-behavior:auto so the JS easing — not the browser's smooth-scroll — owns
-   the scroll position. Touch keeps a gentle native proximity snap; reduced-motion
-   gets plain scroll. */
+/* Desktop: native CSS scroll-snap gives a gentle, OS-momentum section snap with
+   no wheel interception. `proximity` only nudges to a section when scrolling
+   settles near one, so it never fights the user. Touch and short viewports get
+   plain scrolling (snap released above). */
 html.rd-snap {
-  scroll-snap-type: none;
+  scroll-snap-type: y proximity;
   scroll-padding-top: 0;
-  scroll-behavior: auto;
 }
 @media (pointer: coarse) {
-  html.rd-snap { scroll-snap-type: none; scroll-behavior: smooth; }
+  html.rd-snap { scroll-snap-type: none; }
 }
 /* The closing CTA is the last snap stop; the footer flows beneath it as the
    document tail (no snap target at the very bottom, which would otherwise pull

@@ -74,10 +74,10 @@ const CONTENT = {
       },
     ],
     pillars: [
-      { title: 'Data sovereignty', body: 'Models run locally, on your infrastructure.' },
-      { title: 'IP protection', body: 'We never train on your IP. It stays in-house.' },
-      { title: 'Employee trust', body: 'Transparent and traceable. Engineers keep the sign-off.' },
-      { title: 'Data quality', body: 'One clean source for parts, drawings, and BOMs.' },
+      { title: 'Data sovereignty' },
+      { title: 'IP protection' },
+      { title: 'Employee trust' },
+      { title: 'Data quality' },
     ],
     meta: {
       pageTitle: 'RapidDraft | Agentic drawing release and design review',
@@ -193,10 +193,10 @@ const CONTENT = {
       },
     ],
     pillars: [
-      { title: 'Datensouveränität', body: 'Modelle laufen lokal, auf Ihrer Infrastruktur.' },
-      { title: 'IP-Schutz', body: 'Wir trainieren nie auf Ihrem IP. Es bleibt im Haus.' },
-      { title: 'Vertrauen der Mitarbeitenden', body: 'Transparent und nachvollziehbar. Ingenieure behalten die Freigabe.' },
-      { title: 'Datenqualität', body: 'Eine saubere Quelle für Zeichnungen und BOMs.' },
+      { title: 'Datensouveränität' },
+      { title: 'IP-Schutz' },
+      { title: 'Vertrauen der Mitarbeitenden' },
+      { title: 'Datenqualität' },
     ],
     meta: {
       pageTitle: 'RapidDraft | Agentenbasierte Zeichnungsfreigabe und Design-Review',
@@ -205,8 +205,8 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Agentenbasierte Zeichnungsfreigabe und Design-Review für Engineering-Teams',
-      headingLead: 'Engineering-Entscheidungen ',
-      headingMark: 'schneller freigeben',
+      headingLead: 'Schnellere Entscheidungen und ',
+      headingMark: 'Zeichnungsfreigabe',
       subhead:
         'RapidDraft erkennt Probleme früher, automatisiert wiederkehrende Prüfungen und hält jede Entscheidung am Modell fest.',
       bookDemo: 'Demo buchen',
@@ -321,12 +321,10 @@ export default function Home() {
     alt: t.railAlts[item.key],
   }));
 
-  // Buttery, retargetable section scrolling (only while Home is mounted).
-  // A wheel/trackpad swipe glides one section into place; a single continuous
-  // critically-damped SmoothDamp loop always chases a mutable target, so rapid
-  // swipes chain smoothly and nothing is ever LOCKED — a genuine swipe can never
-  // be swallowed by a decaying momentum tail. Touch + reduced-motion fall back
-  // to native scrolling.
+  // Section scrolling is native: CSS scroll-snap (proximity) gives a gentle,
+  // OS-momentum section snap with no wheel interception, and an
+  // IntersectionObserver reveals each section's content as it enters. Touch and
+  // reduced-motion fall back to plain scrolling (handled in CSS).
   useEffect(() => {
     const el = document.documentElement;
     const prevRestoration = history.scrollRestoration;
@@ -346,125 +344,10 @@ export default function Home() {
     );
     screens.forEach((s) => io.observe(s));
 
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const coarse = window.matchMedia('(pointer: coarse)').matches;
-
-    let teardown = () => {};
-    if (!reduce && !coarse) {
-      // Section stops, de-duplicated by Y so an advance can never resolve to the
-      // position it already sits at and silently swallow a swipe.
-      const stops = () => {
-        const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-        const tops = screens.map((s) =>
-          Math.min(maxY, Math.round(s.getBoundingClientRect().top + window.scrollY)),
-        );
-        tops[0] = 0; // hero sits at the page top (with the nav visible)
-        if (maxY - tops[tops.length - 1] > 48) tops.push(maxY); // closing CTA + footer
-        return Array.from(new Set(tops)).sort((a, b) => a - b);
-      };
-      const nearestIndex = (pts: number[], y: number) => {
-        let bi = 0, bd = Infinity;
-        pts.forEach((p, i) => { const d = Math.abs(p - y); if (d < bd) { bd = d; bi = i; } });
-        return bi;
-      };
-
-      // ── Retargetable glide (Unity-style SmoothDamp: critically damped, no
-      //    overshoot, frame-rate independent). Retargeting just moves targetY;
-      //    the carried velocity makes the redirection seamless. scrollTo is
-      //    instant here because html.rd-snap sets scroll-behavior:auto, so this
-      //    easing — not the browser's smooth-scroll — is the sole controller. ──
-      const SMOOTH = 0.19; // seconds; ~90% of the move in ~370ms, settled ~550ms — snappy but smooth
-      let curY = window.scrollY;
-      let targetY = window.scrollY;
-      let vy = 0; // px/sec
-      let running = false;
-      let raf = 0;
-      let lastTs = 0;
-      const tick = (now: number) => {
-        const dt = Math.min(0.064, lastTs ? (now - lastTs) / 1000 : 0.016);
-        lastTs = now;
-        const omega = 2 / SMOOTH;
-        const x = omega * dt;
-        const expf = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
-        const change = curY - targetY;
-        const temp = (vy + omega * change) * dt;
-        vy = (vy - omega * temp) * expf;
-        curY = targetY + (change + temp) * expf;
-        if (Math.abs(targetY - curY) < 0.5) {
-          curY = targetY; vy = 0; running = false; lastTs = 0;
-          window.scrollTo(0, Math.round(curY));
-          return;
-        }
-        window.scrollTo(0, Math.round(curY));
-        raf = requestAnimationFrame(tick);
-      };
-      const glideTo = (y: number) => {
-        targetY = y;
-        if (!running) {
-          running = true;
-          curY = window.scrollY; // resync if the user native-scrolled meanwhile
-          lastTs = 0;
-          raf = requestAnimationFrame(tick);
-        }
-      };
-      const move = (dir: number) => {
-        const pts = stops();
-        const idx = nearestIndex(pts, targetY); // off the in-flight target so flicks accumulate
-        glideTo(pts[Math.max(0, Math.min(pts.length - 1, idx + dir))]);
-      };
-
-      // ── Wheel intent vs momentum tail ─────────────────────────────────────
-      // Normalize the delta, then advance on a genuine push, throttled by a
-      // FIXED interval that momentum can never extend. A momentum tail is a
-      // continuous stream of DECAYING deltas, so it is filtered out by trend —
-      // never by a wall-clock lock it could keep alive — which is the whole bug
-      // fixed: a real new flick (a delta spike, or after a pause) always fires.
-      const normDelta = (e: WheelEvent) => {
-        let d = e.deltaY;
-        if (e.deltaMode === 1) d *= 16;                      // lines -> px
-        else if (e.deltaMode === 2) d *= window.innerHeight; // pages -> px
-        return d;
-      };
-      let lastAbs = 0, lastTime = 0, lastFire = 0;
-      const onWheel = (e: WheelEvent) => {
-        e.preventDefault();
-        const d = normDelta(e);
-        const ad = Math.abs(d);
-        const now = performance.now();
-        const gap = now - lastTime;
-        const decaying = ad < lastAbs - 1; // |delta| falling => inertia, not a fresh push
-        lastAbs = ad; lastTime = now;
-        if (ad < 4) return;                       // ignore micro-deltas
-        if (now - lastFire < 280) return;         // fixed throttle, NOT momentum-extended
-        if (gap <= 140 && decaying) return;       // continuous + decaying = momentum tail
-        lastFire = now;
-        move(d > 0 ? 1 : -1);
-      };
-
-      const onKey = (e: KeyboardEvent) => {
-        const node = e.target as HTMLElement | null;
-        if (node && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA' || node.isContentEditable)) return;
-        const pts = stops();
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); move(1); }
-        else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); move(-1); }
-        else if (e.key === 'Home') { e.preventDefault(); glideTo(pts[0]); }
-        else if (e.key === 'End') { e.preventDefault(); glideTo(pts[pts.length - 1]); }
-      };
-
-      window.addEventListener('wheel', onWheel, { passive: false });
-      window.addEventListener('keydown', onKey);
-      teardown = () => {
-        window.removeEventListener('wheel', onWheel);
-        window.removeEventListener('keydown', onKey);
-        cancelAnimationFrame(raf);
-      };
-    }
-
     return () => {
       el.classList.remove('rd-snap');
       io.disconnect();
       screens.forEach((s) => s.classList.remove('is-in'));
-      teardown();
       if ('scrollRestoration' in history) history.scrollRestoration = prevRestoration;
     };
   }, []);
@@ -624,9 +507,6 @@ export default function Home() {
                 </svg>
               </span>
               <H3 className="mt-4">{p.title}</H3>
-              <Body soft sm className="mt-2">
-                {p.body}
-              </Body>
             </div>
           ))}
         </div>

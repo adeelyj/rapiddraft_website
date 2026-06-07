@@ -162,7 +162,7 @@ const CONTENT = {
       reasons: [
         { title: 'High impact', body: 'Direct influence on product direction and the release workflows we ground first.' },
         { title: 'Deep technical problems', body: 'Hard problems across CAD, geometry, AI systems, and product design.' },
-        { title: 'End-to-end ownership', body: 'From concept to delivery in a small, execution-focused team.' },
+        { title: 'Full ownership', body: 'From concept to delivery in a small, execution-focused team.' },
         { title: 'Low ego, high trust', body: 'A bias for practical engineering over theater.' },
       ],
     },

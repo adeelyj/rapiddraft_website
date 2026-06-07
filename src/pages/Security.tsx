@@ -87,7 +87,6 @@ const CONTENT = {
       points: [
         'See why each finding was raised',
         'Trace it to the rule, standard, or drawing note',
-        'Engineers, not the AI, make every release decision',
       ],
     },
     standards: {
@@ -106,7 +105,7 @@ const CONTENT = {
     compliance: {
       eyebrow: 'Compliance',
       title: 'GDPR-compliant by design',
-      intro: 'GDPR-compliant by design.',
+      intro: '',
       points: [
         'EU data residency',
         'DPA available on request',
@@ -184,7 +183,6 @@ const CONTENT = {
       points: [
         'Sehen, warum jeder Befund entstanden ist',
         'Auf die Regel, Norm oder Zeichnungsnotiz zurückverfolgen',
-        'Ingenieure, nicht die KI, treffen jede Freigabeentscheidung',
       ],
     },
     standards: {
@@ -203,7 +201,7 @@ const CONTENT = {
     compliance: {
       eyebrow: 'Compliance',
       title: 'DSGVO-konform von Grund auf',
-      intro: 'DSGVO-konform von Grund auf.',
+      intro: '',
       points: [
         'EU-Datenresidenz',
         'AVV auf Anfrage',
@@ -332,8 +330,8 @@ export default function Security() {
                 <H3 className="mt-2.5">{s.title}</H3>
               </div>
               <div>
-                <Body soft>{s.intro}</Body>
-                <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                {s.intro && <Body soft>{s.intro}</Body>}
+                <ul className={clsx('grid gap-x-8 gap-y-2.5 sm:grid-cols-2', s.intro && 'mt-4')}>
                   {s.points.map((p) => (
                     <li key={p} className="flex gap-2.5">
                       <span

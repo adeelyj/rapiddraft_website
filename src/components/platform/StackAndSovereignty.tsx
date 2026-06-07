@@ -26,12 +26,6 @@ const CONTENT = {
       title: 'RapidDraft review',
       steps: ['Analyze drawings', 'apply rules', 'surface issues', 'capture decisions'],
     },
-    guarantees: [
-      { title: 'No tool replacement', body: 'Works around your current CAD, PDM, PLM, and release process.' },
-      { title: 'No uncontrolled data movement', body: 'Sensitive files stay within approved environments and access boundaries.' },
-      { title: 'Engineer-controlled AI', body: 'Findings stay reviewable, explainable, and tied to human approval.' },
-      { title: 'Cleaner release data', body: 'Reduce inconsistencies across drawings, BOMs, part data, and review records.' },
-    ],
     cta: 'How we keep your data secure',
   },
   de: {
@@ -53,12 +47,6 @@ const CONTENT = {
       title: 'RapidDraft Review',
       steps: ['Zeichnungen analysieren', 'Regeln anwenden', 'Probleme aufdecken', 'Entscheidungen festhalten'],
     },
-    guarantees: [
-      { title: 'Kein Werkzeugwechsel', body: 'Arbeitet mit Ihrem heutigen CAD, PDM, PLM und Freigabeprozess.' },
-      { title: 'Keine unkontrollierte Datenbewegung', body: 'Sensible Dateien bleiben in freigegebenen Umgebungen und Zugriffsgrenzen.' },
-      { title: 'Von Ingenieuren gesteuerte KI', body: 'Befunde bleiben prüfbar, erklärbar und an menschliche Freigabe gebunden.' },
-      { title: 'Sauberere Freigabedaten', body: 'Weniger Inkonsistenzen über Zeichnungen, Stücklisten, Teiledaten und Review-Daten.' },
-    ],
     cta: 'Wie wir Ihre Daten schützen',
   },
 } as const;
@@ -71,26 +59,6 @@ function CardMark() {
       className="block h-[5px] w-10 rounded-full"
       style={{ background: 'var(--rd-accent)' }}
     />
-  );
-}
-
-function CheckIcon() {
-  return (
-    <span
-      aria-hidden="true"
-      className="flex h-7 w-7 flex-none items-center justify-center rounded-[9px]"
-      style={{ background: 'var(--rd-accent-soft)' }}
-    >
-      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-        <path
-          d="M3.5 8.5l3 3 6-7"
-          stroke="var(--rd-accent)"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
   );
 }
 
@@ -168,25 +136,9 @@ export default function StackAndSovereignty() {
             ))}
           </div>
         </div>
-
-        {/* Four guarantee tiles */}
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {t.guarantees.map((g) => (
-            <div
-              key={g.title}
-              className="rd-lift rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left"
-            >
-              <CheckIcon />
-              <H3 className="mt-4 text-[17px]">{g.title}</H3>
-              <Body soft sm className="mt-2.5">
-                {g.body}
-              </Body>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Bridge to Security */}
+      {/* Bridge to Security (the full guarantees live on the Security page) */}
       <div className="mt-9 flex justify-center">
         <Button to="/security" variant="secondary" arrow>
           {t.cta}
