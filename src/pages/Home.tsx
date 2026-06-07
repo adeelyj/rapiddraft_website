@@ -409,9 +409,9 @@ export default function Home() {
           title={t.problem.title}
           intro={t.problem.intro}
         />
-        <div className="mx-auto mt-10 flex max-w-[820px] flex-col gap-4">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {t.problemCards.map((card, i) => (
-            <div key={card.title} className="rd-tile rd-problemcard">
+            <div key={card.title} className="rd-tile rd-problemcard flex">
               <div className="rd-problemcard__inner">
                 <div className="rd-index">0{i + 1}</div>
                 <H3 className="mt-3">{card.title}</H3>
