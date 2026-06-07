@@ -1,16 +1,18 @@
-/* OnPremFigure — the on-prem agentic architecture diagram for the Security page.
-   Extracted and restyled from TheegartenPactec's LocalAiDeploymentDiagram. Static
-   (no sliding cards) and theme-aware: every color comes from var(--rd-*) tokens, so
-   it reads correctly on the Security page's dark band. Flat hairline, no shadows. */
+/* OnPremFigure — on-prem agentic architecture diagram for the Security page.
+   Theme-aware (every color is a var(--rd-*) token) and aligned to the design
+   language: flat hairline cards, rd-tag-style pills, a single accent, and
+   accent dotted-flow connectors that match the home figure (inputs drift toward
+   the workspace, outputs drift outward). */
 
 const FONT = "'Inter', sans-serif";
 
+// Agent tool pills (rd-tag style: hairline, muted text). Two rows.
 const TOOLS = [
-  { label: 'BOM', x: 442, y: 206, w: 46 },
-  { label: 'DFM', x: 494, y: 206, w: 46 },
-  { label: 'Model / Canvas', x: 546, y: 206, w: 112 },
-  { label: 'Knowledge', x: 442, y: 242, w: 84 },
-  { label: 'Artifacts', x: 532, y: 242, w: 72 },
+  { label: 'BOM', x: 442, y: 210, w: 54 },
+  { label: 'DFM', x: 504, y: 210, w: 54 },
+  { label: 'Model / Canvas', x: 566, y: 210, w: 120 },
+  { label: 'Knowledge', x: 442, y: 248, w: 96 },
+  { label: 'Artifacts', x: 546, y: 248, w: 80 },
 ];
 
 const ALT =
@@ -30,21 +32,32 @@ export default function OnPremFigure({
     >
       <style>
         {`
-          .op-card { fill: var(--rd-surface); stroke: var(--rd-edge); stroke-width: 1.1; }
-          .op-agent { fill: var(--rd-accent-soft); stroke: var(--rd-accent-hair); stroke-width: 1.3; }
+          .op-card { fill: var(--rd-surface); stroke: var(--rd-hair); stroke-width: 1.1; }
+          .op-agent { fill: var(--rd-surface); stroke: var(--rd-accent-hair); stroke-width: 1.4; }
           .op-gate { fill: var(--rd-surface); stroke: var(--rd-accent-hair); stroke-width: 1.2; }
-          .op-tool { fill: var(--rd-accent-soft); stroke: var(--rd-accent-hair); }
+          .op-tool { fill: var(--rd-bg); stroke: var(--rd-hair); stroke-width: 1; }
           .op-micro { font-family: ${FONT}; font-size: 13px; font-weight: 600; letter-spacing: 1.8px; fill: var(--rd-fg-3); }
           .op-micro-accent { font-family: ${FONT}; font-size: 13px; font-weight: 600; letter-spacing: 1.8px; fill: var(--rd-accent); }
           .op-title { font-family: ${FONT}; font-size: 22px; font-weight: 600; fill: var(--rd-head); }
           .op-sub { font-family: ${FONT}; font-size: 14.5px; fill: var(--rd-fg-2); }
-          .op-tool-label { font-family: ${FONT}; font-size: 12px; fill: var(--rd-accent); }
-          .op-flow { stroke: var(--rd-edge); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 2 9; fill: none; }
-          .op-arrow { fill: var(--rd-edge); }
+          .op-tool-label { font-family: ${FONT}; font-size: 12.5px; fill: var(--rd-fg-2); }
+          .op-bound { font-family: ${FONT}; font-size: 10px; font-weight: 600; letter-spacing: 0.6px; fill: var(--rd-accent); }
+          .op-flow { fill: none; stroke: var(--rd-accent); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 1 9; opacity: 0.5; animation: op-flow 3s linear infinite; }
           .op-accent-stroke { stroke: var(--rd-accent); stroke-width: 1.6; fill: none; stroke-linecap: round; }
           .op-accent-fill { fill: var(--rd-accent); }
+          /* left connectors drawn ->center, right connectors drawn center->, so one
+             flow makes inputs drift toward the workspace and outputs drift outward. */
+          @keyframes op-flow { to { stroke-dashoffset: -90; } }
+          @media (prefers-reduced-motion: reduce) { .op-flow { animation: none; } }
         `}
       </style>
+
+      {/* ── CONNECTORS (behind the cards) ─────────────────────── */}
+      <path className="op-flow" d="M320 92 H420" />
+      <path className="op-flow" d="M320 281 H420" />
+      <path className="op-flow" d="M740 92 H848" />
+      <path className="op-flow" d="M740 210 H848" />
+      <path className="op-flow" d="M740 328 H848" />
 
       {/* ── COL 1: INPUT ─────────────────────────────────────── */}
 
@@ -56,26 +69,27 @@ export default function OnPremFigure({
 
       {/* On-prem hardware card */}
       <rect className="op-card" x="20" y="160" width="300" height="242" rx="16" />
-      <text className="op-micro" x="42" y="184">ON-PREM HARDWARE</text>
+      <text className="op-micro" x="42" y="188">ON-PREM HARDWARE</text>
       <image
-        href="/media/NVIDIA-DGX-SPARK.png"
-        x="100"
-        y="196"
-        width="140"
-        height="140"
+        href="/media/NVIDIA-DGX-SPARK-trim.png"
+        x="40"
+        y="220"
+        width="260"
+        height="72"
         preserveAspectRatio="xMidYMid meet"
       />
-      <text className="op-title" x="42" y="362">NVIDIA DGX Spark</text>
-      <text className="op-sub" x="42" y="386">Runs on-site · company network</text>
+      <text className="op-title" x="42" y="350">NVIDIA DGX Spark</text>
+      <text className="op-sub" x="42" y="374">Runs on-site · company network</text>
 
-      {/* Security boundary gate — between the two input cards */}
-      <rect className="op-gate" x="346" y="128" width="50" height="50" rx="14" />
+      {/* Security boundary — lock + stacked label, sized to clear both cards */}
+      <rect className="op-gate" x="346" y="120" width="50" height="50" rx="14" />
       <g className="op-accent-stroke">
-        <rect x="363" y="152" width="18" height="13" rx="2.5" />
-        <path d="M365 152 V147 a6.5 6.5 0 0 1 13 0 V152" />
+        <rect x="363" y="144" width="18" height="13" rx="2.5" />
+        <path d="M365 144 V139 a6.5 6.5 0 0 1 13 0 V144" />
       </g>
-      <circle className="op-accent-fill" cx="372" cy="159" r="1.8" />
-      <text className="op-micro-accent" x="371" y="196" textAnchor="middle">SECURITY BOUNDARY</text>
+      <circle className="op-accent-fill" cx="372" cy="151" r="1.8" />
+      <text className="op-bound" x="371" y="188" textAnchor="middle">SECURITY</text>
+      <text className="op-bound" x="371" y="201" textAnchor="middle">BOUNDARY</text>
 
       {/* ── COL 2: AGENT WORKSPACE ───────────────────────────── */}
 
@@ -92,22 +106,21 @@ export default function OnPremFigure({
       <text className="op-title" x="442" y="112">Agent inside the product</text>
       <text className="op-sub" x="442" y="138">Orchestrates tools, not a chatbot</text>
 
-      <text className="op-micro" x="442" y="188" letterSpacing="2.6">AGENT TOOL LAYER</text>
+      <text className="op-micro" x="442" y="190" letterSpacing="2.6">AGENT TOOL LAYER</text>
       {TOOLS.map((t) => (
         <g key={t.label}>
-          <rect className="op-tool" x={t.x} y={t.y} width={t.w} height="26" rx="8" />
+          <rect className="op-tool" x={t.x} y={t.y} width={t.w} height="26" rx="13" />
           <text
             className="op-tool-label"
             x={t.x + t.w / 2}
-            y={t.y + 17}
+            y={t.y + 17.5}
             textAnchor="middle"
           >
             {t.label}
           </text>
         </g>
       ))}
-      <circle className="op-accent-fill" cx="446" cy="346" r="4.5" />
-      <text className="op-sub" x="462" y="350">Reasoning · orchestration · evidence</text>
+      <text className="op-sub" x="442" y="332">Reasoning · orchestration · evidence</text>
 
       {/* ── COL 3: OUTPUTS (static stack) ────────────────────── */}
 
@@ -133,22 +146,8 @@ export default function OnPremFigure({
       {/* Release → CIM Database (PLM) */}
       <rect className="op-card" x="848" y="276" width="332" height="104" rx="16" />
       <text className="op-micro" x="870" y="302">PLM INTEGRATION</text>
-      <text className="op-title" x="870" y="332">Release → CIM Database</text>
+      <text className="op-title" x="870" y="332">Release to CIM Database</text>
       <text className="op-sub" x="870" y="356">Written back to PLM</text>
-
-      {/* ── CONNECTORS (left → center → right) ────────────────── */}
-      <path className="op-flow" d="M320 92 H420" />
-      <path className="op-flow" d="M320 281 H420" />
-      <path className="op-flow" d="M740 92 H848" />
-      <path className="op-flow" d="M740 210 H848" />
-      <path className="op-flow" d="M740 328 H848" />
-      <g className="op-arrow">
-        <path d="M420 92 l-7 -3.5 l0 7 z" />
-        <path d="M420 281 l-7 -3.5 l0 7 z" />
-        <path d="M848 92 l-7 -3.5 l0 7 z" />
-        <path d="M848 210 l-7 -3.5 l0 7 z" />
-        <path d="M848 328 l-7 -3.5 l0 7 z" />
-      </g>
     </svg>
   );
 }
