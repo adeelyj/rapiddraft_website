@@ -414,15 +414,13 @@ html.rd-snap .rd-screen.is-in .rd-container {
 /* ---------- Figure ---------- */
 .rd-figure { margin: 0; }
 .rd-figcaption {
-  margin-top: 16px;
+  margin-top: 18px;
   font-family: var(--rd-meta);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   color: var(--rd-fg-3);
-  display: flex;
-  gap: 8px;
+  text-align: center;
 }
-.rd-figcaption::before { content: '//'; color: var(--rd-accent); font-family: var(--rd-mono); }
 
 /* ---------- Forms ---------- */
 .rd-label {

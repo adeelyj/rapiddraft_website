@@ -118,7 +118,7 @@ export default function RoiCalculator() {
           </div>
         </div>
 
-        <Body soft sm className="mx-auto mt-6 max-w-3xl text-center">
+        <Body soft sm className="mx-auto mt-6 max-w-[920px] text-center">
           Conservative by design. Time saved is the higher of 3 hours per engineer per week or 30% of
           current effort. Each engineer avoids at least one issue per year, at an average avoided cost
           of about {formatEuro(AVOIDED_COST_PER_ISSUE)}. The model assumes {WORKING_WEEKS_PER_YEAR}{' '}

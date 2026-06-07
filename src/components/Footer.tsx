@@ -19,12 +19,7 @@ const COMPANY_LINKS = [
 function Col({ heading, children }: { heading: string; children: ReactNode }) {
   return (
     <div>
-      <div
-        className="text-[11px] uppercase tracking-[0.14em] text-[var(--rd-fg-3)]"
-        style={{ fontFamily: 'var(--rd-meta)' }}
-      >
-        {heading}
-      </div>
+      <div className="rd-microlabel">{heading}</div>
       <div className="mt-5 flex flex-col gap-3">{children}</div>
     </div>
   );
@@ -47,12 +42,7 @@ export default function Footer() {
               manufacturing-ready drawings, and retain decision logic across CAD workflows.
             </p>
             <div className="mt-8">
-              <div
-                className="text-[11px] uppercase tracking-[0.14em] text-[var(--rd-fg-3)]"
-                style={{ fontFamily: 'var(--rd-meta)' }}
-              >
-                Backed by
-              </div>
+              <div className="rd-microlabel">Backed by</div>
               <div className="mt-4 flex items-center gap-5">
                 <a
                   href="https://www.unternehmertum.de"

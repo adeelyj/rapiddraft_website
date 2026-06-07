@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import StubPage from './pages/StubPage';
+import Platform from './pages/Platform';
+import Security from './pages/Security';
+import Company from './pages/Company';
+import UseCasesPage from './pages/UseCasesPage';
+import BookDemoPage from './pages/BookDemoPage';
 import Product from './pages/Product';
-import CadConcept from './pages/CadConcept';
-import UseCases from './pages/UseCases';
-import Team from './pages/Team';
-import BookDemo from './pages/BookDemo';
 import DealRoom from './pages/DealRoom';
 import CompanyDemoPage from './pages/CompanyDemoPage';
 import { getCompanyDemoByHostname, getCompanyDemoBySlug } from './companyDemos/registry';
@@ -87,42 +88,9 @@ function App() {
         <Route index element={<Home />} />
         {/* Legacy home kept (unlisted) for side-by-side comparison */}
         <Route path="home-v1" element={<Product />} />
-        <Route
-          path="platform"
-          element={
-            <StubPage
-              eyebrow="Platform"
-              title="One agentic review layer for your entire drawing-release process"
-              metaTitle="Platform | RapidDraft"
-              metaDescription="RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model."
-              path="/platform"
-            />
-          }
-        />
-        <Route
-          path="security"
-          element={
-            <StubPage
-              eyebrow="Security and sovereignty"
-              title="Enterprise AI that never leaves your control"
-              metaTitle="Security and sovereignty | RapidDraft"
-              metaDescription="Models run on your infrastructure, training stays governed, and your engineers keep the final say."
-              path="/security"
-            />
-          }
-        />
-        <Route
-          path="company"
-          element={
-            <StubPage
-              eyebrow="Company"
-              title="Built by engineers who have felt the release bottleneck firsthand"
-              metaTitle="Company | RapidDraft"
-              metaDescription="RapidDraft exists because technical drawings and design reviews still slow down real hardware programs."
-              path="/company"
-            />
-          }
-        />
+        <Route path="platform" element={<Platform />} />
+        <Route path="security" element={<Security />} />
+        <Route path="company" element={<Company />} />
         <Route
           path="impressum"
           element={
@@ -149,7 +117,7 @@ function App() {
             />
           }
         />
-        <Route path="cad-concept" element={<CadConcept />} />
+        <Route path="cad-concept" element={<Navigate to="/platform" replace />} />
         <Route path="how-it-works" element={<Navigate to="/" replace />} />
         <Route path="pitch" element={<Navigate to="/" replace />} />
         <Route path="deal-room" element={<DealRoomV3 />} />
@@ -160,10 +128,10 @@ function App() {
         <Route path="deal-room_v3" element={<Navigate to="/deal-room" replace />} />
         <Route path="deal-room_v3/nda-request" element={<Navigate to="/deal-room/nda-request" replace />} />
         <Route path="deal-room_v3/loi-request" element={<Navigate to="/deal-room/loi-request" replace />} />
-        <Route path="use-cases" element={<UseCases />} />
-        <Route path="team" element={<Team />} />
-        <Route path="book-demo" element={<BookDemo />} />
-        <Route path="join-us" element={<Navigate to="/team#open-roles" replace />} />
+        <Route path="use-cases" element={<UseCasesPage />} />
+        <Route path="team" element={<Navigate to="/company#team" replace />} />
+        <Route path="book-demo" element={<BookDemoPage />} />
+        <Route path="join-us" element={<Navigate to="/company#open-roles" replace />} />
         <Route path="theegarten-pactec" element={<TheegartenPactec />} />
       </Route>
     </Routes>
