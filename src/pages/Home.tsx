@@ -24,79 +24,79 @@ import { useLang } from '../i18n/LanguageContext';
 const CONTENT = {
   en: {
     railAlts: {
-      'drawing-memory': 'RapidDraft generating manufacturing-ready drawings from CAD geometry.',
+      'drawing-memory': 'RapidDraft checking a manufacturing drawing against the rules and flagging issues before release.',
       'review-automation':
-        'RapidDraft surfacing manufacturability and completeness issues for engineer review.',
-      'model-collaboration': 'Design, QA, and suppliers reviewing around the shared 3D model.',
+        'RapidDraft surfacing manufacturability and completeness issues for engineer review, with the source of each finding.',
+      'model-collaboration': 'Design, quality, and suppliers reviewing around the shared 3D model and the drawing it releases.',
       'bulk-review':
-        'RapidDraft running review passes across drawings, revisions, and part families.',
+        'RapidDraft running the same review logic across drawings, revisions, and part families.',
     },
     heroBadges: ['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'Human-in-the-loop'],
     kpis: [
-      { value: '30%', label: 'Fewer change cycles' },
-      { value: '10x', label: 'Faster feedback' },
-      { value: '50%', label: 'Less checking time' },
+      { value: '~30%', label: 'ROI from better design review' },
+      { value: 'On-prem', label: 'Your IP never leaves the building' },
+      { value: 'VDA/EMPB', label: 'Findings traced to your rules' },
     ],
     problemCards: [
       {
-        title: 'Drawings restart on every revision',
-        body: 'Documentation work gets rebuilt whenever geometry changes, even when the underlying intent stays the same.',
+        title: 'Design intent and drawings drift apart',
+        body: 'Intent lives in CAD, requirements in the drawing.',
       },
       {
-        title: 'Manufacturing constraints live outside CAD',
-        body: 'DFM notes, supplier feedback, and release caveats stay buried in PDFs, emails, and follow-up threads.',
+        title: 'Constraints live outside CAD',
+        body: 'DFM notes and supplier feedback hide in email.',
       },
       {
-        title: 'Review decisions lose their model context',
-        body: 'Comments and approvals are hard to trace back to the exact change in geometry that triggered them.',
+        title: 'The review logic is tribal knowledge',
+        body: 'The reasoning lives in a checker’s head, not the file.',
       },
       {
-        title: 'Lessons learned rarely reach the next cycle',
-        body: 'Teams keep rediscovering the same issues because past decisions are not preserved with the model.',
+        title: 'The release chain is a serial bottleneck',
+        body: 'Drawings wait on a serial sign-off chain.',
       },
     ],
     capabilities: [
       {
-        title: 'Generate drawings and QA documents',
-        body: 'Produce manufacturing-ready drawings, BOMs, and first-article and inspection reports straight from your CAD geometry.',
+        title: 'Analyze manufacturing drawings',
+        body: 'Check completeness, GD&T, datum schemes, and tolerance stack-up against your rules. Every finding links back to its source.',
       },
       {
-        title: 'Automate review and DFM checks',
-        body: 'Check completeness, manufacturability, and standards (ISO and ASME) against your own rules, and catch issues before release.',
+        title: 'Accelerate design reviews',
+        body: 'A tireless first pass before you cut the rev and before the EMPB. The engineer keeps the sign-off.',
       },
       {
-        title: 'Collaborate around the model',
-        body: 'Bring design, QA, and suppliers into one shared CAD review space, with every comment attached to the geometry it refers to.',
+        title: 'Remove team silos',
+        body: 'Bring design, quality, and suppliers around one shared model, so feedback is answered in context, not over the wall.',
       },
       {
-        title: 'Preserve review knowledge',
-        body: 'Keep decisions, findings, and drafting intent attached to the model so they carry across revisions instead of getting lost.',
+        title: 'Preserve company knowledge',
+        body: 'Keep findings, decisions, and intent on the model, so the reasoning survives the next rev.',
       },
     ],
     pillars: [
-      { title: 'Data sovereignty', body: 'Models run locally, on-prem.' },
-      { title: 'IP protection', body: 'No third-party model ever sees your IP.' },
-      { title: 'Employee trust', body: 'Transparent, with engineers in control.' },
-      { title: 'Data quality', body: 'One clean source across drawings and BOMs.' },
+      { title: 'Data sovereignty', body: 'Models run locally, on your infrastructure.' },
+      { title: 'IP protection', body: 'We never train on your IP. It stays in-house.' },
+      { title: 'Employee trust', body: 'Transparent and traceable. Engineers keep the sign-off.' },
+      { title: 'Data quality', body: 'One clean source for parts, drawings, and BOMs.' },
     ],
     meta: {
       pageTitle: 'RapidDraft | Agentic drawing release and design review',
       pageDescription:
-        'RapidDraft catches design and drawing issues earlier and automates repetitive review checks, keeping decisions attached to the CAD model with engineers in control of every release.',
+        'RapidDraft catches drawing and design issues before release, grounded in your own rules and running on-prem. A traceable, human-in-the-loop second set of eyes that carries findings through to an auditable release gate.',
     },
     hero: {
       eyebrow: 'Agentic drawing release and design review for engineering teams',
-      headingLead: 'Accelerate engineering decisions and ',
-      headingMark: 'drawing release',
+      headingLead: 'A traceable second set of eyes before you ',
+      headingMark: 'cut the rev',
       subhead:
-        'RapidDraft catches issues earlier, automates repetitive review, and keeps every decision attached to the model.',
+        'RapidDraft catches drawing and design issues before release, grounded in your own rules and running on-prem. The engineer keeps the sign-off.',
       bookDemo: 'Book a demo',
       seeHow: 'See how it works',
     },
     credibility: {
-      title: 'Reduce repeated work before it delays release',
+      title: 'Catch it in review, not after the EMPB',
       intro:
-        'Faster feedback, fewer iterations, and less manual checking, right where drawings, reviews, and release readiness still slow teams down.',
+        'Catch an issue in review and you lose hours. Catch it after release and it is rework, a rejected EMPB, or scrap.',
       meta: [
         'Built by engineers from aerospace, automotive, and process industries',
         'Advised by leaders at Siemens, Volocopter, and Amazon',
@@ -107,34 +107,34 @@ const CONTENT = {
       eyebrow: 'Problem',
       title: 'Design intent lives in CAD. Requirements live in drawings. The review logic lives in people’s heads',
       intro:
-        'Collaboration is inefficient, drawing review is error-prone, and quality inspection is slow and tedious. Good designs stall in documentation and review.',
+        'Collaboration is inefficient, drawing review is error-prone, and the release chain waits on a serial multi-signature bottleneck.',
     },
     solution: {
       eyebrow: 'Solution',
-      title: 'Turn fragmented review work into a connected release workflow',
+      title: 'A grounded review that shows its work, not a black box',
       intro:
-        'Human-in-the-loop AI, grounded in your rules, keeping drafting intent, review decisions, and feedback attached to the model.',
+        'Human-in-the-loop AI grounded in your rules. Every finding links back to its source: the rule, standard, or drawing note.',
       caption:
-        'RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.',
+        'RapidDraft sits between your release package, PDM/PLM, drawings, and CAD and an auditable release gate, with human-in-the-loop review at the center.',
     },
     capabilitiesSection: {
       eyebrow: 'Capabilities',
-      title: 'One review layer, four core capabilities',
+      title: 'Analyze drawings, accelerate reviews, remove silos, keep the knowledge',
       intro:
-        'One layer that generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn.',
+        'One review layer that reads the drawing, applies your rules, surfaces issues with their source, and keeps the decision context on the model across revisions.',
       cta: 'Explore the platform',
     },
     security: {
       eyebrow: 'Security',
-      title: 'Works with your stack, keeps your data in-house',
+      title: 'Runs on-prem. Your IP never leaves the building',
       intro:
-        'AI-assisted review inside your existing CAD, drawing, BOM, and PLM workflows. Your tools, approval gates, and sensitive engineering data stay under your control.',
+        'Models run locally and we never train on your IP. The plain answer when nothing may be pasted into a public AI.',
       cta: 'Read about security',
     },
     finalCta: {
-      title: 'Bring speed and traceability to drawing release',
+      title: 'Bring a drawing that is hard to release',
       intro:
-        'See how RapidDraft reduces review effort, generates manufacturing-ready drawings faster, and keeps decision context across revisions.',
+        'Start narrow: one product family, one drawing-release process, one recurring bottleneck. We show the findings traced back to your rules, on your infrastructure.',
       bookDemo: 'Book a demo',
       seeUseCases: 'See use cases',
     },
@@ -142,80 +142,80 @@ const CONTENT = {
   de: {
     railAlts: {
       'drawing-memory':
-        'RapidDraft erzeugt fertigungsreife Zeichnungen aus der CAD-Geometrie.',
+        'RapidDraft prüft eine Fertigungszeichnung gegen Ihre Regeln und meldet Probleme vor der Freigabe.',
       'review-automation':
-        'RapidDraft macht Fertigbarkeits- und Vollständigkeitsprobleme für die Prüfung durch Ingenieure sichtbar.',
+        'RapidDraft macht Fertigbarkeits- und Vollständigkeitsprobleme für die Prüfung sichtbar, mit Quelle zu jedem Befund.',
       'model-collaboration':
-        'Konstruktion, QS und Lieferanten prüfen gemeinsam am geteilten 3D-Modell.',
+        'Konstruktion, QS und Lieferanten prüfen gemeinsam am geteilten 3D-Modell und an der freizugebenden Zeichnung.',
       'bulk-review':
-        'RapidDraft führt Prüfdurchläufe über Zeichnungen, Revisionen und Teilefamilien hinweg aus.',
+        'RapidDraft wendet dieselbe Prüflogik über Zeichnungen, Revisionen und Teilefamilien hinweg an.',
     },
     heroBadges: ['On-Prem-KI', 'Lokale/EU-Cloud', 'DSGVO-konform', 'Human-in-the-Loop'],
     kpis: [
-      { value: '30%', label: 'Weniger Änderungszyklen' },
-      { value: '10x', label: 'Schnelleres Feedback' },
-      { value: '50%', label: 'Weniger Prüfzeit' },
+      { value: '~30%', label: 'ROI aus besserem Design-Review' },
+      { value: 'On-Prem', label: 'Ihr IP verlässt nie das Haus' },
+      { value: 'VDA/EMPB', label: 'Befunde auf Ihre Regeln zurückverfolgbar' },
     ],
     problemCards: [
       {
-        title: 'Zeichnungen starten bei jeder Revision neu',
-        body: 'Dokumentationsarbeit wird bei jeder Geometrieänderung neu aufgebaut, selbst wenn die zugrunde liegende Absicht gleich bleibt.',
+        title: 'Absicht und Zeichnung driften',
+        body: 'Absicht im CAD, Vorgaben in der Zeichnung.',
       },
       {
-        title: 'Fertigungsvorgaben liegen außerhalb des CAD',
-        body: 'DFM-Hinweise, Lieferantenfeedback und Freigabevorbehalte verschwinden in PDFs, E-Mails und Folge-Threads.',
+        title: 'Vorgaben liegen außerhalb des CAD',
+        body: 'DFM-Hinweise und Feedback liegen in E-Mails.',
       },
       {
-        title: 'Prüfentscheidungen verlieren ihren Modellbezug',
-        body: 'Kommentare und Freigaben lassen sich nur schwer auf die genaue Geometrieänderung zurückführen, die sie ausgelöst hat.',
+        title: 'Die Prüflogik ist tribales Wissen',
+        body: 'Die Begründung steckt im Kopf des Prüfers.',
       },
       {
-        title: 'Erkenntnisse erreichen selten den nächsten Zyklus',
-        body: 'Teams entdecken dieselben Probleme immer wieder, weil frühere Entscheidungen nicht beim Modell erhalten bleiben.',
+        title: 'Die Freigabekette ist ein serieller Engpass',
+        body: 'Zeichnungen warten auf serielle Unterschriften.',
       },
     ],
     capabilities: [
       {
-        title: 'Zeichnungen und QS-Dokumente erstellen',
-        body: 'Erzeugen Sie fertigungsreife Zeichnungen, BOMs sowie Erstmuster- und Prüfberichte direkt aus Ihrer CAD-Geometrie.',
+        title: 'Fertigungszeichnungen analysieren',
+        body: 'Prüfen Sie Vollständigkeit, GD&T, Bezugssysteme und Toleranzketten gegen Ihre Regeln, jeder Befund mit seiner Quelle.',
       },
       {
-        title: 'Prüfung und DFM-Checks automatisieren',
-        body: 'Prüfen Sie Vollständigkeit, Fertigbarkeit und Normen (ISO/ASME) gegen Ihre Regeln und finden Sie Probleme vor der Freigabe.',
+        title: 'Design-Reviews beschleunigen',
+        body: 'Ein unermüdlicher erster Durchgang, bevor Sie die Revision ziehen und vor dem EMPB. Die Freigabe bleibt beim Ingenieur.',
       },
       {
-        title: 'Rund um das Modell zusammenarbeiten',
-        body: 'Führen Sie Konstruktion, QS und Lieferanten in einem geteilten CAD-Prüfraum zusammen, jeder Kommentar an seiner Geometrie.',
+        title: 'Team-Silos auflösen',
+        body: 'Bringen Sie Konstruktion, QS und Lieferanten an ein gemeinsames Modell, sodass Feedback im Kontext beantwortet wird.',
       },
       {
-        title: 'Prüfwissen bewahren',
-        body: 'Halten Sie Entscheidungen, Befunde und Zeichnungsabsicht am Modell fest, sodass sie über Revisionen hinweg erhalten bleiben.',
+        title: 'Firmenwissen bewahren',
+        body: 'Halten Sie Befunde, Entscheidungen und Absicht am Modell fest, sodass die Begründung die nächste Revision überlebt.',
       },
     ],
     pillars: [
-      { title: 'Datensouveränität', body: 'Modelle laufen lokal, On-Prem.' },
-      { title: 'IP-Schutz', body: 'Kein Drittanbieter-Modell sieht Ihr IP.' },
-      { title: 'Vertrauen der Mitarbeitenden', body: 'Transparent, Ingenieure in Kontrolle.' },
-      { title: 'Datenqualität', body: 'Eine saubere Quelle über Zeichnungen und BOMs.' },
+      { title: 'Datensouveränität', body: 'Modelle laufen lokal, auf Ihrer Infrastruktur.' },
+      { title: 'IP-Schutz', body: 'Wir trainieren nie auf Ihrem IP. Es bleibt im Haus.' },
+      { title: 'Vertrauen der Mitarbeitenden', body: 'Transparent. Ingenieure behalten die Freigabe.' },
+      { title: 'Datenqualität', body: 'Eine saubere Quelle für Zeichnungen und BOMs.' },
     ],
     meta: {
       pageTitle: 'RapidDraft | Agentenbasierte Zeichnungsfreigabe und Design-Review',
       pageDescription:
-        'RapidDraft erkennt Design- und Zeichnungsprobleme früher und automatisiert wiederkehrende Prüfungen, hält Entscheidungen am CAD-Modell und lässt Ingenieure jede Freigabe steuern.',
+        'RapidDraft erkennt Zeichnungs- und Designprobleme vor der Freigabe, verankert in Ihren eigenen Regeln und On-Prem. Ein nachverfolgbares, Human-in-the-Loop-Zweitaugenpaar, das Befunde bis zu einem auditierbaren Freigabe-Gate trägt.',
     },
     hero: {
       eyebrow: 'Agentenbasierte Zeichnungsfreigabe und Design-Review für Engineering-Teams',
-      headingLead: 'Engineering-Entscheidungen ',
-      headingMark: 'schneller freigeben',
+      headingLead: 'Ein zweites Augenpaar, bevor Sie die ',
+      headingMark: 'Revision ziehen',
       subhead:
-        'RapidDraft erkennt Probleme früher, automatisiert wiederkehrende Prüfungen und hält jede Entscheidung am Modell fest.',
+        'RapidDraft erkennt Zeichnungs- und Designprobleme vor der Freigabe, verankert in Ihren Regeln und On-Prem.',
       bookDemo: 'Demo buchen',
       seeHow: 'So funktioniert es',
     },
     credibility: {
-      title: 'Wiederholte Arbeit reduzieren, bevor sie die Freigabe verzögert',
+      title: 'In der Prüfung abfangen, nicht nach dem EMPB',
       intro:
-        'Schnelleres Feedback, weniger Iterationen und weniger manuelles Prüfen, genau dort, wo Zeichnungen, Reviews und Freigabereife Teams noch ausbremsen.',
+        'In der Prüfung kostet ein Fehler Stunden. Nach der Freigabe sind es Nacharbeit, ein abgelehntes EMPB oder Ausschuss.',
       meta: [
         'Entwickelt von Ingenieuren aus Luftfahrt, Automotive und Prozessindustrie',
         'Beraten von Führungskräften bei Siemens, Volocopter und Amazon',
@@ -226,34 +226,34 @@ const CONTENT = {
       eyebrow: 'Problem',
       title: 'Designabsicht lebt im CAD. Anforderungen in Zeichnungen. Prüflogik in den Köpfen',
       intro:
-        'Die Zusammenarbeit ist ineffizient, die Zeichnungsprüfung fehleranfällig und die Qualitätsinspektion langsam und mühsam. Gute Designs bleiben in Dokumentation und Prüfung stecken.',
+        'Die Zusammenarbeit ist ineffizient, die Zeichnungsprüfung fehleranfällig, und die Freigabekette wartet auf einen seriellen Mehrfach-Unterschriftsengpass.',
     },
     solution: {
       eyebrow: 'Lösung',
-      title: 'Aus fragmentierter Prüfarbeit einen vernetzten Freigabe-Workflow machen',
+      title: 'Eine begründete Prüfung, die ihre Arbeit zeigt, keine Blackbox',
       intro:
-        'Human-in-the-Loop-KI, verankert in Ihren Regeln, die Zeichnungsabsicht, Prüfentscheidungen und Feedback am Modell hält.',
+        'Human-in-the-Loop-KI, verankert in Ihren Regeln. Jeder Befund führt zurück auf seine Quelle: die Regel, Norm oder Zeichnungsnotiz.',
       caption:
-        'RapidDraft steht zwischen Ihren Engineering-Eingaben und freigabereifen Ergebnissen, mit Human-in-the-Loop-Prüfung im Zentrum.',
+        'RapidDraft steht zwischen Ihrem Freigabepaket, PDM/PLM, Zeichnungen und CAD und einem auditierbaren Freigabe-Gate, mit Human-in-the-Loop-Prüfung im Zentrum.',
     },
     capabilitiesSection: {
       eyebrow: 'Funktionen',
-      title: 'Eine Prüfebene, vier Kernfunktionen',
+      title: 'Zeichnungen analysieren, Reviews beschleunigen, Wissen bewahren',
       intro:
-        'Eine Ebene, die Dokumente erzeugt, Prüfungen automatisiert, die Zusammenarbeit am Modell hält und das Wissen der Teams bewahrt.',
+        'Eine Prüfebene, die die Zeichnung liest, Ihre Regeln anwendet, Probleme mit ihrer Quelle sichtbar macht und den Entscheidungskontext über Revisionen hinweg am Modell hält.',
       cta: 'Plattform ansehen',
     },
     security: {
       eyebrow: 'Sicherheit',
-      title: 'Funktioniert mit Ihrem Stack, hält Ihre Daten im Haus',
+      title: 'Läuft On-Prem. Ihr IP verlässt nie das Haus',
       intro:
-        'KI-gestützte Prüfung innerhalb Ihrer bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows. Ihre Tools, Freigabe-Gates und sensiblen Engineering-Daten bleiben unter Ihrer Kontrolle.',
+        'Modelle laufen lokal, und wir trainieren nie auf Ihrem IP. Die klare Antwort, wenn nichts in eine öffentliche KI eingefügt werden darf.',
       cta: 'Mehr zur Sicherheit',
     },
     finalCta: {
-      title: 'Tempo und Nachverfolgbarkeit in die Freigabe bringen',
+      title: 'Bringen Sie eine Zeichnung mit, die schwer freizugeben ist',
       intro:
-        'Sehen Sie, wie RapidDraft den Prüfaufwand reduziert, fertigungsreife Zeichnungen schneller erzeugt und den Entscheidungskontext über Revisionen hinweg bewahrt.',
+        'Starten Sie eng: eine Produktfamilie, ein Zeichnungsfreigabe-Prozess, ein wiederkehrender Engpass. Wir zeigen die Befunde, zurückverfolgt auf Ihre Regeln, auf Ihrer Infrastruktur.',
       bookDemo: 'Demo buchen',
       seeUseCases: 'Anwendungsfälle ansehen',
     },

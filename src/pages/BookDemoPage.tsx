@@ -19,23 +19,24 @@ const CONTENT = {
     meta: {
       title: 'Book a demo | RapidDraft',
       description:
-        'The best demo starts with a real release workflow. Tell us where drawings, reviews, or manufacturability checks create the most friction, and we will focus the conversation there.',
+        'Start narrow: one product family, one drawing-release process, one recurring review bottleneck. Bring a drawing that is hard to release, and we show the findings traced back to your rules, on your infrastructure.',
     },
     hero: {
       eyebrow: 'Book a demo',
-      heading: 'Bring the workflow that is slowing your team down the most',
+      heading: 'Bring a drawing that is hard to release',
       subhead:
-        'The best demo starts with a real release workflow, not a generic product tour. Tell us where drawings, reviews, or manufacturability checks create the most friction, and we will focus the conversation there.',
+        'Skip the generic product tour. Pick one product family and one drawing-release process, bring a drawing that keeps getting kicked back, and we show the findings traced back to your rules: missing dimensions, tolerance conflicts, datum-scheme gaps, caught before you cut the rev and before the EMPB.',
       inTheCall: [
-        'Walk through the highest-effort workflow',
-        'See where RapidDraft fits your CAD and release environment',
-        'Decide whether it is a strong candidate for a narrow pilot',
+        'Walk through one recurring drawing-release bottleneck',
+        'See where RapidDraft fits your CAD, PDM/PLM, and release gate',
+        'Decide whether it is a strong candidate for a scoped pilot',
       ],
       responseNote: 'We typically respond within 1 to 2 business days.',
     },
     form: {
-      title: 'Share the workflow you want to walk through',
-      intro: 'A focused request helps us make the demo specific and useful.',
+      title: 'Tell us which drawing release to walk through',
+      intro:
+        'Name one workflow and one drawing. The more specific the request, the more specific the findings we can show you.',
       nameLabel: 'Name (required)',
       emailLabel: 'Work email (required)',
       companyLabel: 'Company',
@@ -47,18 +48,18 @@ const CONTENT = {
     pilot: {
       title: 'How a pilot works',
       intro:
-        'Start with one focused workflow: a single product family, one drawing-release process, or one recurring review bottleneck.',
+        'Start narrow: one product family, one drawing-release process, one recurring review bottleneck. We agree on the workflow, the success metric, and the inputs up front, so you know what a result looks like before we begin. It runs on your infrastructure, so your IP never leaves the building.',
       steps: [
-        'Measure review effort, repeated issues, and time to release.',
-        'Expand team by team once the workflow proves itself.',
+        'Measure review effort, repeated findings, and time to release against the metric we agreed on.',
+        'Expand team by team once the workflow proves itself, with every finding still traced to its source.',
       ],
     },
     bestFit: {
       title: 'Best fit',
       items: [
         'Mechanical design teams with frequent CAD revisions and drawing-heavy release workflows.',
-        'Supplier-facing programs where quality, certification, or manufacturing teams still depend on 2D documentation.',
-        'Teams that want a measurable reduction in redraw and review effort before broader rollout.',
+        'Supplier-facing programs where quality, certification, or FAIR and EMPB documentation still rides on the 2D drawing.',
+        'Teams that want a grounded check on review and rework effort before a broader rollout. Better design review workflows are where the roughly 30% ROI comes from.',
       ],
     },
   },
@@ -66,23 +67,24 @@ const CONTENT = {
     meta: {
       title: 'Demo buchen | RapidDraft',
       description:
-        'Die beste Demo beginnt mit einem echten Freigabe-Workflow. Sagen Sie uns, wo Zeichnungen, Reviews oder Fertigbarkeitsprüfungen den größten Reibungsverlust verursachen, und wir richten das Gespräch genau darauf aus.',
+        'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess, ein wiederkehrender Review-Engpass. Bringen Sie eine Zeichnung mit, die sich schwer freigeben lässt, und wir zeigen die Befunde zurückverfolgt auf Ihre Regeln, auf Ihrer Infrastruktur.',
     },
     hero: {
       eyebrow: 'Demo buchen',
-      heading: 'Bringen Sie den Workflow mit, der Ihr Team am stärksten ausbremst',
+      heading: 'Bringen Sie eine Zeichnung mit, die sich schwer freigeben lässt',
       subhead:
-        'Die beste Demo beginnt mit einem echten Freigabe-Workflow, nicht mit einer generischen Produkttour. Sagen Sie uns, wo Zeichnungen, Reviews oder Fertigbarkeitsprüfungen die größte Reibung verursachen, und wir richten das Gespräch genau darauf aus.',
+        'Keine generische Produkttour. Wählen Sie eine Produktfamilie und einen Zeichnungs-Freigabeprozess, bringen Sie eine Zeichnung mit, die immer wieder zurückkommt, und wir zeigen die Befunde zurückverfolgt auf Ihre Regeln: fehlende Maße, Toleranzkonflikte, Lücken im Bezugssystem, erkannt bevor Sie die Revision ziehen und vor dem EMPB.',
       inTheCall: [
-        'Den aufwändigsten Workflow gemeinsam durchgehen',
-        'Sehen, wo RapidDraft in Ihre CAD- und Freigabeumgebung passt',
+        'Einen wiederkehrenden Engpass in der Zeichnungsfreigabe gemeinsam durchgehen',
+        'Sehen, wo RapidDraft in Ihre CAD-, PDM/PLM- und Freigabeumgebung passt',
         'Entscheiden, ob er ein starker Kandidat für ein eng gefasstes Pilotprojekt ist',
       ],
       responseNote: 'Wir antworten in der Regel innerhalb von 1 bis 2 Werktagen.',
     },
     form: {
-      title: 'Teilen Sie den Workflow, den Sie durchgehen möchten',
-      intro: 'Eine gezielte Anfrage hilft uns, die Demo konkret und nützlich zu gestalten.',
+      title: 'Sagen Sie uns, welche Freigabe wir durchgehen sollen',
+      intro:
+        'Nennen Sie einen Workflow und eine Zeichnung. Je konkreter die Anfrage, desto konkreter die Befunde, die wir Ihnen zeigen können.',
       nameLabel: 'Name (erforderlich)',
       emailLabel: 'Geschäftliche E-Mail (erforderlich)',
       companyLabel: 'Unternehmen',
@@ -94,18 +96,18 @@ const CONTENT = {
     pilot: {
       title: 'So läuft ein Pilotprojekt ab',
       intro:
-        'Beginnen Sie mit einem fokussierten Workflow: einer einzelnen Produktfamilie, einem Zeichnungs-Freigabeprozess oder einem wiederkehrenden Review-Engpass.',
+        'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess, ein wiederkehrender Review-Engpass. Wir legen Workflow, Erfolgskennzahl und benötigte Eingaben vorab fest, damit Sie wissen, wie ein Ergebnis aussieht, bevor wir beginnen. Es läuft auf Ihrer Infrastruktur, Ihr geistiges Eigentum verlässt das Haus nicht.',
       steps: [
-        'Review-Aufwand, wiederkehrende Probleme und Zeit bis zur Freigabe messen.',
-        'Team für Team ausweiten, sobald sich der Workflow bewährt hat.',
+        'Review-Aufwand, wiederkehrende Befunde und Zeit bis zur Freigabe an der vereinbarten Kennzahl messen.',
+        'Team für Team ausweiten, sobald sich der Workflow bewährt hat, jeder Befund weiterhin auf seine Quelle zurückverfolgbar.',
       ],
     },
     bestFit: {
       title: 'Passt am besten zu',
       items: [
         'Konstruktionsteams im Maschinenbau mit häufigen CAD-Revisionen und zeichnungsintensiven Freigabe-Workflows.',
-        'Lieferantenbezogene Programme, in denen Qualitäts-, Zertifizierungs- oder Fertigungsteams weiterhin auf 2D-Dokumentation angewiesen sind.',
-        'Teams, die vor einem breiteren Rollout eine messbare Reduktion von Nachzeichnungs- und Review-Aufwand erreichen wollen.',
+        'Lieferantenbezogene Programme, in denen Qualität, Zertifizierung oder die FAIR- und EMPB-Dokumentation weiterhin an der 2D-Zeichnung hängt.',
+        'Teams, die vor einem breiteren Rollout eine fundierte Einschätzung von Review- und Nacharbeitsaufwand wollen. Bessere Design-Review-Workflows sind die Quelle der rund 30 % ROI.',
       ],
     },
   },

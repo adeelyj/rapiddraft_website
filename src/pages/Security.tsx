@@ -23,25 +23,25 @@ const CONTENT = {
     meta: {
       title: 'Security and sovereignty | RapidDraft',
       description:
-        'RapidDraft runs on your infrastructure, on your network. Models stay on-prem, training stays governed, and engineers keep the final say over every release.',
+        'RapidDraft runs on your infrastructure, on your network. Models stay on-prem, we do not train on your IP, and engineers keep the sign-off on every release.',
     },
     heroBadges: ['On-prem AI', 'SSO', 'Local / EU Cloud', 'GDPR-Compliant'],
     hero: {
       eyebrow: 'Security and sovereignty',
-      heading: 'Enterprise AI that never leaves your control',
+      heading: 'Your drawings never leave the building',
       subhead:
-        'RapidDraft is built for teams who cannot send drawings to a third-party cloud. Models run on your infrastructure, training stays governed, and your engineers keep the final say.',
+        'If your company will not let engineers paste anything into a public AI, that is the right instinct, and RapidDraft is built for it. Models run locally, on your infrastructure. We do not train on your IP, and your engineers keep the sign-off.',
       requestNda: 'Request an NDA',
       bookDemo: 'Book a demo',
       figureCaption:
-        'RapidDraft runs on your hardware, on your network. Your data stays on-site, the agent orchestrates the work, and an engineer approves before anything is written back to your PLM.',
+        'RapidDraft runs on your hardware, on your network. Your data stays on-site, the agent runs the first pass, and an engineer approves before anything is written back to your PLM.',
       figureInputLabel: 'Your release package',
     },
     whyItMatters: {
       eyebrow: 'Why it matters',
-      title: 'Bring AI to your most sensitive IP without moving it',
+      title: 'Bring AI to your most sensitive drawings without moving them',
       intro:
-        "In automotive and precision manufacturing, your drawings and BOMs are some of your most sensitive IP. RapidDraft brings AI into that work without moving the data out of approved environments or out of your engineers' hands.",
+        'In automotive and precision manufacturing, your drawings and BOMs are some of your most sensitive IP, and the reflex is to keep them off any third-party cloud. RapidDraft brings AI to that work without moving the data out of approved environments or out of your engineers’ hands.',
     },
     pillarsSection: {
       eyebrow: 'The four pillars',
@@ -52,45 +52,45 @@ const CONTENT = {
     pillars: [
       {
         title: 'Data sovereignty',
-        body: 'AI models run locally, on-prem, so your designs never leave your environment.',
+        body: 'Models run locally, on-prem, so your designs never leave your environment.',
       },
       {
         title: 'IP protection',
-        body: 'Training uses only anonymized or approved data, and no third-party model ever sees your IP.',
+        body: 'Training uses only anonymized or approved data. No third-party model ever sees your IP, and we never train on it.',
       },
       {
         title: 'Employee trust',
-        body: 'Workflows are transparent, traceable, and reliable, and final approval always stays with your engineers.',
+        body: 'Every finding is transparent and traces back to its source, and the engineer keeps the final sign-off, never the AI.',
       },
       {
         title: 'Data quality',
-        body: 'One clean source across part data, drawings, and BOMs.',
+        body: 'One clean source across part data, drawings, and BOMs, with inconsistencies caught before release.',
       },
     ],
     deployment: {
       eyebrow: 'Deployment and data handling',
       title: 'Run it on-prem or in a private EU cloud',
       intro:
-        'Run it on-prem for full sovereignty, or in a private or EU-hosted cloud if you would rather we operate it, scaling to your release volume. Either way you get scoped access, SSO, role-based permissions, encryption, and a complete audit trail, with no uncontrolled data movement.',
+        'Run it on-prem for full sovereignty, or in a private or EU-hosted cloud if you would rather we operate it, scaled to your release volume. Either way you get scoped access, SSO, role-based permissions, encryption, and a full audit trail, with no uncontrolled data movement.',
     },
     governance: {
       eyebrow: 'AI governance',
-      title: 'Transparent agents, engineers in control',
+      title: 'Show-your-work agents, engineers in control',
       intro:
-        'Models run locally and learn only from anonymized or approved data. The agentic workflow is transparent and traceable, so you can see why a finding was raised, and engineers, not the AI, make every release decision.',
+        'Models run locally and learn only from anonymized or approved data. The agentic workflow shows its work, so you can see why each finding was raised and trace it back to the rule, standard, or drawing note it came from. Engineers, not the AI, make every release decision.',
     },
     standards: {
       eyebrow: 'Standards and audit',
       title: 'Outputs that line up with your quality processes',
       intro:
-        'Outputs follow your drawing standards, ISO and ASME. Release gates, first-article inspection (FAIR and EMPB), BOM consistency, and a full audit trail line up with VDA and your quality processes.',
+        'Outputs follow your drawing standards, ISO and ASME. Release gates, first-article inspection (FAIR and EMPB), BOM consistency, and a full audit trail line up with VDA Band 2 and the rigor your quality team already works to.',
     },
     compliance: {
       eyebrow: 'Compliance',
       title: 'GDPR-compliant by design',
       intro:
         'RapidDraft is GDPR-compliant by design, with EU data residency, a DPA available on request, and subprocessor transparency.',
-      todoTag: 'TODO: SOC 2 / ISO 27001 — state status or “in progress”',
+      todoTag: 'TODO: SOC 2 / ISO 27001: state status or “in progress”',
       requestNda: 'Request an NDA',
       bookDemo: 'Book a demo',
     },
@@ -99,48 +99,48 @@ const CONTENT = {
     meta: {
       title: 'Sicherheit und Souveränität | RapidDraft',
       description:
-        'RapidDraft läuft auf Ihrer Infrastruktur, in Ihrem Netzwerk. Modelle bleiben On-Prem, das Training bleibt kontrolliert, und Ihre Ingenieure behalten bei jeder Freigabe das letzte Wort.',
+        'RapidDraft läuft auf Ihrer Infrastruktur, in Ihrem Netzwerk. Modelle bleiben On-Prem, wir trainieren nicht auf Ihrem IP, und Ihre Ingenieure behalten die Freigabe über jede Konstruktionsfreigabe.',
     },
     heroBadges: ['On-Prem-KI', 'SSO', 'Lokale/EU-Cloud', 'DSGVO-konform'],
     hero: {
       eyebrow: 'Sicherheit und Souveränität',
-      heading: 'Enterprise-KI, die Ihre Kontrolle nie verlässt',
+      heading: 'Ihre Zeichnungen verlassen das Haus nie',
       subhead:
-        'RapidDraft ist für Teams gebaut, die keine Zeichnungen in eine Drittanbieter-Cloud geben dürfen. Modelle laufen auf Ihrer Infrastruktur, das Training bleibt kontrolliert, und Ihre Ingenieure behalten das letzte Wort.',
+        'Wenn Ihr Unternehmen es Ingenieuren verbietet, etwas in eine öffentliche KI einzufügen, ist das der richtige Reflex, und genau dafür ist RapidDraft gebaut. Modelle laufen lokal, auf Ihrer Infrastruktur. Wir trainieren nicht auf Ihrem IP, und Ihre Ingenieure behalten die Freigabe.',
       requestNda: 'NDA anfragen',
       bookDemo: 'Demo buchen',
       figureCaption:
-        'RapidDraft läuft auf Ihrer Hardware, in Ihrem Netzwerk. Ihre Daten bleiben vor Ort, der Agent orchestriert die Arbeit, und ein Ingenieur gibt frei, bevor etwas in Ihr PLM zurückgeschrieben wird.',
+        'RapidDraft läuft auf Ihrer Hardware, in Ihrem Netzwerk. Ihre Daten bleiben vor Ort, der Agent übernimmt den ersten Durchlauf, und ein Ingenieur gibt frei, bevor etwas in Ihr PLM zurückgeschrieben wird.',
       figureInputLabel: 'Ihr Freigabepaket',
     },
     whyItMatters: {
       eyebrow: 'Warum es zählt',
-      title: 'Bringen Sie KI in Ihr sensibelstes IP, ohne es zu verschieben',
+      title: 'KI auf Ihre sensibelsten Zeichnungen bringen, ohne sie zu verschieben',
       intro:
-        'In der Automobil- und Präzisionsfertigung gehören Ihre Zeichnungen und Stücklisten zu Ihrem sensibelsten IP. RapidDraft bringt KI in diese Arbeit, ohne die Daten aus freigegebenen Umgebungen oder aus den Händen Ihrer Ingenieure zu bewegen.',
+        'In der Automobil- und Präzisionsfertigung gehören Ihre Zeichnungen und Stücklisten zu Ihrem sensibelsten IP, und der Reflex ist, sie aus jeder Drittanbieter-Cloud herauszuhalten. RapidDraft bringt KI in diese Arbeit, ohne die Daten aus freigegebenen Umgebungen oder aus den Händen Ihrer Ingenieure zu bewegen.',
     },
     pillarsSection: {
       eyebrow: 'Die vier Säulen',
-      title: 'Vier Versprechen hinter jeder Freigabe',
+      title: 'Vier Zusagen hinter jeder Freigabe',
       intro:
         'Datensouveränität, IP-Schutz, Vertrauen der Mitarbeiter und Datenqualität, zusammengehalten durch einen kontrollierten Freigabe-Workflow.',
     },
     pillars: [
       {
         title: 'Datensouveränität',
-        body: 'KI-Modelle laufen lokal, On-Prem, sodass Ihre Konstruktionen Ihre Umgebung nie verlassen.',
+        body: 'Modelle laufen lokal, On-Prem, sodass Ihre Konstruktionen Ihre Umgebung nie verlassen.',
       },
       {
         title: 'IP-Schutz',
-        body: 'Das Training nutzt ausschließlich anonymisierte oder freigegebene Daten, und kein Drittanbieter-Modell sieht jemals Ihr IP.',
+        body: 'Das Training nutzt ausschließlich anonymisierte oder freigegebene Daten. Kein Drittanbieter-Modell sieht jemals Ihr IP, und wir trainieren nie darauf.',
       },
       {
         title: 'Vertrauen der Mitarbeiter',
-        body: 'Workflows sind transparent, nachvollziehbar und verlässlich, und die finale Freigabe bleibt stets bei Ihren Ingenieuren.',
+        body: 'Jeder Befund ist transparent und führt auf seine Quelle zurück, und die finale Freigabe bleibt beim Ingenieur, nie bei der KI.',
       },
       {
         title: 'Datenqualität',
-        body: 'Eine saubere Quelle über Teiledaten, Zeichnungen und Stücklisten hinweg.',
+        body: 'Eine saubere Quelle über Teiledaten, Zeichnungen und Stücklisten hinweg, mit Inkonsistenzen, die vor der Freigabe gefunden werden.',
       },
     ],
     deployment: {
@@ -151,22 +151,22 @@ const CONTENT = {
     },
     governance: {
       eyebrow: 'KI-Governance',
-      title: 'Transparente Agenten, Ingenieure in Kontrolle',
+      title: 'Agenten, die ihre Arbeit zeigen, Ingenieure in Kontrolle',
       intro:
-        'Modelle laufen lokal und lernen nur aus anonymisierten oder freigegebenen Daten. Der agentische Workflow ist transparent und nachvollziehbar, sodass Sie sehen, warum ein Befund entstanden ist, und Ingenieure, nicht die KI, treffen jede Freigabeentscheidung.',
+        'Modelle laufen lokal und lernen nur aus anonymisierten oder freigegebenen Daten. Der agentische Workflow zeigt seine Arbeit, sodass Sie sehen, warum jeder Befund entstanden ist, und ihn auf die Regel, den Standard oder die Zeichnungsnotiz zurückführen können. Ingenieure, nicht die KI, treffen jede Freigabeentscheidung.',
     },
     standards: {
       eyebrow: 'Standards und Audit',
       title: 'Ergebnisse, die zu Ihren Qualitätsprozessen passen',
       intro:
-        'Ergebnisse folgen Ihren Zeichnungsstandards, ISO und ASME. Freigabe-Gates, Erstmusterprüfung (FAIR und EMPB), Stücklisten-Konsistenz und ein vollständiger Audit-Trail passen zu VDA und Ihren Qualitätsprozessen.',
+        'Ergebnisse folgen Ihren Zeichnungsstandards, ISO und ASME. Freigabe-Gates, Erstmusterprüfung (FAIR und EMPB), Stücklisten-Konsistenz und ein vollständiger Audit-Trail passen zu VDA Band 2 und der Sorgfalt, mit der Ihr Qualitätsteam ohnehin arbeitet.',
     },
     compliance: {
       eyebrow: 'Compliance',
       title: 'DSGVO-konform by Design',
       intro:
         'RapidDraft ist DSGVO-konform by Design, mit EU-Datenresidenz, einem auf Anfrage verfügbaren AVV und Transparenz über Unterauftragsverarbeiter.',
-      todoTag: 'TODO: SOC 2 / ISO 27001 — Status angeben oder “in Bearbeitung”',
+      todoTag: 'TODO: SOC 2 / ISO 27001: Status angeben oder “in Bearbeitung”',
       requestNda: 'NDA anfragen',
       bookDemo: 'Demo buchen',
     },

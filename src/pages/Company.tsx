@@ -119,32 +119,32 @@ const CONTENT = {
     meta: {
       title: 'Company | RapidDraft',
       description:
-        'RapidDraft is built by engineers who have felt the release bottleneck firsthand, building tooling that reduces repeated effort, tightens review cycles, and makes release workflows easier to govern.',
+        'RapidDraft is built by engineers who have felt the release bottleneck firsthand. We speak the release engineer’s, checker’s, and quality engineer’s language, and everything we build is traceable, on-prem, and human-in-the-loop.',
     },
     hero: {
       eyebrow: 'Company',
       heading: 'Built by engineers who have felt the release bottleneck firsthand',
       subhead:
-        'RapidDraft exists because technical drawings and design reviews still slow down real hardware programs. We are building the software we wished existed: tooling that reduces repeated effort, tightens review cycles, and makes release workflows easier to govern.',
+        'We have cut the rev, owned the title block, and waited on the serial multi-signature chain. So we built RapidDraft on the buyer’s terms: a traceable, human-in-the-loop second set of eyes that catches drawing and design issues before release and before the EMPB. Skepticism welcome. That is exactly why everything shows its work, runs on-prem, and keeps your sign-off in your hands.',
     },
     visionMission: {
       title: 'Vision and mission',
       intro: 'Where we are headed, and what we do every day to get there.',
       vision: {
         label: 'Vision',
-        statement: 'The 3D model becomes the single source of truth for the entire release.',
-        body: 'Drawings, reviews, inspection documents, and decisions all live with the model, so nothing is rebuilt from zero and no hard-won decision is ever lost.',
+        statement: 'Design intent and manufacturing requirements stay connected, all the way to the release gate.',
+        body: 'Drawings, design reviews, inspection documents, and the decisions behind them stay grounded in your own rules, so nothing is rebuilt from zero and the tribal knowledge your reviews depend on is never lost when the person who set it up leaves.',
       },
       mission: {
         label: 'Mission',
-        statement: 'Turn engineering release from a manual bottleneck into a reliable system.',
-        body: 'We cut repeated drafting and review effort and keep every decision traceable, so teams move from design intent to release-ready output with speed and control.',
+        statement: 'Turn drawing release from a serial bottleneck into a traceable release gate.',
+        body: 'RapidDraft does the tireless first pass over manufacturing drawings and design reviews, grounded in your rules, with every finding linked back to its source. The engineer keeps the sign-off. The audit trail carries through to the EMPB.',
       },
     },
     team: {
       title: 'Engineering depth, AI capability, and industrial execution in one team',
       intro:
-        'The founding team brings the technical understanding to see where the bottleneck lives, the product capability to build around it, and the operational discipline to make it useful inside real programs.',
+        'The founding team brings the shop-floor understanding to see where the release bottleneck lives, the capability to build a grounded, traceable check around it, and the operational discipline to make it useful inside real programs.',
     },
     advisors: {
       title: 'Advisory board',
@@ -156,11 +156,11 @@ const CONTENT = {
       intro: 'Supported by leading European deep-tech programs.',
     },
     joinUs: {
-      title: 'Help build better tools for how engineering release actually works',
+      title: 'Help build better tools for how drawing release actually works',
       intro:
         'We are looking for people who want to work on hard, useful problems across software, geometry, AI, and industrial execution.',
       reasons: [
-        { title: 'High impact', body: 'Direct influence on product direction and the workflows we solve first.' },
+        { title: 'High impact', body: 'Direct influence on product direction and the release workflows we ground first.' },
         { title: 'Deep technical problems', body: 'Hard problems across CAD, geometry, AI systems, and product design.' },
         { title: 'End-to-end ownership', body: 'From concept to delivery in a small, execution-focused team.' },
         { title: 'Low ego, high trust', body: 'A bias for practical engineering over theater.' },
@@ -190,7 +190,7 @@ const CONTENT = {
       {
         name: 'Adeel Yawar Jamil',
         role: 'Founder & Mechanical Engineering Lead',
-        bio: '15+ years across CAD, simulation, and technical documentation in aerospace, automotive, and process industries. RapidDraft grew from his repeated experience of good designs slowing down in drawing and review chaos.',
+        bio: '15+ years across CAD, simulation, and technical documentation in aerospace, automotive, and process industries. RapidDraft grew from his repeated experience of good designs stalling in the drawing and review chain.',
       },
       {
         name: 'Dr. Hasan Raza',
@@ -216,13 +216,13 @@ const CONTENT = {
       {
         category: 'Full-stack',
         title: 'Full Stack Web Developer',
-        body: 'Build and scale the platform that turns complex CAD intelligence into fast, intuitive engineering workflows.',
+        body: 'Build and scale the platform that turns CAD and drawing intelligence into fast, intuitive engineering workflows.',
         tags: ['Node.js/Python', 'React', 'CAD API experience', 'Cloud (AWS/GCP)', 'Git'],
       },
       {
         category: 'ML / Computational geometry',
         title: 'AI & ML Expert',
-        body: 'Build systems that read 3D geometry and drawings to automate DFM checks, feature recognition, and engineering decisions.',
+        body: 'Build systems that read 3D geometry and drawings to support DFM checks, feature recognition, and grounded engineering review.',
         tags: ['Python', 'PyTorch', 'OpenCascade', 'Graph Algorithms', '3D Vision'],
       },
       {
@@ -237,32 +237,32 @@ const CONTENT = {
     meta: {
       title: 'Unternehmen | RapidDraft',
       description:
-        'RapidDraft wird von Ingenieuren entwickelt, die den Freigabe-Engpass selbst erlebt haben. Wir bauen Werkzeuge, die wiederholten Aufwand reduzieren, Review-Zyklen verkürzen und Freigabe-Workflows leichter steuerbar machen.',
+        'RapidDraft wird von Ingenieuren entwickelt, die den Freigabe-Engpass selbst erlebt haben. Wir sprechen die Sprache von Konstruktion, Prüfer und Qualität, und alles ist nachvollziehbar, on-prem und mit dem Menschen in der Schleife.',
     },
     hero: {
       eyebrow: 'Unternehmen',
       heading: 'Entwickelt von Ingenieuren, die den Freigabe-Engpass selbst erlebt haben',
       subhead:
-        'RapidDraft entsteht, weil technische Zeichnungen und Design-Reviews reale Hardware-Programme noch immer ausbremsen. Wir bauen die Software, die wir uns gewünscht haben: Werkzeuge, die wiederholten Aufwand reduzieren, Review-Zyklen verkürzen und Freigabe-Workflows leichter steuerbar machen.',
+        'Wir haben selbst Revs gezogen, den Schriftkopf verantwortet und auf die serielle Mehrfach-Signatur gewartet. Darum bauen wir RapidDraft auf den Bedingungen des Käufers: ein nachvollziehbares zweites Augenpaar mit dem Menschen in der Schleife, das Zeichnungs- und Design-Fehler vor der Freigabe und vor dem EMPB findet. Skepsis ist willkommen. Genau deshalb zeigt alles seine Quelle, läuft on-prem und lässt die Freigabe in Ihrer Hand.',
     },
     visionMission: {
       title: 'Vision und Mission',
       intro: 'Wohin wir wollen, und was wir jeden Tag dafür tun.',
       vision: {
         label: 'Vision',
-        statement: 'Das 3D-Modell wird zur einzigen Quelle der Wahrheit für die gesamte Freigabe.',
-        body: 'Zeichnungen, Reviews, Prüfdokumente und Entscheidungen leben am Modell, sodass nichts von Grund auf neu entsteht und keine hart erarbeitete Entscheidung verloren geht.',
+        statement: 'Design-Absicht und Fertigungsanforderungen bleiben verbunden, bis zum Release-Gate.',
+        body: 'Zeichnungen, Design-Reviews, Prüfdokumente und die Entscheidungen dahinter bleiben in Ihren eigenen Regeln verankert, sodass nichts von Grund auf neu entsteht und das Erfahrungswissen, auf dem Ihre Reviews beruhen, nicht verloren geht, wenn die Person geht, die es aufgesetzt hat.',
       },
       mission: {
         label: 'Mission',
-        statement: 'Engineering-Freigabe vom manuellen Engpass zu einem verlässlichen System machen.',
-        body: 'Wir reduzieren wiederholten Zeichen- und Review-Aufwand und halten jede Entscheidung nachvollziehbar, sodass Teams schneller und kontrollierter von der Design-Absicht zum freigabefertigen Ergebnis gelangen.',
+        statement: 'Die Konstruktionsfreigabe vom seriellen Engpass zu einem nachvollziehbaren Release-Gate machen.',
+        body: 'RapidDraft übernimmt den unermüdlichen ersten Durchgang durch Fertigungszeichnungen und Design-Reviews, verankert in Ihren Regeln, mit jedem Befund auf seine Quelle zurückgeführt. Die Freigabe bleibt beim Ingenieur. Der Audit-Trail trägt bis zum EMPB.',
       },
     },
     team: {
       title: 'Engineering-Tiefe, KI-Kompetenz und industrielle Umsetzung in einem Team',
       intro:
-        'Das Gründungsteam vereint das technische Verständnis, um zu sehen, wo der Engpass liegt, die Produktkompetenz, darum herum zu bauen, und die operative Disziplin, es in realen Programmen nützlich zu machen.',
+        'Das Gründungsteam vereint das Verständnis von der Werkbank, um zu sehen, wo der Freigabe-Engpass liegt, die Kompetenz, eine fundierte, nachvollziehbare Prüfung darum herum zu bauen, und die operative Disziplin, es in realen Programmen nützlich zu machen.',
     },
     advisors: {
       title: 'Beirat',
@@ -274,11 +274,11 @@ const CONTENT = {
       intro: 'Unterstützt von führenden europäischen Deep-Tech-Programmen.',
     },
     joinUs: {
-      title: 'Helfen Sie, bessere Werkzeuge für die echte Engineering-Freigabe zu bauen',
+      title: 'Helfen Sie, bessere Werkzeuge für die echte Konstruktionsfreigabe zu bauen',
       intro:
         'Wir suchen Menschen, die an harten, nützlichen Problemen aus Software, Geometrie, KI und industrieller Umsetzung arbeiten wollen.',
       reasons: [
-        { title: 'Hohe Wirkung', body: 'Direkter Einfluss auf die Produktrichtung und die Workflows, die wir zuerst lösen.' },
+        { title: 'Hohe Wirkung', body: 'Direkter Einfluss auf die Produktrichtung und die Freigabe-Workflows, die wir zuerst verankern.' },
         { title: 'Tiefe technische Probleme', body: 'Harte Probleme aus CAD, Geometrie, KI-Systemen und Produktdesign.' },
         { title: 'Verantwortung von Anfang bis Ende', body: 'Vom Konzept bis zur Auslieferung in einem kleinen, umsetzungsstarken Team.' },
         { title: 'Wenig Ego, viel Vertrauen', body: 'Eine Vorliebe für praktische Technik statt Theater.' },
@@ -308,7 +308,7 @@ const CONTENT = {
       {
         name: 'Adeel Yawar Jamil',
         role: 'Gründer & Lead Maschinenbau',
-        bio: 'Über 15 Jahre in CAD, Simulation und technischer Dokumentation in Luft- und Raumfahrt, Automobil und Prozessindustrie. RapidDraft entstand aus seiner wiederkehrenden Erfahrung, dass gute Designs im Zeichnungs- und Review-Chaos ins Stocken geraten.',
+        bio: 'Über 15 Jahre in CAD, Simulation und technischer Dokumentation in Luft- und Raumfahrt, Automobil und Prozessindustrie. RapidDraft entstand aus seiner wiederkehrenden Erfahrung, dass gute Designs in der Zeichnungs- und Review-Kette ins Stocken geraten.',
       },
       {
         name: 'Dr. Hasan Raza',
@@ -334,13 +334,13 @@ const CONTENT = {
       {
         category: 'Full-Stack',
         title: 'Full-Stack-Webentwickler',
-        body: 'Entwickeln und skalieren Sie die Plattform, die komplexe CAD-Intelligenz in schnelle, intuitive Engineering-Workflows verwandelt.',
+        body: 'Entwickeln und skalieren Sie die Plattform, die CAD- und Zeichnungsintelligenz in schnelle, intuitive Engineering-Workflows verwandelt.',
         tags: ['Node.js/Python', 'React', 'CAD-API-Erfahrung', 'Cloud (AWS/GCP)', 'Git'],
       },
       {
         category: 'ML / Computational Geometry',
         title: 'KI- und ML-Experte',
-        body: 'Entwickeln Sie Systeme, die 3D-Geometrie und Zeichnungen lesen, um DFM-Prüfungen, Feature-Erkennung und Engineering-Entscheidungen zu automatisieren.',
+        body: 'Entwickeln Sie Systeme, die 3D-Geometrie und Zeichnungen lesen, um DFM-Prüfungen, Feature-Erkennung und fundierte Engineering-Reviews zu unterstützen.',
         tags: ['Python', 'PyTorch', 'OpenCascade', 'Graph-Algorithmen', '3D-Vision'],
       },
       {

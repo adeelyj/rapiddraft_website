@@ -22,21 +22,21 @@ const CONTENT = {
     meta: {
       title: 'Platform | RapidDraft',
       description:
-        'RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model. It is human-in-the-loop and grounded in your rules.',
+        'Grounded drawing release and design review, not a black box. RapidDraft applies engineering, manufacturing, and your own rules, shows its work, and links every finding back to its source. Human-in-the-loop, runs on-prem.',
     },
     hero: {
       eyebrow: 'Platform',
-      headingLead: 'One agentic review layer for your entire ',
+      headingLead: 'A grounded second set of eyes for your ',
       headingMark: 'drawing-release process',
       subhead:
-        'RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model. It is human-in-the-loop and grounded in your rules.',
+        'RapidDraft checks the drawing against engineering, manufacturing, and your own rules, then shows its work. Every finding links back to the rule, standard, or drawing note it came from. The engineer keeps the sign-off.',
       primaryCta: 'Book a demo',
-      secondaryCta: 'See it in your workflow',
+      secondaryCta: 'See it on your drawings',
     },
     sourceOfTruth: {
-      title: 'The model is the single source of truth, and so is the review',
+      title: 'A reviewed release, not a verdict from a black box',
       intro:
-        'Drawings, reviews, and feedback usually scatter across email, PDFs, and spreadsheets, disconnected from the CAD they describe. RapidDraft keeps them attached to the model and governed by your rules, so every release is backed by a complete, traceable review.',
+        'Drawings, reviews, and feedback scatter across email, PDFs, and spreadsheets, cut off from the CAD they describe. RapidDraft keeps the check attached to the model and grounded in your rules, so every finding traces back to its source and every release carries a complete, auditable review behind it.',
     },
     howItWorks: {
       title: 'How it works',
@@ -44,56 +44,56 @@ const CONTENT = {
     steps: [
       {
         title: 'Connect',
-        body: 'Plug RapidDraft into your CAD and PLM: Siemens NX, CATIA, SolidWorks, EPLAN, and your PDM or CIM Database. Your data stays in your governed systems.',
+        body: 'Point RapidDraft at your CAD and PLM: Siemens NX, CATIA, SolidWorks, EPLAN, and your PDM or CIM Database. Your IP stays in your governed systems. No tools or workflow to swap out.',
       },
       {
         title: 'Check',
-        body: 'RapidDraft generates drawings and QA documents, then reviews them against your engineering, manufacturing, and company-specific rules. It flags missing dimensions, tolerance and GD&T issues, standards violations, and manufacturability risks.',
+        body: 'RapidDraft does the first pass: it reads the drawing and tests it against your engineering, manufacturing, and company rules. It flags missing dimensions, tolerance and GD&T conflicts, datum-scheme gaps, standards violations, and manufacturability risks, each one linked to the rule it came from.',
       },
       {
         title: 'Release',
-        body: 'Engineers review the findings, decide, and release through a clear gate. Every decision feeds an audit trail (VDA, EMPB) and reusable company knowledge.',
+        body: 'The engineer reviews the findings, decides, and releases through a clear gate. Every decision feeds an audit trail (VDA, EMPB) and stays as reusable company knowledge for the next reviewer.',
       },
     ],
     inside: {
       title: 'Inside the platform',
-      intro: 'The modules behind RapidDraft, and how each one works.',
+      intro: 'The modules behind RapidDraft, and how each one shows its work.',
     },
     modules: [
       {
         title: 'Drawing Memory',
-        body: 'Generate manufacturing-ready drawings and inspection-ready documents, including BOMs and first-article inspection reports, from current geometry, and preserve drafting intent as designs evolve.',
+        body: 'Generate manufacturing-ready drawings and inspection-ready documents, including BOMs and First Article Inspection reports, from current geometry, and carry drafting intent forward as the design changes.',
         list: [
-          'Preserves dimensions, notes, and checks across revisions.',
-          'Keeps redraw effort from starting at zero after each change.',
-          'Turns review effort into reusable company knowledge.',
+          'Keeps dimensions, notes, and checks intact across revisions.',
+          'Stops the redraw from starting at zero after every change.',
+          'Turns each review into reusable company knowledge instead of tribal memory.',
         ],
       },
       {
         title: 'Review Automation',
-        body: 'Apply your engineering, manufacturing, and company-specific logic to surface manufacturability and completeness issues early, while engineers keep control of the final decisions.',
+        body: 'Apply your engineering, manufacturing, and company-specific rules to catch manufacturability and completeness issues before the rev, while the engineer keeps the final call.',
         list: [
-          'Flags repeated DFM risks before formal review starts.',
-          'Catches missing, inconsistent, or review-critical information before release.',
-          'Standardizes technical drawings against ISO and ASME.',
+          'Flags repeated DFM risks before the formal review starts.',
+          'Catches missing, inconsistent, or review-critical detail before release, not at the EMPB.',
+          'Checks technical drawings against ISO and ASME, and against your in-house standards.',
         ],
       },
       {
         title: 'Model-Linked Collaboration',
-        body: 'Give design, QA, and suppliers one shared CAD review environment built around the model.',
+        body: 'Give design, QA, and suppliers one shared review surface built around the model, so the design is not thrown over the wall.',
         list: [
-          'Feedback stays attached to geometry instead of scattered screenshots.',
+          'Feedback stays pinned to the geometry instead of scattered screenshots.',
           'Every reviewer works from the same model state and revision.',
-          'Lessons learned stay connected to the part for future iterations.',
+          'Findings export as a package attached to the part, so the next reviewer or supplier picks it up cold.',
         ],
       },
       {
         title: 'Bulk Review',
-        body: 'Run repeated checks across drawings, revisions, and part families without reopening work one file at a time.',
+        body: 'Run the same checks across drawings, revisions, and part families without reopening work one file at a time.',
         list: [
           'Applies the same review logic across large drawing sets and revision queues.',
-          'Surfaces common failure patterns and high-priority outliers fast.',
-          'Lets engineers triage exceptions instead of repeating the same checks.',
+          'Surfaces common failure patterns and high-priority outliers first.',
+          'Lets engineers triage the exceptions instead of repeating the same checks.',
         ],
       },
     ],
@@ -104,23 +104,23 @@ const CONTENT = {
     faqs: [
       {
         q: 'Does it work with my CAD?',
-        a: 'Yes. Siemens NX, CATIA, SolidWorks, and EPLAN today, with more coming. You do not change tools or workflow.',
+        a: 'Yes. Siemens NX, CATIA, SolidWorks, and EPLAN today, with more coming. You keep your tools and your workflow.',
       },
       {
         q: 'Does it replace my engineers?',
-        a: 'No. It highlights issues, suggests fixes, and automates repetitive work. Final approval always stays with the engineer.',
+        a: 'No. It does the first pass, flags issues, and links each one to its source. The sign-off always stays with the engineer, supporting the four-eyes principle.',
       },
       {
         q: 'Can it run on-prem?',
-        a: 'Yes. It runs locally on your infrastructure, with local or EU-cloud options.',
+        a: 'Yes. It runs locally on your infrastructure, with Local or EU-cloud options. Your IP never leaves the building.',
       },
       {
-        q: 'How accurate is it?',
-        a: 'It is grounded in engineering standards and your company rules, and it learns from your feedback on your specific parts over time.',
+        q: 'How do I know it is right?',
+        a: 'It is grounded in engineering standards and your own rules, and every finding links back to the rule, standard, or drawing note it came from, so you can check the reasoning, not just the verdict.',
       },
       {
         q: 'What happens to my data?',
-        a: 'It stays in your environment. Models run locally, and training uses only anonymized or approved data.',
+        a: 'It stays in your environment. Models run locally, we do not train on your IP, and any training uses only anonymized or approved data.',
       },
     ],
   },
@@ -128,21 +128,21 @@ const CONTENT = {
     meta: {
       title: 'Plattform | RapidDraft',
       description:
-        'RapidDraft setzt auf Ihr CAD und PLM auf und hält Zeichnungsfreigabe, Design-Review und Fertigungsfeedback mit dem Modell verbunden. Human-in-the-Loop und verankert in Ihren Regeln.',
+        'Fundierte Zeichnungsfreigabe und Design-Review, keine Blackbox. RapidDraft wendet Konstruktions-, Fertigungs- und Ihre eigenen Regeln an, legt seine Arbeit offen und verknüpft jeden Befund mit seiner Quelle. Human-in-the-Loop, läuft On-Prem.',
     },
     hero: {
       eyebrow: 'Plattform',
-      headingLead: 'Eine agentische Review-Ebene für Ihren gesamten ',
+      headingLead: 'Ein fundiertes Vier-Augen-Prinzip für Ihren ',
       headingMark: 'Zeichnungsfreigabe-Prozess',
       subhead:
-        'RapidDraft setzt auf Ihr CAD und PLM auf und hält Zeichnungsfreigabe, Design-Review und Fertigungsfeedback mit dem Modell verbunden. Human-in-the-Loop und verankert in Ihren Regeln.',
+        'RapidDraft prüft die Zeichnung gegen Konstruktions-, Fertigungs- und Ihre eigenen Regeln und legt seine Arbeit offen. Jeder Befund verweist zurück auf die Regel, Norm oder Zeichnungsnotiz, aus der er stammt. Die Freigabe bleibt beim Ingenieur.',
       primaryCta: 'Demo buchen',
-      secondaryCta: 'In Ihrem Workflow erleben',
+      secondaryCta: 'An Ihren Zeichnungen erleben',
     },
     sourceOfTruth: {
-      title: 'Das Modell ist die einzige Quelle der Wahrheit, und das Review ist es auch',
+      title: 'Ein geprüftes Review, kein Urteil aus der Blackbox',
       intro:
-        'Zeichnungen, Reviews und Feedback verteilen sich meist über E-Mails, PDFs und Tabellen, getrennt vom CAD, das sie beschreiben. RapidDraft hält sie mit dem Modell verbunden und durch Ihre Regeln gesteuert, sodass jede Freigabe durch ein vollständiges, nachvollziehbares Review abgesichert ist.',
+        'Zeichnungen, Reviews und Feedback verteilen sich über E-Mails, PDFs und Tabellen, abgeschnitten vom CAD, das sie beschreiben. RapidDraft hält die Prüfung mit dem Modell verbunden und in Ihren Regeln verankert, sodass jeder Befund auf seine Quelle zurückführt und hinter jeder Freigabe ein vollständiges, auditierbares Review steht.',
     },
     howItWorks: {
       title: 'So funktioniert es',
@@ -150,56 +150,56 @@ const CONTENT = {
     steps: [
       {
         title: 'Verbinden',
-        body: 'Binden Sie RapidDraft in Ihr CAD und PLM ein: Siemens NX, CATIA, SolidWorks, EPLAN sowie Ihr PDM oder CIM Database. Ihre Daten bleiben in Ihren geregelten Systemen.',
+        body: 'Richten Sie RapidDraft auf Ihr CAD und PLM aus: Siemens NX, CATIA, SolidWorks, EPLAN sowie Ihr PDM oder CIM Database. Ihr IP bleibt in Ihren geregelten Systemen. Keine Werkzeuge oder Workflows zum Austauschen.',
       },
       {
         title: 'Prüfen',
-        body: 'RapidDraft erstellt Zeichnungen und QS-Dokumente und prüft sie anschließend gegen Ihre Konstruktions-, Fertigungs- und unternehmensspezifischen Regeln. Es markiert fehlende Bemaßungen, Toleranz- und GD&T-Probleme, Normverstöße und Fertigungsrisiken.',
+        body: 'RapidDraft übernimmt den ersten Durchgang: Es liest die Zeichnung und prüft sie gegen Ihre Konstruktions-, Fertigungs- und Unternehmensregeln. Es markiert fehlende Bemaßungen, Toleranz- und GD&T-Konflikte, Lücken im Bezugssystem, Normverstöße und Fertigungsrisiken, jeden Befund verknüpft mit der Regel, aus der er stammt.',
       },
       {
         title: 'Freigeben',
-        body: 'Ingenieure prüfen die Befunde, entscheiden und geben über ein klares Gate frei. Jede Entscheidung fließt in einen Audit-Trail (VDA, EMPB) und wiederverwendbares Unternehmenswissen ein.',
+        body: 'Der Ingenieur prüft die Befunde, entscheidet und gibt über ein klares Gate frei. Jede Entscheidung fließt in einen Audit-Trail (VDA, EMPB) und bleibt als wiederverwendbares Unternehmenswissen für den nächsten Prüfer erhalten.',
       },
     ],
     inside: {
       title: 'Im Inneren der Plattform',
-      intro: 'Die Module hinter RapidDraft und wie jedes einzelne arbeitet.',
+      intro: 'Die Module hinter RapidDraft und wie jedes seine Arbeit offenlegt.',
     },
     modules: [
       {
         title: 'Drawing Memory',
-        body: 'Erstellen Sie fertigungsreife Zeichnungen und prüffertige Dokumente, einschließlich BOMs und Erstmusterprüfberichten, aus der aktuellen Geometrie, und bewahren Sie die Zeichnungsabsicht, während sich Designs weiterentwickeln.',
+        body: 'Erstellen Sie fertigungsreife Zeichnungen und prüffertige Dokumente, einschließlich BOMs und Erstmusterprüfberichten, aus der aktuellen Geometrie, und tragen Sie die Zeichnungsabsicht weiter, während sich das Design ändert.',
         list: [
-          'Bewahrt Bemaßungen, Anmerkungen und Prüfungen über Revisionen hinweg.',
+          'Hält Bemaßungen, Anmerkungen und Prüfungen über Revisionen hinweg intakt.',
           'Verhindert, dass die Neuzeichnung nach jeder Änderung bei null beginnt.',
-          'Verwandelt Review-Aufwand in wiederverwendbares Unternehmenswissen.',
+          'Verwandelt jedes Review in wiederverwendbares Unternehmenswissen statt in Erfahrungswissen Einzelner.',
         ],
       },
       {
         title: 'Review Automation',
-        body: 'Wenden Sie Ihre Konstruktions-, Fertigungs- und unternehmensspezifische Logik an, um Fertigbarkeits- und Vollständigkeitsprobleme früh aufzudecken, während Ingenieure die finalen Entscheidungen behalten.',
+        body: 'Wenden Sie Ihre Konstruktions-, Fertigungs- und unternehmensspezifischen Regeln an, um Fertigbarkeits- und Vollständigkeitsprobleme vor dem Rev zu erkennen, während der Ingenieur die finale Entscheidung behält.',
         list: [
           'Markiert wiederkehrende DFM-Risiken, bevor das formale Review beginnt.',
-          'Erkennt fehlende, inkonsistente oder review-kritische Informationen vor der Freigabe.',
-          'Standardisiert technische Zeichnungen gemäß ISO und ASME.',
+          'Erkennt fehlende, inkonsistente oder review-kritische Angaben vor der Freigabe, nicht erst beim EMPB.',
+          'Prüft technische Zeichnungen gegen ISO und ASME sowie gegen Ihre internen Normen.',
         ],
       },
       {
         title: 'Model-Linked Collaboration',
-        body: 'Geben Sie Konstruktion, QS und Lieferanten eine gemeinsame CAD-Review-Umgebung, die rund um das Modell aufgebaut ist.',
+        body: 'Geben Sie Konstruktion, QS und Lieferanten eine gemeinsame Review-Umgebung rund um das Modell, damit das Design nicht über den Zaun geworfen wird.',
         list: [
-          'Feedback bleibt mit der Geometrie verbunden statt in verstreuten Screenshots.',
+          'Feedback bleibt an der Geometrie verankert statt in verstreuten Screenshots.',
           'Jeder Prüfer arbeitet vom gleichen Modellstand und der gleichen Revision aus.',
-          'Erkenntnisse bleiben für künftige Iterationen mit dem Bauteil verknüpft.',
+          'Befunde werden als Paket am Bauteil exportiert, sodass der nächste Prüfer oder Lieferant ohne Vorlauf einsteigt.',
         ],
       },
       {
         title: 'Bulk Review',
-        body: 'Führen Sie wiederholte Prüfungen über Zeichnungen, Revisionen und Teilefamilien hinweg durch, ohne jede Datei einzeln erneut zu öffnen.',
+        body: 'Führen Sie dieselben Prüfungen über Zeichnungen, Revisionen und Teilefamilien hinweg durch, ohne jede Datei einzeln erneut zu öffnen.',
         list: [
           'Wendet dieselbe Review-Logik auf große Zeichnungssätze und Revisionswarteschlangen an.',
-          'Deckt häufige Fehlermuster und Ausreißer mit hoher Priorität schnell auf.',
-          'Lässt Ingenieure Ausnahmen bearbeiten, statt dieselben Prüfungen zu wiederholen.',
+          'Deckt häufige Fehlermuster und Ausreißer mit hoher Priorität zuerst auf.',
+          'Lässt Ingenieure die Ausnahmen bearbeiten, statt dieselben Prüfungen zu wiederholen.',
         ],
       },
     ],
@@ -210,23 +210,23 @@ const CONTENT = {
     faqs: [
       {
         q: 'Funktioniert es mit meinem CAD?',
-        a: 'Ja. Siemens NX, CATIA, SolidWorks und EPLAN heute, weitere folgen. Sie ändern weder Werkzeuge noch Workflow.',
+        a: 'Ja. Siemens NX, CATIA, SolidWorks und EPLAN heute, weitere folgen. Sie behalten Ihre Werkzeuge und Ihren Workflow.',
       },
       {
         q: 'Ersetzt es meine Ingenieure?',
-        a: 'Nein. Es hebt Probleme hervor, schlägt Korrekturen vor und automatisiert repetitive Arbeit. Die finale Freigabe bleibt immer beim Ingenieur.',
+        a: 'Nein. Es übernimmt den ersten Durchgang, markiert Probleme und verknüpft jedes mit seiner Quelle. Die Freigabe bleibt immer beim Ingenieur und stützt das Vier-Augen-Prinzip.',
       },
       {
         q: 'Kann es On-Prem laufen?',
-        a: 'Ja. Es läuft lokal auf Ihrer Infrastruktur, mit Optionen für lokale oder EU-Cloud.',
+        a: 'Ja. Es läuft lokal auf Ihrer Infrastruktur, mit Optionen für lokale oder EU-Cloud. Ihr IP verlässt das Haus nicht.',
       },
       {
-        q: 'Wie genau ist es?',
-        a: 'Es ist in Konstruktionsnormen und Ihren Unternehmensregeln verankert und lernt mit der Zeit aus Ihrem Feedback zu Ihren spezifischen Bauteilen.',
+        q: 'Woher weiß ich, dass es stimmt?',
+        a: 'Es ist in Konstruktionsnormen und Ihren eigenen Regeln verankert, und jeder Befund verweist zurück auf die Regel, Norm oder Zeichnungsnotiz, aus der er stammt. So prüfen Sie die Begründung, nicht nur das Urteil.',
       },
       {
         q: 'Was passiert mit meinen Daten?',
-        a: 'Sie bleiben in Ihrer Umgebung. Modelle laufen lokal, und das Training nutzt ausschließlich anonymisierte oder freigegebene Daten.',
+        a: 'Sie bleiben in Ihrer Umgebung. Modelle laufen lokal, wir trainieren nicht auf Ihrem IP, und jedes Training nutzt ausschließlich anonymisierte oder freigegebene Daten.',
       },
     ],
   },
