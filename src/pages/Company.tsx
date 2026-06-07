@@ -228,7 +228,7 @@ const CONTENT = {
       {
         category: 'Mechanical / CAD',
         title: 'CAD Automation Engineer',
-        body: 'Develop the core CAD automation that extracts geometry, relationships, and engineering intent from NX, SolidWorks, and CATIA models.',
+        body: 'Develop the core CAD automation that extracts geometry, relationships, and release-relevant context from NX, SolidWorks, and CATIA models.',
         tags: ['GD&T Logic', 'NX/SolidWorks', 'Geometry Processing'],
       },
     ],
@@ -346,7 +346,7 @@ const CONTENT = {
       {
         category: 'Maschinenbau / CAD',
         title: 'CAD-Automatisierungsingenieur',
-        body: 'Entwickeln Sie die zentrale CAD-Automatisierung, die Geometrie, Beziehungen und Engineering-Absicht aus NX-, SolidWorks- und CATIA-Modellen extrahiert.',
+        body: 'Entwickeln Sie die zentrale CAD-Automatisierung, die Geometrie, Beziehungen und freigaberelevanten Kontext aus NX-, SolidWorks- und CATIA-Modellen extrahiert.',
         tags: ['GD&T-Logik', 'NX/SolidWorks', 'Geometrieverarbeitung'],
       },
     ],

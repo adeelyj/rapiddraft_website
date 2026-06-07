@@ -71,7 +71,7 @@ const CONTENT = {
       eyebrow: 'Deployment and data handling',
       title: 'Run it on-prem or in a private EU cloud',
       intro:
-        'Run it on-prem for full sovereignty, or in a private or EU-hosted cloud if you would rather we operate it, scaled to your release volume. Either way you get scoped access, SSO, role-based permissions, encryption, and a full audit trail, with no uncontrolled data movement.',
+        'Run it on-prem for full sovereignty, or in a private or EU-hosted cloud if you would rather we operate it, scaled to your release volume. It works around your current CAD, PDM, PLM, and release process rather than replacing them. Either way you get scoped access, SSO, role-based permissions, encryption, and a full audit trail, with no uncontrolled data movement.',
     },
     governance: {
       eyebrow: 'AI governance',
@@ -147,7 +147,7 @@ const CONTENT = {
       eyebrow: 'Bereitstellung und Datenverarbeitung',
       title: 'Betreiben Sie es On-Prem oder in einer privaten EU-Cloud',
       intro:
-        'Betreiben Sie es On-Prem für volle Souveränität oder in einer privaten bzw. EU-gehosteten Cloud, wenn wir es lieber für Sie betreiben sollen, skaliert auf Ihr Freigabevolumen. So oder so erhalten Sie eingeschränkten Zugriff, SSO, rollenbasierte Berechtigungen, Verschlüsselung und einen vollständigen Audit-Trail, ohne unkontrollierte Datenbewegung.',
+        'Betreiben Sie es On-Prem für volle Souveränität oder in einer privaten bzw. EU-gehosteten Cloud, wenn wir es lieber für Sie betreiben sollen, skaliert auf Ihr Freigabevolumen. Es fügt sich in Ihre bestehenden CAD-, PDM-, PLM- und Freigabeprozesse ein, statt sie zu ersetzen. So oder so erhalten Sie eingeschränkten Zugriff, SSO, rollenbasierte Berechtigungen, Verschlüsselung und einen vollständigen Audit-Trail, ohne unkontrollierte Datenbewegung.',
     },
     governance: {
       eyebrow: 'KI-Governance',

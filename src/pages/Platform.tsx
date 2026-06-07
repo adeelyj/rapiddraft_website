@@ -80,7 +80,7 @@ const CONTENT = {
       },
       {
         title: 'Model-Linked Collaboration',
-        body: 'Give design, QA, and suppliers one shared review surface built around the model, so the design is not thrown over the wall.',
+        body: 'Give design, QA, and suppliers one shared review surface built around the model, so a finding is something the model can defend, not a PDF re-explained for every supplier.',
         list: [
           'Feedback stays pinned to the geometry instead of scattered screenshots.',
           'Every reviewer works from the same model state and revision.',
@@ -186,7 +186,7 @@ const CONTENT = {
       },
       {
         title: 'Model-Linked Collaboration',
-        body: 'Geben Sie Konstruktion, QS und Lieferanten eine gemeinsame Review-Umgebung rund um das Modell, damit das Design nicht über den Zaun geworfen wird.',
+        body: 'Geben Sie Konstruktion, QS und Lieferanten eine gemeinsame Review-Umgebung rund um das Modell, sodass ein Befund am Modell belegbar ist und nicht als PDF für jeden Lieferanten neu erklärt werden muss.',
         list: [
           'Feedback bleibt an der Geometrie verankert statt in verstreuten Screenshots.',
           'Jeder Prüfer arbeitet vom gleichen Modellstand und der gleichen Revision aus.',

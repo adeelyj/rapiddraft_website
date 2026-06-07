@@ -169,7 +169,7 @@ export default function StackAndSovereignty() {
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14.5px]" style={{ color: 'rgba(255,255,255,0.62)' }}>
             {t.bar.steps.map((step, i) => (
               <span key={step} className="inline-flex items-center gap-2">
-                {i > 0 && <span style={{ color: 'var(--rd-accent)' }}>·</span>}
+                {i > 0 && <span style={{ color: 'rgba(255,255,255,0.4)' }}>·</span>}
                 {step}
               </span>
             ))}

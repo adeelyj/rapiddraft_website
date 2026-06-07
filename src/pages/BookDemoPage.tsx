@@ -48,7 +48,7 @@ const CONTENT = {
     pilot: {
       title: 'How a pilot works',
       intro:
-        'Start narrow: one product family, one drawing-release process, one recurring review bottleneck. We agree on the workflow, the success metric, and the inputs up front, so you know what a result looks like before we begin. It runs on your infrastructure, so your IP never leaves the building.',
+        'Start narrow: one product family, one drawing-release process, one recurring review bottleneck. We agree on the workflow, the success metric, the inputs, and the decision point up front, so you know what a result looks like and what happens next before we begin. It runs on your infrastructure, so your IP never leaves the building.',
       steps: [
         'Measure review effort, repeated findings, and time to release against the metric we agreed on.',
         'Expand team by team once the workflow proves itself, with every finding still traced to its source.',
@@ -96,7 +96,7 @@ const CONTENT = {
     pilot: {
       title: 'So läuft ein Pilotprojekt ab',
       intro:
-        'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess, ein wiederkehrender Review-Engpass. Wir legen Workflow, Erfolgskennzahl und benötigte Eingaben vorab fest, damit Sie wissen, wie ein Ergebnis aussieht, bevor wir beginnen. Es läuft auf Ihrer Infrastruktur, Ihr geistiges Eigentum verlässt das Haus nicht.',
+        'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess, ein wiederkehrender Review-Engpass. Wir legen Workflow, Erfolgskennzahl, benötigte Eingaben und den Entscheidungspunkt vorab fest, damit Sie wissen, wie ein Ergebnis aussieht und was danach passiert, bevor wir beginnen. Es läuft auf Ihrer Infrastruktur, Ihr geistiges Eigentum verlässt das Haus nicht.',
       steps: [
         'Review-Aufwand, wiederkehrende Befunde und Zeit bis zur Freigabe an der vereinbarten Kennzahl messen.',
         'Team für Team ausweiten, sobald sich der Workflow bewährt hat, jeder Befund weiterhin auf seine Quelle zurückverfolgbar.',
