@@ -402,7 +402,7 @@ export default function Company() {
           {[t.visionMission.vision, t.visionMission.mission].map((item) => (
             <div
               key={item.label}
-              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-8 text-center rd-lift"
+              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-center sm:p-8 rd-lift"
             >
               <span
                 aria-hidden="true"
@@ -410,7 +410,7 @@ export default function Company() {
                 style={{ background: 'var(--rd-accent)' }}
               />
               <AccentLabel className="mt-5">{item.label}</AccentLabel>
-              <p className="mx-auto mt-3 max-w-[420px] text-[21px] font-semibold leading-[1.3] tracking-[-0.01em] text-[var(--rd-fg-strong)]">
+              <p className="mx-auto mt-3 max-w-[420px] text-[19px] font-semibold leading-[1.3] tracking-[-0.01em] text-[var(--rd-fg-strong)] sm:text-[21px]">
                 {item.statement}
               </p>
               <Body soft sm className="mx-auto mt-4 max-w-[440px]">
@@ -424,7 +424,7 @@ export default function Company() {
       {/* ── Founding team ────────────────────────────────── */}
       <Section id="team">
         <SectionHeader title={t.team.title} intro={t.team.intro} />
-        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {t.founders.map((person) => (
             <FounderCard key={person.name} name={person.name} role={person.role} bio={person.bio} />
           ))}
@@ -434,7 +434,7 @@ export default function Company() {
       {/* ── Advisory board ───────────────────────────────── */}
       <Section id="advisors">
         <SectionHeader title={t.advisors.title} intro={t.advisors.intro} />
-        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {t.advisorList.map((person) => (
             <AdvisorCard key={person.name} name={person.name} role={person.role} />
           ))}

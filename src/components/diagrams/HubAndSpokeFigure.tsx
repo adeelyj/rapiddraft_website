@@ -45,6 +45,14 @@ export default function HubAndSpokeFigure() {
              flow makes inputs drift toward the center and outputs drift outward. */
           @keyframes hs-flow { to { stroke-dashoffset: -90; } }
           @media (prefers-reduced-motion: reduce) { .hs-flow { animation: none; } }
+          /* The whole SVG scales down with the container, so bump viewBox type on
+             narrow screens to keep labels legible after the scale-down. */
+          @media (max-width: 700px) {
+            .hs-label { font-size: 32px; }
+            .hs-cap { font-size: 24px; }
+            .hs-hub-name { font-size: 42px; }
+            .hs-hub-sub { font-size: 22px; }
+          }
         `}</style>
 
         {/* connectors */}

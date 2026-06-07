@@ -103,7 +103,7 @@ export default function CapabilityRail({ items }: { items: RailItem[] }) {
 
   return (
     <div className="rd-panel overflow-hidden rounded-[16px] p-3 sm:p-4">
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {items.map((item) => {
           const active = item.key === activeKey;
           return (

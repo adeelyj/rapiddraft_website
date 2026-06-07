@@ -27,7 +27,7 @@ export default function Layout() {
         <div className="rd-app flex min-h-screen flex-col bg-[var(--rd-bg)] text-[var(--rd-fg)]">
             <GridBackdrop />
             <Navbar />
-            <main className="relative z-[1] flex-grow overflow-hidden">
+            <main className="relative z-[1] flex-grow overflow-x-clip">
                 <Outlet />
             </main>
             <Footer />

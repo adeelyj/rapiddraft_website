@@ -49,6 +49,15 @@ export default function OnPremFigure({
              flow makes inputs drift toward the workspace and outputs drift outward. */
           @keyframes op-flow { to { stroke-dashoffset: -90; } }
           @media (prefers-reduced-motion: reduce) { .op-flow { animation: none; } }
+          /* The SVG scales with its container; bump viewBox type on narrow
+             screens so the diagram stays legible after the scale-down. */
+          @media (max-width: 700px) {
+            .op-micro, .op-micro-accent { font-size: 19px; letter-spacing: 1.2px; }
+            .op-title { font-size: 31px; }
+            .op-sub { font-size: 21px; }
+            .op-tool-label { font-size: 18px; }
+            .op-bound { font-size: 15px; }
+          }
         `}
       </style>
 

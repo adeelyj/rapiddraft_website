@@ -144,9 +144,9 @@ export default function RoiCalculator() {
             {results.map((r) => (
               <div
                 key={r.label}
-                className="flex items-center justify-between gap-6 bg-[var(--rd-surface)] p-6 sm:px-8"
+                className="flex items-center justify-between gap-3 bg-[var(--rd-surface)] p-4 sm:gap-6 sm:p-6 sm:px-8"
               >
-                <div className="text-[14px] text-[var(--rd-fg-2)]">{r.label}</div>
+                <div className="text-[13px] text-[var(--rd-fg-2)] sm:text-[14px]">{r.label}</div>
                 <div
                   className="text-[26px] sm:text-[30px]"
                   style={{

@@ -292,9 +292,12 @@ export default function Security() {
               <div>
                 <Body soft>{s.intro}</Body>
                 {i === 3 && (
-                  <div className="mt-4">
-                    <Tag accent>{t.compliance.todoTag}</Tag>
-                  </div>
+                  <p
+                    className="mt-4 text-[13px] font-medium leading-relaxed text-[var(--rd-accent)]"
+                    style={{ fontFamily: 'var(--rd-meta)' }}
+                  >
+                    {t.compliance.todoTag}
+                  </p>
                 )}
               </div>
             </div>

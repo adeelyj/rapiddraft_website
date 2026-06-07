@@ -143,14 +143,31 @@
   min-height: calc(100vh - 80px);
   min-height: calc(100svh - 80px);
 }
-/* Desktop: JavaScript drives a deliberate one-section-per-gesture scroll (see Home).
-   Touch keeps a gentle native proximity snap; reduced-motion gets plain scroll. */
+/* Short or touch viewports (phones, landscape): a full section's content can be
+   taller than the viewport. Top-align it and let it scroll naturally instead of
+   centring it so the top/bottom get clipped behind the nav and become
+   unreachable; also release the snap so native scrolling stays free. */
+@media (max-height: 760px), (pointer: coarse) {
+  .rd-screen {
+    min-height: auto;
+    justify-content: flex-start;
+    padding-top: clamp(96px, 14vh, 132px);
+    padding-bottom: clamp(48px, 8vh, 72px);
+    scroll-snap-align: none;
+  }
+  .rd-screen--hero { min-height: auto; }
+}
+/* Desktop: JavaScript drives a deliberate, buttery section glide (see Home).
+   scroll-behavior:auto so the JS easing — not the browser's smooth-scroll — owns
+   the scroll position. Touch keeps a gentle native proximity snap; reduced-motion
+   gets plain scroll. */
 html.rd-snap {
   scroll-snap-type: none;
   scroll-padding-top: 0;
+  scroll-behavior: auto;
 }
 @media (pointer: coarse) {
-  html.rd-snap { scroll-snap-type: y proximity; }
+  html.rd-snap { scroll-snap-type: none; scroll-behavior: smooth; }
 }
 /* The closing CTA is the last snap stop; the footer flows beneath it as the
    document tail (no snap target at the very bottom, which would otherwise pull

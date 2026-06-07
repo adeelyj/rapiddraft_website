@@ -138,10 +138,10 @@ export default function Footer() {
             <p className="mt-5 text-[14px] leading-7 text-[var(--rd-fg-2)]">{t.desc}</p>
             <div className="mt-8">
               <div className="rd-microlabel">{t.backedBy}</div>
-              <div className="mt-4 flex items-center gap-6">
+              <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
                 {BACKERS.map((b) => (
                   <a key={b.name} href={b.href} target="_blank" rel="noreferrer" aria-label={b.name}>
-                    <img src={b.src} alt={b.name} className="rd-logo h-8 w-auto object-contain" />
+                    <img src={b.src} alt={b.name} className="rd-logo h-8 w-auto max-w-[150px] object-contain" />
                   </a>
                 ))}
               </div>

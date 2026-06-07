@@ -121,7 +121,7 @@ export default function Navbar() {
           </div>
 
           {/* center: nav links */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-6 lg:flex lg:gap-8">
             {nav.links.map((link) => (
               <Link
                 key={link.to}
@@ -153,14 +153,14 @@ export default function Navbar() {
 
           {/* right: controls */}
           <div className="flex items-center justify-end gap-3">
-            <div className="hidden items-center gap-3 md:flex">
+            <div className="hidden items-center gap-3 lg:flex">
               <LangToggle lang={lang} onSet={setLang} />
               <ThemeToggle theme={theme} onToggle={toggle} />
               <Link to="/book-demo" className="rd-btn rd-btn--primary rd-btn--sm">
                 {nav.cta}
               </Link>
             </div>
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
               <ThemeToggle theme={theme} onToggle={toggle} />
               <button
                 type="button"
@@ -180,7 +180,7 @@ export default function Navbar() {
 
       <div
         className={clsx(
-          'border-t border-[var(--rd-hair)] bg-[var(--rd-bg)] md:hidden',
+          'border-t border-[var(--rd-hair)] bg-[var(--rd-bg)] lg:hidden',
           isOpen ? 'block' : 'hidden',
         )}
       >

@@ -11,7 +11,6 @@ import {
   Subhead,
   Intro,
   Body,
-  MetaRow,
 } from '../components/ui/primitives';
 
 const CONTENT = {
@@ -168,7 +167,7 @@ export default function BookDemoPage() {
             <Eyebrow>{t.hero.eyebrow}</Eyebrow>
             <H1 className="mt-5">{t.hero.heading}</H1>
             <Subhead className="mx-auto mt-5 max-w-[760px]">{t.hero.subhead}</Subhead>
-            <MetaRow className="mt-8 justify-center" items={[...t.hero.inTheCall]} />
+            <BulletList items={[...t.hero.inTheCall]} className="mx-auto mt-8 max-w-[540px] text-left" />
             <Body soft sm className="mt-6">
               {t.hero.responseNote}
             </Body>

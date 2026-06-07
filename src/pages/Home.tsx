@@ -321,10 +321,12 @@ export default function Home() {
     alt: t.railAlts[item.key],
   }));
 
-  // Deliberate, one-section-per-gesture scrolling (only while Home is mounted).
-  // On a trackpad/wheel, each swipe animates exactly one section up into place,
-  // like a card settling. Content reveals as it lands. Touch + reduced-motion
-  // fall back to native scrolling.
+  // Buttery, retargetable section scrolling (only while Home is mounted).
+  // A wheel/trackpad swipe glides one section into place; a single continuous
+  // critically-damped SmoothDamp loop always chases a mutable target, so rapid
+  // swipes chain smoothly and nothing is ever LOCKED — a genuine swipe can never
+  // be swallowed by a decaying momentum tail. Touch + reduced-motion fall back
+  // to native scrolling.
   useEffect(() => {
     const el = document.documentElement;
     const prevRestoration = history.scrollRestoration;
@@ -349,6 +351,8 @@ export default function Home() {
 
     let teardown = () => {};
     if (!reduce && !coarse) {
+      // Section stops, de-duplicated by Y so an advance can never resolve to the
+      // position it already sits at and silently swallow a swipe.
       const stops = () => {
         const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
         const tops = screens.map((s) =>
@@ -356,71 +360,95 @@ export default function Home() {
         );
         tops[0] = 0; // hero sits at the page top (with the nav visible)
         if (maxY - tops[tops.length - 1] > 48) tops.push(maxY); // closing CTA + footer
-        return tops;
+        return Array.from(new Set(tops)).sort((a, b) => a - b);
       };
-      const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-      const nearest = (pts: number[]) => {
-        const y = window.scrollY;
+      const nearestIndex = (pts: number[], y: number) => {
         let bi = 0, bd = Infinity;
         pts.forEach((p, i) => { const d = Math.abs(p - y); if (d < bd) { bd = d; bi = i; } });
         return bi;
       };
 
-      let animating = false; // an eased move is currently in flight
-      let cooling = false; // brief settle after a move, kept alive by momentum
+      // ── Retargetable glide (Unity-style SmoothDamp: critically damped, no
+      //    overshoot, frame-rate independent). Retargeting just moves targetY;
+      //    the carried velocity makes the redirection seamless. scrollTo is
+      //    instant here because html.rd-snap sets scroll-behavior:auto, so this
+      //    easing — not the browser's smooth-scroll — is the sole controller. ──
+      const SMOOTH = 0.4; // seconds, approx glide time
+      let curY = window.scrollY;
+      let targetY = window.scrollY;
+      let vy = 0; // px/sec
+      let running = false;
       let raf = 0;
-      let coolT: number | undefined;
-      const isLocked = () => animating || cooling;
-      const startCooldown = () => {
-        cooling = true;
-        window.clearTimeout(coolT);
-        coolT = window.setTimeout(() => { cooling = false; }, 160);
+      let lastTs = 0;
+      const tick = (now: number) => {
+        const dt = Math.min(0.064, lastTs ? (now - lastTs) / 1000 : 0.016);
+        lastTs = now;
+        const omega = 2 / SMOOTH;
+        const x = omega * dt;
+        const expf = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+        const change = curY - targetY;
+        const temp = (vy + omega * change) * dt;
+        vy = (vy - omega * temp) * expf;
+        curY = targetY + (change + temp) * expf;
+        if (Math.abs(targetY - curY) < 0.5) {
+          curY = targetY; vy = 0; running = false; lastTs = 0;
+          window.scrollTo(0, Math.round(curY));
+          return;
+        }
+        window.scrollTo(0, Math.round(curY));
+        raf = requestAnimationFrame(tick);
       };
-
-      const animateTo = (targetY: number) => {
-        cancelAnimationFrame(raf);
-        const startY = window.scrollY;
-        const dist = targetY - startY;
-        if (Math.abs(dist) < 2) return;
-        const dur = Math.min(820, Math.max(420, Math.abs(dist) * 0.62));
-        const t0 = performance.now();
-        animating = true;
-        const step = (now: number) => {
-          const t = Math.min(1, (now - t0) / dur);
-          window.scrollTo(0, Math.round(startY + dist * ease(t)));
-          if (t < 1) raf = requestAnimationFrame(step);
-          else { animating = false; startCooldown(); }
-        };
-        raf = requestAnimationFrame(step);
+      const glideTo = (y: number) => {
+        targetY = y;
+        if (!running) {
+          running = true;
+          curY = window.scrollY; // resync if the user native-scrolled meanwhile
+          lastTs = 0;
+          raf = requestAnimationFrame(tick);
+        }
       };
-
-      const go = (dir: number) => {
+      const move = (dir: number) => {
         const pts = stops();
-        const cur = nearest(pts);
-        const target = Math.max(0, Math.min(pts.length - 1, cur + dir));
-        if (target === cur) return; // already at the first/last stop
-        animateTo(pts[target]);
+        const idx = nearestIndex(pts, targetY); // off the in-flight target so flicks accumulate
+        glideTo(pts[Math.max(0, Math.min(pts.length - 1, idx + dir))]);
       };
 
+      // ── Wheel intent vs momentum tail ─────────────────────────────────────
+      // Normalize the delta, then advance on a genuine push, throttled by a
+      // FIXED interval that momentum can never extend. A momentum tail is a
+      // continuous stream of DECAYING deltas, so it is filtered out by trend —
+      // never by a wall-clock lock it could keep alive — which is the whole bug
+      // fixed: a real new flick (a delta spike, or after a pause) always fires.
+      const normDelta = (e: WheelEvent) => {
+        let d = e.deltaY;
+        if (e.deltaMode === 1) d *= 16;                      // lines -> px
+        else if (e.deltaMode === 2) d *= window.innerHeight; // pages -> px
+        return d;
+      };
+      let lastAbs = 0, lastTime = 0, lastFire = 0;
       const onWheel = (e: WheelEvent) => {
         e.preventDefault();
-        // One physical swipe = one section. While a move is in flight or settling,
-        // keep absorbing the trackpad's momentum tail (extend the cooldown) so the
-        // decelerating scroll never bleeds into a second jump.
-        if (isLocked()) { if (cooling) startCooldown(); return; }
-        if (Math.abs(e.deltaY) < 4) return;
-        go(e.deltaY > 0 ? 1 : -1);
+        const d = normDelta(e);
+        const ad = Math.abs(d);
+        const now = performance.now();
+        const gap = now - lastTime;
+        const decaying = ad < lastAbs - 1; // |delta| falling => inertia, not a fresh push
+        lastAbs = ad; lastTime = now;
+        if (ad < 4) return;                       // ignore micro-deltas
+        if (now - lastFire < 280) return;         // fixed throttle, NOT momentum-extended
+        if (gap <= 140 && decaying) return;       // continuous + decaying = momentum tail
+        lastFire = now;
+        move(d > 0 ? 1 : -1);
       };
 
       const onKey = (e: KeyboardEvent) => {
         const node = e.target as HTMLElement | null;
         if (node && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA' || node.isContentEditable)) return;
-        if (isLocked()) { if (e.key.startsWith('Arrow') || e.key === 'PageDown' || e.key === 'PageUp' || e.key === ' ') e.preventDefault(); return; }
         const pts = stops();
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(1); }
-        else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
-        else if (e.key === 'Home') { e.preventDefault(); animateTo(pts[0]); }
-        else if (e.key === 'End') { e.preventDefault(); animateTo(pts[pts.length - 1]); }
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); move(1); }
+        else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); move(-1); }
+        else if (e.key === 'Home') { e.preventDefault(); glideTo(pts[0]); }
+        else if (e.key === 'End') { e.preventDefault(); glideTo(pts[pts.length - 1]); }
       };
 
       window.addEventListener('wheel', onWheel, { passive: false });
@@ -429,7 +457,6 @@ export default function Home() {
         window.removeEventListener('wheel', onWheel);
         window.removeEventListener('keydown', onKey);
         cancelAnimationFrame(raf);
-        window.clearTimeout(coolT);
       };
     }
 

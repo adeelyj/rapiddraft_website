@@ -14,8 +14,11 @@
     scroll-behavior: smooth;
     background: #fffaf7;
   }
-  
+
   body {
+    /* Global horizontal-overflow guard. `clip` (not `hidden`) so it never turns
+       the body into a scroll container and breaks the sticky navbar. */
+    overflow-x: clip;
     @apply bg-white text-gray-900 antialiased;
     background-image:
       radial-gradient(circle at top left, rgba(255, 237, 213, 0.82), transparent 28%),
