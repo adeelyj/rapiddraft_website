@@ -59,17 +59,17 @@ const CONTENT = {
       {
         title: 'Connect',
         body: 'Point RapidDraft at your existing CAD and PLM. Your IP stays in your governed systems, with nothing to swap out.',
-        tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PDM / CIM'],
+        tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'PDM / PLM'],
       },
       {
         title: 'Check',
         body: 'The first pass against your engineering, manufacturing, and company rules, every finding linked to its source.',
-        tags: ['Missing dimensions', 'GD&T & tolerances', 'Datum schemes', 'Standards', 'Manufacturability'],
+        tags: ['Missing dimensions', 'GD&T & tolerances', 'Datum schemes', 'Manufacturability'],
       },
       {
         title: 'Release',
         body: 'The engineer reviews the findings, decides, and releases through a clear gate.',
-        tags: ['Audit trail (VDA, EMPB)', 'Reusable knowledge'],
+        tags: ['Engineer sign-off', 'Release gate', 'Audit trail (VDA, EMPB)', 'Reusable knowledge'],
       },
     ],
     inside: {
@@ -170,17 +170,17 @@ const CONTENT = {
       {
         title: 'Verbinden',
         body: 'Richten Sie RapidDraft auf Ihr bestehendes CAD und PLM aus. Ihr IP bleibt in Ihren geregelten Systemen, nichts zum Austauschen.',
-        tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PDM / CIM'],
+        tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'PDM / PLM'],
       },
       {
         title: 'Prüfen',
         body: 'Der erste Durchgang gegen Ihre Konstruktions-, Fertigungs- und Unternehmensregeln, jeder Befund mit seiner Quelle verknüpft.',
-        tags: ['Fehlende Maße', 'GD&T & Toleranzen', 'Bezugssysteme', 'Normen', 'Fertigbarkeit'],
+        tags: ['Fehlende Maße', 'GD&T & Toleranzen', 'Bezugssysteme', 'Fertigbarkeit'],
       },
       {
         title: 'Freigeben',
         body: 'Der Ingenieur prüft die Befunde, entscheidet und gibt über ein klares Gate frei.',
-        tags: ['Audit-Trail (VDA, EMPB)', 'Wiederverwendbares Wissen'],
+        tags: ['Ingenieur-Freigabe', 'Release-Gate', 'Audit-Trail (VDA, EMPB)', 'Wiederverwendbares Wissen'],
       },
     ],
     inside: {
