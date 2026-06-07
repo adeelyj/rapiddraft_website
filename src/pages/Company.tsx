@@ -132,13 +132,13 @@ const CONTENT = {
       intro: 'Where we are headed, and what we do every day to get there.',
       vision: {
         label: 'Vision',
-        statement: 'Design intent and manufacturing requirements stay connected, all the way to the release gate.',
-        body: 'Drawings, design reviews, inspection documents, and the decisions behind them stay grounded in your own rules, so nothing is rebuilt from zero and the tribal knowledge your reviews depend on is never lost when the person who set it up leaves.',
+        statement: 'A future where engineering teams build on everything they have learned, and release with confidence.',
+        body: 'The intent behind a drawing and the reasoning behind a review stay with the work, so knowledge compounds instead of walking out the door.',
       },
       mission: {
         label: 'Mission',
-        statement: 'Turn drawing release from a serial bottleneck into a traceable release gate.',
-        body: 'RapidDraft does the tireless first pass over manufacturing drawings and design reviews, grounded in your rules, with every finding linked back to its source. The engineer keeps the sign-off. The audit trail carries through to the EMPB.',
+        statement: 'Give every engineering team a grounded, traceable second set of eyes on every release.',
+        body: 'RapidDraft runs the tireless first pass over your drawings and reviews, grounded in your rules and traceable to the source. The engineer keeps the sign-off.',
       },
     },
     team: {
@@ -250,13 +250,13 @@ const CONTENT = {
       intro: 'Wohin wir wollen, und was wir jeden Tag dafür tun.',
       vision: {
         label: 'Vision',
-        statement: 'Designabsicht und Fertigungsanforderungen bleiben verbunden, bis zum Release-Gate.',
-        body: 'Zeichnungen, Design-Reviews, Prüfdokumente und die Entscheidungen dahinter bleiben in Ihren eigenen Regeln verankert, sodass nichts von Grund auf neu entsteht und das Erfahrungswissen, auf dem Ihre Reviews beruhen, nicht verloren geht, wenn die Person geht, die es aufgesetzt hat.',
+        statement: 'Eine Zukunft, in der Engineering-Teams auf allem aufbauen, was sie gelernt haben, und mit Zuversicht freigeben.',
+        body: 'Die Absicht hinter einer Zeichnung und die Begründung hinter einem Review bleiben bei der Arbeit, sodass sich Wissen summiert, statt verloren zu gehen.',
       },
       mission: {
         label: 'Mission',
-        statement: 'Die Konstruktionsfreigabe vom seriellen Engpass zu einem nachvollziehbaren Release-Gate machen.',
-        body: 'RapidDraft übernimmt den unermüdlichen ersten Durchgang durch Fertigungszeichnungen und Design-Reviews, verankert in Ihren Regeln, mit jedem Befund auf seine Quelle zurückgeführt. Die Freigabe bleibt beim Ingenieur. Der Audit-Trail trägt bis zum EMPB.',
+        statement: 'Jedem Engineering-Team ein fundiertes, nachvollziehbares zweites Augenpaar für jede Freigabe geben.',
+        body: 'RapidDraft übernimmt den unermüdlichen ersten Durchgang über Ihre Zeichnungen und Reviews, verankert in Ihren Regeln und nachvollziehbar bis zur Quelle. Die Freigabe bleibt beim Ingenieur.',
       },
     },
     team: {
