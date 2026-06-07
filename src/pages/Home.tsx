@@ -73,7 +73,12 @@ const CONTENT = {
         body: 'Keep decisions, findings, and drafting intent attached to the model so they carry across revisions instead of getting lost.',
       },
     ],
-    pillars: ['Data sovereignty', 'IP protection', 'Employee trust', 'Data quality'],
+    pillars: [
+      { title: 'Data sovereignty', body: 'Models run locally, on-prem.' },
+      { title: 'IP protection', body: 'No third-party model ever sees your IP.' },
+      { title: 'Employee trust', body: 'Transparent, with engineers in control.' },
+      { title: 'Data quality', body: 'One clean source across drawings and BOMs.' },
+    ],
     meta: {
       pageTitle: 'RapidDraft | Agentic drawing release and design review',
       pageDescription:
@@ -187,7 +192,12 @@ const CONTENT = {
         body: 'Halten Sie Entscheidungen, Befunde und Zeichnungsabsicht am Modell fest, sodass sie über Revisionen hinweg erhalten bleiben.',
       },
     ],
-    pillars: ['Datensouveränität', 'IP-Schutz', 'Vertrauen der Mitarbeitenden', 'Datenqualität'],
+    pillars: [
+      { title: 'Datensouveränität', body: 'Modelle laufen lokal, On-Prem.' },
+      { title: 'IP-Schutz', body: 'Kein Drittanbieter-Modell sieht Ihr IP.' },
+      { title: 'Vertrauen der Mitarbeitenden', body: 'Transparent, Ingenieure in Kontrolle.' },
+      { title: 'Datenqualität', body: 'Eine saubere Quelle über Zeichnungen und BOMs.' },
+    ],
     meta: {
       pageTitle: 'RapidDraft | Agentenbasierte Zeichnungsfreigabe und Design-Review',
       pageDescription:
@@ -481,11 +491,26 @@ export default function Home() {
         />
         <div className="mx-auto mt-10 grid max-w-[1120px] grid-cols-2 gap-4 sm:grid-cols-4">
           {t.pillars.map((p) => (
-            <div
-              key={p}
-              className="flex items-center justify-center rounded-[14px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] px-4 py-6 text-center text-[15px] text-[var(--rd-fg)]"
-            >
-              {p}
+            <div key={p.title} className="rd-tile">
+              <span
+                aria-hidden="true"
+                className="mx-auto flex h-7 w-7 items-center justify-center rounded-[9px]"
+                style={{ background: 'var(--rd-accent-soft)' }}
+              >
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3.5 8.5l3 3 6-7"
+                    stroke="var(--rd-accent)"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <H3 className="mt-4">{p.title}</H3>
+              <Body soft sm className="mt-2">
+                {p.body}
+              </Body>
             </div>
           ))}
         </div>
