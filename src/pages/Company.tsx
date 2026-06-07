@@ -432,7 +432,7 @@ export default function Company() {
       </Section>
 
       {/* ── Advisory board ───────────────────────────────── */}
-      <Section>
+      <Section id="advisors">
         <SectionHeader title={t.advisors.title} intro={t.advisors.intro} />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.advisorList.map((person) => (
@@ -446,7 +446,7 @@ export default function Company() {
         <SectionHeader title={t.backers.title} intro={t.backers.intro} />
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
           {t.backerList.map((b) => (
-            <img key={b.name} src={b.src} alt={b.name} className="h-9 w-auto opacity-80" loading="lazy" />
+            <img key={b.name} src={b.src} alt={b.name} className="rd-logo h-9 w-auto" loading="lazy" />
           ))}
         </div>
       </Section>

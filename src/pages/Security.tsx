@@ -274,27 +274,29 @@ export default function Security() {
 
       {/* ── How it runs: deployment, governance, standards, compliance ── */}
       <Section>
-        <div className="mx-auto grid max-w-[1120px] gap-4 sm:grid-cols-2">
+        <div className="mx-auto max-w-[1040px] border-b border-[var(--rd-hair)]">
           {[t.deployment, t.governance, t.standards, t.compliance].map((s, i) => (
             <div
               key={s.title}
-              className="rd-lift rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-7 text-left sm:p-8"
+              className="grid gap-x-12 gap-y-3 border-t border-[var(--rd-hair)] py-9 text-left md:grid-cols-[0.9fr_1.1fr]"
             >
-              <div
-                className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--rd-accent)]"
-                style={{ fontFamily: 'var(--rd-meta)' }}
-              >
-                {s.eyebrow}
-              </div>
-              <H3 className="mt-2.5">{s.title}</H3>
-              <Body soft sm className="mt-3">
-                {s.intro}
-              </Body>
-              {i === 3 && (
-                <div className="mt-4">
-                  <Tag accent>{t.compliance.todoTag}</Tag>
+              <div>
+                <div
+                  className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--rd-accent)]"
+                  style={{ fontFamily: 'var(--rd-meta)' }}
+                >
+                  {s.eyebrow}
                 </div>
-              )}
+                <H3 className="mt-2.5">{s.title}</H3>
+              </div>
+              <div>
+                <Body soft>{s.intro}</Body>
+                {i === 3 && (
+                  <div className="mt-4">
+                    <Tag accent>{t.compliance.todoTag}</Tag>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>

@@ -302,7 +302,7 @@ export default function Platform() {
       </Section>
 
       {/* ── How it works (three numbered steps) ──────────── */}
-      <Section>
+      <Section id="how-it-works">
         <SectionHeader title={t.howItWorks.title} />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.steps.map((step, i) => (
@@ -318,7 +318,7 @@ export default function Platform() {
       </Section>
 
       {/* ── Inside the platform (four modules) ───────────── */}
-      <Section>
+      <Section id="inside">
         <SectionHeader
           title={t.inside.title}
           intro={t.inside.intro}
@@ -349,10 +349,12 @@ export default function Platform() {
       </Section>
 
       {/* ── Works with your stack, keeps your data secure ── */}
-      <StackAndSovereignty />
+      <div id="stack" className="scroll-mt-[88px]">
+        <StackAndSovereignty />
+      </div>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <Section>
+      <Section id="faq">
         <SectionHeader title={t.faqSection.title} />
         <FaqAccordion items={t.faqs} />
         <div className="mt-9 flex justify-center">
