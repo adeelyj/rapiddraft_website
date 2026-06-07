@@ -398,6 +398,10 @@ html.rd-snap .rd-screen.is-in .rd-container {
   padding: clamp(22px, 2.2vw, 30px);
   text-align: center;
 }
+/* Left-aligned variant for index-led informational cards (01/02 + heading +
+   body), so they match the same idiom on Platform/Company. Centered .rd-tile
+   stays right for KPI and icon-led tiles. */
+.rd-tile.rd-tile--left { text-align: left; }
 
 /* Consistent interactive card motion. Rest stays flat (hairline, no shadow);
    on hover the card lifts a few px with a soft shadow and a stronger edge.

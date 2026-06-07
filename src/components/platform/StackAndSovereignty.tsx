@@ -8,10 +8,10 @@ import { useLang } from '../../i18n/LanguageContext';
 
 const CONTENT = {
   en: {
-    eyebrow: 'Enterprise-ready AI review',
+    eyebrow: 'Data sovereignty, built in',
     heading: 'Works with your stack, keeps your data secure',
     intro:
-      'RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM workflows, while tools, approval gates, and sensitive engineering data stay under your control.',
+      'RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM workflows. Models run on your infrastructure, your IP never leaves the building, and we do not train on it.',
     stack: {
       title: 'Works with your engineering stack',
       body: 'Connect review context from CAD models, manufacturing drawings, BOMs, PLM/PDM records, and internal review rules.',
@@ -20,10 +20,10 @@ const CONTENT = {
     sovereignty: {
       title: 'Designed for data sovereignty',
       body: 'Keep sensitive engineering data inside approved environments, with scoped access, controlled AI workflows, and engineer-reviewed outputs.',
-      tags: ['GDPR-Compliant', 'On-prem AI', 'Local/EU Cloud', 'SSO', 'IP protection', 'Human approval'],
+      tags: ['GDPR-Compliant', 'On-prem AI', 'Local/EU Cloud', 'SSO', 'IP protection', 'Human-in-the-loop'],
     },
     bar: {
-      title: 'RapidDraft AI review layer',
+      title: 'RapidDraft review',
       steps: ['Analyze drawings', 'apply rules', 'surface issues', 'capture decisions'],
     },
     guarantees: [
@@ -35,10 +35,10 @@ const CONTENT = {
     cta: 'How we keep your data secure',
   },
   de: {
-    eyebrow: 'Enterprise-taugliche KI-Prüfung',
+    eyebrow: 'Datensouveränität, von Anfang an',
     heading: 'Arbeitet mit Ihrem Stack, schützt Ihre Daten',
     intro:
-      'RapidDraft bringt KI-gestützte Prüfung in Ihre bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows, während Werkzeuge, Freigabe-Gates und sensible Konstruktionsdaten unter Ihrer Kontrolle bleiben.',
+      'RapidDraft bringt KI-gestützte Prüfung in Ihre bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows. Die Modelle laufen auf Ihrer Infrastruktur, Ihr IP verlässt das Haus nicht, und wir trainieren nicht darauf.',
     stack: {
       title: 'Arbeitet mit Ihrem Engineering-Stack',
       body: 'Verbindet Review-Kontext aus CAD-Modellen, Fertigungszeichnungen, Stücklisten, PLM/PDM-Daten und internen Prüfregeln.',
@@ -47,10 +47,10 @@ const CONTENT = {
     sovereignty: {
       title: 'Für Datensouveränität konzipiert',
       body: 'Hält sensible Konstruktionsdaten in freigegebenen Umgebungen, mit eingeschränktem Zugriff, kontrollierten KI-Workflows und von Ingenieuren geprüften Ergebnissen.',
-      tags: ['DSGVO-konform', 'On-Prem-KI', 'Lokale/EU-Cloud', 'SSO', 'IP-Schutz', 'Freigabe durch Menschen'],
+      tags: ['DSGVO-konform', 'On-Prem-KI', 'Lokale/EU-Cloud', 'SSO', 'IP-Schutz', 'Human-in-the-Loop'],
     },
     bar: {
-      title: 'RapidDraft KI-Review-Ebene',
+      title: 'RapidDraft Review',
       steps: ['Zeichnungen analysieren', 'Regeln anwenden', 'Probleme aufdecken', 'Entscheidungen festhalten'],
     },
     guarantees: [
@@ -152,24 +152,17 @@ export default function StackAndSovereignty() {
         </div>
 
         {/* Dark review-layer bar (stays dark in both themes) */}
-        <div
-          className="mt-4 flex flex-col items-start gap-2.5 rounded-[20px] px-7 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-9"
-          style={{
-            background: 'linear-gradient(180deg, #16161a 0%, #0d0d0f 100%)',
-            border: '1px solid var(--rd-accent-hair)',
-            boxShadow: '0 1px 0 rgba(255,255,255,0.04) inset',
-          }}
-        >
-          <div
-            className="text-[19px] font-semibold tracking-[-0.01em]"
-            style={{ color: '#ffffff' }}
-          >
+        <div className="rd-dark mt-4 flex flex-col items-start gap-2.5 rounded-[16px] border border-[var(--rd-accent-hair)] bg-[var(--rd-bg)] px-7 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-9">
+          <div className="text-[19px] font-medium tracking-[-0.005em] text-[var(--rd-head)]">
             {t.bar.title}
           </div>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14.5px]" style={{ color: 'rgba(255,255,255,0.62)' }}>
+          <div
+            className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14.5px] text-[var(--rd-fg-2)]"
+            style={{ fontFamily: 'var(--rd-meta)' }}
+          >
             {t.bar.steps.map((step, i) => (
               <span key={step} className="inline-flex items-center gap-2">
-                {i > 0 && <span style={{ color: 'rgba(255,255,255,0.4)' }}>·</span>}
+                {i > 0 && <span className="text-[var(--rd-muted)]">·</span>}
                 {step}
               </span>
             ))}

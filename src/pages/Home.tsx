@@ -195,7 +195,7 @@ const CONTENT = {
     pillars: [
       { title: 'Datensouveränität', body: 'Modelle laufen lokal, auf Ihrer Infrastruktur.' },
       { title: 'IP-Schutz', body: 'Wir trainieren nie auf Ihrem IP. Es bleibt im Haus.' },
-      { title: 'Vertrauen der Mitarbeitenden', body: 'Transparent. Ingenieure behalten die Freigabe.' },
+      { title: 'Vertrauen der Mitarbeitenden', body: 'Transparent und nachvollziehbar. Ingenieure behalten die Freigabe.' },
       { title: 'Datenqualität', body: 'Eine saubere Quelle für Zeichnungen und BOMs.' },
     ],
     meta: {
@@ -238,7 +238,7 @@ const CONTENT = {
     },
     capabilitiesSection: {
       eyebrow: 'Funktionen',
-      title: 'Zeichnungen analysieren, Reviews beschleunigen, Wissen bewahren',
+      title: 'Zeichnungen analysieren, Reviews beschleunigen, Silos auflösen, Wissen bewahren',
       intro:
         'Eine Prüfebene, die die Zeichnung liest, Ihre Regeln anwendet, Probleme mit ihrer Quelle sichtbar macht und den Entscheidungskontext über Revisionen hinweg am Modell hält.',
       cta: 'Plattform ansehen',
@@ -546,7 +546,7 @@ export default function Home() {
         />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {t.problemCards.map((card, i) => (
-            <div key={card.title} className="rd-tile rd-problemcard flex">
+            <div key={card.title} className="rd-tile rd-tile--left rd-problemcard flex">
               <div className="rd-problemcard__inner">
                 <div className="rd-index">0{i + 1}</div>
                 <H3 className="mt-3">{card.title}</H3>
@@ -582,7 +582,7 @@ export default function Home() {
         />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2">
           {t.capabilities.map((cap, i) => (
-            <div key={cap.title} className="rd-tile">
+            <div key={cap.title} className="rd-tile rd-tile--left">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-3">{cap.title}</H3>
               <Body soft sm className="mt-2.5">

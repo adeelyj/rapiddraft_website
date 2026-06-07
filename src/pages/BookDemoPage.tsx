@@ -75,7 +75,7 @@ const CONTENT = {
         'Keine generische Produkttour. Wählen Sie eine Produktfamilie und einen Zeichnungs-Freigabeprozess, bringen Sie eine Zeichnung mit, die immer wieder zurückkommt, und wir zeigen die Befunde zurückverfolgt auf Ihre Regeln: fehlende Maße, Toleranzkonflikte, Lücken im Bezugssystem, erkannt bevor Sie die Revision ziehen und vor dem EMPB.',
       inTheCall: [
         'Einen wiederkehrenden Engpass in der Zeichnungsfreigabe gemeinsam durchgehen',
-        'Sehen, wo RapidDraft in Ihre CAD-, PDM/PLM- und Freigabeumgebung passt',
+        'Sehen, wo RapidDraft in Ihre CAD-, PDM/PLM-Landschaft und Ihren Freigabeprozess passt',
         'Entscheiden, ob er ein starker Kandidat für ein eng gefasstes Pilotprojekt ist',
       ],
       responseNote: 'Wir antworten in der Regel innerhalb von 1 bis 2 Werktagen.',
@@ -136,12 +136,12 @@ function SectionHeader({
 /* Left-aligned bullet list inside a centered tile/panel. */
 function BulletList({ items, className }: { items: readonly string[]; className?: string }) {
   return (
-    <ul className={clsx('flex flex-col gap-3 text-left', className)}>
+    <ul className={clsx('flex flex-col gap-2.5 text-left', className)}>
       {items.map((item) => (
-        <li key={item} className="flex gap-3">
+        <li key={item} className="flex gap-2.5">
           <span
             aria-hidden="true"
-            className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--rd-accent)]"
+            className="mt-2 h-1 w-1 flex-none rounded-full bg-[var(--rd-accent)]"
           />
           <Body soft sm>
             {item}
@@ -162,6 +162,11 @@ export default function BookDemoPage() {
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <header className="relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
+        />
         <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
           <div className="mx-auto max-w-[820px] text-center">
             <Eyebrow>{t.hero.eyebrow}</Eyebrow>

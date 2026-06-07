@@ -14,7 +14,6 @@ import {
   Body,
   Button,
   Tag,
-  MetaRow,
 } from '../components/ui/primitives';
 
 // Workflow imagery (language-independent), in the same order as the workflows.
@@ -37,7 +36,7 @@ const CONTENT = {
       eyebrow: 'Use cases',
       heading: 'Where RapidDraft catches issues before release',
       subhead:
-        'Four review jobs every drawing-release team knows: checking the drawing, building the inspection documents, the DFM pass, and the supplier handoff. RapidDraft does the first pass on each, grounded in your rules, and you keep the sign-off.',
+        'The review jobs every drawing-release team knows: checking the drawing, building the inspection documents, the DFM pass, the supplier handoff, and the churn after a change. RapidDraft does the first pass on each, grounded in your rules, and you keep the sign-off.',
       overviewItems: [
         'Drawings checked against your rules before you cut the rev',
         'DFM questions surfaced before the EMPB, not after a rejection',
@@ -49,7 +48,7 @@ const CONTENT = {
     lead: {
       title: 'Built for the review work, not an abstract CAD demo',
       intro:
-        'Design intent lives in CAD, the manufacturing requirements live in the drawing, and the review logic is tribal knowledge. RapidDraft runs the repetitive first pass across all four, links every finding back to the rule or note it came from, and leaves the judgment to you.',
+        'Design intent lives in CAD, the manufacturing requirements live in the drawing, and the review logic is tribal knowledge. RapidDraft runs the repetitive first pass across all of them, links every finding back to the rule or note it came from, and leaves the judgment to you.',
     },
     workflows: [
       {
@@ -115,13 +114,13 @@ const CONTENT = {
     meta: {
       title: 'Anwendungsfälle | RapidDraft',
       description:
-        'Technische Zeichnungsprüfungen, Qualitätsdokumente, DFM-Reviews und Lieferanten-CAD-Zusammenarbeit. RapidDraft findet Zeichnungs- und Designfehler vor der Freigabe und vor dem EMPB.',
+        'Technische Zeichnungsprüfungen, Qualitätsdokumente, DFM-Reviews und Lieferanten-CAD-Zusammenarbeit. RapidDraft findet Zeichnungs- und Designprobleme vor der Freigabe und vor dem EMPB.',
     },
     hero: {
       eyebrow: 'Anwendungsfälle',
       heading: 'Wo RapidDraft Fehler vor der Freigabe findet',
       subhead:
-        'Vier Prüfaufgaben, die jedes Freigabeteam kennt: die Zeichnung prüfen, die Prüfdokumente erstellen, der DFM-Durchgang und die Lieferantenübergabe. RapidDraft übernimmt bei jeder den ersten Durchgang, verankert in Ihren Regeln, und die Freigabe behalten Sie.',
+        'Die Prüfaufgaben, die jedes Freigabeteam kennt: die Zeichnung prüfen, die Prüfdokumente erstellen, der DFM-Durchgang, die Lieferantenübergabe und der Aufwand nach einer Änderung. RapidDraft übernimmt bei jeder den ersten Durchgang, verankert in Ihren Regeln, und die Freigabe behalten Sie.',
       overviewItems: [
         'Zeichnungen werden gegen Ihre Regeln geprüft, bevor Sie eine Revision ziehen',
         'DFM-Fragen werden vor dem EMPB sichtbar, nicht nach einer Reklamation',
@@ -133,7 +132,7 @@ const CONTENT = {
     lead: {
       title: 'Gebaut für die Prüfarbeit, nicht für eine abstrakte CAD-Demo',
       intro:
-        'Die Designintention steckt im CAD, die Fertigungsanforderungen stecken in der Zeichnung, und die Prüflogik ist Erfahrungswissen. RapidDraft übernimmt den wiederkehrenden ersten Durchgang über alle vier hinweg, verknüpft jeden Befund mit der Regel oder dem Hinweis, aus dem er stammt, und überlässt Ihnen das Urteil.',
+        'Die Designabsicht steckt im CAD, die Fertigungsanforderungen stecken in der Zeichnung, und die Prüflogik ist Erfahrungswissen. RapidDraft übernimmt den wiederkehrenden ersten Durchgang über alle hinweg, verknüpft jeden Befund mit der Regel oder dem Hinweis, aus dem er stammt, und überlässt Ihnen das Urteil.',
     },
     workflows: [
       {
@@ -243,7 +242,19 @@ export default function UseCasesPage() {
             <Subhead className="mx-auto mt-5 max-w-[760px]">
               {t.hero.subhead}
             </Subhead>
-            <MetaRow className="mt-8 justify-center" items={t.hero.overviewItems} />
+            <ul className="mx-auto mt-8 flex max-w-[560px] flex-col gap-2.5 text-left">
+              {t.hero.overviewItems.map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1 w-1 flex-none rounded-full bg-[var(--rd-accent)]"
+                  />
+                  <Body soft sm>
+                    {item}
+                  </Body>
+                </li>
+              ))}
+            </ul>
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button to="/book-demo" variant="primary">
                 {t.hero.ctaPrimary}
@@ -287,7 +298,7 @@ export default function UseCasesPage() {
                   <li key={bullet} className="flex gap-2.5">
                     <span
                       aria-hidden="true"
-                      className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--rd-accent)]"
+                      className="mt-2 h-1 w-1 flex-none rounded-full bg-[var(--rd-accent)]"
                     />
                     <Body soft sm>
                       {bullet}

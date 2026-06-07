@@ -90,7 +90,6 @@ const CONTENT = {
       title: 'GDPR-compliant by design',
       intro:
         'RapidDraft is GDPR-compliant by design, with EU data residency, a DPA available on request, and subprocessor transparency.',
-      todoTag: 'TODO: SOC 2 / ISO 27001: state status or “in progress”',
       requestNda: 'Request an NDA',
       bookDemo: 'Book a demo',
     },
@@ -99,7 +98,7 @@ const CONTENT = {
     meta: {
       title: 'Sicherheit und Souveränität | RapidDraft',
       description:
-        'RapidDraft läuft auf Ihrer Infrastruktur, in Ihrem Netzwerk. Modelle bleiben On-Prem, wir trainieren nicht auf Ihrem IP, und Ihre Ingenieure behalten die Freigabe über jede Konstruktionsfreigabe.',
+        'RapidDraft läuft auf Ihrer Infrastruktur, in Ihrem Netzwerk. Modelle bleiben On-Prem, wir trainieren nicht auf Ihrem IP, und Ihre Ingenieure behalten das letzte Wort bei jeder Freigabe.',
     },
     heroBadges: ['On-Prem-KI', 'SSO', 'Lokale/EU-Cloud', 'DSGVO-konform'],
     hero: {
@@ -163,10 +162,9 @@ const CONTENT = {
     },
     compliance: {
       eyebrow: 'Compliance',
-      title: 'DSGVO-konform by Design',
+      title: 'DSGVO-konform von Grund auf',
       intro:
-        'RapidDraft ist DSGVO-konform by Design, mit EU-Datenresidenz, einem auf Anfrage verfügbaren AVV und Transparenz über Unterauftragsverarbeiter.',
-      todoTag: 'TODO: SOC 2 / ISO 27001: Status angeben oder “in Bearbeitung”',
+        'RapidDraft ist DSGVO-konform von Grund auf, mit EU-Datenresidenz, einem auf Anfrage verfügbaren AVV und Transparenz über Unterauftragsverarbeiter.',
       requestNda: 'NDA anfragen',
       bookDemo: 'Demo buchen',
     },
@@ -275,7 +273,7 @@ export default function Security() {
       {/* ── How it runs: deployment, governance, standards, compliance ── */}
       <Section>
         <div className="mx-auto max-w-[1040px] border-b border-[var(--rd-hair)]">
-          {[t.deployment, t.governance, t.standards, t.compliance].map((s, i) => (
+          {[t.deployment, t.governance, t.standards, t.compliance].map((s) => (
             <div
               key={s.title}
               className="grid gap-x-12 gap-y-3 border-t border-[var(--rd-hair)] py-9 text-left md:grid-cols-[0.9fr_1.1fr]"
@@ -291,14 +289,6 @@ export default function Security() {
               </div>
               <div>
                 <Body soft>{s.intro}</Body>
-                {i === 3 && (
-                  <p
-                    className="mt-4 text-[13px] font-medium leading-relaxed text-[var(--rd-accent)]"
-                    style={{ fontFamily: 'var(--rd-meta)' }}
-                  >
-                    {t.compliance.todoTag}
-                  </p>
-                )}
               </div>
             </div>
           ))}

@@ -237,20 +237,20 @@ const CONTENT = {
     meta: {
       title: 'Unternehmen | RapidDraft',
       description:
-        'RapidDraft wird von Ingenieuren entwickelt, die den Freigabe-Engpass selbst erlebt haben. Wir sprechen die Sprache von Konstruktion, Prüfer und Qualität, und alles ist nachvollziehbar, on-prem und mit dem Menschen in der Schleife.',
+        'RapidDraft wird von Ingenieuren entwickelt, die den Freigabe-Engpass selbst erlebt haben. Wir sprechen die Sprache von Konstruktion, Prüfer und Qualität, und alles ist nachvollziehbar, On-Prem und Human-in-the-Loop.',
     },
     hero: {
       eyebrow: 'Unternehmen',
       heading: 'Entwickelt von Ingenieuren, die den Freigabe-Engpass selbst erlebt haben',
       subhead:
-        'Wir haben selbst Revs gezogen, den Schriftkopf verantwortet und auf die serielle Mehrfach-Signatur gewartet. Darum bauen wir RapidDraft auf den Bedingungen des Käufers: ein nachvollziehbares zweites Augenpaar mit dem Menschen in der Schleife, das Zeichnungs- und Design-Fehler vor der Freigabe und vor dem EMPB findet. Skepsis ist willkommen. Genau deshalb zeigt alles seine Quelle, läuft on-prem und lässt die Freigabe in Ihrer Hand.',
+        'Wir haben selbst Revs gezogen, den Schriftkopf verantwortet und auf die serielle Mehrfach-Signatur gewartet. Darum bauen wir RapidDraft auf den Bedingungen des Käufers: ein nachvollziehbares Human-in-the-Loop-Zweitaugenpaar, das Zeichnungs- und Designprobleme vor der Freigabe und vor dem EMPB findet. Skepsis ist willkommen. Genau deshalb zeigt alles seine Quelle, läuft On-Prem und lässt die Freigabe in Ihrer Hand.',
     },
     visionMission: {
       title: 'Vision und Mission',
       intro: 'Wohin wir wollen, und was wir jeden Tag dafür tun.',
       vision: {
         label: 'Vision',
-        statement: 'Design-Absicht und Fertigungsanforderungen bleiben verbunden, bis zum Release-Gate.',
+        statement: 'Designabsicht und Fertigungsanforderungen bleiben verbunden, bis zum Release-Gate.',
         body: 'Zeichnungen, Design-Reviews, Prüfdokumente und die Entscheidungen dahinter bleiben in Ihren eigenen Regeln verankert, sodass nichts von Grund auf neu entsteht und das Erfahrungswissen, auf dem Ihre Reviews beruhen, nicht verloren geht, wenn die Person geht, die es aufgesetzt hat.',
       },
       mission: {
@@ -410,7 +410,7 @@ export default function Company() {
                 style={{ background: 'var(--rd-accent)' }}
               />
               <AccentLabel className="mt-5">{item.label}</AccentLabel>
-              <p className="mx-auto mt-3 max-w-[420px] text-[19px] font-semibold leading-[1.3] tracking-[-0.01em] text-[var(--rd-fg-strong)] sm:text-[21px]">
+              <p className="mx-auto mt-3 max-w-[420px] text-[19px] font-medium leading-[1.35] tracking-[-0.01em] text-[var(--rd-fg-strong)] sm:text-[20px]">
                 {item.statement}
               </p>
               <Body soft sm className="mx-auto mt-4 max-w-[440px]">
