@@ -47,7 +47,7 @@ const CONTENT = {
     sourceOfTruth: {
       title: 'A reviewed release, not a verdict from a black box',
       intro:
-        'Reviews scatter across email, PDFs, and spreadsheets, cut off from the CAD. RapidDraft keeps the check on the model, grounded in your rules.',
+        'Every finding traces back to the rule, standard, or drawing note it came from, so every release carries an auditable review.',
       figureCaption:
         'RapidDraft sits between your engineering stack and an auditable release gate, with human-in-the-loop review at the center.',
     },
@@ -155,7 +155,7 @@ const CONTENT = {
     sourceOfTruth: {
       title: 'Ein geprüftes Review, kein Urteil aus der Blackbox',
       intro:
-        'Reviews verteilen sich über E-Mails und Tabellen, weg vom CAD. RapidDraft hält die Prüfung am Modell, verankert in Ihren Regeln.',
+        'Jeder Befund führt auf die Regel, Norm oder Zeichnungsnotiz zurück, und hinter jeder Freigabe steht ein auditierbares Review.',
       figureCaption:
         'RapidDraft sitzt zwischen Ihrem Engineering-Stack und einem auditierbaren Release-Gate, mit Human-in-the-Loop-Review im Zentrum.',
     },
