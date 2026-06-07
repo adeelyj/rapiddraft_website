@@ -63,7 +63,7 @@ const CONTENT = {
     modules: [
       {
         title: 'Drawing Memory',
-        body: 'Generate manufacturing-ready drawings and inspection-ready documents, including BOMs and first-article and inspection reports, from current geometry, and preserve drafting intent as designs evolve.',
+        body: 'Generate manufacturing-ready drawings and inspection-ready documents, including BOMs and first-article inspection reports, from current geometry, and preserve drafting intent as designs evolve.',
         list: [
           'Preserves dimensions, notes, and checks across revisions.',
           'Keeps redraw effort from starting at zero after each change.',
@@ -183,7 +183,7 @@ const CONTENT = {
     modules: [
       {
         title: 'Drawing Memory',
-        body: 'Erstellen Sie fertigungsreife Zeichnungen und prüffertige Dokumente, einschließlich BOMs sowie Erstmuster- und Prüfberichten, aus der aktuellen Geometrie, und bewahren Sie die Zeichnungsabsicht, während sich Designs weiterentwickeln.',
+        body: 'Erstellen Sie fertigungsreife Zeichnungen und prüffertige Dokumente, einschließlich BOMs und Erstmusterprüfberichten, aus der aktuellen Geometrie, und bewahren Sie die Zeichnungsabsicht, während sich Designs weiterentwickeln.',
         list: [
           'Bewahrt Bemaßungen, Anmerkungen und Prüfungen über Revisionen hinweg.',
           'Verhindert, dass die Neuzeichnung nach jeder Änderung bei null beginnt.',

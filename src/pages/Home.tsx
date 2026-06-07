@@ -84,14 +84,14 @@ const CONTENT = {
       headingLead: 'Accelerate engineering decisions and ',
       headingMark: 'drawing release',
       subhead:
-        'RapidDraft catches issues earlier, automates repetitive review checks, and keeps every decision attached to the model.',
+        'RapidDraft catches issues earlier, automates repetitive review, and keeps every decision attached to the model.',
       bookDemo: 'Book a demo',
       seeHow: 'See how it works',
     },
     credibility: {
       title: 'Reduce repeated work before it delays release',
       intro:
-        'Faster feedback, fewer iterations, and less manual checking, right where drawings and reviews still slow teams down.',
+        'Faster feedback, fewer iterations, and less manual checking, right where drawings, reviews, and release readiness still slow teams down.',
       meta: [
         'Built by engineers from aerospace, automotive, and process industries',
         'Advised by leaders at Siemens, Volocopter, and Amazon',
@@ -102,7 +102,7 @@ const CONTENT = {
       eyebrow: 'Problem',
       title: 'Design intent lives in CAD. Requirements live in drawings. The review logic lives in people’s heads',
       intro:
-        'Collaboration is inefficient, review is error-prone, and inspection is slow. Good designs stall in documentation.',
+        'Collaboration is inefficient, drawing review is error-prone, and quality inspection is slow and tedious. Good designs stall in documentation and review.',
     },
     solution: {
       eyebrow: 'Solution',
@@ -123,13 +123,13 @@ const CONTENT = {
       eyebrow: 'Security',
       title: 'Works with your stack, keeps your data in-house',
       intro:
-        'AI-assisted review inside your existing CAD, drawing, BOM, and PLM workflows, with your tools and data under your control.',
+        'AI-assisted review inside your existing CAD, drawing, BOM, and PLM workflows. Your tools, approval gates, and sensitive engineering data stay under your control.',
       cta: 'Read about security',
     },
     finalCta: {
       title: 'Bring speed and traceability to drawing release',
       intro:
-        'See how RapidDraft reduces review effort, speeds up drawing release, and keeps decision context across revisions.',
+        'See how RapidDraft reduces review effort, generates manufacturing-ready drawings faster, and keeps decision context across revisions.',
       bookDemo: 'Book a demo',
       seeUseCases: 'See use cases',
     },
@@ -176,15 +176,15 @@ const CONTENT = {
       },
       {
         title: 'Prüfung und DFM-Checks automatisieren',
-        body: 'Prüfen Sie Vollständigkeit, Fertigbarkeit und Normen (ISO und ASME) gegen Ihre eigenen Regeln und erkennen Sie Probleme vor der Freigabe.',
+        body: 'Prüfen Sie Vollständigkeit, Fertigbarkeit und Normen (ISO/ASME) gegen Ihre Regeln und finden Sie Probleme vor der Freigabe.',
       },
       {
         title: 'Rund um das Modell zusammenarbeiten',
-        body: 'Führen Sie Konstruktion, QS und Lieferanten in einem geteilten CAD-Prüfraum zusammen, wobei jeder Kommentar an der zugehörigen Geometrie hängt.',
+        body: 'Führen Sie Konstruktion, QS und Lieferanten in einem geteilten CAD-Prüfraum zusammen, jeder Kommentar an seiner Geometrie.',
       },
       {
         title: 'Prüfwissen bewahren',
-        body: 'Halten Sie Entscheidungen, Befunde und die Zeichnungsabsicht am Modell fest, sodass sie über Revisionen hinweg erhalten bleiben statt verloren zu gehen.',
+        body: 'Halten Sie Entscheidungen, Befunde und Zeichnungsabsicht am Modell fest, sodass sie über Revisionen hinweg erhalten bleiben.',
       },
     ],
     pillars: ['Datensouveränität', 'IP-Schutz', 'Vertrauen der Mitarbeitenden', 'Datenqualität'],
@@ -195,8 +195,8 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Agentenbasierte Zeichnungsfreigabe und Design-Review für Engineering-Teams',
-      headingLead: 'Beschleunigen Sie Engineering-Entscheidungen und ',
-      headingMark: 'Zeichnungsfreigabe',
+      headingLead: 'Engineering-Entscheidungen ',
+      headingMark: 'schneller freigeben',
       subhead:
         'RapidDraft erkennt Probleme früher, automatisiert wiederkehrende Prüfungen und hält jede Entscheidung am Modell fest.',
       bookDemo: 'Demo buchen',
@@ -205,7 +205,7 @@ const CONTENT = {
     credibility: {
       title: 'Wiederholte Arbeit reduzieren, bevor sie die Freigabe verzögert',
       intro:
-        'Schnelleres Feedback, weniger Iterationen und weniger manuelles Prüfen, genau dort, wo Zeichnungen und Reviews Teams noch ausbremsen.',
+        'Schnelleres Feedback, weniger Iterationen und weniger manuelles Prüfen, genau dort, wo Zeichnungen, Reviews und Freigabereife Teams noch ausbremsen.',
       meta: [
         'Entwickelt von Ingenieuren aus Luftfahrt, Automotive und Prozessindustrie',
         'Beraten von Führungskräften bei Siemens, Volocopter und Amazon',
@@ -214,15 +214,15 @@ const CONTENT = {
     },
     problem: {
       eyebrow: 'Problem',
-      title: 'Die Designabsicht steckt im CAD. Anforderungen stehen in Zeichnungen. Die Prüflogik steckt in den Köpfen der Menschen',
+      title: 'Designabsicht lebt im CAD. Anforderungen in Zeichnungen. Prüflogik in den Köpfen',
       intro:
-        'Die Zusammenarbeit ist ineffizient, die Prüfung fehleranfällig und die Inspektion langsam. Gute Designs bleiben in der Dokumentation stecken.',
+        'Die Zusammenarbeit ist ineffizient, die Zeichnungsprüfung fehleranfällig und die Qualitätsinspektion langsam und mühsam. Gute Designs bleiben in Dokumentation und Prüfung stecken.',
     },
     solution: {
       eyebrow: 'Lösung',
       title: 'Aus fragmentierter Prüfarbeit einen vernetzten Freigabe-Workflow machen',
       intro:
-        'Human-in-the-Loop-KI, verankert in Ihren Regeln, hält Zeichnungsabsicht, Prüfentscheidungen und Feedback am Modell.',
+        'Human-in-the-Loop-KI, verankert in Ihren Regeln, die Zeichnungsabsicht, Prüfentscheidungen und Feedback am Modell hält.',
       caption:
         'RapidDraft steht zwischen Ihren Engineering-Eingaben und freigabereifen Ergebnissen, mit Human-in-the-Loop-Prüfung im Zentrum.',
     },
@@ -237,13 +237,13 @@ const CONTENT = {
       eyebrow: 'Sicherheit',
       title: 'Funktioniert mit Ihrem Stack, hält Ihre Daten im Haus',
       intro:
-        'KI-gestützte Prüfung innerhalb Ihrer bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows, mit Ihren Tools und Daten unter Ihrer Kontrolle.',
+        'KI-gestützte Prüfung innerhalb Ihrer bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows. Ihre Tools, Freigabe-Gates und sensiblen Engineering-Daten bleiben unter Ihrer Kontrolle.',
       cta: 'Mehr zur Sicherheit',
     },
     finalCta: {
-      title: 'Geschwindigkeit und Nachverfolgbarkeit in die Zeichnungsfreigabe bringen',
+      title: 'Tempo und Nachverfolgbarkeit in die Freigabe bringen',
       intro:
-        'Sehen Sie, wie RapidDraft den Prüfaufwand reduziert, die Zeichnungsfreigabe beschleunigt und den Entscheidungskontext über Revisionen hinweg bewahrt.',
+        'Sehen Sie, wie RapidDraft den Prüfaufwand reduziert, fertigungsreife Zeichnungen schneller erzeugt und den Entscheidungskontext über Revisionen hinweg bewahrt.',
       bookDemo: 'Demo buchen',
       seeUseCases: 'Anwendungsfälle ansehen',
     },
@@ -490,7 +490,7 @@ export default function Home() {
 
       {/* ── Final CTA (closing block) ────────────────────── */}
       <Section>
-        <div className="mx-auto max-w-[680px] text-center">
+        <div className="mx-auto max-w-[780px] text-center">
           <H2>{t.finalCta.title}</H2>
           <Intro className="mx-auto mt-5 max-w-[760px]">{t.finalCta.intro}</Intro>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

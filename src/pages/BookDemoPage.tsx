@@ -72,7 +72,7 @@ const CONTENT = {
       eyebrow: 'Demo buchen',
       heading: 'Bringen Sie den Workflow mit, der Ihr Team am stärksten ausbremst',
       subhead:
-        'Die beste Demo beginnt mit einem echten Freigabe-Workflow, nicht mit einer generischen Produkttour. Sagen Sie uns, wo die größte Reibung entsteht, und wir richten das Gespräch genau darauf aus.',
+        'Die beste Demo beginnt mit einem echten Freigabe-Workflow, nicht mit einer generischen Produkttour. Sagen Sie uns, wo Zeichnungen, Reviews oder Fertigbarkeitsprüfungen die größte Reibung verursachen, und wir richten das Gespräch genau darauf aus.',
       inTheCall: [
         'Den aufwändigsten Workflow gemeinsam durchgehen',
         'Sehen, wo RapidDraft in Ihre CAD- und Freigabeumgebung passt',

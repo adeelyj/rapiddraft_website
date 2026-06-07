@@ -129,7 +129,7 @@ const CONTENT = {
       },
       {
         title: 'AI and ML expert',
-        body: 'Build systems that understand 3D geometry and drawings to automate DFM checks, feature recognition, and engineering decisions.',
+        body: 'Build systems that read 3D geometry and drawings to automate DFM checks, feature recognition, and engineering decisions.',
         tags: ['Python', 'PyTorch', 'OpenCascade', 'Graph Algorithms', '3D Vision'],
       },
       {
@@ -208,7 +208,7 @@ const CONTENT = {
       },
       {
         title: 'KI- und ML-Experte',
-        body: 'Entwickeln Sie Systeme, die 3D-Geometrie und Zeichnungen verstehen, um DFM-Prüfungen, Feature-Erkennung und Engineering-Entscheidungen zu automatisieren.',
+        body: 'Entwickeln Sie Systeme, die 3D-Geometrie und Zeichnungen lesen, um DFM-Prüfungen, Feature-Erkennung und Engineering-Entscheidungen zu automatisieren.',
         tags: ['Python', 'PyTorch', 'OpenCascade', 'Graph-Algorithmen', '3D-Vision'],
       },
       {

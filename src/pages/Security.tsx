@@ -39,7 +39,7 @@ const CONTENT = {
     },
     whyItMatters: {
       eyebrow: 'Why it matters',
-      title: 'Bring AI into your most sensitive IP without moving it',
+      title: 'Bring AI to your most sensitive IP without moving it',
       intro:
         "In automotive and precision manufacturing, your drawings and BOMs are some of your most sensitive IP. RapidDraft brings AI into that work without moving the data out of approved environments or out of your engineers' hands.",
     },
@@ -47,7 +47,7 @@ const CONTENT = {
       eyebrow: 'The four pillars',
       title: 'Four commitments behind every release',
       intro:
-        'Data sovereignty, IP protection, employee trust, and data quality, held together by one governed workflow.',
+        'Data sovereignty, IP protection, employee trust, and data quality, held together by one governed drawing-release workflow.',
     },
     pillars: [
       {
@@ -123,7 +123,7 @@ const CONTENT = {
       eyebrow: 'Die vier Säulen',
       title: 'Vier Versprechen hinter jeder Freigabe',
       intro:
-        'Datensouveränität, IP-Schutz, Vertrauen der Mitarbeiter und Datenqualität, zusammengehalten durch einen kontrollierten Workflow.',
+        'Datensouveränität, IP-Schutz, Vertrauen der Mitarbeiter und Datenqualität, zusammengehalten durch einen kontrollierten Freigabe-Workflow.',
     },
     pillars: [
       {

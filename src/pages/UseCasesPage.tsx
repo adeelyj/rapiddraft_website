@@ -64,7 +64,7 @@ const CONTENT = {
       },
       {
         title: 'Battery packs and structural components',
-        body: 'High-complexity parts carry tighter tolerances, more manufacturing sensitivity, and less room for avoidable review drift.',
+        body: 'High-complexity parts carry tighter tolerances, more manufacturing sensitivity, and less room for avoidable review drift. RapidDraft keeps structural components reviewed consistently before downstream work compounds.',
         bullets: [
           'Highlight manufacturing-sensitive features while the model is still active.',
           'Keep GD&T, geometry checks, and drawing completeness in one review flow.',
@@ -84,7 +84,7 @@ const CONTENT = {
       },
       {
         title: 'Change-driven updates (ECR / ECO)',
-        body: 'Geometry changes often trigger drawing churn long after the design decision is made.',
+        body: 'Geometry changes often trigger drawing churn long after the design decision is made. RapidDraft pinpoints what changed, what needs review, and what to update before sign-off.',
         bullets: [
           'See which views, dimensions, and notes need attention after a change.',
           'Avoid restarting drawing work from zero after each revision.',
@@ -94,7 +94,7 @@ const CONTENT = {
       },
       {
         title: 'Legacy drawing cleanup',
-        body: 'Old archives carry outdated tolerances, missing standards context, and inconsistent release practices.',
+        body: 'Old archives carry outdated tolerances, missing standards context, and inconsistent release practices. RapidDraft helps teams modernize documentation without losing track of what matters.',
         bullets: [
           'Surface missing GD&T, outdated notes, and standards inconsistencies.',
           'Prioritize cleanup where release or manufacturing confusion is highest.',
@@ -121,7 +121,7 @@ const CONTENT = {
       eyebrow: 'Anwendungsfälle',
       heading: 'Wo RapidDraft in echte Freigabe-Workflows passt',
       subhead:
-        'Von der Neuprodukteinführung bis zu Zeichnungspaketen für Lieferanten ist RapidDraft dort am stärksten, wo Zeichnungen und Fertigbarkeitschecks noch teure Schleifen verursachen.',
+        'Von der Neuprodukteinführung bis zu Zeichnungspaketen für Lieferanten ist RapidDraft dort am stärksten, wo Zeichnungen, Prüfungen und Fertigbarkeitschecks noch teure Schleifen verursachen.',
       overviewItems: [
         'Zeichnungen bleiben mit sich entwickelnder CAD-Geometrie abgestimmt',
         'Die Fertigbarkeitsprüfung beginnt, bevor sich Freigabe-Reibung aufschaukelt',
@@ -148,7 +148,7 @@ const CONTENT = {
       },
       {
         title: 'Batteriepacks und Strukturbauteile',
-        body: 'Hochkomplexe Teile bringen engere Toleranzen, mehr Fertigungsempfindlichkeit und weniger Spielraum für vermeidbare Prüf-Abweichungen mit sich.',
+        body: 'Hochkomplexe Teile bringen engere Toleranzen, mehr Fertigungsempfindlichkeit und weniger Spielraum für vermeidbare Prüf-Abweichungen mit sich. RapidDraft prüft Strukturbauteile konsistent, bevor sich nachgelagerte Arbeit aufschaukelt.',
         bullets: [
           'Fertigungsempfindliche Merkmale hervorheben, solange das Modell noch aktiv ist.',
           'GD&T, Geometrieprüfungen und Zeichnungsvollständigkeit in einem Prüfablauf vereinen.',
@@ -168,7 +168,7 @@ const CONTENT = {
       },
       {
         title: 'Änderungsgetriebene Aktualisierungen (ECR / ECO)',
-        body: 'Geometrieänderungen lösen oft lange nach der Designentscheidung noch Zeichnungsaufwand aus.',
+        body: 'Geometrieänderungen lösen oft lange nach der Designentscheidung noch Zeichnungsaufwand aus. RapidDraft zeigt präzise, was sich geändert hat, was geprüft werden muss und was vor der Freigabe zu aktualisieren ist.',
         bullets: [
           'Erkennen, welche Ansichten, Maße und Hinweise nach einer Änderung Aufmerksamkeit brauchen.',
           'Vermeiden, die Zeichnungsarbeit nach jeder Revision bei null zu beginnen.',
@@ -178,7 +178,7 @@ const CONTENT = {
       },
       {
         title: 'Bereinigung von Altzeichnungen',
-        body: 'Alte Archive enthalten veraltete Toleranzen, fehlenden Normenkontext und uneinheitliche Freigabepraktiken.',
+        body: 'Alte Archive enthalten veraltete Toleranzen, fehlenden Normenkontext und uneinheitliche Freigabepraktiken. RapidDraft hilft Teams, die Dokumentation zu modernisieren, ohne den Blick für das Wesentliche zu verlieren.',
         bullets: [
           'Fehlende GD&T, veraltete Hinweise und Normen-Inkonsistenzen sichtbar machen.',
           'Die Bereinigung dort priorisieren, wo Freigabe- oder Fertigungsverwirrung am größten ist.',

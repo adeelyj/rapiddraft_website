@@ -48,7 +48,7 @@ const CONTENT = {
       total: 'Gesamtwert',
     },
     note: (avoidedCost: string, weeks: number) =>
-      `Bewusst konservativ angesetzt. Die Zeitersparnis ist der höhere Wert aus 3 Stunden pro Ingenieur und Woche oder 30% des aktuellen Aufwands. Jeder Ingenieur vermeidet mindestens einen Fehler pro Jahr, bei durchschnittlich vermiedenen Kosten von rund ${avoidedCost}. Das Modell geht von ${weeks} Arbeitswochen pro Jahr aus.`,
+      `Bewusst konservativ. Die Zeitersparnis ist der höhere Wert aus 3 Stunden je Ingenieur und Woche oder 30% des Aufwands. Jeder vermeidet mindestens einen Fehler pro Jahr (Ø ${avoidedCost}); das Modell rechnet mit ${weeks} Arbeitswochen pro Jahr.`,
   },
 } as const;
 
