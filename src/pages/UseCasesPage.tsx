@@ -15,6 +15,7 @@ import {
   Button,
   Tag,
 } from '../components/ui/primitives';
+import FindingAnatomyFigure from '../components/diagrams/FindingAnatomyFigure';
 
 // Workflow imagery (language-independent), in the same order as the workflows.
 const WORKFLOW_IMAGES = [
@@ -49,6 +50,15 @@ const CONTENT = {
       title: 'Built for the review work, not an abstract CAD demo',
       intro:
         'Design intent in CAD, requirements in the drawing, logic in people’s heads. RapidDraft runs the first pass, each finding traced to source.',
+      figure: {
+        sheet: 'BRACKET 4471-A · REV C',
+        finding: 'FINDING',
+        issue: 'Missing datum on the Ø22 bore',
+        tracedTo: 'TRACED TO',
+        rule: 'GD&T policy §4.2',
+        standard: 'ISO 5459',
+        decision: 'Engineer reviews and keeps the sign-off',
+      },
     },
     workflows: [
       {
@@ -133,6 +143,15 @@ const CONTENT = {
       title: 'Gebaut für die Prüfarbeit, nicht für eine abstrakte CAD-Demo',
       intro:
         'Designabsicht im CAD, Anforderungen in der Zeichnung, Logik im Kopf. RapidDraft macht den ersten Durchgang, jeder Befund belegt.',
+      figure: {
+        sheet: 'BRACKET 4471-A · REV C',
+        finding: 'BEFUND',
+        issue: 'Fehlender Bezug an der Ø22-Bohrung',
+        tracedTo: 'ZURÜCKVERFOLGT AUF',
+        rule: 'GD&T-Regel §4.2',
+        standard: 'ISO 5459',
+        decision: 'Ingenieur prüft und behält die Freigabe',
+      },
     },
     workflows: [
       {
@@ -273,6 +292,9 @@ export default function UseCasesPage() {
           title={t.lead.title}
           intro={t.lead.intro}
         />
+        <div className="mx-auto mt-10 w-full max-w-[960px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-sunken)] p-5 shadow-[inset_0_2px_8px_-4px_rgba(17,24,39,0.12)] sm:p-7">
+          <FindingAnatomyFigure labels={t.lead.figure} />
+        </div>
       </Section>
 
       {/* ── Workflows ────────────────────────────────────── */}
