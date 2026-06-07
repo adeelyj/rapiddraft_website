@@ -14,6 +14,7 @@ import {
   Button,
 } from '../components/ui/primitives';
 import StackAndSovereignty from '../components/platform/StackAndSovereignty';
+import FaqAccordion from '../components/FaqAccordion';
 import { useLang } from '../i18n/LanguageContext';
 
 const CONTENT = {
@@ -353,16 +354,7 @@ export default function Platform() {
       {/* ── FAQ ──────────────────────────────────────────── */}
       <Section>
         <SectionHeader title={t.faqSection.title} />
-        <div className="mx-auto mt-10 flex max-w-[820px] flex-col gap-4">
-          {t.faqs.map((faq) => (
-            <div key={faq.q} className="rd-tile text-left">
-              <H3>{faq.q}</H3>
-              <Body soft sm className="mt-2.5">
-                {faq.a}
-              </Body>
-            </div>
-          ))}
-        </div>
+        <FaqAccordion items={t.faqs} />
         <div className="mt-9 flex justify-center">
           <Button to="/book-demo" variant="primary">
             {t.faqSection.cta}
