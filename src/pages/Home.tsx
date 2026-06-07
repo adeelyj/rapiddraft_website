@@ -374,12 +374,15 @@ export default function Home() {
               ))}
             </div>
           </div>
-
-          <div className="mx-auto mt-10 w-full max-w-[820px]">
-            <CapabilityRail items={RAIL_ITEMS} />
-          </div>
         </Container>
       </header>
+
+      {/* ── Product rail (own full screen so snap never skips it) ── */}
+      <Section screen>
+        <div className="mx-auto w-full max-w-[860px]">
+          <CapabilityRail items={RAIL_ITEMS} />
+        </div>
+      </Section>
 
       {/* ── Credibility (no eyebrow) ─────────────────────── */}
       <Section screen>
@@ -431,7 +434,7 @@ export default function Home() {
           title={t.solution.title}
           intro={t.solution.intro}
         />
-        <div className="mx-auto mt-9 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
+        <div className="mx-auto mt-10 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
           <Figure caption={t.solution.caption}>
             <HubAndSpokeFigure />
           </Figure>

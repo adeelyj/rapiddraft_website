@@ -74,7 +74,7 @@ function CheckIcon() {
 function FounderCard({ name, role, bio }: { name: string; role: string; bio: string }) {
   const media = PEOPLE[name];
   return (
-    <div className="overflow-hidden rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] transition-colors hover:border-[var(--rd-edge)]">
+    <div className="overflow-hidden rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] rd-lift">
       {media?.image && (
         <img src={media.image} alt={name} loading="lazy" className="aspect-[4/5] w-full object-cover" />
       )}
@@ -105,7 +105,7 @@ function AdvisorCard({ name, role }: { name: string; role: string }) {
           className="h-16 w-16 rounded-full object-cover ring-1 ring-[var(--rd-hair)]"
         />
       )}
-      <H3 className="mt-4 text-[17px]">{name}</H3>
+      <H3 className="mt-4">{name}</H3>
       <div className="rd-microlabel mt-1.5 normal-case tracking-normal">{role}</div>
       <div className="mt-3">
         <LinkedInLink name={name} />
@@ -364,7 +364,7 @@ function SectionHeader({
   display?: boolean;
 }) {
   return (
-    <div className={clsx('mx-auto text-center', display ? 'max-w-[1000px]' : 'max-w-[860px]')}>
+    <div className={clsx('mx-auto text-center', display ? 'max-w-[1120px]' : 'max-w-[860px]')}>
       <H2 display={display}>{title}</H2>
       {intro && <Intro className="mx-auto mt-5 max-w-[760px]">{intro}</Intro>}
     </div>
@@ -402,7 +402,7 @@ export default function Company() {
           {[t.visionMission.vision, t.visionMission.mission].map((item) => (
             <div
               key={item.label}
-              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-8 text-center transition-colors hover:border-[var(--rd-edge)]"
+              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-8 text-center rd-lift"
             >
               <span
                 aria-hidden="true"
@@ -424,7 +424,7 @@ export default function Company() {
       {/* ── Founding team ────────────────────────────────── */}
       <Section id="team">
         <SectionHeader title={t.team.title} intro={t.team.intro} />
-        <div className="mx-auto mt-10 grid max-w-[1000px] gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.founders.map((person) => (
             <FounderCard key={person.name} name={person.name} role={person.role} bio={person.bio} />
           ))}
@@ -434,7 +434,7 @@ export default function Company() {
       {/* ── Advisory board ───────────────────────────────── */}
       <Section>
         <SectionHeader title={t.advisors.title} intro={t.advisors.intro} />
-        <div className="mx-auto mt-10 grid max-w-[1000px] gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.advisorList.map((person) => (
             <AdvisorCard key={person.name} name={person.name} role={person.role} />
           ))}
@@ -454,11 +454,11 @@ export default function Company() {
       {/* ── Join us (transition into open roles) ─────────── */}
       <Section>
         <SectionHeader title={t.joinUs.title} intro={t.joinUs.intro} />
-        <div className="mx-auto mt-10 grid max-w-[1000px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {t.joinUs.reasons.map((reason) => (
             <div
               key={reason.title}
-              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left transition-colors hover:border-[var(--rd-edge)]"
+              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left rd-lift"
             >
               <CheckIcon />
               <H3 className="mt-4 text-[17px]">{reason.title}</H3>
@@ -477,7 +477,7 @@ export default function Company() {
           {t.roles.map((role) => (
             <div
               key={role.title}
-              className="grid gap-5 rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left transition-colors hover:border-[var(--rd-edge)] sm:p-7 md:grid-cols-[230px_minmax(0,1fr)]"
+              className="grid gap-5 rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left rd-lift sm:p-7 md:grid-cols-[230px_minmax(0,1fr)]"
             >
               <div>
                 <AccentLabel>{role.category}</AccentLabel>

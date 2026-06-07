@@ -111,7 +111,7 @@ export default function StackAndSovereignty() {
         {/* Two cards */}
         <div className="grid gap-4 lg:grid-cols-2">
           {/* Engineering stack */}
-          <div className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-7 text-left sm:p-8">
+          <div className="rd-lift rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-7 text-left sm:p-8">
             <CardMark />
             <H3 className="mt-6">{t.stack.title}</H3>
             <Body soft sm className="mt-3">
@@ -126,7 +126,7 @@ export default function StackAndSovereignty() {
 
           {/* Data sovereignty (faint accent treatment) */}
           <div
-            className="relative overflow-hidden rounded-[16px] border p-7 text-left sm:p-8"
+            className="rd-lift relative overflow-hidden rounded-[16px] border p-7 text-left sm:p-8"
             style={{ borderColor: 'var(--rd-accent-hair)', background: 'var(--rd-surface)' }}
           >
             <div
@@ -181,7 +181,7 @@ export default function StackAndSovereignty() {
           {t.guarantees.map((g) => (
             <div
               key={g.title}
-              className="rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left transition-colors hover:border-[var(--rd-edge)]"
+              className="rd-lift rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-6 text-left"
             >
               <CheckIcon />
               <H3 className="mt-4 text-[17px]">{g.title}</H3>

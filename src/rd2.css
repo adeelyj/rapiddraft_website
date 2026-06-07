@@ -21,7 +21,7 @@
   --rd-head:      #1f1f1f;   /* section headings */
   --rd-fg:        #1a1a1a;   /* body */
   --rd-fg-2:      #4a4a4a;   /* supporting / lede */
-  --rd-fg-3:      #707070;   /* eyebrow / meta */
+  --rd-fg-3:      #5f5f5f;   /* eyebrow / meta — AA on the #f5f5f5 canvas */
   --rd-muted:     #a0a0a0;   /* hairline labels */
 
   --rd-hair:      #e0e0e0;   /* default 1px divider/edge */
@@ -33,6 +33,7 @@
   --rd-accent-hair:   rgba(234, 88, 12, 0.32);
   --rd-focus:         #ea580c;
   --rd-grid-line:     rgba(17, 17, 17, 0.05);
+  --rd-shadow-hover:  0 14px 30px -20px rgba(17, 17, 17, 0.28);
 
   /* All reading + UI text is Inter. All numerics use --rd-num (Manrope, the
      credibility-KPI font from the earlier site). Geist Mono is kept only for
@@ -82,6 +83,7 @@
   --rd-accent-hair:   rgba(251, 122, 60, 0.35);
   --rd-focus:         #fb7a3c;
   --rd-grid-line:     rgba(255, 255, 255, 0.05);
+  --rd-shadow-hover:  0 18px 40px -22px rgba(0, 0, 0, 0.72);
 }
 
 /* ---------- Page shell ---------- */
@@ -128,10 +130,17 @@
   padding-top: calc(80px + clamp(4px, 1.6vh, 22px));
   padding-bottom: clamp(16px, 2.5vh, 34px);
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 html.rd-snap {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
+}
+/* The closing CTA + footer form the final stop, aligned to the viewport end so
+   the very bottom stays reachable under mandatory snap (no footer trap). */
+html.rd-snap footer {
+  scroll-snap-align: end;
+  scroll-snap-stop: always;
 }
 /* Card-style reveal: each section's content fades and slides up as it
    takes over the viewport (toggled by an IntersectionObserver in Home). */
@@ -358,23 +367,41 @@ html.rd-snap .rd-screen.is-in .rd-container {
   border-radius: 16px;
   padding: clamp(22px, 2.2vw, 30px);
   text-align: center;
-  transition: border-color var(--rd-dur) var(--rd-ease),
-    transform var(--rd-dur) var(--rd-ease);
 }
-.rd-tile:hover { border-color: var(--rd-edge); }
+
+/* Consistent interactive card motion. Rest stays flat (hairline, no shadow);
+   on hover the card lifts a few px with a soft shadow and a stronger edge.
+   .rd-tile gets it automatically; add .rd-lift to any bespoke card so every
+   card across the site animates identically. */
+.rd-tile,
+.rd-lift {
+  transition: border-color var(--rd-dur) var(--rd-ease),
+    transform var(--rd-dur-slow) var(--rd-ease),
+    box-shadow var(--rd-dur-slow) var(--rd-ease);
+}
+.rd-tile:hover,
+.rd-lift:hover {
+  border-color: var(--rd-edge);
+  transform: translateY(-4px);
+  box-shadow: var(--rd-shadow-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rd-tile:hover,
+  .rd-lift:hover { transform: none; }
+}
 
 /* Problem cards — vertical list with a "dim until hover" focus effect.
    The card background stays opaque (no grid bleed); only the content dims.
    Cards fade in one after another as the section enters (keyed to .is-in). */
 .rd-problemcard__inner {
-  opacity: 0.56;
+  opacity: 0.8;
   transition: opacity 0.5s var(--rd-ease);
 }
 .rd-problemcard:hover .rd-problemcard__inner { opacity: 1; }
 
 /* Staggered entrance while Home is in snap mode. */
 html.rd-snap .rd-screen .rd-problemcard__inner { opacity: 0; }
-html.rd-snap .rd-screen.is-in .rd-problemcard__inner { opacity: 0.56; }
+html.rd-snap .rd-screen.is-in .rd-problemcard__inner { opacity: 0.8; }
 html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(1) .rd-problemcard__inner { transition-delay: 0.06s; }
 html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(2) .rd-problemcard__inner { transition-delay: 0.15s; }
 html.rd-snap .rd-screen.is-in .rd-problemcard:nth-child(3) .rd-problemcard__inner { transition-delay: 0.24s; }
@@ -386,7 +413,7 @@ html.rd-snap .rd-screen.is-in .rd-problemcard:hover .rd-problemcard__inner {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.rd-snap .rd-screen .rd-problemcard__inner { opacity: 0.56; transition: none; }
+  html.rd-snap .rd-screen .rd-problemcard__inner { opacity: 0.8; transition: none; }
   html.rd-snap .rd-screen.is-in .rd-problemcard:hover .rd-problemcard__inner { opacity: 1; }
 }
 
