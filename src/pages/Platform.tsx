@@ -265,7 +265,7 @@ export default function Platform() {
       />
 
       {/* ── Hero (centered) ──────────────────────────────── */}
-      <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
+      <header className="relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"

@@ -24,7 +24,7 @@ export default function StubPage({
   return (
     <div className="rd2 rd-page">
       <PageMeta title={metaTitle} description={metaDescription} path={path} robots="noindex" />
-      <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
+      <header className="relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"

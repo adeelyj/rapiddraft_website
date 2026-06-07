@@ -160,7 +160,7 @@ export default function BookDemoPage() {
       <PageMeta title={t.meta.title} description={t.meta.description} path="/book-demo" />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <header className="relative overflow-hidden border-b border-[var(--rd-hair)]">
+      <header className="relative overflow-hidden">
         <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
           <div className="mx-auto max-w-[820px] text-center">
             <Eyebrow>{t.hero.eyebrow}</Eyebrow>

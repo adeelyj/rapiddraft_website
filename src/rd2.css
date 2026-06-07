@@ -113,7 +113,10 @@
 .rd-container--wide { max-width: 1560px; }
 .rd-container--narrow { max-width: 900px; }
 
-.rd-section { padding-block: clamp(56px, 9vw, 120px); }
+/* Hairline section divider — one subtle 1px boundary at the top of every
+   section, the consistent separation strategy across snap (home) and flow
+   (inner) pages. The first screen (hero) is .rd-screen only, so it has none. */
+.rd-section { padding-block: clamp(56px, 9vw, 120px); border-top: 1px solid var(--rd-hair); }
 .rd-section--tight { padding-block: clamp(40px, 6vw, 80px); }
 .rd-divider { border-top: 1px solid var(--rd-hair); }
 
