@@ -1,499 +1,366 @@
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import { Check, ChevronDown, Mail } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { ChevronDown, Mail } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
-import Section from '../components/Section';
-import Reveal from '../components/home/Reveal';
+import { useLang } from '../i18n/LanguageContext';
 import {
-    defaultDealRoomV3Content,
-    type DealRoomV3Content,
-    type OnboardingOffer,
-    type OnboardingStep,
-} from '../data/dealRoomV3Content';
+    Section,
+    Container,
+    Eyebrow,
+    H1,
+    H2,
+    H3,
+    Subhead,
+    Intro,
+    Body,
+    Button,
+    Tag,
+} from '../components/ui/primitives';
+import { dealRoomV3Content, type OnboardingOffer, type OnboardingStep } from '../data/dealRoomV3Content';
 import { type DisclosureItem } from '../data/dealRoomContent';
 
-function SectionHeader({
-    kicker,
-    title,
-    copy,
-}: {
-    kicker?: string;
-    title: string;
-    copy: string;
-}) {
+/* Page-chrome strings (the navigator + hero CTAs). All translated body copy
+   lives in src/data/dealRoomV3Content.ts. */
+const UI = {
+    en: {
+        meta: {
+            title: 'Deal Room | RapidDraft',
+            description:
+                'The path from the first documents to a running pilot: NDA and LOI, a discussion of one drawing-release workflow, the pilot scope, and the agreement. Scoped, traceable, and on your infrastructure.',
+        },
+        eyebrow: 'Deal Room',
+        navHint: 'Each step at a glance. Click any step to jump to the section below.',
+        step: 'Step',
+        startNda: 'Start NDA + LOI',
+        viewOffers: 'View Pilot Offers',
+    },
+    de: {
+        meta: {
+            title: 'Deal Room | RapidDraft',
+            description:
+                'Der Weg von den ersten Dokumenten zum laufenden Pilot: NDA und LOI, ein Gespräch über einen Zeichnungs-Freigabe-Workflow, der Pilotumfang und die Vereinbarung. Eng gefasst, rückverfolgbar und auf Ihrer Infrastruktur.',
+        },
+        eyebrow: 'Deal Room',
+        navHint: 'Jeder Schritt auf einen Blick. Klicken Sie einen Schritt an, um zum Abschnitt darunter zu springen.',
+        step: 'Schritt',
+        startNda: 'NDA + LOI starten',
+        viewOffers: 'Pilot-Angebote ansehen',
+    },
+} as const;
+
+/* Centered section header — rd-index marker, H2, intro. */
+function StepHeader({ index, title, body }: { index: number; title: string; body: string }) {
     return (
-        <div className="mx-auto max-w-3xl">
-            {kicker ? <div className="site-kicker">{kicker}</div> : null}
-            <h2 className={clsx('section-title text-balance', kicker ? 'mt-5' : '')}>{title}</h2>
-            <p className="section-copy mt-5">{copy}</p>
+        <div className="mx-auto max-w-[860px] text-center">
+            <div className="rd-index">0{index + 1}</div>
+            <H2 className="mt-3">{title}</H2>
+            <Intro className="mx-auto mt-5 max-w-[760px]">{body}</Intro>
         </div>
     );
 }
 
-function DisclosureCard({ item, defaultOpen = false }: { item: DisclosureItem; defaultOpen?: boolean }) {
+/* Left-aligned bullet list inside a tile. */
+function BulletList({ items }: { items: readonly string[] }) {
     return (
-        <details
-            open={defaultOpen}
-            className="warm-panel group p-5 transition duration-300 hover:-translate-y-1 sm:p-6"
-        >
-            <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
-                <h3 className="text-lg font-semibold tracking-tight text-gray-950 sm:text-xl">{item.question}</h3>
-                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-200 bg-stone-50 text-gray-500 transition group-open:border-orange-200 group-open:bg-orange-50 group-open:text-primary">
-                    <ChevronDown className="h-4 w-4 transition duration-300 group-open:rotate-180" />
-                </span>
-            </summary>
-            <p className="card-copy pt-4">{item.answer}</p>
-        </details>
+        <ul className="flex flex-col gap-2.5">
+            {items.map((item) => (
+                <li key={item} className="flex gap-2.5">
+                    <span
+                        aria-hidden="true"
+                        className="mt-2 h-1 w-1 flex-none rounded-full bg-[var(--rd-accent)]"
+                    />
+                    <Body soft sm>
+                        {item}
+                    </Body>
+                </li>
+            ))}
+        </ul>
     );
 }
 
-function OfferPanel({ offer }: { offer: OnboardingOffer }) {
+function OfferCard({ offer }: { offer: OnboardingOffer }) {
     return (
-        <motion.article
-            whileHover={{ y: -5 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-            className={clsx(
-                'flex h-full flex-col rounded-[2rem] p-5 sm:p-6',
-                offer.recommended
-                    ? 'warm-panel border-orange-200/90 bg-[linear-gradient(180deg,rgba(255,244,235,0.98),rgba(255,255,255,0.98))] shadow-[0_30px_72px_-42px_rgba(234,88,12,0.24)]'
-                    : 'surface-card'
-            )}
+        <div
+            className="flex h-full flex-col rd-tile rd-tile--left"
+            style={offer.recommended ? { borderColor: 'var(--rd-accent)' } : undefined}
         >
             <div className="flex items-start justify-between gap-3">
-                <h4 className="card-title text-[1.2rem] sm:text-[1.35rem]">{offer.title}</h4>
-                {offer.badge ? (
-                    <span className="inline-flex items-center rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-                        {offer.badge}
-                    </span>
-                ) : null}
+                <H3>{offer.title}</H3>
+                {offer.badge ? <Tag accent>{offer.badge}</Tag> : null}
             </div>
-            <p className="mt-3 text-[13px] font-semibold leading-6 text-primary sm:text-sm">{offer.subtext}</p>
-            <p className="card-copy mt-3">{offer.description}</p>
-            <ul className="mt-4 space-y-2">
+            <p className="mt-3 text-[13px] font-medium leading-6 text-[var(--rd-accent)]">{offer.subtext}</p>
+            <Body soft sm className="mt-3">
+                {offer.description}
+            </Body>
+            <ul className="mt-5 flex flex-col gap-2.5">
                 {offer.details.map((item) => (
-                    <li key={item} className="bullet-row">
-                        <span className="bullet-icon">
-                            <Check className="h-3 w-3 text-primary" />
-                        </span>
-                        <span className="bullet-copy">{item}</span>
+                    <li key={item} className="flex gap-2.5">
+                        <span
+                            aria-hidden="true"
+                            className="mt-2 h-1 w-1 flex-none rounded-full bg-[var(--rd-accent)]"
+                        />
+                        <Body soft sm>
+                            {item}
+                        </Body>
                     </li>
                 ))}
             </ul>
-            <div className="mt-auto pt-5">
-                <div className="inline-flex rounded-full border border-orange-200/70 bg-orange-50/70 px-4 py-2 text-[13px] font-semibold leading-6 text-gray-900">
-                    {offer.footer}
-                </div>
+            <div className="mt-auto pt-6">
+                <Tag mono>{offer.footer}</Tag>
             </div>
-        </motion.article>
+        </div>
+    );
+}
+
+function FaqItem({ item, defaultOpen }: { item: DisclosureItem; defaultOpen?: boolean }) {
+    return (
+        <details open={defaultOpen} className="group rd-tile rd-tile--left">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                <H3>{item.question}</H3>
+                <span className="mt-0.5 inline-flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--rd-hair)] text-[var(--rd-fg-3)] transition group-open:border-[var(--rd-accent-hair)] group-open:text-[var(--rd-accent)]">
+                    <ChevronDown className="h-4 w-4 transition duration-200 group-open:rotate-180" aria-hidden="true" />
+                </span>
+            </summary>
+            <Body soft className="mt-4">
+                {item.answer}
+            </Body>
+        </details>
     );
 }
 
 function StepSection({
     step,
     index,
-    sectionRef,
     onStartNda,
 }: {
     step: OnboardingStep;
     index: number;
-    sectionRef: (element: HTMLDivElement | null) => void;
     onStartNda: () => void;
 }) {
-    const stepNumber = `0${index + 1}`;
-    const background = index % 2 === 1 ? 'light' : 'white';
-    const isOffers = step.kind === 'offers';
-    const isNda = step.id === 'nda';
-    const isAgreement = step.id === 'agreement';
-
     return (
-        <Section
-            id={step.id}
-            className="pb-16 pt-16 md:pb-24 md:pt-20"
-            background={background}
-        >
-            <div ref={sectionRef} className="scroll-mt-24">
-                {isOffers ? (
-                    <>
-                        <Reveal className="mx-auto max-w-3xl text-center">
-                            <div className="card-index">{stepNumber}</div>
-                            <h2 className="section-title mt-4 text-balance">{step.detailTitle}</h2>
-                            <p className="section-copy mt-5">{step.detailBody}</p>
-                        </Reveal>
+        <Section id={step.id}>
+            <StepHeader index={index} title={step.detailTitle} body={step.detailBody} />
 
-                        <Reveal delay={0.08} className="mx-auto mt-10 max-w-[1120px]">
-                            <>
-                                <div className="grid gap-4 xl:grid-cols-3">
-                                    {step.offers?.map((offer) => (
-                                        <OfferPanel key={offer.title} offer={offer} />
-                                    ))}
-                                </div>
-
-                                {step.scopeTitle && step.scopeBody && step.scopeItems?.length ? (
-                                    <div className="warm-panel mt-8 p-6 sm:p-8">
-                                        <div className="mx-auto max-w-3xl text-center">
-                                            <h3 className="text-[1.4rem] font-semibold tracking-tight text-gray-950 sm:text-[1.65rem]">
-                                                {step.scopeTitle}
-                                            </h3>
-                                            <p className="card-copy mt-4">{step.scopeBody}</p>
-                                        </div>
-
-                                        <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-                                            {step.scopeItems.map((item) => (
-                                                <div
-                                                    key={item.title}
-                                                    className="surface-card h-full p-4 text-left"
-                                                >
-                                                    <p className="text-sm font-semibold tracking-tight text-gray-950">
-                                                        {item.title}
-                                                    </p>
-                                                    <p className="mt-2 text-sm leading-6 text-gray-600">
-                                                        {item.description}
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ) : null}
-
-                                {step.scopeNote ? (
-                                    <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-7 text-gray-500">
-                                        {step.scopeNote}
-                                    </p>
-                                ) : null}
-
-                                {step.finalCtaCopy && step.finalCtaLabel ? (
-                                    <div className="mx-auto mt-8 max-w-3xl text-center">
-                                        <p className="section-copy text-base sm:text-lg">{step.finalCtaCopy}</p>
-                                        <div className="mt-5">
-                                            <Link to="/book-demo" className="btn-primary w-full sm:inline-flex sm:w-auto">
-                                                {step.finalCtaLabel}
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ) : null}
-                            </>
-                        </Reveal>
-                    </>
-                ) : isNda || isAgreement ? (
-                    <>
-                        <Reveal className="mx-auto max-w-3xl text-center">
-                            <div className="card-index">{stepNumber}</div>
-                            <h2 className="section-title mt-4 text-balance">{step.detailTitle}</h2>
-                            <p className="section-copy mt-5">{step.detailBody}</p>
-                        </Reveal>
-
-                        {step.actions?.length ? (
-                            <Reveal delay={0.08} className="mx-auto mt-10 max-w-[860px]">
-                                <div className="warm-panel p-6 sm:p-7">
-                                    <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
-                                        {step.actions.map((action) => (
-                                            <div key={action.label} className="w-full max-w-[340px] flex-1">
-                                                <button
-                                                    type="button"
-                                                    onClick={step.id === 'nda' ? onStartNda : undefined}
-                                                    className={clsx(
-                                                        'w-full',
-                                                        action.variant === 'primary' ? 'btn-primary' : 'btn-secondary'
-                                                    )}
-                                                >
-                                                    {action.label}
-                                                </button>
-                                                {action.helper ? (
-                                                    <p className="mt-3 text-center text-xs leading-6 text-gray-500">{action.helper}</p>
-                                                ) : null}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </Reveal>
-                        ) : null}
-                    </>
-                ) : (
-                    <div className="mx-auto max-w-[1080px]">
-                        <Reveal>
-                            <div className="card-index">{stepNumber}</div>
-                        </Reveal>
-
-                        <div className="mt-4 grid gap-10 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-stretch lg:gap-14">
-                            <Reveal className="max-w-[34rem] lg:h-full">
-                                <div className="flex h-full flex-col">
-                                    <h2 className="section-title text-balance lg:max-w-[11ch]">{step.detailTitle}</h2>
-                                    <p className="section-copy mt-6">{step.detailBody}</p>
-                                    {step.microcopy ? (
-                                        <p className="mt-5 max-w-3xl text-sm leading-7 text-gray-500 sm:text-base">{step.microcopy}</p>
-                                    ) : null}
-                                </div>
-                            </Reveal>
-
-                            <Reveal delay={0.08} className="lg:h-full">
-                                <ul className="flex h-full flex-col">
-                                    {step.bullets?.map((bullet, bulletIndex) => (
-                                        <motion.li
-                                            key={bullet}
-                                            whileHover={{ x: 4 }}
-                                            transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-                                            className={clsx(
-                                                'flex items-start gap-4',
-                                                bulletIndex === 0 ? 'pt-0' : 'border-t border-stone-200/80 pt-6',
-                                                bulletIndex === (step.bullets?.length ?? 1) - 1 ? 'pb-0' : 'pb-6',
-                                                'flex-1'
-                                            )}
-                                        >
-                                            <span className="bullet-icon mt-0.5">
-                                                <Check className="h-3 w-3 text-primary" />
-                                            </span>
-                                            <div className="bullet-copy min-w-0">
-                                                {bullet}
-                                            </div>
-                                        </motion.li>
-                                    ))}
-                                </ul>
-                            </Reveal>
-                        </div>
+            {step.kind === 'offers' ? (
+                <>
+                    <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 lg:grid-cols-3">
+                        {step.offers?.map((offer) => (
+                            <OfferCard key={offer.title} offer={offer} />
+                        ))}
                     </div>
-                )}
-            </div>
+
+                    {step.scopeTitle && step.scopeBody && step.scopeItems?.length ? (
+                        <div className="mx-auto mt-8 w-full max-w-[1120px] rd-tile">
+                            <div className="mx-auto max-w-[760px]">
+                                <H3>{step.scopeTitle}</H3>
+                                <Body soft className="mt-4">
+                                    {step.scopeBody}
+                                </Body>
+                            </div>
+                            <div className="mt-8 grid gap-3 text-left sm:grid-cols-2 xl:grid-cols-5">
+                                {step.scopeItems.map((scope) => (
+                                    <div
+                                        key={scope.title}
+                                        className="rounded-[var(--rd-r-md)] border border-[var(--rd-hair)] bg-[var(--rd-bg)] p-4"
+                                    >
+                                        <p className="text-[14px] font-medium text-[var(--rd-fg)]">{scope.title}</p>
+                                        <p className="mt-2 text-[14px] leading-6 text-[var(--rd-fg-2)]">
+                                            {scope.description}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ) : null}
+
+                    {step.scopeNote ? (
+                        <Body soft sm className="mx-auto mt-5 max-w-[760px] text-center">
+                            {step.scopeNote}
+                        </Body>
+                    ) : null}
+
+                    {step.finalCtaCopy && step.finalCtaLabel ? (
+                        <div className="mx-auto mt-8 max-w-[640px] text-center">
+                            <Intro>{step.finalCtaCopy}</Intro>
+                            <div className="mt-5">
+                                <Button to="/book-demo" variant="primary">
+                                    {step.finalCtaLabel}
+                                </Button>
+                            </div>
+                        </div>
+                    ) : null}
+                </>
+            ) : step.bullets?.length ? (
+                <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile rd-tile--left">
+                    <BulletList items={step.bullets} />
+                </div>
+            ) : step.actions?.length ? (
+                <div className="mx-auto mt-8 flex max-w-[520px] flex-col items-center gap-3 text-center">
+                    {step.actions.map((action) => (
+                        <div key={action.label} className="w-full">
+                            <Button
+                                variant={action.variant ?? 'primary'}
+                                onClick={step.id === 'nda' ? onStartNda : undefined}
+                                className="w-full sm:w-auto"
+                            >
+                                {action.label}
+                            </Button>
+                            {action.helper ? (
+                                <Body soft sm className="mt-3">
+                                    {action.helper}
+                                </Body>
+                            ) : null}
+                        </div>
+                    ))}
+                </div>
+            ) : null}
         </Section>
     );
 }
 
-function DealRoomOnboardingHero({
-    content,
-    activeStepId,
-    hoveredStepId,
-    onHoverStep,
-    onLeaveSteps,
-    onSelectStep,
-    onStartNda,
-}: {
-    content: DealRoomV3Content;
-    activeStepId: string;
-    hoveredStepId: string | null;
-    onHoverStep: (stepId: string) => void;
-    onLeaveSteps: () => void;
-    onSelectStep: (stepId: string) => void;
-    onStartNda: () => void;
-}) {
-    return (
-        <section className="hero-mesh relative overflow-hidden border-b border-stone-200/70 py-12 md:py-16">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top,rgba(17,24,39,0.08),transparent_60%)]" />
-            <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                <Reveal className="mx-auto max-w-[980px] pt-2 text-center sm:pt-4 lg:pt-8">
-                    <div className="mx-auto max-w-[940px]">
-                        <h1 className="hero-title text-balance">{content.heroTitle}</h1>
-                        <p className="hero-copy mx-auto mt-5 max-w-4xl sm:mt-6">{content.heroBody}</p>
-                    </div>
-                </Reveal>
-
-                <Reveal delay={0.08} className="mx-auto mt-8 max-w-[980px] sm:mt-10">
-                    <div className="overflow-hidden rounded-[2rem] border border-[#262d3f] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(234,88,12,0.18),transparent_36%),linear-gradient(140deg,#171d2b_0%,#1d2435_52%,#2a2331_100%)] p-4 text-white shadow-[0_42px_120px_-48px_rgba(17,24,39,0.58)] sm:rounded-[2.25rem] sm:p-5 md:p-6">
-                        <div>
-                            <p className="mx-auto max-w-3xl text-center text-sm leading-7 text-white/68">
-                                Hover to preview the path. Click any step to jump directly into the relevant section below.
-                            </p>
-                            <div
-                                className="mt-5 flex flex-col gap-3 md:flex-row"
-                                onMouseLeave={onLeaveSteps}
-                            >
-                                {content.onboardingSteps.map((step, index) => {
-                                    const isPreviewed = step.id === hoveredStepId;
-                                    const isSelected = step.id === activeStepId;
-
-                                    return (
-                                        <motion.button
-                                            key={step.id}
-                                            type="button"
-                                            onMouseEnter={() => onHoverStep(step.id)}
-                                            onFocus={() => onHoverStep(step.id)}
-                                            onBlur={onLeaveSteps}
-                                            onClick={() => onSelectStep(step.id)}
-                                            layout
-                                            whileHover={{ y: -2 }}
-                                            animate={{ flexGrow: isPreviewed ? 2.2 : 1 }}
-                                            transition={{ type: 'spring', stiffness: 200, damping: 26 }}
-                                            className={clsx(
-                                                'group relative min-h-[148px] basis-0 overflow-hidden rounded-[1.75rem] border text-left shadow-[0_24px_60px_-42px_rgba(17,24,39,0.26)] transition hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200/70 md:min-w-0 md:min-h-[156px]',
-                                                isPreviewed
-                                                    ? 'border-[#deac49]/40'
-                                                    : isSelected
-                                                        ? 'border-white/24'
-                                                        : 'border-white/12'
-                                            )}
-                                            aria-pressed={isSelected}
-                                        >
-                                            <div
-                                                className={clsx(
-                                                    'absolute inset-0 transition duration-500',
-                                                    isPreviewed
-                                                        ? 'bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(234,88,12,0.16),transparent_40%),linear-gradient(140deg,#171d2b_0%,#1d2435_52%,#2a2331_100%)]'
-                                                        : isSelected
-                                                            ? 'bg-[radial-gradient(circle_at_bottom_right,rgba(234,88,12,0.08),transparent_48%),rgba(255,255,255,0.025)]'
-                                                            : 'bg-[rgba(255,255,255,0.02)]'
-                                                )}
-                                            />
-                                            <div className="relative flex h-full flex-col justify-between p-5 sm:p-6">
-                                                <div>
-                                                    <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                                                        Step 0{index + 1}
-                                                    </div>
-                                                    <h3 className="mt-3 max-w-[12ch] text-[1.28rem] font-semibold leading-[1.08] tracking-tight text-white">
-                                                        {step.title}
-                                                    </h3>
-                                                </div>
-                                                <motion.p
-                                                    animate={{
-                                                        opacity: isPreviewed ? 1 : 0,
-                                                        y: isPreviewed ? 0 : 10,
-                                                        height: isPreviewed ? 'auto' : 0,
-                                                        marginTop: isPreviewed ? 24 : 0,
-                                                    }}
-                                                    transition={{ duration: 0.22 }}
-                                                    className="hidden max-w-[26ch] overflow-hidden text-sm leading-7 text-white/78 md:block"
-                                                >
-                                                    {step.summary}
-                                                </motion.p>
-                                            </div>
-                                        </motion.button>
-                                    );
-                                })}
-                            </div>
-                            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                                <button
-                                    type="button"
-                                    onClick={onStartNda}
-                                    className="btn-primary w-full sm:w-auto"
-                                >
-                                    Start NDA + LOI
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => onSelectStep(content.secondaryStepId)}
-                                    className="btn-secondary w-full sm:w-auto border-white/20 bg-white/5 text-white hover:border-white/35 hover:bg-white/10"
-                                >
-                                    View Pilot Offers
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </Reveal>
-            </div>
-        </section>
-    );
-}
-
-export default function DealRoomV3({ content = defaultDealRoomV3Content }: { content?: DealRoomV3Content }) {
-    const [activeStepId, setActiveStepId] = useState(content.primaryStepId);
-    const [hoveredStepId, setHoveredStepId] = useState<string | null>(null);
-    const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+export default function DealRoomV3() {
+    const { lang } = useLang();
+    const content = dealRoomV3Content[lang];
+    const ui = UI[lang];
     const navigate = useNavigate();
+
+    const [activeStepId, setActiveStepId] = useState(content.primaryStepId);
+
+    const scrollToStep = (stepId: string) => {
+        setActiveStepId(stepId);
+        requestAnimationFrame(() => {
+            document.getElementById(stepId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    };
 
     const handleStartNda = () => {
         navigate('/deal-room/nda-request');
     };
 
-    const handleSelectStep = (stepId: string) => {
-        setActiveStepId(stepId);
-        requestAnimationFrame(() => {
-            sectionRefs.current[stepId]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    };
-
     return (
-        <>
-            <PageMeta
-                title="RapidDraft Deal Room v3 | Onboarding-first workspace"
-                description="A streamlined, onboarding-first deal room for guiding the RapidDraft pilot setup journey."
-                path="/deal-room"
-            />
+        <div className="rd2 rd-page">
+            <PageMeta title={ui.meta.title} description={ui.meta.description} path="/deal-room" />
 
-            <DealRoomOnboardingHero
-                content={content}
-                activeStepId={activeStepId}
-                hoveredStepId={hoveredStepId}
-                onHoverStep={setHoveredStepId}
-                onLeaveSteps={() => setHoveredStepId(null)}
-                onSelectStep={handleSelectStep}
-                onStartNda={handleStartNda}
-            />
-
-            {content.onboardingSteps.map((step, index) => (
-                <StepSection
-                    key={step.id}
-                    step={step}
-                    index={index}
-                    onStartNda={handleStartNda}
-                    sectionRef={(element) => {
-                        sectionRefs.current[step.id] = element;
-                    }}
+            {/* ── Hero + step navigator ────────────────────────── */}
+            <header className="relative overflow-hidden">
+                <div
+                    className="pointer-events-none absolute inset-0"
+                    aria-hidden="true"
+                    style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
                 />
+                <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
+                    <div className="mx-auto max-w-[860px] text-center">
+                        <Eyebrow>{ui.eyebrow}</Eyebrow>
+                        <H1 className="mt-5">{content.heroTitle}</H1>
+                        <Subhead className="mx-auto mt-5 max-w-[760px]">{content.heroBody}</Subhead>
+                    </div>
+
+                    <div className="mx-auto mt-10 max-w-[1120px]">
+                        <Body soft sm className="text-center">
+                            {ui.navHint}
+                        </Body>
+                        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                            {content.onboardingSteps.map((step, index) => {
+                                const isActive = step.id === activeStepId;
+                                return (
+                                    <button
+                                        key={step.id}
+                                        type="button"
+                                        onClick={() => scrollToStep(step.id)}
+                                        aria-pressed={isActive}
+                                        className="rd-tile rd-tile--left flex flex-col text-left focus-visible:outline-none"
+                                        style={isActive ? { borderColor: 'var(--rd-accent)' } : undefined}
+                                    >
+                                        <div className="rd-microlabel">
+                                            {ui.step} 0{index + 1}
+                                        </div>
+                                        <H3 className="mt-2">{step.title}</H3>
+                                        <Body soft sm className="mt-2">
+                                            {step.summary}
+                                        </Body>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                            <Button variant="primary" onClick={handleStartNda}>
+                                {ui.startNda}
+                            </Button>
+                            <Button variant="secondary" arrow onClick={() => scrollToStep(content.secondaryStepId)}>
+                                {ui.viewOffers}
+                            </Button>
+                        </div>
+                    </div>
+                </Container>
+            </header>
+
+            {/* ── Onboarding steps ─────────────────────────────── */}
+            {content.onboardingSteps.map((step, index) => (
+                <StepSection key={step.id} step={step} index={index} onStartNda={handleStartNda} />
             ))}
 
-            <Section id="why-rapiddraft" className="pb-16 pt-14 md:pb-20 md:pt-16">
-                <Reveal className="mx-auto max-w-4xl text-center">
-                    <SectionHeader title={content.overview.title} copy={content.overview.body} />
-                </Reveal>
+            {/* ── Overview ─────────────────────────────────────── */}
+            <Section id="why-rapiddraft">
+                <div className="mx-auto max-w-[820px] text-center">
+                    <H2>{content.overview.title}</H2>
+                    <Intro className="mx-auto mt-5 max-w-[760px]">{content.overview.body}</Intro>
+                </div>
             </Section>
 
-            <Section id="faq" background="light" className="pb-16 pt-16 md:pb-20 md:pt-20">
-                <Reveal className="mx-auto max-w-3xl text-center">
-                    <SectionHeader
-                        title="Questions that usually come up at this stage."
-                        copy="A few practical answers on process, scope, and what to expect from the pilot setup journey."
-                    />
-                </Reveal>
-
-                <div className="mx-auto mt-12 max-w-4xl space-y-4">
+            {/* ── FAQ ──────────────────────────────────────────── */}
+            <Section id="faq">
+                <div className="mx-auto max-w-[860px] text-center">
+                    <H2>{content.faqTitle}</H2>
+                    <Intro className="mx-auto mt-5 max-w-[760px]">{content.faqIntro}</Intro>
+                </div>
+                <div className="mx-auto mt-10 flex max-w-[820px] flex-col gap-3">
                     {content.faqs.map((item, index) => (
-                        <Reveal key={item.question} delay={index * 0.03}>
-                            <DisclosureCard item={item} defaultOpen={index === 0} />
-                        </Reveal>
+                        <FaqItem key={item.question} item={item} defaultOpen={index === 0} />
                     ))}
                 </div>
             </Section>
 
-            <Section id="contact-person" className="pb-16 pt-16 md:pb-20 md:pt-20">
-                <Reveal className="mx-auto max-w-3xl text-center">
-                    <SectionHeader
-                        title={content.contactIntroTitle}
-                        copy={content.contactIntroBody}
-                    />
-                </Reveal>
-
-                <Reveal delay={0.08} className="mx-auto mt-12 max-w-4xl">
-                    <div className="warm-panel grid gap-6 p-6 md:grid-cols-[128px_minmax(0,1fr)] sm:p-8">
-                        <div className="relative h-28 w-28 overflow-hidden rounded-[1.75rem] border border-stone-200 bg-[#fff8f3]">
+            {/* ── Contact ──────────────────────────────────────── */}
+            <Section id="contact-person">
+                <div className="mx-auto max-w-[860px] text-center">
+                    <H2>{content.contactIntroTitle}</H2>
+                    <Intro className="mx-auto mt-5 max-w-[760px]">{content.contactIntroBody}</Intro>
+                </div>
+                <div className="mx-auto mt-10 w-full max-w-[820px] rd-tile rd-tile--left">
+                    <div className="grid gap-6 sm:grid-cols-[120px_minmax(0,1fr)] sm:items-start">
+                        <div className="h-28 w-28 overflow-hidden rounded-[var(--rd-r-lg)] border border-[var(--rd-hair)] bg-[var(--rd-bg)]">
                             {content.contact.image ? (
-                                <img src={content.contact.image} alt={content.contact.name} className="h-full w-full object-cover" />
+                                <img
+                                    src={content.contact.image}
+                                    alt={content.contact.name}
+                                    className="h-full w-full object-cover"
+                                />
                             ) : (
-                                <div className="flex h-full w-full items-center justify-center bg-[#fff8f3] text-primary/50">
-                                    <Mail className="h-8 w-8" />
+                                <div className="flex h-full w-full items-center justify-center text-[var(--rd-accent)]">
+                                    <Mail className="h-8 w-8" aria-hidden="true" />
                                 </div>
                             )}
                         </div>
-
                         <div>
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                 <div>
-                                    <h3 className="card-title text-[1.45rem] md:text-2xl">{content.contact.name}</h3>
-                                    <p className="mt-1 text-sm font-medium uppercase tracking-[0.16em] text-primary">
+                                    <H3>{content.contact.name}</H3>
+                                    <p className="mt-1 text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--rd-accent)]">
                                         {content.contact.title}
                                     </p>
                                 </div>
-                                <a
-                                    href={`mailto:${content.contact.email}`}
-                                    className="btn-secondary inline-flex w-full gap-2 sm:w-auto"
-                                >
-                                    <Mail className="h-4 w-4" />
+                                <Button href={`mailto:${content.contact.email}`} variant="secondary">
+                                    <Mail className="h-4 w-4" aria-hidden="true" />
                                     {content.contactCtaLabel ?? content.contact.email}
-                                </a>
+                                </Button>
                             </div>
-                            <p className="card-copy mt-4 max-w-3xl">{content.contact.message}</p>
+                            <Body soft className="mt-4">
+                                {content.contact.message}
+                            </Body>
                         </div>
                     </div>
-                </Reveal>
+                </div>
             </Section>
-        </>
+        </div>
     );
 }
