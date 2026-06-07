@@ -102,7 +102,7 @@ export default function CapabilityRail({ items }: { items: RailItem[] }) {
   };
 
   return (
-    <div className="rd-panel overflow-hidden p-3 sm:p-4">
+    <div className="rd-panel overflow-hidden rounded-[16px] p-3 sm:p-4">
       <div className="grid grid-cols-2 gap-2">
         {items.map((item) => {
           const active = item.key === activeKey;
@@ -135,7 +135,7 @@ export default function CapabilityRail({ items }: { items: RailItem[] }) {
         })}
       </div>
 
-      <div className="mt-3 overflow-hidden rounded-[8px] border border-[var(--rd-hair)] bg-[var(--rd-surface)]">
+      <div className="mt-3 overflow-hidden rounded-[12px] border border-[var(--rd-hair)] bg-[var(--rd-surface)]">
         <div className="flex items-center gap-2 border-b border-[var(--rd-hair)] px-4 py-2.5">
           <span className="h-2.5 w-2.5 rounded-full bg-[var(--rd-accent)]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[var(--rd-hair)]" />
@@ -149,7 +149,7 @@ export default function CapabilityRail({ items }: { items: RailItem[] }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.24 }}
             className="bg-[var(--rd-sunken)]"
-            style={{ height: 'clamp(190px, 32vh, 360px)' }}
+            style={{ height: 'clamp(140px, 16vh, 210px)' }}
           >
             <VideoStage
               item={activeItem}

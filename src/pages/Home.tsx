@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
+import clsx from 'clsx';
 import PageMeta from '../components/PageMeta';
 import {
   Section,
@@ -11,7 +12,6 @@ import {
   Intro,
   Body,
   Button,
-  Card,
   Tag,
   MetaRow,
   Figure,
@@ -57,6 +57,12 @@ const RAIL_ITEMS: RailItem[] = [
 
 const HERO_BADGES = ['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'Human-in-the-loop'];
 
+const KPIS = [
+  { value: '30%', label: 'Fewer change cycles' },
+  { value: '10x', label: 'Faster feedback' },
+  { value: '50%', label: 'Less checking time' },
+];
+
 const PROBLEM_CARDS = [
   {
     title: 'Drawings restart on every revision',
@@ -95,21 +101,35 @@ const CAPABILITIES = [
   },
 ];
 
-const KPIS = [
-  { value: '30%', label: 'Fewer change cycles' },
-  { value: '10x', label: 'Faster feedback' },
-  { value: '50%', label: 'Less checking time' },
-];
+const PILLARS = ['Data sovereignty', 'IP protection', 'Employee trust', 'Data quality'];
+
+/* Consistent centered section header used by every section. */
+function SectionHeader({
+  eyebrow,
+  title,
+  intro,
+  display = false,
+}: {
+  eyebrow?: string;
+  title: ReactNode;
+  intro?: ReactNode;
+  display?: boolean;
+}) {
+  return (
+    <div className={clsx('mx-auto text-center', display ? 'max-w-[860px]' : 'max-w-[720px]')}>
+      {eyebrow && <Eyebrow className="mb-5">{eyebrow}</Eyebrow>}
+      <H2 display={display}>{title}</H2>
+      {intro && <Intro className="mx-auto mt-5 max-w-[640px]">{intro}</Intro>}
+    </div>
+  );
+}
 
 export default function Home() {
-  // Apple-style full-screen section snapping + card-style reveal, only while
-  // Home is mounted.
+  // Full-screen section snapping + card-style reveal, only while Home is mounted.
   useEffect(() => {
     const el = document.documentElement;
     el.classList.add('rd-snap');
     const screens = Array.from(document.querySelectorAll<HTMLElement>('.rd-screen'));
-    // Reveal anything already on screen immediately (reliable on load), then let
-    // the observer reveal the rest as they scroll into view.
     const vh = window.innerHeight;
     screens.forEach((s) => {
       const r = s.getBoundingClientRect();
@@ -139,68 +159,60 @@ export default function Home() {
         path="/"
       />
 
-      {/* ── Hero ─────────────────────────────────────────── */}
+      {/* ── Hero (slightly larger, centered) ─────────────── */}
       <header className="rd-screen relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
-          style={{ background: 'radial-gradient(55% 60% at 12% 2%, var(--rd-accent-soft), transparent 60%)' }}
+          style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
         />
         <Container className="relative w-full">
-          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-16">
-            <div className="max-w-2xl">
-              <Eyebrow>Agentic drawing release and design review for engineering teams</Eyebrow>
-              <H1 className="mt-5">
-                Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
-              </H1>
-              <Subhead className="mt-5 max-w-lg">
-                RapidDraft catches design and drawing issues earlier and automates repetitive review
-                checks. The decisions behind each drawing stay attached to the model, instead of
-                scattering across emails, PDFs, and meetings.
-              </Subhead>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button to="/book-demo" variant="primary">
-                  Book a demo
-                </Button>
-                <Button to="/platform" variant="secondary" arrow>
-                  See how it works
-                </Button>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2.5">
-                {HERO_BADGES.map((b) => (
-                  <Tag key={b}>{b}</Tag>
-                ))}
-              </div>
+          <div className="mx-auto max-w-[820px] text-center">
+            <Eyebrow>Agentic drawing release and design review for engineering teams</Eyebrow>
+            <H1 className="mt-5">
+              Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
+            </H1>
+            <Subhead className="mx-auto mt-5 max-w-[600px]">
+              RapidDraft catches design and drawing issues earlier and automates repetitive review
+              checks, keeping the decisions behind each drawing attached to the model.
+            </Subhead>
+            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button to="/book-demo" variant="primary">
+                Book a demo
+              </Button>
+              <Button to="/platform" variant="secondary" arrow>
+                See how it works
+              </Button>
             </div>
+            <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+              {HERO_BADGES.map((b) => (
+                <Tag key={b}>{b}</Tag>
+              ))}
+            </div>
+          </div>
 
-            <div className="w-full">
-              <CapabilityRail items={RAIL_ITEMS} />
-            </div>
+          <div className="mx-auto mt-6 w-full max-w-[940px]">
+            <CapabilityRail items={RAIL_ITEMS} />
           </div>
         </Container>
       </header>
 
-      {/* ── Credibility ──────────────────────────────────── */}
+      {/* ── Credibility (no eyebrow) ─────────────────────── */}
       <Section screen>
-        <div className="max-w-2xl">
-          <H2>Reduce repeated work before it delays release</H2>
-          <Intro className="mt-5">
-            RapidDraft brings faster feedback, fewer iterations, and less manual checking to the
-            workflows where drawings, reviews, and release readiness still slow teams down.
-          </Intro>
-        </div>
-
-        <div className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-3">
+        <SectionHeader
+          title="Reduce repeated work before it delays release"
+          intro="RapidDraft brings faster feedback, fewer iterations, and less manual checking to the workflows where drawings, reviews, and release readiness still slow teams down."
+        />
+        <div className="mx-auto mt-10 grid max-w-[1000px] gap-4 sm:grid-cols-3">
           {KPIS.map((k) => (
-            <div key={k.label} className="bg-[var(--rd-surface)] p-6 sm:p-7">
+            <div key={k.label} className="rd-tile">
               <div className="rd-kpi-num">{k.value}</div>
               <div className="rd-kpi-label mt-3">{k.label}</div>
             </div>
           ))}
         </div>
-
         <MetaRow
-          className="mt-8"
+          className="mt-8 justify-center"
           items={[
             'Built by engineers from aerospace, automotive, and process industries',
             'Advised by leaders at Siemens, Volocopter, and Amazon',
@@ -209,26 +221,25 @@ export default function Home() {
         />
       </Section>
 
-      {/* ── Problem (sanctioned display heading) ─────────── */}
+      {/* ── Problem (display statement) ──────────────────── */}
       <Section screen>
-        <div className="max-w-4xl">
-          <Eyebrow className="mb-5">Problem</Eyebrow>
-          <H2 display>
-            Design intent lives in CAD. Requirements live in drawings. The review logic lives in
-            people&rsquo;s heads
-          </H2>
-          <Intro className="mt-5 max-w-2xl">
-            Collaboration is inefficient, drawing review is error-prone, and quality inspection is
-            slow and tedious. Good designs stall in documentation and review.
-          </Intro>
-        </div>
-
-        <div className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
+        <SectionHeader
+          eyebrow="Problem"
+          display
+          title={
+            <>
+              Design intent lives in CAD. Requirements live in drawings. The review logic lives in
+              people&rsquo;s heads
+            </>
+          }
+          intro="Collaboration is inefficient, drawing review is error-prone, and quality inspection is slow and tedious. Good designs stall in documentation and review."
+        />
+        <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-2">
           {PROBLEM_CARDS.map((card, i) => (
-            <div key={card.title} className="bg-[var(--rd-surface)] p-6 sm:p-7">
+            <div key={card.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
-              <H3 className="mt-4">{card.title}</H3>
-              <Body soft sm className="mt-3">
+              <H3 className="mt-3">{card.title}</H3>
+              <Body soft sm className="mt-2.5">
                 {card.body}
               </Body>
             </div>
@@ -238,19 +249,12 @@ export default function Home() {
 
       {/* ── Solution + figure 2 (centered showcase) ──────── */}
       <Section screen>
-        <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow className="mb-5">Solution</Eyebrow>
-          <H2>Turn fragmented review work into a connected release workflow</H2>
-          <Intro className="mt-5">
-            RapidDraft is human-in-the-loop AI, grounded in your rules. Drafting intent, review
-            decisions, and manufacturing feedback stay attached to the design, with the 3D model as
-            the single source of truth and engineers in control of every release. Teams redo less
-            work, close reviews faster, and keep the knowledge that usually leaves when a project
-            ends or a colleague moves on.
-          </Intro>
-        </div>
-
-        <div className="mx-auto mt-8 w-full max-w-[820px] rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-4 sm:p-5">
+        <SectionHeader
+          eyebrow="Solution"
+          title="Turn fragmented review work into a connected release workflow"
+          intro="RapidDraft is human-in-the-loop AI, grounded in your rules. Drafting intent, review decisions, and manufacturing feedback stay attached to the design, with the 3D model as the single source of truth and engineers in control of every release."
+        />
+        <div className="mx-auto mt-9 w-full max-w-[760px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
           <Figure caption="RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.">
             <HubAndSpokeFigure />
           </Figure>
@@ -259,26 +263,23 @@ export default function Home() {
 
       {/* ── Capabilities ─────────────────────────────────── */}
       <Section screen>
-        <div className="max-w-3xl">
-          <Eyebrow className="mb-5">Capabilities</Eyebrow>
-          <H2>One review layer, four core capabilities</H2>
-          <Intro className="mt-5">
-            The same review layer generates documents, automates checks, keeps collaboration on the
-            model, and preserves what teams learn.
-          </Intro>
-        </div>
-        <div className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
+        <SectionHeader
+          eyebrow="Capabilities"
+          title="One review layer, four core capabilities"
+          intro="The same review layer generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
+        />
+        <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-2">
           {CAPABILITIES.map((cap, i) => (
-            <div key={cap.title} className="bg-[var(--rd-surface)] p-6 sm:p-7">
+            <div key={cap.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
-              <H3 className="mt-4">{cap.title}</H3>
-              <Body soft sm className="mt-3">
+              <H3 className="mt-3">{cap.title}</H3>
+              <Body soft sm className="mt-2.5">
                 {cap.body}
               </Body>
             </div>
           ))}
         </div>
-        <div className="mt-7">
+        <div className="mt-9 flex justify-center">
           <Button to="/platform" variant="secondary" arrow>
             Explore the platform
           </Button>
@@ -287,57 +288,40 @@ export default function Home() {
 
       {/* ── Security teaser ──────────────────────────────── */}
       <Section screen>
-        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
-          <div>
-            <Eyebrow className="mb-5">Security</Eyebrow>
-            <H2>Works with your stack, keeps your data in-house</H2>
-            <Intro className="mt-5 max-w-xl">
-              RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM
-              workflows. Your tools, approval gates, and sensitive engineering data stay under your
-              control.
-            </Intro>
-            <div className="mt-8">
-              <Button to="/security" variant="secondary" arrow>
-                Read about security
-              </Button>
+        <SectionHeader
+          eyebrow="Security"
+          title="Works with your stack, keeps your data in-house"
+          intro="RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM workflows. Your tools, approval gates, and sensitive engineering data stay under your control."
+        />
+        <div className="mx-auto mt-10 grid max-w-[920px] grid-cols-2 gap-4 sm:grid-cols-4">
+          {PILLARS.map((p) => (
+            <div
+              key={p}
+              className="flex items-center justify-center rounded-[14px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] px-4 py-6 text-center text-[15px] text-[var(--rd-fg)]"
+            >
+              {p}
             </div>
-          </div>
-          <Card className="bg-[var(--rd-surface)]">
-            <div className="rd-microlabel">The four pillars</div>
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              {['Data sovereignty', 'IP protection', 'Employee trust', 'Data quality'].map((p) => (
-                <div
-                  key={p}
-                  className="rounded-[6px] border border-[var(--rd-hair)] px-4 py-3 text-[15px] text-[var(--rd-fg)]"
-                >
-                  {p}
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'SSO', 'Human approval'].map((b) => (
-                <Tag key={b}>
-                  {b}
-                </Tag>
-              ))}
-            </div>
-          </Card>
+          ))}
+        </div>
+        <div className="mt-9 flex justify-center">
+          <Button to="/security" variant="secondary" arrow>
+            Read about security
+          </Button>
         </div>
       </Section>
 
-      {/* ── ROI ──────────────────────────────────────────── */}
+      {/* ── ROI (centered showcase) ──────────────────────── */}
       <RoiCalculator />
 
-      {/* ── Final CTA (closing block; not a snap screen so the footer stays
-           reachable under mandatory snapping) ─────────────── */}
+      {/* ── Final CTA (closing block) ────────────────────── */}
       <Section>
-        <div className="max-w-2xl">
+        <div className="mx-auto max-w-[680px] text-center">
           <H2>Bring speed and traceability to drawing release</H2>
-          <Intro className="mt-5 max-w-xl">
+          <Intro className="mx-auto mt-5 max-w-[560px]">
             See how RapidDraft helps your team reduce review effort, generate manufacturing-ready
             drawings faster, and keep decision context across revisions.
           </Intro>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button to="/book-demo" variant="primary">
               Book a demo
             </Button>
