@@ -333,6 +333,9 @@ html.rd-snap .rd-screen.is-in .rd-container {
 .rd-btn--ghost { background: transparent; color: var(--rd-fg-2); padding-inline: 4px; }
 .rd-btn--ghost:hover { color: var(--rd-accent); }
 
+/* Compact nav-sized button (40px tall, harmonized with the nav controls) */
+.rd-btn--sm { height: 40px; padding: 0 20px; font-size: 14.5px; }
+
 /* ---------- Surfaces ---------- */
 .rd-card {
   background: var(--rd-raised);

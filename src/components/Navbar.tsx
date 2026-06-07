@@ -43,7 +43,7 @@ function ThemeToggle({ theme, onToggle }: { theme: Theme; onToggle: () => void }
 function LangToggle({ lang, onSet }: { lang: Lang; onSet: (l: Lang) => void }) {
   return (
     <div
-      className="inline-flex items-center rounded-full border border-[var(--rd-edge)] p-[3px] text-[12.5px] font-medium"
+      className="inline-flex h-10 items-center rounded-full border border-[var(--rd-edge)] p-1 text-[13px] font-medium"
       style={{ fontFamily: 'var(--rd-meta)' }}
       role="group"
       aria-label="Language"
@@ -55,7 +55,7 @@ function LangToggle({ lang, onSet }: { lang: Lang; onSet: (l: Lang) => void }) {
           onClick={() => onSet(l)}
           aria-pressed={lang === l}
           className={clsx(
-            'rounded-full px-2.5 py-1 leading-none transition-colors',
+            'flex h-full items-center rounded-full px-3 leading-none transition-colors',
             lang === l
               ? 'bg-[var(--rd-surface)] text-[var(--rd-fg-strong)] shadow-[0_0_0_1px_var(--rd-hair)]'
               : 'text-[var(--rd-fg-3)] hover:text-[var(--rd-fg)]',
@@ -127,7 +127,7 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={clsx(
-                  'group inline-flex items-center gap-1 whitespace-nowrap text-[13.5px] transition-colors duration-150',
+                  'group inline-flex items-center gap-1 whitespace-nowrap text-[15px] font-medium transition-colors duration-150',
                   isActive(link.to)
                     ? 'text-[var(--rd-accent)]'
                     : 'text-[var(--rd-head)] hover:text-[var(--rd-accent)]',
@@ -156,7 +156,7 @@ export default function Navbar() {
             <div className="hidden items-center gap-3 md:flex">
               <LangToggle lang={lang} onSet={setLang} />
               <ThemeToggle theme={theme} onToggle={toggle} />
-              <Link to="/book-demo" className="rd-btn rd-btn--primary h-10 px-5 text-[13.5px]">
+              <Link to="/book-demo" className="rd-btn rd-btn--primary rd-btn--sm">
                 {nav.cta}
               </Link>
             </div>
