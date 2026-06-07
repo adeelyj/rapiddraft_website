@@ -373,7 +373,7 @@ export default function Home() {
       //    the carried velocity makes the redirection seamless. scrollTo is
       //    instant here because html.rd-snap sets scroll-behavior:auto, so this
       //    easing — not the browser's smooth-scroll — is the sole controller. ──
-      const SMOOTH = 0.4; // seconds, approx glide time
+      const SMOOTH = 0.19; // seconds; ~90% of the move in ~370ms, settled ~550ms — snappy but smooth
       let curY = window.scrollY;
       let targetY = window.scrollY;
       let vy = 0; // px/sec
