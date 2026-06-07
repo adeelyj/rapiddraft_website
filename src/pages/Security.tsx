@@ -198,7 +198,7 @@ export default function Security() {
   const { lang } = useLang();
   const t = CONTENT[lang];
   return (
-    <div className="rd2 rd-dark" style={{ background: 'var(--rd-bg)' }}>
+    <div className="rd2 rd-page">
       <PageMeta
         title={t.meta.title}
         description={t.meta.description}

@@ -287,7 +287,7 @@ export default function Platform() {
   const t = CONTENT[lang];
 
   return (
-    <div className="rd2">
+    <div className="rd2 rd-page">
       <PageMeta
         title={t.meta.title}
         description={t.meta.description}

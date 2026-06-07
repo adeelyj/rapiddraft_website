@@ -257,15 +257,14 @@ html.rd-snap .rd-screen.is-in .rd-container {
 }
 .rd-body--soft { color: var(--rd-fg-2); }
 
-/* Accent highlight — at most once, hero only */
+/* Hero word marker — highlight removed; renders as plain heading text */
 .rd-mark {
-  background: var(--rd-accent-soft);
-  box-shadow: inset 0 -0.34em 0 var(--rd-accent-soft);
   color: inherit;
-  padding: 0 0.06em;
-  border-radius: var(--rd-r-xs);
 }
 .rd-ink { color: var(--rd-accent); }
+
+/* Eyebrows are a homepage-only signature element; hide them on inner pages */
+.rd-page .rd-eyebrow { display: none; }
 
 /* ---------- Meta rows (middot-separated) ---------- */
 .rd-meta {
