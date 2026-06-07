@@ -134,7 +134,9 @@ export default function Footer() {
       <div className="rd-container py-16">
         <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.85fr_0.85fr_0.85fr_0.85fr]">
           <div className="max-w-sm sm:col-span-2 lg:col-span-1">
-            <BrandMark theme="dark" size="sm" />
+            <Link to="/" aria-label="RapidDraft home" onClick={() => window.scrollTo(0, 0)} className="inline-flex">
+              <BrandMark theme="dark" size="sm" />
+            </Link>
             <p className="mt-5 text-[14px] leading-7 text-[var(--rd-fg-2)]">{t.desc}</p>
             <div className="mt-8">
               <div className="rd-microlabel">{t.backedBy}</div>

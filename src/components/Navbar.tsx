@@ -115,7 +115,12 @@ export default function Navbar() {
         <div className="grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-4">
           {/* left: logo */}
           <div className="flex items-center justify-start">
-            <Link to="/" className="flex items-center" aria-label="RapidDraft home">
+            <Link
+              to="/"
+              className="flex items-center"
+              aria-label="RapidDraft home"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               <BrandMark theme={theme} size="sm" />
             </Link>
           </div>

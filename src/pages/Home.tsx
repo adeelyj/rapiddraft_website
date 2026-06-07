@@ -86,17 +86,17 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Agentic drawing release and design review for engineering teams',
-      headingLead: 'A traceable second set of eyes before you ',
-      headingMark: 'cut the rev',
+      headingLead: 'Accelerate engineering decisions and ',
+      headingMark: 'drawing release',
       subhead:
-        'RapidDraft catches drawing and design issues before release, grounded in your own rules and running on-prem. The engineer keeps the sign-off.',
+        'RapidDraft catches issues earlier, automates repetitive review, and keeps every decision attached to the model.',
       bookDemo: 'Book a demo',
       seeHow: 'See how it works',
     },
     credibility: {
-      title: 'Catch it in review, not after the EMPB',
+      title: 'Reduce repeated work before it delays release',
       intro:
-        'Catch an issue in review and you lose hours. Catch it after release and it is rework, a rejected EMPB, or scrap.',
+        'Faster feedback, fewer iterations, and less manual checking, right where drawings, reviews, and release readiness still slow teams down.',
       meta: [
         'Built by engineers from aerospace, automotive, and process industries',
         'Advised by leaders at Siemens, Volocopter, and Amazon',
@@ -205,17 +205,17 @@ const CONTENT = {
     },
     hero: {
       eyebrow: 'Agentenbasierte Zeichnungsfreigabe und Design-Review für Engineering-Teams',
-      headingLead: 'Ein zweites Augenpaar, bevor Sie die ',
-      headingMark: 'Revision ziehen',
+      headingLead: 'Engineering-Entscheidungen ',
+      headingMark: 'schneller freigeben',
       subhead:
-        'RapidDraft erkennt Zeichnungs- und Designprobleme vor der Freigabe, verankert in Ihren Regeln und On-Prem.',
+        'RapidDraft erkennt Probleme früher, automatisiert wiederkehrende Prüfungen und hält jede Entscheidung am Modell fest.',
       bookDemo: 'Demo buchen',
       seeHow: 'So funktioniert es',
     },
     credibility: {
-      title: 'In der Prüfung abfangen, nicht nach dem EMPB',
+      title: 'Wiederholte Arbeit reduzieren, bevor sie die Freigabe verzögert',
       intro:
-        'In der Prüfung kostet ein Fehler Stunden. Nach der Freigabe sind es Nacharbeit, ein abgelehntes EMPB oder Ausschuss.',
+        'Schnelleres Feedback, weniger Iterationen und weniger manuelles Prüfen, genau dort, wo Zeichnungen, Reviews und Freigabereife Teams noch ausbremsen.',
       meta: [
         'Entwickelt von Ingenieuren aus Luftfahrt, Automotive und Prozessindustrie',
         'Beraten von Führungskräften bei Siemens, Volocopter und Amazon',
