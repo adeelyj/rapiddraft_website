@@ -46,7 +46,7 @@ export default function RoiCalculator() {
   ];
 
   return (
-    <section id="roi-calculator" className="rd-section rd-screen rd-divider">
+    <section id="roi-calculator" className="rd-section rd-screen">
       <div className="rd-container">
         <div className="max-w-2xl">
           <Eyebrow className="mb-5">ROI calculator</Eyebrow>
@@ -57,7 +57,7 @@ export default function RoiCalculator() {
           </Intro>
         </div>
 
-        <div className="mt-10 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mt-7 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] lg:grid-cols-[1.05fr_0.95fr]">
           {/* Parameters */}
           <div className="bg-[var(--rd-surface)] p-6 sm:p-8">
             <div

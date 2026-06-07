@@ -115,19 +115,23 @@
 .rd-section--tight { padding-block: clamp(40px, 6vw, 80px); }
 .rd-divider { border-top: 1px solid var(--rd-hair); }
 
-/* Full-viewport "screen" sections (apple-style snap). */
+/* Full-viewport "screen" sections (apple-style snap). Content is centered in
+   the area below the sticky 80px nav so every section is fully visible when it
+   snaps into place. */
 .rd-screen {
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-sizing: border-box;
+  padding-top: calc(80px + clamp(8px, 3vh, 36px));
+  padding-bottom: clamp(20px, 4vh, 48px);
   scroll-snap-align: start;
-  scroll-margin-top: 80px;
 }
 html.rd-snap {
   scroll-snap-type: y proximity;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   html.rd-snap { scroll-snap-type: none; }
@@ -137,8 +141,8 @@ html.rd-snap {
 .rd-sectionhead {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px 64px;
-  margin-bottom: clamp(36px, 5vw, 64px);
+  gap: 16px 64px;
+  margin-bottom: clamp(24px, 3.5vw, 44px);
 }
 @media (min-width: 880px) {
   .rd-sectionhead { grid-template-columns: 1.1fr 1fr; align-items: end; }
@@ -177,8 +181,8 @@ html.rd-snap {
    · body (default) · body--sm (inside cards) · meta/eyebrow (13/12). */
 .rd-h1 {
   font-family: var(--rd-sans);
-  font-size: clamp(36px, 5.2vw, 58px);
-  line-height: 1.06;
+  font-size: clamp(31px, 4.3vw, 50px);
+  line-height: 1.08;
   letter-spacing: -0.025em;
   font-weight: 500;
   color: var(--rd-fg-strong);
@@ -187,8 +191,8 @@ html.rd-snap {
 }
 .rd-h2 {
   font-family: var(--rd-sans);
-  font-size: clamp(28px, 3.4vw, 40px);
-  line-height: 1.13;
+  font-size: clamp(24px, 2.8vw, 35px);
+  line-height: 1.15;
   letter-spacing: -0.02em;
   font-weight: 500;
   color: var(--rd-head);
@@ -196,14 +200,14 @@ html.rd-snap {
   margin: 0;
 }
 .rd-h2--display {
-  font-size: clamp(30px, 4vw, 46px);
-  line-height: 1.16;
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.18;
   letter-spacing: -0.02em;
 }
 .rd-h3 {
   font-family: var(--rd-sans);
-  font-size: clamp(18px, 1.3vw, 21px);
-  line-height: 1.32;
+  font-size: clamp(17px, 1.1vw, 19px);
+  line-height: 1.35;
   letter-spacing: -0.005em;
   font-weight: 500;
   color: var(--rd-head);
@@ -212,8 +216,8 @@ html.rd-snap {
 
 /* Hero subhead — the single largest paragraph */
 .rd-sub {
-  font-size: clamp(17px, 1.5vw, 19px);
-  line-height: 1.65;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
   color: var(--rd-fg-2);
   font-weight: 400;
   margin: 0;
@@ -221,21 +225,21 @@ html.rd-snap {
 /* Section intro / lede — every paragraph that sits directly under a section H2 */
 .rd-intro,
 .rd-lede {
-  font-size: clamp(16px, 1.15vw, 18px);
-  line-height: 1.7;
+  font-size: clamp(15px, 1vw, 16px);
+  line-height: 1.62;
   color: var(--rd-fg-2);
   font-weight: 400;
   margin: 0;
 }
 .rd-body {
-  font-size: 16px;
-  line-height: 1.72;
+  font-size: 15px;
+  line-height: 1.62;
   color: var(--rd-fg);
   margin: 0;
 }
 .rd-body--sm {
-  font-size: 15px;
-  line-height: 1.62;
+  font-size: 14px;
+  line-height: 1.58;
 }
 .rd-body--soft { color: var(--rd-fg-2); }
 
@@ -432,34 +436,31 @@ html.rd-snap {
   background-image:
     linear-gradient(var(--rd-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--rd-line) 1px, transparent 1px);
-  background-size: 72px 72px;
+  background-size: 54px 54px;
 }
 .rd-app__grid { --rd-line: var(--rd-grid-line); }
+/* Orange spotlight near the cursor. The glow layer is scaled out from the
+   pointer (transform-origin at the cursor), so its lines diverge from the base
+   grid inside the small mask — a subtle lens distortion that tracks the cursor. */
 .rd-app__grid-glow {
   --rd-line: var(--rd-accent-hair);
+  transform-origin: var(--rd-mx) var(--rd-my);
+  transform: scale(1.16);
   -webkit-mask-image: radial-gradient(
-    260px circle at var(--rd-mx) var(--rd-my),
-    #000 0%, rgba(0, 0, 0, 0.45) 42%, transparent 72%);
+    120px circle at var(--rd-mx) var(--rd-my),
+    #000 0%, rgba(0, 0, 0, 0.5) 48%, transparent 74%);
   mask-image: radial-gradient(
-    260px circle at var(--rd-mx) var(--rd-my),
-    #000 0%, rgba(0, 0, 0, 0.45) 42%, transparent 72%);
-  animation: rd-grid-pulse 4.5s ease-in-out infinite;
+    120px circle at var(--rd-mx) var(--rd-my),
+    #000 0%, rgba(0, 0, 0, 0.5) 48%, transparent 74%);
 }
 .rd-app__grid-orb {
   position: absolute;
   left: var(--rd-mx);
   top: var(--rd-my);
-  width: 460px;
-  height: 460px;
+  width: 260px;
+  height: 260px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, var(--rd-accent-soft) 0%, transparent 62%);
-}
-@keyframes rd-grid-pulse {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .rd-app__grid-glow { animation: none; }
+  background: radial-gradient(circle, var(--rd-accent-soft) 0%, transparent 64%);
 }
 
 /* ---------- Hairline schematic grid (local hero backdrop) ---------- */

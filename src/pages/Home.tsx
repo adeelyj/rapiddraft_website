@@ -119,44 +119,42 @@ export default function Home() {
       />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <header className="rd-screen relative overflow-hidden border-b border-[var(--rd-hair)]">
+      <header className="rd-screen relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
-          style={{ background: 'radial-gradient(62% 52% at 50% -8%, var(--rd-accent-soft), transparent 70%)' }}
+          style={{ background: 'radial-gradient(55% 60% at 12% 2%, var(--rd-accent-soft), transparent 60%)' }}
         />
-        <Container className="relative w-full py-16 text-center sm:py-20">
-          <div className="mx-auto max-w-[920px]">
-            <Eyebrow className="justify-center">
-              Agentic drawing release and design review for engineering teams
-            </Eyebrow>
-            <H1 className="mt-7">
-              Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
-            </H1>
-            <Subhead className="mx-auto mt-6 max-w-2xl">
-              RapidDraft catches design and drawing issues earlier and automates repetitive review
-              checks. The decisions behind each drawing stay attached to the model, instead of
-              scattering across emails, PDFs, and meetings.
-            </Subhead>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button to="/book-demo" variant="primary">
-                Book a demo
-              </Button>
-              <Button to="/platform" variant="secondary" arrow>
-                See how it works
-              </Button>
+        <Container className="relative w-full">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+            <div className="max-w-xl">
+              <Eyebrow>Agentic drawing release and design review for engineering teams</Eyebrow>
+              <H1 className="mt-5">
+                Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
+              </H1>
+              <Subhead className="mt-5 max-w-lg">
+                RapidDraft catches design and drawing issues earlier and automates repetitive review
+                checks. The decisions behind each drawing stay attached to the model, instead of
+                scattering across emails, PDFs, and meetings.
+              </Subhead>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <Button to="/book-demo" variant="primary">
+                  Book a demo
+                </Button>
+                <Button to="/platform" variant="secondary" arrow>
+                  See how it works
+                </Button>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2.5">
+                {HERO_BADGES.map((b) => (
+                  <Tag key={b}>{b}</Tag>
+                ))}
+              </div>
             </div>
-            <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {HERO_BADGES.map((b) => (
-                <Tag key={b}>
-                  {b}
-                </Tag>
-              ))}
-            </div>
-          </div>
 
-          <div className="mx-auto mt-12 max-w-[1000px] sm:mt-14">
-            <CapabilityRail items={RAIL_ITEMS} />
+            <div className="w-full">
+              <CapabilityRail items={RAIL_ITEMS} />
+            </div>
           </div>
         </Container>
       </header>
@@ -171,9 +169,9 @@ export default function Home() {
           </Intro>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-3">
+        <div className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-3">
           {KPIS.map((k) => (
-            <div key={k.label} className="bg-[var(--rd-surface)] p-7 sm:p-8">
+            <div key={k.label} className="bg-[var(--rd-surface)] p-6 sm:p-7">
               <div className="rd-kpi-num">{k.value}</div>
               <div className="rd-kpi-label mt-3">{k.label}</div>
             </div>
@@ -191,7 +189,7 @@ export default function Home() {
       </Section>
 
       {/* ── Problem (sanctioned display heading) ─────────── */}
-      <Section divider screen>
+      <Section screen>
         <div className="max-w-4xl">
           <H2 display>
             Design intent lives in CAD. Requirements live in drawings. The review logic lives in
@@ -203,9 +201,9 @@ export default function Home() {
           </Intro>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
+        <div className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
           {PROBLEM_CARDS.map((card, i) => (
-            <div key={card.title} className="bg-[var(--rd-surface)] p-7 sm:p-8">
+            <div key={card.title} className="bg-[var(--rd-surface)] p-6 sm:p-7">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-4">{card.title}</H3>
               <Body soft sm className="mt-3">
@@ -217,7 +215,7 @@ export default function Home() {
       </Section>
 
       {/* ── Solution + figure 2 ──────────────────────────── */}
-      <Section divider screen>
+      <Section screen>
         <div className="max-w-3xl">
           <Eyebrow className="mb-5">Solution</Eyebrow>
           <H2>Turn fragmented review work into a connected release workflow</H2>
@@ -230,7 +228,7 @@ export default function Home() {
           </Intro>
         </div>
 
-        <div className="mt-12 rounded-[12px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-8 lg:p-10">
+        <div className="mt-6 w-full max-w-[820px] rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-4 sm:p-5">
           <Figure caption="RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.">
             <HubAndSpokeFigure />
           </Figure>
@@ -238,14 +236,14 @@ export default function Home() {
       </Section>
 
       {/* ── Capabilities ─────────────────────────────────── */}
-      <Section divider screen>
+      <Section screen>
         <SectionHead
           title="One review layer, four core capabilities"
           lede="The same review layer generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
         />
         <div className="grid gap-px overflow-hidden rounded-[10px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] sm:grid-cols-2">
           {CAPABILITIES.map((cap, i) => (
-            <div key={cap.title} className="bg-[var(--rd-surface)] p-7 sm:p-8">
+            <div key={cap.title} className="bg-[var(--rd-surface)] p-6 sm:p-7">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-4">{cap.title}</H3>
               <Body soft sm className="mt-3">
@@ -254,7 +252,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="mt-10">
+        <div className="mt-7">
           <Button to="/platform" variant="secondary" arrow>
             Explore the platform
           </Button>
@@ -262,7 +260,7 @@ export default function Home() {
       </Section>
 
       {/* ── Security teaser ──────────────────────────────── */}
-      <Section divider screen>
+      <Section screen>
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
           <div>
             <Eyebrow className="mb-5">Security</Eyebrow>
@@ -305,14 +303,14 @@ export default function Home() {
       <RoiCalculator />
 
       {/* ── Final CTA ────────────────────────────────────── */}
-      <Section divider screen className="text-center">
-        <div className="mx-auto max-w-2xl">
+      <Section screen>
+        <div className="max-w-2xl">
           <H2>Bring speed and traceability to drawing release</H2>
-          <Intro className="mx-auto mt-6 max-w-xl">
+          <Intro className="mt-5 max-w-xl">
             See how RapidDraft helps your team reduce review effort, generate manufacturing-ready
             drawings faster, and keep decision context across revisions.
           </Intro>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button to="/book-demo" variant="primary">
               Book a demo
             </Button>
