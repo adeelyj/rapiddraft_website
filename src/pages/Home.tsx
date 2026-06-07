@@ -116,10 +116,10 @@ function SectionHeader({
   display?: boolean;
 }) {
   return (
-    <div className={clsx('mx-auto text-center', display ? 'max-w-[860px]' : 'max-w-[720px]')}>
+    <div className={clsx('mx-auto text-center', display ? 'max-w-[1000px]' : 'max-w-[860px]')}>
       {eyebrow && <Eyebrow className="mb-5">{eyebrow}</Eyebrow>}
       <H2 display={display}>{title}</H2>
-      {intro && <Intro className="mx-auto mt-5 max-w-[640px]">{intro}</Intro>}
+      {intro && <Intro className="mx-auto mt-5 max-w-[760px]">{intro}</Intro>}
     </div>
   );
 }
@@ -172,9 +172,9 @@ export default function Home() {
             <H1 className="mt-5">
               Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
             </H1>
-            <Subhead className="mx-auto mt-5 max-w-[600px]">
-              RapidDraft catches design and drawing issues earlier and automates repetitive review
-              checks, keeping the decisions behind each drawing attached to the model.
+            <Subhead className="mx-auto mt-5 max-w-[760px]">
+              RapidDraft catches issues earlier, automates repetitive review checks, and keeps every
+              decision attached to the model.
             </Subhead>
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button to="/book-demo" variant="primary">
@@ -201,9 +201,9 @@ export default function Home() {
       <Section screen>
         <SectionHeader
           title="Reduce repeated work before it delays release"
-          intro="RapidDraft brings faster feedback, fewer iterations, and less manual checking to the workflows where drawings, reviews, and release readiness still slow teams down."
+          intro="Faster feedback, fewer iterations, and less manual checking, right where drawings and reviews still slow teams down."
         />
-        <div className="mx-auto mt-10 grid max-w-[1000px] gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-3">
           {KPIS.map((k) => (
             <div key={k.label} className="rd-tile">
               <div className="rd-kpi-num">{k.value}</div>
@@ -232,9 +232,9 @@ export default function Home() {
               people&rsquo;s heads
             </>
           }
-          intro="Collaboration is inefficient, drawing review is error-prone, and quality inspection is slow and tedious. Good designs stall in documentation and review."
+          intro="Collaboration is inefficient, review is error-prone, and inspection is slow. Good designs stall in documentation."
         />
-        <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2">
           {PROBLEM_CARDS.map((card, i) => (
             <div key={card.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
@@ -252,9 +252,9 @@ export default function Home() {
         <SectionHeader
           eyebrow="Solution"
           title="Turn fragmented review work into a connected release workflow"
-          intro="RapidDraft is human-in-the-loop AI, grounded in your rules. Drafting intent, review decisions, and manufacturing feedback stay attached to the design, with the 3D model as the single source of truth and engineers in control of every release."
+          intro="Human-in-the-loop AI, grounded in your rules, keeping drafting intent, review decisions, and feedback attached to the model."
         />
-        <div className="mx-auto mt-9 w-full max-w-[760px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
+        <div className="mx-auto mt-9 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
           <Figure caption="RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.">
             <HubAndSpokeFigure />
           </Figure>
@@ -266,9 +266,9 @@ export default function Home() {
         <SectionHeader
           eyebrow="Capabilities"
           title="One review layer, four core capabilities"
-          intro="The same review layer generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
+          intro="One layer that generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
         />
-        <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2">
           {CAPABILITIES.map((cap, i) => (
             <div key={cap.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
@@ -291,9 +291,9 @@ export default function Home() {
         <SectionHeader
           eyebrow="Security"
           title="Works with your stack, keeps your data in-house"
-          intro="RapidDraft brings AI-assisted review into your existing CAD, drawing, BOM, and PLM workflows. Your tools, approval gates, and sensitive engineering data stay under your control."
+          intro="AI-assisted review inside your existing CAD, drawing, BOM, and PLM workflows, with your tools and data under your control."
         />
-        <div className="mx-auto mt-10 grid max-w-[920px] grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-[1040px] grid-cols-2 gap-4 sm:grid-cols-4">
           {PILLARS.map((p) => (
             <div
               key={p}
@@ -317,9 +317,9 @@ export default function Home() {
       <Section>
         <div className="mx-auto max-w-[680px] text-center">
           <H2>Bring speed and traceability to drawing release</H2>
-          <Intro className="mx-auto mt-5 max-w-[560px]">
-            See how RapidDraft helps your team reduce review effort, generate manufacturing-ready
-            drawings faster, and keep decision context across revisions.
+          <Intro className="mx-auto mt-5 max-w-[760px]">
+            See how RapidDraft reduces review effort, speeds up drawing release, and keeps decision
+            context across revisions.
           </Intro>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button to="/book-demo" variant="primary">

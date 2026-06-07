@@ -325,7 +325,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
 }
 
 .rd-btn--secondary {
-  background: transparent;
+  background: var(--rd-bg);
   border-color: var(--rd-edge);
   color: var(--rd-fg-strong);
 }
@@ -372,7 +372,7 @@ html.rd-snap .rd-screen.is-in .rd-container {
   font-size: 13px;
   line-height: 1;
   color: var(--rd-fg-2);
-  background: transparent;
+  background: var(--rd-bg);
   white-space: nowrap;
 }
 .rd-tag--mono { font-family: var(--rd-mono); }

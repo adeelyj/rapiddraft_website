@@ -48,16 +48,16 @@ export default function RoiCalculator() {
   return (
     <section id="roi-calculator" className="rd-section rd-screen">
       <div className="rd-container">
-        <div className="mx-auto max-w-[720px] text-center">
+        <div className="mx-auto max-w-[860px] text-center">
           <Eyebrow className="mb-5">ROI calculator</Eyebrow>
           <H2>Estimate the annual value of faster engineering review</H2>
-          <Intro className="mx-auto mt-5 max-w-[560px]">
+          <Intro className="mx-auto mt-5 max-w-[760px]">
             Adjust the core assumptions to see how reduced review effort and fewer late issues turn
             into annual value.
           </Intro>
         </div>
 
-        <div className="mx-auto mt-9 grid w-full max-w-[960px] gap-px overflow-hidden rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] text-left lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mx-auto mt-9 grid w-full max-w-[1040px] gap-px overflow-hidden rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-hair)] text-left lg:grid-cols-[1.05fr_0.95fr]">
           {/* Parameters */}
           <div className="bg-[var(--rd-surface)] p-6 sm:p-8">
             <div className="rd-microlabel">Parameters</div>

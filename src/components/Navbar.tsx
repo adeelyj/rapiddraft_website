@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import clsx from 'clsx';
@@ -38,15 +38,46 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [openPath, setOpenPath] = useState<string | null>(null);
+  const [hidden, setHidden] = useState(false);
   const location = useLocation();
   const isOpen = openPath === location.pathname;
   const { theme, toggle } = useTheme();
+
+  // Hide the navbar when scrolling down, reveal it when scrolling up.
+  useEffect(() => {
+    let last = window.scrollY;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY;
+        if (y > last + 4 && y > 90) {
+          setHidden(true);
+          setOpenPath(null);
+        } else if (y < last - 4) {
+          setHidden(false);
+        }
+        last = y;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const isActive = (to: string) =>
     to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[var(--rd-hair)] bg-[var(--rd-bg)]">
+    <nav
+      className={clsx(
+        'sticky top-0 z-50 border-b border-[var(--rd-hair)] bg-[var(--rd-bg)] transition-transform duration-300 will-change-transform',
+        hidden ? '-translate-y-full' : 'translate-y-0',
+      )}
+    >
       <div className="rd-container">
         <div className="flex h-20 items-center justify-between gap-6">
           <Link to="/" className="flex items-center" aria-label="RapidDraft home">
