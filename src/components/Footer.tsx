@@ -7,9 +7,9 @@ const CONTENT = {
   en: {
     desc: 'RapidDraft helps engineering teams accelerate design reviews, generate manufacturing-ready drawings, and retain decision logic across CAD workflows.',
     backedBy: 'Backed by',
-    productHeading: 'Product',
+    productHeading: 'Platform',
     product: [
-      { name: 'Platform', to: '/platform' },
+      { name: 'Overview', to: '/platform' },
       { name: 'Use cases', to: '/use-cases' },
       { name: 'Security', to: '/security' },
       { name: 'ROI calculator', to: '/#roi-calculator' },
@@ -33,9 +33,9 @@ const CONTENT = {
   de: {
     desc: 'RapidDraft hilft Engineering-Teams, Design-Reviews zu beschleunigen, fertigungsreife Zeichnungen zu erstellen und Entscheidungslogik über alle CAD-Workflows hinweg zu bewahren.',
     backedBy: 'Unterstützt von',
-    productHeading: 'Produkt',
+    productHeading: 'Plattform',
     product: [
-      { name: 'Plattform', to: '/platform' },
+      { name: 'Übersicht', to: '/platform' },
       { name: 'Anwendungsfälle', to: '/use-cases' },
       { name: 'Sicherheit', to: '/security' },
       { name: 'ROI-Rechner', to: '/#roi-calculator' },

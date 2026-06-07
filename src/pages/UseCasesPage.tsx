@@ -17,6 +17,15 @@ import {
   MetaRow,
 } from '../components/ui/primitives';
 
+// Workflow imagery (language-independent), in the same order as the workflows.
+const WORKFLOW_IMAGES = [
+  '/media/usecase-new-product-development.jpg',
+  '/media/usecase-battery-structural.png',
+  '/media/usecase-supplier-packages.png',
+  '/media/usecase-change-driven.png',
+  '/media/usecase-legacy-cleanup.png',
+];
+
 const CONTENT = {
   en: {
     meta: {
@@ -260,6 +269,14 @@ export default function UseCasesPage() {
         <div className="mx-auto grid max-w-[1120px] gap-4 sm:grid-cols-2">
           {t.workflows.map((wf, i) => (
             <div key={wf.title} className="rd-tile flex flex-col">
+              {WORKFLOW_IMAGES[i] && (
+                <img
+                  src={WORKFLOW_IMAGES[i]}
+                  alt={wf.title}
+                  loading="lazy"
+                  className="mb-5 aspect-[16/9] w-full rounded-[10px] border border-[var(--rd-hair)] object-cover"
+                />
+              )}
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-3">{wf.title}</H3>
               <Body soft sm className="mt-2.5">

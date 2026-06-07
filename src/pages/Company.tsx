@@ -17,6 +17,48 @@ import {
   MetaRow,
 } from '../components/ui/primitives';
 
+// Photos + LinkedIn are language-independent, keyed by person name.
+const PEOPLE: Record<string, { image: string; linkedin: string }> = {
+  'Adeel Yawar Jamil': { image: '/media/adeel.jpg', linkedin: 'https://www.linkedin.com/in/adeelyawarjamil/' },
+  'Dr. Hasan Raza': { image: '/media/hasan.jpg', linkedin: 'https://www.linkedin.com/in/shasanrr/' },
+  'Sreekar Reddy Sajjala': { image: '/media/sreekar.jpg', linkedin: 'https://www.linkedin.com/in/sreekar2858/' },
+  'Shehjar Kaul': { image: '/media/shehjar.jpg', linkedin: 'https://www.linkedin.com/in/shehjarkaul/' },
+  'Julio Saucedo': { image: '/media/julio.jpg', linkedin: 'https://www.linkedin.com/in/julio-saucedo/' },
+  'Muneeb Ahmed': { image: '/media/muneeb.jpg', linkedin: 'https://www.linkedin.com/in/muneebdotahmed/' },
+};
+
+function PersonCard({ name, bio }: { name: string; bio: string }) {
+  const media = PEOPLE[name];
+  return (
+    <div className="rd-tile flex flex-col items-center">
+      {media?.image && (
+        <img
+          src={media.image}
+          alt={name}
+          loading="lazy"
+          className="h-20 w-20 rounded-full object-cover ring-1 ring-[var(--rd-hair)]"
+        />
+      )}
+      <H3 className="mt-4">{name}</H3>
+      <Body soft sm className="mt-2.5">
+        {bio}
+      </Body>
+      {media?.linkedin && (
+        <a
+          href={media.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-1 text-[13px] font-medium text-[var(--rd-accent)] transition-opacity hover:opacity-80"
+          style={{ fontFamily: 'var(--rd-meta)' }}
+          aria-label={`${name} on LinkedIn`}
+        >
+          LinkedIn<span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
+  );
+}
+
 const CONTENT = {
   en: {
     meta: {
@@ -252,12 +294,7 @@ export default function Company() {
         <SectionHeader title={t.team.title} />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.founders.map((person) => (
-            <div key={person.name} className="rd-tile">
-              <H3>{person.name}</H3>
-              <Body soft sm className="mt-2.5">
-                {person.bio}
-              </Body>
-            </div>
+            <PersonCard key={person.name} name={person.name} bio={person.bio} />
           ))}
         </div>
       </Section>
@@ -267,12 +304,7 @@ export default function Company() {
         <SectionHeader title={t.advisors.title} />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
           {t.advisorList.map((person) => (
-            <div key={person.name} className="rd-tile">
-              <H3>{person.name}</H3>
-              <Body soft sm className="mt-2.5">
-                {person.bio}
-              </Body>
-            </div>
+            <PersonCard key={person.name} name={person.name} bio={person.bio} />
           ))}
         </div>
       </Section>
