@@ -16,93 +16,250 @@ import {
   Figure,
 } from '../components/ui/primitives';
 import EngineeringStackFigure from '../components/diagrams/EngineeringStackFigure';
+import { useLang } from '../i18n/LanguageContext';
 
-const STEPS = [
-  {
-    title: 'Connect',
-    body: 'Plug RapidDraft into your CAD and PLM: Siemens NX, CATIA, SolidWorks, EPLAN, and your PDM or CIM Database. Your data stays in your governed systems.',
-  },
-  {
-    title: 'Check',
-    body: 'RapidDraft generates drawings and QA documents, then reviews them against your engineering, manufacturing, and company-specific rules. It flags missing dimensions, tolerance and GD&T issues, standards violations, and manufacturability risks.',
-  },
-  {
-    title: 'Release',
-    body: 'Engineers review the findings, decide, and release through a clear gate. Every decision feeds an audit trail (VDA, EMPB) and reusable company knowledge.',
-  },
-];
-
-const MODULES = [
-  {
-    title: 'Drawing Memory',
-    body: 'Generate manufacturing-ready drawings and inspection-ready documents, including BOMs and first-article and inspection reports, from current geometry, and preserve drafting intent as designs evolve.',
-    list: [
-      'Preserves dimensions, notes, and checks across revisions.',
-      'Keeps redraw effort from starting at zero after each change.',
-      'Turns review effort into reusable company knowledge.',
+const CONTENT = {
+  en: {
+    meta: {
+      title: 'Platform | RapidDraft',
+      description:
+        'RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model. It is human-in-the-loop and grounded in your rules.',
+    },
+    hero: {
+      eyebrow: 'Platform',
+      headingLead: 'One agentic review layer for your entire ',
+      headingMark: 'drawing-release process',
+      subhead:
+        'RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model. It is human-in-the-loop and grounded in your rules.',
+      primaryCta: 'Book a demo',
+      secondaryCta: 'See it in your workflow',
+    },
+    sourceOfTruth: {
+      title: 'The model is the single source of truth, and so is the review',
+      intro:
+        'Drawings, reviews, and feedback usually scatter across email, PDFs, and spreadsheets, disconnected from the CAD they describe. RapidDraft keeps them attached to the model and governed by your rules, so every release is backed by a complete, traceable review.',
+    },
+    howItWorks: {
+      title: 'How it works',
+    },
+    steps: [
+      {
+        title: 'Connect',
+        body: 'Plug RapidDraft into your CAD and PLM: Siemens NX, CATIA, SolidWorks, EPLAN, and your PDM or CIM Database. Your data stays in your governed systems.',
+      },
+      {
+        title: 'Check',
+        body: 'RapidDraft generates drawings and QA documents, then reviews them against your engineering, manufacturing, and company-specific rules. It flags missing dimensions, tolerance and GD&T issues, standards violations, and manufacturability risks.',
+      },
+      {
+        title: 'Release',
+        body: 'Engineers review the findings, decide, and release through a clear gate. Every decision feeds an audit trail (VDA, EMPB) and reusable company knowledge.',
+      },
+    ],
+    inside: {
+      title: 'Inside the platform',
+      intro: 'The modules behind RapidDraft, and how each one works.',
+    },
+    modules: [
+      {
+        title: 'Drawing Memory',
+        body: 'Generate manufacturing-ready drawings and inspection-ready documents, including BOMs and first-article and inspection reports, from current geometry, and preserve drafting intent as designs evolve.',
+        list: [
+          'Preserves dimensions, notes, and checks across revisions.',
+          'Keeps redraw effort from starting at zero after each change.',
+          'Turns review effort into reusable company knowledge.',
+        ],
+      },
+      {
+        title: 'Review Automation',
+        body: 'Apply your engineering, manufacturing, and company-specific logic to surface manufacturability and completeness issues early, while engineers keep control of the final decisions.',
+        list: [
+          'Flags repeated DFM risks before formal review starts.',
+          'Catches missing, inconsistent, or review-critical information before release.',
+          'Standardizes technical drawings against ISO and ASME.',
+        ],
+      },
+      {
+        title: 'Model-Linked Collaboration',
+        body: 'Give design, QA, and suppliers one shared CAD review environment built around the model.',
+        list: [
+          'Feedback stays attached to geometry instead of scattered screenshots.',
+          'Every reviewer works from the same model state and revision.',
+          'Lessons learned stay connected to the part for future iterations.',
+        ],
+      },
+      {
+        title: 'Bulk Review',
+        body: 'Run repeated checks across drawings, revisions, and part families without reopening work one file at a time.',
+        list: [
+          'Applies the same review logic across large drawing sets and revision queues.',
+          'Surfaces common failure patterns and high-priority outliers fast.',
+          'Lets engineers triage exceptions instead of repeating the same checks.',
+        ],
+      },
+    ],
+    integrations: {
+      title: 'Works inside the stack you already run',
+      intro:
+        'RapidDraft fits natively with Siemens NX, CATIA, SolidWorks, and EPLAN, and connects to your PDM or PLM, for example CIM Database. It reads your CAD models, drawings, and BOMs, and works with your release process rather than replacing it.',
+      tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PLM / PDM (CIM Database)', 'Drawings', 'BOMs'],
+    },
+    aiLayer: {
+      title: 'The AI review layer',
+      intro:
+        'Analyze drawings, apply rules, surface issues, capture decisions. RapidDraft automates the repetitive checking and surfaces what needs attention. Every approval stays with your engineers, and it runs inside your environment.',
+      cta: 'How we keep your data secure',
+      caption:
+        'One review layer across your stack: drawings, PDM/PLM, and supplier QA in; DFM findings, inspection documents, BOMs, release gates, and an audit trail out.',
+    },
+    faqSection: {
+      title: 'Frequently asked questions',
+      cta: 'Book a demo',
+    },
+    faqs: [
+      {
+        q: 'Does it work with my CAD?',
+        a: 'Yes. Siemens NX, CATIA, SolidWorks, and EPLAN today, with more coming. You do not change tools or workflow.',
+      },
+      {
+        q: 'Does it replace my engineers?',
+        a: 'No. It highlights issues, suggests fixes, and automates repetitive work. Final approval always stays with the engineer.',
+      },
+      {
+        q: 'Can it run on-prem?',
+        a: 'Yes. It runs locally on your infrastructure, with local or EU-cloud options.',
+      },
+      {
+        q: 'How accurate is it?',
+        a: 'It is grounded in engineering standards and your company rules, and it learns from your feedback on your specific parts over time.',
+      },
+      {
+        q: 'What happens to my data?',
+        a: 'It stays in your environment. Models run locally, and training uses only anonymized or approved data.',
+      },
     ],
   },
-  {
-    title: 'Review Automation',
-    body: 'Apply your engineering, manufacturing, and company-specific logic to surface manufacturability and completeness issues early, while engineers keep control of the final decisions.',
-    list: [
-      'Flags repeated DFM risks before formal review starts.',
-      'Catches missing, inconsistent, or review-critical information before release.',
-      'Standardizes technical drawings against ISO and ASME.',
+  de: {
+    meta: {
+      title: 'Plattform | RapidDraft',
+      description:
+        'RapidDraft setzt auf Ihr CAD und PLM auf und hält Zeichnungsfreigabe, Design-Review und Fertigungsfeedback mit dem Modell verbunden. Human-in-the-Loop und verankert in Ihren Regeln.',
+    },
+    hero: {
+      eyebrow: 'Plattform',
+      headingLead: 'Eine agentische Review-Ebene für Ihren gesamten ',
+      headingMark: 'Zeichnungsfreigabe-Prozess',
+      subhead:
+        'RapidDraft setzt auf Ihr CAD und PLM auf und hält Zeichnungsfreigabe, Design-Review und Fertigungsfeedback mit dem Modell verbunden. Human-in-the-Loop und verankert in Ihren Regeln.',
+      primaryCta: 'Demo buchen',
+      secondaryCta: 'In Ihrem Workflow erleben',
+    },
+    sourceOfTruth: {
+      title: 'Das Modell ist die einzige Quelle der Wahrheit, und das Review ist es auch',
+      intro:
+        'Zeichnungen, Reviews und Feedback verteilen sich meist über E-Mails, PDFs und Tabellen, getrennt vom CAD, das sie beschreiben. RapidDraft hält sie mit dem Modell verbunden und durch Ihre Regeln gesteuert, sodass jede Freigabe durch ein vollständiges, nachvollziehbares Review abgesichert ist.',
+    },
+    howItWorks: {
+      title: 'So funktioniert es',
+    },
+    steps: [
+      {
+        title: 'Verbinden',
+        body: 'Binden Sie RapidDraft in Ihr CAD und PLM ein: Siemens NX, CATIA, SolidWorks, EPLAN sowie Ihr PDM oder CIM Database. Ihre Daten bleiben in Ihren geregelten Systemen.',
+      },
+      {
+        title: 'Prüfen',
+        body: 'RapidDraft erstellt Zeichnungen und QS-Dokumente und prüft sie anschließend gegen Ihre Konstruktions-, Fertigungs- und unternehmensspezifischen Regeln. Es markiert fehlende Bemaßungen, Toleranz- und GD&T-Probleme, Normverstöße und Fertigungsrisiken.',
+      },
+      {
+        title: 'Freigeben',
+        body: 'Ingenieure prüfen die Befunde, entscheiden und geben über ein klares Gate frei. Jede Entscheidung fließt in einen Audit-Trail (VDA, EMPB) und wiederverwendbares Unternehmenswissen ein.',
+      },
+    ],
+    inside: {
+      title: 'Im Inneren der Plattform',
+      intro: 'Die Module hinter RapidDraft und wie jedes einzelne arbeitet.',
+    },
+    modules: [
+      {
+        title: 'Drawing Memory',
+        body: 'Erstellen Sie fertigungsreife Zeichnungen und prüffertige Dokumente, einschließlich BOMs sowie Erstmuster- und Prüfberichten, aus der aktuellen Geometrie, und bewahren Sie die Zeichnungsabsicht, während sich Designs weiterentwickeln.',
+        list: [
+          'Bewahrt Bemaßungen, Anmerkungen und Prüfungen über Revisionen hinweg.',
+          'Verhindert, dass die Neuzeichnung nach jeder Änderung bei null beginnt.',
+          'Verwandelt Review-Aufwand in wiederverwendbares Unternehmenswissen.',
+        ],
+      },
+      {
+        title: 'Review Automation',
+        body: 'Wenden Sie Ihre Konstruktions-, Fertigungs- und unternehmensspezifische Logik an, um Fertigbarkeits- und Vollständigkeitsprobleme früh aufzudecken, während Ingenieure die finalen Entscheidungen behalten.',
+        list: [
+          'Markiert wiederkehrende DFM-Risiken, bevor das formale Review beginnt.',
+          'Erkennt fehlende, inkonsistente oder review-kritische Informationen vor der Freigabe.',
+          'Standardisiert technische Zeichnungen gemäß ISO und ASME.',
+        ],
+      },
+      {
+        title: 'Model-Linked Collaboration',
+        body: 'Geben Sie Konstruktion, QS und Lieferanten eine gemeinsame CAD-Review-Umgebung, die rund um das Modell aufgebaut ist.',
+        list: [
+          'Feedback bleibt mit der Geometrie verbunden statt in verstreuten Screenshots.',
+          'Jeder Prüfer arbeitet vom gleichen Modellstand und der gleichen Revision aus.',
+          'Erkenntnisse bleiben für künftige Iterationen mit dem Bauteil verknüpft.',
+        ],
+      },
+      {
+        title: 'Bulk Review',
+        body: 'Führen Sie wiederholte Prüfungen über Zeichnungen, Revisionen und Teilefamilien hinweg durch, ohne jede Datei einzeln erneut zu öffnen.',
+        list: [
+          'Wendet dieselbe Review-Logik auf große Zeichnungssätze und Revisionswarteschlangen an.',
+          'Deckt häufige Fehlermuster und Ausreißer mit hoher Priorität schnell auf.',
+          'Lässt Ingenieure Ausnahmen bearbeiten, statt dieselben Prüfungen zu wiederholen.',
+        ],
+      },
+    ],
+    integrations: {
+      title: 'Arbeitet in dem Stack, den Sie bereits nutzen',
+      intro:
+        'RapidDraft fügt sich nativ in Siemens NX, CATIA, SolidWorks und EPLAN ein und verbindet sich mit Ihrem PDM oder PLM, zum Beispiel CIM Database. Es liest Ihre CAD-Modelle, Zeichnungen und BOMs und arbeitet mit Ihrem Freigabeprozess, statt ihn zu ersetzen.',
+      tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PLM / PDM (CIM Database)', 'Zeichnungen', 'BOMs'],
+    },
+    aiLayer: {
+      title: 'Die KI-Review-Ebene',
+      intro:
+        'Zeichnungen analysieren, Regeln anwenden, Probleme aufdecken, Entscheidungen festhalten. RapidDraft automatisiert die repetitive Prüfung und hebt hervor, was Aufmerksamkeit braucht. Jede Freigabe bleibt bei Ihren Ingenieuren, und es läuft in Ihrer Umgebung.',
+      cta: 'Mehr zur Sicherheit',
+      caption:
+        'Eine Review-Ebene über Ihren Stack hinweg: Zeichnungen, PDM/PLM und Lieferanten-QS hinein; DFM-Befunde, Prüfdokumente, BOMs, Freigabe-Gates und ein Audit-Trail hinaus.',
+    },
+    faqSection: {
+      title: 'Häufig gestellte Fragen',
+      cta: 'Demo buchen',
+    },
+    faqs: [
+      {
+        q: 'Funktioniert es mit meinem CAD?',
+        a: 'Ja. Siemens NX, CATIA, SolidWorks und EPLAN heute, weitere folgen. Sie ändern weder Werkzeuge noch Workflow.',
+      },
+      {
+        q: 'Ersetzt es meine Ingenieure?',
+        a: 'Nein. Es hebt Probleme hervor, schlägt Korrekturen vor und automatisiert repetitive Arbeit. Die finale Freigabe bleibt immer beim Ingenieur.',
+      },
+      {
+        q: 'Kann es On-Prem laufen?',
+        a: 'Ja. Es läuft lokal auf Ihrer Infrastruktur, mit Optionen für lokale oder EU-Cloud.',
+      },
+      {
+        q: 'Wie genau ist es?',
+        a: 'Es ist in Konstruktionsnormen und Ihren Unternehmensregeln verankert und lernt mit der Zeit aus Ihrem Feedback zu Ihren spezifischen Bauteilen.',
+      },
+      {
+        q: 'Was passiert mit meinen Daten?',
+        a: 'Sie bleiben in Ihrer Umgebung. Modelle laufen lokal, und das Training nutzt ausschließlich anonymisierte oder freigegebene Daten.',
+      },
     ],
   },
-  {
-    title: 'Model-Linked Collaboration',
-    body: 'Give design, QA, and suppliers one shared CAD review environment built around the model.',
-    list: [
-      'Feedback stays attached to geometry instead of scattered screenshots.',
-      'Every reviewer works from the same model state and revision.',
-      'Lessons learned stay connected to the part for future iterations.',
-    ],
-  },
-  {
-    title: 'Bulk Review',
-    body: 'Run repeated checks across drawings, revisions, and part families without reopening work one file at a time.',
-    list: [
-      'Applies the same review logic across large drawing sets and revision queues.',
-      'Surfaces common failure patterns and high-priority outliers fast.',
-      'Lets engineers triage exceptions instead of repeating the same checks.',
-    ],
-  },
-];
-
-const INTEGRATION_TAGS = [
-  'Siemens NX',
-  'CATIA',
-  'SolidWorks',
-  'EPLAN',
-  'PLM / PDM (CIM Database)',
-  'Drawings',
-  'BOMs',
-];
-
-const FAQS = [
-  {
-    q: 'Does it work with my CAD?',
-    a: 'Yes. Siemens NX, CATIA, SolidWorks, and EPLAN today, with more coming. You do not change tools or workflow.',
-  },
-  {
-    q: 'Does it replace my engineers?',
-    a: 'No. It highlights issues, suggests fixes, and automates repetitive work. Final approval always stays with the engineer.',
-  },
-  {
-    q: 'Can it run on-prem?',
-    a: 'Yes. It runs locally on your infrastructure, with local or EU-cloud options.',
-  },
-  {
-    q: 'How accurate is it?',
-    a: 'It is grounded in engineering standards and your company rules, and it learns from your feedback on your specific parts over time.',
-  },
-  {
-    q: 'What happens to my data?',
-    a: 'It stays in your environment. Models run locally, and training uses only anonymized or approved data.',
-  },
-];
+} as const;
 
 /* Consistent centered section header used by every section. */
 function SectionHeader({
@@ -126,11 +283,14 @@ function SectionHeader({
 }
 
 export default function Platform() {
+  const { lang } = useLang();
+  const t = CONTENT[lang];
+
   return (
     <div className="rd2">
       <PageMeta
-        title="Platform | RapidDraft"
-        description="RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and manufacturing feedback attached to the model. It is human-in-the-loop and grounded in your rules."
+        title={t.meta.title}
+        description={t.meta.description}
         path="/platform"
       />
 
@@ -143,21 +303,19 @@ export default function Platform() {
         />
         <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
           <div className="mx-auto max-w-[820px] text-center">
-            <Eyebrow>Platform</Eyebrow>
+            <Eyebrow>{t.hero.eyebrow}</Eyebrow>
             <H1 className="mt-5">
-              One agentic review layer for your entire <span className="rd-mark">drawing-release process</span>
+              {t.hero.headingLead}<span className="rd-mark">{t.hero.headingMark}</span>
             </H1>
             <Subhead className="mx-auto mt-5 max-w-[760px]">
-              RapidDraft sits on top of your CAD and PLM and keeps drawing release, design review, and
-              manufacturing feedback attached to the model. It is human-in-the-loop and grounded in your
-              rules.
+              {t.hero.subhead}
             </Subhead>
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button to="/book-demo" variant="primary">
-                Book a demo
+                {t.hero.primaryCta}
               </Button>
               <Button to="/book-demo" variant="secondary" arrow>
-                See it in your workflow
+                {t.hero.secondaryCta}
               </Button>
             </div>
           </div>
@@ -167,16 +325,16 @@ export default function Platform() {
       {/* ── Single source of truth ───────────────────────── */}
       <Section>
         <SectionHeader
-          title="The model is the single source of truth, and so is the review"
-          intro="Drawings, reviews, and feedback usually scatter across email, PDFs, and spreadsheets, disconnected from the CAD they describe. RapidDraft keeps them attached to the model and governed by your rules, so every release is backed by a complete, traceable review."
+          title={t.sourceOfTruth.title}
+          intro={t.sourceOfTruth.intro}
         />
       </Section>
 
       {/* ── How it works (three numbered steps) ──────────── */}
       <Section>
-        <SectionHeader title="How it works" />
+        <SectionHeader title={t.howItWorks.title} />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-3">
-          {STEPS.map((step, i) => (
+          {t.steps.map((step, i) => (
             <div key={step.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-3">{step.title}</H3>
@@ -191,11 +349,11 @@ export default function Platform() {
       {/* ── Inside the platform (four modules) ───────────── */}
       <Section>
         <SectionHeader
-          title="Inside the platform"
-          intro="The modules behind RapidDraft, and how each one works."
+          title={t.inside.title}
+          intro={t.inside.intro}
         />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2">
-          {MODULES.map((mod) => (
+          {t.modules.map((mod) => (
             <div key={mod.title} className="rd-tile">
               <H3>{mod.title}</H3>
               <Body soft sm className="mt-2.5">
@@ -222,12 +380,12 @@ export default function Platform() {
       {/* ── Integrations ─────────────────────────────────── */}
       <Section>
         <SectionHeader
-          title="Works inside the stack you already run"
-          intro="RapidDraft fits natively with Siemens NX, CATIA, SolidWorks, and EPLAN, and connects to your PDM or PLM, for example CIM Database. It reads your CAD models, drawings, and BOMs, and works with your release process rather than replacing it."
+          title={t.integrations.title}
+          intro={t.integrations.intro}
         />
         <div className="mx-auto mt-10 flex max-w-[860px] flex-wrap justify-center gap-2.5">
-          {INTEGRATION_TAGS.map((t) => (
-            <Tag key={t}>{t}</Tag>
+          {t.integrations.tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
           ))}
         </div>
       </Section>
@@ -235,16 +393,16 @@ export default function Platform() {
       {/* ── AI review layer + figure ─────────────────────── */}
       <Section>
         <SectionHeader
-          title="The AI review layer"
-          intro="Analyze drawings, apply rules, surface issues, capture decisions. RapidDraft automates the repetitive checking and surfaces what needs attention. Every approval stays with your engineers, and it runs inside your environment."
+          title={t.aiLayer.title}
+          intro={t.aiLayer.intro}
         />
         <div className="mt-9 flex justify-center">
           <Button to="/security" variant="secondary" arrow>
-            How we keep your data secure
+            {t.aiLayer.cta}
           </Button>
         </div>
         <div className="mx-auto mt-9 w-full max-w-[920px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
-          <Figure caption="One review layer across your stack: drawings, PDM/PLM, and supplier QA in; DFM findings, inspection documents, BOMs, release gates, and an audit trail out.">
+          <Figure caption={t.aiLayer.caption}>
             <EngineeringStackFigure />
           </Figure>
         </div>
@@ -252,9 +410,9 @@ export default function Platform() {
 
       {/* ── FAQ ──────────────────────────────────────────── */}
       <Section>
-        <SectionHeader title="Frequently asked questions" />
+        <SectionHeader title={t.faqSection.title} />
         <div className="mx-auto mt-10 flex max-w-[820px] flex-col gap-4">
-          {FAQS.map((faq) => (
+          {t.faqs.map((faq) => (
             <div key={faq.q} className="rd-tile text-left">
               <H3>{faq.q}</H3>
               <Body soft sm className="mt-2.5">
@@ -265,7 +423,7 @@ export default function Platform() {
         </div>
         <div className="mt-9 flex justify-center">
           <Button to="/book-demo" variant="primary">
-            Book a demo
+            {t.faqSection.cta}
           </Button>
         </div>
       </Section>

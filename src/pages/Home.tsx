@@ -19,89 +19,267 @@ import {
 import CapabilityRail, { type RailItem } from '../components/home2/CapabilityRail';
 import RoiCalculator from '../components/home2/RoiCalculator';
 import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
+import { useLang } from '../i18n/LanguageContext';
 
-const RAIL_ITEMS: RailItem[] = [
+const CONTENT = {
+  en: {
+    railAlts: {
+      'drawing-memory': 'RapidDraft generating manufacturing-ready drawings from CAD geometry.',
+      'review-automation':
+        'RapidDraft surfacing manufacturability and completeness issues for engineer review.',
+      'model-collaboration': 'Design, QA, and suppliers reviewing around the shared 3D model.',
+      'bulk-review':
+        'RapidDraft running review passes across drawings, revisions, and part families.',
+    },
+    heroBadges: ['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'Human-in-the-loop'],
+    kpis: [
+      { value: '30%', label: 'Fewer change cycles' },
+      { value: '10x', label: 'Faster feedback' },
+      { value: '50%', label: 'Less checking time' },
+    ],
+    problemCards: [
+      {
+        title: 'Drawings restart on every revision',
+        body: 'Documentation work gets rebuilt whenever geometry changes, even when the underlying intent stays the same.',
+      },
+      {
+        title: 'Manufacturing constraints live outside CAD',
+        body: 'DFM notes, supplier feedback, and release caveats stay buried in PDFs, emails, and follow-up threads.',
+      },
+      {
+        title: 'Review decisions lose their model context',
+        body: 'Comments and approvals are hard to trace back to the exact change in geometry that triggered them.',
+      },
+      {
+        title: 'Lessons learned rarely reach the next cycle',
+        body: 'Teams keep rediscovering the same issues because past decisions are not preserved with the model.',
+      },
+    ],
+    capabilities: [
+      {
+        title: 'Generate drawings and QA documents',
+        body: 'Produce manufacturing-ready drawings, BOMs, and first-article and inspection reports straight from your CAD geometry.',
+      },
+      {
+        title: 'Automate review and DFM checks',
+        body: 'Check completeness, manufacturability, and standards (ISO and ASME) against your own rules, and catch issues before release.',
+      },
+      {
+        title: 'Collaborate around the model',
+        body: 'Bring design, QA, and suppliers into one shared CAD review space, with every comment attached to the geometry it refers to.',
+      },
+      {
+        title: 'Preserve review knowledge',
+        body: 'Keep decisions, findings, and drafting intent attached to the model so they carry across revisions instead of getting lost.',
+      },
+    ],
+    pillars: ['Data sovereignty', 'IP protection', 'Employee trust', 'Data quality'],
+    meta: {
+      pageTitle: 'RapidDraft | Agentic drawing release and design review',
+      pageDescription:
+        'RapidDraft catches design and drawing issues earlier and automates repetitive review checks, keeping decisions attached to the CAD model with engineers in control of every release.',
+    },
+    hero: {
+      eyebrow: 'Agentic drawing release and design review for engineering teams',
+      headingLead: 'Accelerate engineering decisions and ',
+      headingMark: 'drawing release',
+      subhead:
+        'RapidDraft catches issues earlier, automates repetitive review checks, and keeps every decision attached to the model.',
+      bookDemo: 'Book a demo',
+      seeHow: 'See how it works',
+    },
+    credibility: {
+      title: 'Reduce repeated work before it delays release',
+      intro:
+        'Faster feedback, fewer iterations, and less manual checking, right where drawings and reviews still slow teams down.',
+      meta: [
+        'Built by engineers from aerospace, automotive, and process industries',
+        'Advised by leaders at Siemens, Volocopter, and Amazon',
+        'Backed by UnternehmerTUM and XPLORE',
+      ],
+    },
+    problem: {
+      eyebrow: 'Problem',
+      title: 'Design intent lives in CAD. Requirements live in drawings. The review logic lives in people’s heads',
+      intro:
+        'Collaboration is inefficient, review is error-prone, and inspection is slow. Good designs stall in documentation.',
+    },
+    solution: {
+      eyebrow: 'Solution',
+      title: 'Turn fragmented review work into a connected release workflow',
+      intro:
+        'Human-in-the-loop AI, grounded in your rules, keeping drafting intent, review decisions, and feedback attached to the model.',
+      caption:
+        'RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.',
+    },
+    capabilitiesSection: {
+      eyebrow: 'Capabilities',
+      title: 'One review layer, four core capabilities',
+      intro:
+        'One layer that generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn.',
+      cta: 'Explore the platform',
+    },
+    security: {
+      eyebrow: 'Security',
+      title: 'Works with your stack, keeps your data in-house',
+      intro:
+        'AI-assisted review inside your existing CAD, drawing, BOM, and PLM workflows, with your tools and data under your control.',
+      cta: 'Read about security',
+    },
+    finalCta: {
+      title: 'Bring speed and traceability to drawing release',
+      intro:
+        'See how RapidDraft reduces review effort, speeds up drawing release, and keeps decision context across revisions.',
+      bookDemo: 'Book a demo',
+      seeUseCases: 'See use cases',
+    },
+  },
+  de: {
+    railAlts: {
+      'drawing-memory':
+        'RapidDraft erzeugt fertigungsreife Zeichnungen aus der CAD-Geometrie.',
+      'review-automation':
+        'RapidDraft macht Fertigbarkeits- und Vollständigkeitsprobleme für die Prüfung durch Ingenieure sichtbar.',
+      'model-collaboration':
+        'Konstruktion, QS und Lieferanten prüfen gemeinsam am geteilten 3D-Modell.',
+      'bulk-review':
+        'RapidDraft führt Prüfdurchläufe über Zeichnungen, Revisionen und Teilefamilien hinweg aus.',
+    },
+    heroBadges: ['On-Prem-KI', 'Lokale/EU-Cloud', 'DSGVO-konform', 'Human-in-the-Loop'],
+    kpis: [
+      { value: '30%', label: 'Weniger Änderungszyklen' },
+      { value: '10x', label: 'Schnelleres Feedback' },
+      { value: '50%', label: 'Weniger Prüfzeit' },
+    ],
+    problemCards: [
+      {
+        title: 'Zeichnungen starten bei jeder Revision neu',
+        body: 'Dokumentationsarbeit wird bei jeder Geometrieänderung neu aufgebaut, selbst wenn die zugrunde liegende Absicht gleich bleibt.',
+      },
+      {
+        title: 'Fertigungsvorgaben liegen außerhalb des CAD',
+        body: 'DFM-Hinweise, Lieferantenfeedback und Freigabevorbehalte verschwinden in PDFs, E-Mails und Folge-Threads.',
+      },
+      {
+        title: 'Prüfentscheidungen verlieren ihren Modellbezug',
+        body: 'Kommentare und Freigaben lassen sich nur schwer auf die genaue Geometrieänderung zurückführen, die sie ausgelöst hat.',
+      },
+      {
+        title: 'Erkenntnisse erreichen selten den nächsten Zyklus',
+        body: 'Teams entdecken dieselben Probleme immer wieder, weil frühere Entscheidungen nicht beim Modell erhalten bleiben.',
+      },
+    ],
+    capabilities: [
+      {
+        title: 'Zeichnungen und QS-Dokumente erstellen',
+        body: 'Erzeugen Sie fertigungsreife Zeichnungen, BOMs sowie Erstmuster- und Prüfberichte direkt aus Ihrer CAD-Geometrie.',
+      },
+      {
+        title: 'Prüfung und DFM-Checks automatisieren',
+        body: 'Prüfen Sie Vollständigkeit, Fertigbarkeit und Normen (ISO und ASME) gegen Ihre eigenen Regeln und erkennen Sie Probleme vor der Freigabe.',
+      },
+      {
+        title: 'Rund um das Modell zusammenarbeiten',
+        body: 'Führen Sie Konstruktion, QS und Lieferanten in einem geteilten CAD-Prüfraum zusammen, wobei jeder Kommentar an der zugehörigen Geometrie hängt.',
+      },
+      {
+        title: 'Prüfwissen bewahren',
+        body: 'Halten Sie Entscheidungen, Befunde und die Zeichnungsabsicht am Modell fest, sodass sie über Revisionen hinweg erhalten bleiben statt verloren zu gehen.',
+      },
+    ],
+    pillars: ['Datensouveränität', 'IP-Schutz', 'Vertrauen der Mitarbeitenden', 'Datenqualität'],
+    meta: {
+      pageTitle: 'RapidDraft | Agentenbasierte Zeichnungsfreigabe und Design-Review',
+      pageDescription:
+        'RapidDraft erkennt Design- und Zeichnungsprobleme früher und automatisiert wiederkehrende Prüfungen, hält Entscheidungen am CAD-Modell und lässt Ingenieure jede Freigabe steuern.',
+    },
+    hero: {
+      eyebrow: 'Agentenbasierte Zeichnungsfreigabe und Design-Review für Engineering-Teams',
+      headingLead: 'Beschleunigen Sie Engineering-Entscheidungen und ',
+      headingMark: 'Zeichnungsfreigabe',
+      subhead:
+        'RapidDraft erkennt Probleme früher, automatisiert wiederkehrende Prüfungen und hält jede Entscheidung am Modell fest.',
+      bookDemo: 'Demo buchen',
+      seeHow: 'So funktioniert es',
+    },
+    credibility: {
+      title: 'Wiederholte Arbeit reduzieren, bevor sie die Freigabe verzögert',
+      intro:
+        'Schnelleres Feedback, weniger Iterationen und weniger manuelles Prüfen, genau dort, wo Zeichnungen und Reviews Teams noch ausbremsen.',
+      meta: [
+        'Entwickelt von Ingenieuren aus Luftfahrt, Automotive und Prozessindustrie',
+        'Beraten von Führungskräften bei Siemens, Volocopter und Amazon',
+        'Unterstützt von UnternehmerTUM und XPLORE',
+      ],
+    },
+    problem: {
+      eyebrow: 'Problem',
+      title: 'Die Designabsicht steckt im CAD. Anforderungen stehen in Zeichnungen. Die Prüflogik steckt in den Köpfen der Menschen',
+      intro:
+        'Die Zusammenarbeit ist ineffizient, die Prüfung fehleranfällig und die Inspektion langsam. Gute Designs bleiben in der Dokumentation stecken.',
+    },
+    solution: {
+      eyebrow: 'Lösung',
+      title: 'Aus fragmentierter Prüfarbeit einen vernetzten Freigabe-Workflow machen',
+      intro:
+        'Human-in-the-Loop-KI, verankert in Ihren Regeln, hält Zeichnungsabsicht, Prüfentscheidungen und Feedback am Modell.',
+      caption:
+        'RapidDraft steht zwischen Ihren Engineering-Eingaben und freigabereifen Ergebnissen, mit Human-in-the-Loop-Prüfung im Zentrum.',
+    },
+    capabilitiesSection: {
+      eyebrow: 'Funktionen',
+      title: 'Eine Prüfebene, vier Kernfunktionen',
+      intro:
+        'Eine Ebene, die Dokumente erzeugt, Prüfungen automatisiert, die Zusammenarbeit am Modell hält und das Wissen der Teams bewahrt.',
+      cta: 'Plattform ansehen',
+    },
+    security: {
+      eyebrow: 'Sicherheit',
+      title: 'Funktioniert mit Ihrem Stack, hält Ihre Daten im Haus',
+      intro:
+        'KI-gestützte Prüfung innerhalb Ihrer bestehenden CAD-, Zeichnungs-, BOM- und PLM-Workflows, mit Ihren Tools und Daten unter Ihrer Kontrolle.',
+      cta: 'Mehr zur Sicherheit',
+    },
+    finalCta: {
+      title: 'Geschwindigkeit und Nachverfolgbarkeit in die Zeichnungsfreigabe bringen',
+      intro:
+        'Sehen Sie, wie RapidDraft den Prüfaufwand reduziert, die Zeichnungsfreigabe beschleunigt und den Entscheidungskontext über Revisionen hinweg bewahrt.',
+      bookDemo: 'Demo buchen',
+      seeUseCases: 'Anwendungsfälle ansehen',
+    },
+  },
+} as const;
+
+const RAIL_META = [
   {
-    key: 'drawing-memory',
+    key: 'drawing-memory' as const,
     label: 'Drawing Memory',
     media: '/media/pitch/optimized/drawing-analysis.mp4',
     poster: '/media/pitch/pitch-drawing-memory.png',
-    alt: 'RapidDraft generating manufacturing-ready drawings from CAD geometry.',
     durationMs: 9030,
   },
   {
-    key: 'review-automation',
+    key: 'review-automation' as const,
     label: 'Review Automation',
     media: '/media/pitch/optimized/design-review-expert-mode.mp4',
     poster: '/media/pitch/pitch-dfm-checks.png',
-    alt: 'RapidDraft surfacing manufacturability and completeness issues for engineer review.',
     durationMs: 15364,
   },
   {
-    key: 'model-collaboration',
+    key: 'model-collaboration' as const,
     label: 'Model-Linked Collaboration',
     media: '/media/pitch/optimized/collaboration.mp4',
     poster: '/media/pitch/pitch-collaboration.png',
-    alt: 'Design, QA, and suppliers reviewing around the shared 3D model.',
     durationMs: 5940,
   },
   {
-    key: 'bulk-review',
+    key: 'bulk-review' as const,
     label: 'Bulk Review',
     media: '/media/pitch/optimized/bulk-design-review.mp4',
     poster: '/media/pitch/pitch-release-approval.png',
-    alt: 'RapidDraft running review passes across drawings, revisions, and part families.',
     durationMs: 11100,
   },
 ];
-
-const HERO_BADGES = ['On-prem AI', 'Local/EU Cloud', 'GDPR-Compliant', 'Human-in-the-loop'];
-
-const KPIS = [
-  { value: '30%', label: 'Fewer change cycles' },
-  { value: '10x', label: 'Faster feedback' },
-  { value: '50%', label: 'Less checking time' },
-];
-
-const PROBLEM_CARDS = [
-  {
-    title: 'Drawings restart on every revision',
-    body: 'Documentation work gets rebuilt whenever geometry changes, even when the underlying intent stays the same.',
-  },
-  {
-    title: 'Manufacturing constraints live outside CAD',
-    body: 'DFM notes, supplier feedback, and release caveats stay buried in PDFs, emails, and follow-up threads.',
-  },
-  {
-    title: 'Review decisions lose their model context',
-    body: 'Comments and approvals are hard to trace back to the exact change in geometry that triggered them.',
-  },
-  {
-    title: 'Lessons learned rarely reach the next cycle',
-    body: 'Teams keep rediscovering the same issues because past decisions are not preserved with the model.',
-  },
-];
-
-const CAPABILITIES = [
-  {
-    title: 'Generate drawings and QA documents',
-    body: 'Produce manufacturing-ready drawings, BOMs, and first-article and inspection reports straight from your CAD geometry.',
-  },
-  {
-    title: 'Automate review and DFM checks',
-    body: 'Check completeness, manufacturability, and standards (ISO and ASME) against your own rules, and catch issues before release.',
-  },
-  {
-    title: 'Collaborate around the model',
-    body: 'Bring design, QA, and suppliers into one shared CAD review space, with every comment attached to the geometry it refers to.',
-  },
-  {
-    title: 'Preserve review knowledge',
-    body: 'Keep decisions, findings, and drafting intent attached to the model so they carry across revisions instead of getting lost.',
-  },
-];
-
-const PILLARS = ['Data sovereignty', 'IP protection', 'Employee trust', 'Data quality'];
 
 /* Consistent centered section header used by every section. */
 function SectionHeader({
@@ -125,6 +303,14 @@ function SectionHeader({
 }
 
 export default function Home() {
+  const { lang } = useLang();
+  const t = CONTENT[lang];
+
+  const RAIL_ITEMS: RailItem[] = RAIL_META.map((item) => ({
+    ...item,
+    alt: t.railAlts[item.key],
+  }));
+
   // Full-screen section snapping + card-style reveal, only while Home is mounted.
   useEffect(() => {
     const el = document.documentElement;
@@ -154,8 +340,8 @@ export default function Home() {
   return (
     <div className="rd2">
       <PageMeta
-        title="RapidDraft | Agentic drawing release and design review"
-        description="RapidDraft catches design and drawing issues earlier and automates repetitive review checks, keeping decisions attached to the CAD model with engineers in control of every release."
+        title={t.meta.pageTitle}
+        description={t.meta.pageDescription}
         path="/"
       />
 
@@ -168,24 +354,22 @@ export default function Home() {
         />
         <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
           <div className="mx-auto max-w-[820px] text-center">
-            <Eyebrow>Agentic drawing release and design review for engineering teams</Eyebrow>
+            <Eyebrow>{t.hero.eyebrow}</Eyebrow>
             <H1 className="mt-5">
-              Accelerate engineering decisions and <span className="rd-mark">drawing release</span>
+              {t.hero.headingLead}
+              <span className="rd-mark">{t.hero.headingMark}</span>
             </H1>
-            <Subhead className="mx-auto mt-5 max-w-[760px]">
-              RapidDraft catches issues earlier, automates repetitive review checks, and keeps every
-              decision attached to the model.
-            </Subhead>
+            <Subhead className="mx-auto mt-5 max-w-[760px]">{t.hero.subhead}</Subhead>
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button to="/book-demo" variant="primary">
-                Book a demo
+                {t.hero.bookDemo}
               </Button>
               <Button to="/platform" variant="secondary" arrow>
-                See how it works
+                {t.hero.seeHow}
               </Button>
             </div>
             <div className="mt-5 flex flex-wrap justify-center gap-2.5">
-              {HERO_BADGES.map((b) => (
+              {t.heroBadges.map((b) => (
                 <Tag key={b}>{b}</Tag>
               ))}
             </div>
@@ -200,11 +384,11 @@ export default function Home() {
       {/* ── Credibility (no eyebrow) ─────────────────────── */}
       <Section screen>
         <SectionHeader
-          title="Reduce repeated work before it delays release"
-          intro="Faster feedback, fewer iterations, and less manual checking, right where drawings and reviews still slow teams down."
+          title={t.credibility.title}
+          intro={t.credibility.intro}
         />
         <div className="mx-auto mt-10 grid max-w-[1040px] gap-4 sm:grid-cols-3">
-          {KPIS.map((k) => (
+          {t.kpis.map((k) => (
             <div key={k.label} className="rd-tile">
               <div className="rd-kpi-num">{k.value}</div>
               <div className="rd-kpi-label mt-3">{k.label}</div>
@@ -213,29 +397,20 @@ export default function Home() {
         </div>
         <MetaRow
           className="mt-8 justify-center"
-          items={[
-            'Built by engineers from aerospace, automotive, and process industries',
-            'Advised by leaders at Siemens, Volocopter, and Amazon',
-            'Backed by UnternehmerTUM and XPLORE',
-          ]}
+          items={[...t.credibility.meta]}
         />
       </Section>
 
       {/* ── Problem (display statement) ──────────────────── */}
       <Section screen>
         <SectionHeader
-          eyebrow="Problem"
+          eyebrow={t.problem.eyebrow}
           display
-          title={
-            <>
-              Design intent lives in CAD. Requirements live in drawings. The review logic lives in
-              people&rsquo;s heads
-            </>
-          }
-          intro="Collaboration is inefficient, review is error-prone, and inspection is slow. Good designs stall in documentation."
+          title={t.problem.title}
+          intro={t.problem.intro}
         />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2">
-          {PROBLEM_CARDS.map((card, i) => (
+          {t.problemCards.map((card, i) => (
             <div key={card.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-3">{card.title}</H3>
@@ -250,12 +425,12 @@ export default function Home() {
       {/* ── Solution + figure 2 (centered showcase) ──────── */}
       <Section screen>
         <SectionHeader
-          eyebrow="Solution"
-          title="Turn fragmented review work into a connected release workflow"
-          intro="Human-in-the-loop AI, grounded in your rules, keeping drafting intent, review decisions, and feedback attached to the model."
+          eyebrow={t.solution.eyebrow}
+          title={t.solution.title}
+          intro={t.solution.intro}
         />
         <div className="mx-auto mt-9 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
-          <Figure caption="RapidDraft sits between your engineering inputs and release-ready outputs, with human-in-the-loop review at the center.">
+          <Figure caption={t.solution.caption}>
             <HubAndSpokeFigure />
           </Figure>
         </div>
@@ -264,12 +439,12 @@ export default function Home() {
       {/* ── Capabilities ─────────────────────────────────── */}
       <Section screen>
         <SectionHeader
-          eyebrow="Capabilities"
-          title="One review layer, four core capabilities"
-          intro="One layer that generates documents, automates checks, keeps collaboration on the model, and preserves what teams learn."
+          eyebrow={t.capabilitiesSection.eyebrow}
+          title={t.capabilitiesSection.title}
+          intro={t.capabilitiesSection.intro}
         />
         <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2">
-          {CAPABILITIES.map((cap, i) => (
+          {t.capabilities.map((cap, i) => (
             <div key={cap.title} className="rd-tile">
               <div className="rd-index">0{i + 1}</div>
               <H3 className="mt-3">{cap.title}</H3>
@@ -281,7 +456,7 @@ export default function Home() {
         </div>
         <div className="mt-9 flex justify-center">
           <Button to="/platform" variant="secondary" arrow>
-            Explore the platform
+            {t.capabilitiesSection.cta}
           </Button>
         </div>
       </Section>
@@ -289,12 +464,12 @@ export default function Home() {
       {/* ── Security teaser ──────────────────────────────── */}
       <Section screen>
         <SectionHeader
-          eyebrow="Security"
-          title="Works with your stack, keeps your data in-house"
-          intro="AI-assisted review inside your existing CAD, drawing, BOM, and PLM workflows, with your tools and data under your control."
+          eyebrow={t.security.eyebrow}
+          title={t.security.title}
+          intro={t.security.intro}
         />
         <div className="mx-auto mt-10 grid max-w-[1040px] grid-cols-2 gap-4 sm:grid-cols-4">
-          {PILLARS.map((p) => (
+          {t.pillars.map((p) => (
             <div
               key={p}
               className="flex items-center justify-center rounded-[14px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] px-4 py-6 text-center text-[15px] text-[var(--rd-fg)]"
@@ -305,7 +480,7 @@ export default function Home() {
         </div>
         <div className="mt-9 flex justify-center">
           <Button to="/security" variant="secondary" arrow>
-            Read about security
+            {t.security.cta}
           </Button>
         </div>
       </Section>
@@ -316,17 +491,14 @@ export default function Home() {
       {/* ── Final CTA (closing block) ────────────────────── */}
       <Section>
         <div className="mx-auto max-w-[680px] text-center">
-          <H2>Bring speed and traceability to drawing release</H2>
-          <Intro className="mx-auto mt-5 max-w-[760px]">
-            See how RapidDraft reduces review effort, speeds up drawing release, and keeps decision
-            context across revisions.
-          </Intro>
+          <H2>{t.finalCta.title}</H2>
+          <Intro className="mx-auto mt-5 max-w-[760px]">{t.finalCta.intro}</Intro>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button to="/book-demo" variant="primary">
-              Book a demo
+              {t.finalCta.bookDemo}
             </Button>
             <Button to="/use-cases" variant="secondary" arrow>
-              See use cases
+              {t.finalCta.seeUseCases}
             </Button>
           </div>
         </div>

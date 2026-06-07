@@ -17,7 +17,7 @@
     <meta name="twitter:image" content="/media/rd_social.png" />
     <title>RapidDraft | AI for drawing release and design review</title>
     <script>
-      // Set theme before paint to avoid a flash. Saved preference wins, else system.
+      // Set theme + language before paint to avoid a flash. Saved preference wins.
       (function () {
         try {
           var t = localStorage.getItem('rd-theme');
@@ -25,6 +25,8 @@
             t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           }
           document.documentElement.dataset.theme = t;
+          var l = localStorage.getItem('rd-lang');
+          document.documentElement.lang = l === 'de' ? 'de' : 'en';
         } catch (e) {}
       })();
     </script>

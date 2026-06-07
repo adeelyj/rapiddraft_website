@@ -141,7 +141,7 @@ export function Body({ children, className, soft, sm }: Div & { soft?: boolean; 
 }
 
 /* ---------- Meta row (middot-separated) ---------- */
-export function MetaRow({ items, className }: { items: ReactNode[]; className?: string }) {
+export function MetaRow({ items, className }: { items: readonly ReactNode[]; className?: string }) {
   return (
     <ul className={clsx('rd-meta', className)}>
       {items.map((item, i) => (
@@ -228,7 +228,7 @@ export function TagRow({
   className,
   mono = false,
 }: {
-  tags: string[];
+  tags: readonly string[];
   className?: string;
   mono?: boolean;
 }) {

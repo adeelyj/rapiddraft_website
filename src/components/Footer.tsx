@@ -1,20 +1,64 @@
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import BrandMark from './BrandMark';
+import { useLang } from '../i18n/LanguageContext';
 
-const PRODUCT_LINKS = [
-  { name: 'Platform', to: '/platform' },
-  { name: 'Use cases', to: '/use-cases' },
-  { name: 'Security', to: '/security' },
-  { name: 'ROI calculator', to: '/#roi-calculator' },
-  { name: 'Book a demo', to: '/book-demo' },
-];
+const CONTENT = {
+  en: {
+    desc: 'RapidDraft helps engineering teams accelerate design reviews, generate manufacturing-ready drawings, and retain decision logic across CAD workflows.',
+    backedBy: 'Backed by',
+    productHeading: 'Product',
+    product: [
+      { name: 'Platform', to: '/platform' },
+      { name: 'Use cases', to: '/use-cases' },
+      { name: 'Security', to: '/security' },
+      { name: 'ROI calculator', to: '/#roi-calculator' },
+      { name: 'Book a demo', to: '/book-demo' },
+    ],
+    companyHeading: 'Company',
+    company: [
+      { name: 'Vision and mission', to: '/company' },
+      { name: 'Team', to: '/company#team' },
+      { name: 'Open roles', to: '/company#open-roles' },
+    ],
+    contactHeading: 'Contact',
+    legal: [
+      { name: 'Impressum', to: '/impressum', external: false },
+      { name: 'Privacy', to: '/privacy', external: false },
+      { name: 'Request an NDA', to: '/deal-room/nda-request', external: false },
+      { name: 'LinkedIn', to: 'https://www.linkedin.com/company/rapiddraft/', external: true },
+    ],
+    copyright: 'RapidDraft. Made with care in Munich.',
+  },
+  de: {
+    desc: 'RapidDraft hilft Engineering-Teams, Design-Reviews zu beschleunigen, fertigungsreife Zeichnungen zu erstellen und Entscheidungslogik über alle CAD-Workflows hinweg zu bewahren.',
+    backedBy: 'Unterstützt von',
+    productHeading: 'Produkt',
+    product: [
+      { name: 'Plattform', to: '/platform' },
+      { name: 'Anwendungsfälle', to: '/use-cases' },
+      { name: 'Sicherheit', to: '/security' },
+      { name: 'ROI-Rechner', to: '/#roi-calculator' },
+      { name: 'Demo buchen', to: '/book-demo' },
+    ],
+    companyHeading: 'Unternehmen',
+    company: [
+      { name: 'Vision und Mission', to: '/company' },
+      { name: 'Team', to: '/company#team' },
+      { name: 'Offene Stellen', to: '/company#open-roles' },
+    ],
+    contactHeading: 'Kontakt',
+    legal: [
+      { name: 'Impressum', to: '/impressum', external: false },
+      { name: 'Datenschutz', to: '/privacy', external: false },
+      { name: 'NDA anfragen', to: '/deal-room/nda-request', external: false },
+      { name: 'LinkedIn', to: 'https://www.linkedin.com/company/rapiddraft/', external: true },
+    ],
+    copyright: 'RapidDraft. Mit Sorgfalt in München erstellt.',
+  },
+} as const;
 
-const COMPANY_LINKS = [
-  { name: 'Vision and mission', to: '/company' },
-  { name: 'Team', to: '/company#team' },
-  { name: 'Open roles', to: '/company#open-roles' },
-];
+const linkCls = 'text-[14px] text-[var(--rd-fg-2)] transition-colors hover:text-[var(--rd-accent)]';
 
 function Col({ heading, children }: { heading: string; children: ReactNode }) {
   return (
@@ -25,11 +69,10 @@ function Col({ heading, children }: { heading: string; children: ReactNode }) {
   );
 }
 
-const linkCls =
-  'text-[14px] text-[var(--rd-fg-2)] transition-colors hover:text-[var(--rd-accent)]';
-
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { lang } = useLang();
+  const t = CONTENT[lang];
 
   return (
     <footer className="rd-dark relative z-[1] border-t border-[var(--rd-hair)] bg-[var(--rd-bg)] text-[var(--rd-fg)]">
@@ -37,19 +80,11 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr]">
           <div className="max-w-sm">
             <BrandMark theme="dark" size="sm" />
-            <p className="mt-5 text-[14px] leading-7 text-[var(--rd-fg-2)]">
-              RapidDraft helps engineering teams accelerate design reviews, generate
-              manufacturing-ready drawings, and retain decision logic across CAD workflows.
-            </p>
+            <p className="mt-5 text-[14px] leading-7 text-[var(--rd-fg-2)]">{t.desc}</p>
             <div className="mt-8">
-              <div className="rd-microlabel">Backed by</div>
+              <div className="rd-microlabel">{t.backedBy}</div>
               <div className="mt-4 flex items-center gap-5">
-                <a
-                  href="https://www.unternehmertum.de"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="UnternehmerTUM"
-                >
+                <a href="https://www.unternehmertum.de" target="_blank" rel="noreferrer" aria-label="UnternehmerTUM">
                   <img
                     src="/media/ecosystem/unternehmertum-logo.svg"
                     alt="UnternehmerTUM"
@@ -72,23 +107,23 @@ export default function Footer() {
             </div>
           </div>
 
-          <Col heading="Product">
-            {PRODUCT_LINKS.map((l) => (
+          <Col heading={t.productHeading}>
+            {t.product.map((l) => (
               <Link key={l.name} to={l.to} className={linkCls}>
                 {l.name}
               </Link>
             ))}
           </Col>
 
-          <Col heading="Company">
-            {COMPANY_LINKS.map((l) => (
+          <Col heading={t.companyHeading}>
+            {t.company.map((l) => (
               <Link key={l.name} to={l.to} className={linkCls}>
                 {l.name}
               </Link>
             ))}
           </Col>
 
-          <Col heading="Contact">
+          <Col heading={t.contactHeading}>
             <a href="mailto:info@rapiddraft.ai" className={linkCls}>
               info@rapiddraft.ai
             </a>
@@ -103,24 +138,10 @@ export default function Footer() {
             className="flex flex-wrap items-center gap-x-0 gap-y-2 text-[13px] text-[var(--rd-fg-2)]"
             style={{ fontFamily: 'var(--rd-meta)' }}
           >
-            {[
-              { name: 'Impressum', to: '/impressum', external: false },
-              { name: 'Privacy', to: '/privacy', external: false },
-              { name: 'Request an NDA', to: '/deal-room/nda-request', external: false },
-              {
-                name: 'LinkedIn',
-                to: 'https://www.linkedin.com/company/rapiddraft/',
-                external: true,
-              },
-            ].map((l, i, arr) => (
+            {t.legal.map((l, i, arr) => (
               <li key={l.name} className="inline-flex items-center">
                 {l.external ? (
-                  <a
-                    href={l.to}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transition-colors hover:text-[var(--rd-accent)]"
-                  >
+                  <a href={l.to} target="_blank" rel="noreferrer" className="transition-colors hover:text-[var(--rd-accent)]">
                     {l.name}
                   </a>
                 ) : (
@@ -133,7 +154,7 @@ export default function Footer() {
             ))}
           </ul>
           <p className="text-[13px] text-[var(--rd-fg-3)]">
-            &copy; {year} RapidDraft. Made with care in Munich.
+            &copy; {year} {t.copyright}
           </p>
         </div>
       </div>
