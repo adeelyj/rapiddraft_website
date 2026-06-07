@@ -68,7 +68,7 @@ export type DealRoomV3Content = {
    (src/forward/components/PilotOptions.tsx), which matches offer.title === 'Assess',
    so keep that tier title stable. */
 export const defaultDealRoomV3Content: DealRoomV3Content = {
-    heroTitle: 'From the first documents to a running pilot, in clear steps.',
+    heroTitle: 'From the first documents to a running pilot, in clear steps',
     heroBody:
         'This room is for the next stage of the conversation: the NDA and LOI, a look at the drawing-release workflow you want to test, the pilot scope, and the agreement. Each step is scoped, traceable, and runs on your infrastructure.',
     primaryStepId: 'nda',
@@ -78,7 +78,7 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
             id: 'nda',
             title: 'NDA + LOI',
             summary: 'Share the details so we can prepare and send both documents together.',
-            detailTitle: 'Start with the NDA and LOI together.',
+            detailTitle: 'Start with the NDA and LOI together',
             detailBody:
                 'We start by collecting the company, workflow, and environment details needed to prepare both the NDA and the LOI, so they can go out together. Drawings, standards, and review logic are sensitive, and this keeps that covered from the first step.',
             kind: 'document',
@@ -94,7 +94,7 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
             id: 'discussion',
             title: 'Discussion',
             summary: 'Walk through the drawing-release workflow, the constraints, and the fit.',
-            detailTitle: 'Walk through the drawing-release workflow we would test.',
+            detailTitle: 'Walk through the drawing-release workflow we would test',
             detailBody:
                 'We go through the release workflow, where it gets stuck today, and the CAD and standards around it. The goal is to see whether RapidDraft is a strong fit and what one scoped pilot should focus on.',
             kind: 'discussion',
@@ -109,7 +109,7 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
             id: 'offer-selection',
             title: 'Offer Selection',
             summary: 'Start at the level of commitment that matches where you are.',
-            detailTitle: 'Start with one workflow. See the result before any rollout.',
+            detailTitle: 'Start with one workflow. See the result before any rollout',
             detailBody:
                 'Every engagement is scoped around one priority workflow, the success metric we agree on, the inputs it needs, and a clear decision point. Start at the level of commitment that matches where you are.',
             kind: 'offers',
@@ -163,7 +163,7 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
                     footer: 'Typical duration: 8 to 12 weeks',
                 },
             ],
-            scopeTitle: 'Every engagement starts with a clear scope.',
+            scopeTitle: 'Every engagement starts with a clear scope',
             scopeBody:
                 'Before any work begins, we agree on the priority workflow, the success metric, the inputs it needs, who owns the sign-off, and the decision point at the end. That keeps the engagement focused and the result easy to judge.',
             scopeItems: [
@@ -192,13 +192,13 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
                 'After the pilot, we agree on the production path from the validated workflow, the rollout scope, and what deployment needs.',
             finalCtaCopy:
                 'Not sure where to start? Bring one drawing-release process to a short demo and we will recommend the right starting point.',
-            finalCtaLabel: 'Book a Demo',
+            finalCtaLabel: 'Book a demo',
         },
         {
             id: 'agreement',
             title: 'Agreement',
             summary: 'Once the NDA, LOI, and offer are settled, we send the pilot agreement.',
-            detailTitle: 'Put the pilot in writing.',
+            detailTitle: 'Put the pilot in writing',
             detailBody:
                 'Once the NDA and LOI are in place and the offer is agreed, we send the pilot agreement: scope, timing, responsibilities, and commercial terms, so everyone works from the same document.',
             kind: 'document',
@@ -207,7 +207,7 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
             id: 'pilot-execution',
             title: 'Pilot Execution',
             summary: 'Run the pilot against a defined scope and close with a clear result.',
-            detailTitle: 'Run the pilot against a defined scope and a measurable result.',
+            detailTitle: 'Run the pilot against a defined scope and a measurable result',
             detailBody:
                 'The pilot starts with one workflow, a working cadence, and the success criteria we set. At the end we review what RapidDraft caught and agree on the next step.',
             kind: 'execution',
@@ -220,11 +220,11 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
         },
     ],
     overview: {
-        title: 'Built for the release workflows where the drawing still carries the work.',
+        title: 'Built for the release workflows where the drawing still carries the work',
         body:
             'RapidDraft does the repetitive first pass on drawing release and design review, grounded in your own rules, and links every finding back to the rule or note it came from. The repeated review effort drops, the release stays consistent, and the engineer keeps the sign-off.',
     },
-    faqTitle: 'Questions that usually come up at this stage.',
+    faqTitle: 'Questions that usually come up at this stage',
     faqIntro:
         'A few straight answers on process, scope, and what to expect from the pilot setup.',
     faqs: [
@@ -249,10 +249,10 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
             answer: 'Yes, within the agreed scope. The pilot is built around one defined workflow, not a generic demo.',
         },
     ],
-    contactIntroTitle: 'Your point of contact through the process.',
+    contactIntroTitle: 'Your point of contact through the process',
     contactIntroBody:
         'For questions on scope, the documents, the offers, or the next step, your RapidDraft contact moves things forward.',
-    contactCtaLabel: 'Email Your Contact',
+    contactCtaLabel: 'Email your contact',
     contact: {
         name: 'Adeel Yawar Jamil',
         title: 'Founder & Mechanical Engineering Lead',
@@ -265,7 +265,7 @@ export const defaultDealRoomV3Content: DealRoomV3Content = {
 /* German. Technical loanwords (CAD, PDM/PLM, EMPB, FAIR, BOM, Release Gate, Pilot,
    Rollout) are kept as the buyer uses them; the prose is fully German. */
 const dealRoomV3ContentDe: DealRoomV3Content = {
-    heroTitle: 'Von den ersten Dokumenten zum laufenden Pilot, in klaren Schritten.',
+    heroTitle: 'Von den ersten Dokumenten zum laufenden Pilot, in klaren Schritten',
     heroBody:
         'Dieser Raum ist für die nächste Phase des Gesprächs: NDA und LOI, ein Blick auf den Zeichnungs-Freigabe-Workflow, den Sie testen wollen, der Pilotumfang und die Vereinbarung. Jeder Schritt ist eng gefasst, rückverfolgbar und läuft auf Ihrer Infrastruktur.',
     primaryStepId: 'nda',
@@ -275,7 +275,7 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
             id: 'nda',
             title: 'NDA + LOI',
             summary: 'Teilen Sie die Angaben, damit wir beide Dokumente gemeinsam vorbereiten können.',
-            detailTitle: 'Mit NDA und LOI gemeinsam beginnen.',
+            detailTitle: 'Mit NDA und LOI gemeinsam beginnen',
             detailBody:
                 'Wir beginnen damit, die Angaben zu Unternehmen, Workflow und Umgebung zu erfassen, die wir brauchen, um NDA und LOI vorzubereiten, damit beide zusammen herausgehen. Zeichnungen, Normen und Prüflogik sind sensibel, und so ist das vom ersten Schritt an abgedeckt.',
             kind: 'document',
@@ -291,7 +291,7 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
             id: 'discussion',
             title: 'Gespräch',
             summary: 'Den Zeichnungs-Freigabe-Workflow, die Randbedingungen und die Passung durchgehen.',
-            detailTitle: 'Den Zeichnungs-Freigabe-Workflow durchgehen, den wir testen würden.',
+            detailTitle: 'Den Zeichnungs-Freigabe-Workflow durchgehen, den wir testen würden',
             detailBody:
                 'Wir gehen den Freigabe-Workflow durch, wo er heute hängen bleibt, und das CAD und die Normen drumherum. Das Ziel ist zu sehen, ob RapidDraft gut passt und worauf sich ein eng gefasster Pilot konzentrieren sollte.',
             kind: 'discussion',
@@ -306,9 +306,9 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
             id: 'offer-selection',
             title: 'Angebotswahl',
             summary: 'Beginnen Sie auf dem Niveau, das zu Ihrem Stand passt.',
-            detailTitle: 'Mit einem Workflow beginnen. Das Ergebnis vor jedem Rollout sehen.',
+            detailTitle: 'Mit einem Workflow beginnen. Das Ergebnis vor jedem Rollout sehen',
             detailBody:
-                'Jedes Engagement ist um einen priorisierten Workflow herum gefasst, die vereinbarte Erfolgskennzahl, die benötigten Eingaben und einen klaren Entscheidungspunkt. Beginnen Sie auf dem Niveau, das zu Ihrem Stand passt.',
+                'Jedes Projekt ist um einen priorisierten Workflow herum gefasst, die vereinbarte Erfolgskennzahl, die benötigten Eingaben und einen klaren Entscheidungspunkt. Beginnen Sie auf dem Niveau, das zu Ihrem Stand passt.',
             kind: 'offers',
             offers: [
                 {
@@ -360,9 +360,9 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
                     footer: 'Typische Dauer: 8 bis 12 Wochen',
                 },
             ],
-            scopeTitle: 'Jedes Engagement beginnt mit einem klaren Umfang.',
+            scopeTitle: 'Jedes Projekt beginnt mit einem klaren Umfang',
             scopeBody:
-                'Bevor die Arbeit beginnt, einigen wir uns auf den priorisierten Workflow, die Erfolgskennzahl, die benötigten Eingaben, wer die Freigabe verantwortet und den Entscheidungspunkt am Ende. So bleibt das Engagement fokussiert und das Ergebnis leicht zu beurteilen.',
+                'Bevor die Arbeit beginnt, einigen wir uns auf den priorisierten Workflow, die Erfolgskennzahl, die benötigten Eingaben, wer die Freigabe verantwortet und den Entscheidungspunkt am Ende. So bleibt das Projekt fokussiert und das Ergebnis leicht zu beurteilen.',
             scopeItems: [
                 {
                     title: 'Priorisierter Workflow',
@@ -382,7 +382,7 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
                 },
                 {
                     title: 'Entscheidungspunkt',
-                    description: 'Was nach dem Engagement passiert.',
+                    description: 'Was nach dem Projekt passiert.',
                 },
             ],
             scopeNote:
@@ -395,16 +395,16 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
             id: 'agreement',
             title: 'Vereinbarung',
             summary: 'Sind NDA, LOI und Angebot geklärt, senden wir die Pilotvereinbarung.',
-            detailTitle: 'Den Pilot schriftlich festhalten.',
+            detailTitle: 'Den Pilot schriftlich festhalten',
             detailBody:
-                'Sind NDA und LOI in Kraft und das Angebot vereinbart, senden wir die Pilotvereinbarung: Umfang, Zeitplan, Verantwortlichkeiten und kommerzielle Bedingungen, damit alle vom selben Dokument ausgehen.',
+                'Sind NDA und LOI in Kraft und das Angebot vereinbart, senden wir die Pilotvereinbarung: Umfang, Zeitplan, Verantwortlichkeiten und kaufmännische Bedingungen, damit alle vom selben Dokument ausgehen.',
             kind: 'document',
         },
         {
             id: 'pilot-execution',
             title: 'Pilotdurchführung',
-            summary: 'Den Pilot gegen einen definierten Umfang durchführen und mit einem klaren Ergebnis abschließen.',
-            detailTitle: 'Den Pilot gegen einen definierten Umfang und ein messbares Ergebnis durchführen.',
+            summary: 'Den Pilot in einem definierten Umfang durchführen und mit einem klaren Ergebnis abschließen.',
+            detailTitle: 'Den Pilot in einem definierten Umfang mit einem messbaren Ergebnis durchführen',
             detailBody:
                 'Der Pilot beginnt mit einem Workflow, einem Arbeitsrhythmus und den Erfolgskriterien, die wir festlegen. Am Ende sehen wir uns an, was RapidDraft gefunden hat, und einigen uns auf den nächsten Schritt.',
             kind: 'execution',
@@ -417,11 +417,11 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
         },
     ],
     overview: {
-        title: 'Gebaut für die Freigabe-Workflows, in denen die Zeichnung die Arbeit trägt.',
+        title: 'Gebaut für die Freigabe-Workflows, in denen die Zeichnung die Arbeit trägt',
         body:
             'RapidDraft übernimmt den wiederkehrenden ersten Durchgang bei Zeichnungsfreigabe und Design-Review, verankert in Ihren eigenen Regeln, und verknüpft jeden Befund mit der Regel oder dem Hinweis, aus dem er stammt. Der wiederkehrende Review-Aufwand sinkt, die Freigabe bleibt konsistent, und der Ingenieur behält die Freigabe.',
     },
-    faqTitle: 'Fragen, die in dieser Phase meist aufkommen.',
+    faqTitle: 'Fragen, die in dieser Phase meist aufkommen',
     faqIntro:
         'Ein paar klare Antworten zu Ablauf, Umfang und dem, was vom Pilot-Setup zu erwarten ist.',
     faqs: [
@@ -439,20 +439,20 @@ const dealRoomV3ContentDe: DealRoomV3Content = {
         },
         {
             question: 'Was passiert, nachdem die Pilotvereinbarung unterschrieben ist?',
-            answer: 'Der Pilot startet gegen den vereinbarten Umfang, den Arbeitsrhythmus und die Erfolgskriterien.',
+            answer: 'Der Pilot startet im vereinbarten Umfang, mit dem festgelegten Arbeitsrhythmus und den vereinbarten Erfolgskriterien.',
         },
         {
             question: 'Kann der Pilot an unseren Workflow angepasst werden?',
             answer: 'Ja, im vereinbarten Umfang. Der Pilot ist um einen definierten Workflow herum gebaut, nicht um eine generische Demo.',
         },
     ],
-    contactIntroTitle: 'Ihr Ansprechpartner über den gesamten Ablauf.',
+    contactIntroTitle: 'Ihr Ansprechpartner über den gesamten Ablauf',
     contactIntroBody:
         'Bei Fragen zu Umfang, den Dokumenten, den Angeboten oder dem nächsten Schritt bringt Ihr RapidDraft-Ansprechpartner die Dinge voran.',
     contactCtaLabel: 'Ansprechpartner kontaktieren',
     contact: {
         name: 'Adeel Yawar Jamil',
-        title: 'Gründer und Mechanical Engineering Lead',
+        title: 'Gründer & Lead Maschinenbau',
         email: 'info@rapiddraft.ai',
         message: 'Direkter Kontakt für Pilot-Setup, Koordination und Nachverfolgung.',
         image: '/media/adeel.jpg',

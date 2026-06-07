@@ -1,7 +1,8 @@
-import { ChevronDown, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
+import FaqAccordion from '../components/FaqAccordion';
 import { useLang } from '../i18n/LanguageContext';
 import {
     Section,
@@ -17,7 +18,6 @@ import {
     Tag,
 } from '../components/ui/primitives';
 import { dealRoomV3Content, type OnboardingOffer, type OnboardingStep } from '../data/dealRoomV3Content';
-import { type DisclosureItem } from '../data/dealRoomContent';
 
 /* Page-chrome strings (the navigator + hero CTAs). All translated body copy
    lives in src/data/dealRoomV3Content.ts. */
@@ -30,9 +30,8 @@ const UI = {
         },
         eyebrow: 'Deal Room',
         navHint: 'Each step at a glance. Click any step to jump to the section below.',
-        step: 'Step',
         startNda: 'Start NDA + LOI',
-        viewOffers: 'View Pilot Offers',
+        viewOffers: 'View pilot offers',
     },
     de: {
         meta: {
@@ -42,18 +41,16 @@ const UI = {
         },
         eyebrow: 'Deal Room',
         navHint: 'Jeder Schritt auf einen Blick. Klicken Sie einen Schritt an, um zum Abschnitt darunter zu springen.',
-        step: 'Schritt',
         startNda: 'NDA + LOI starten',
         viewOffers: 'Pilot-Angebote ansehen',
     },
 } as const;
 
-/* Centered section header — rd-index marker, H2, intro. */
-function StepHeader({ index, title, body }: { index: number; title: string; body: string }) {
+/* Centered section header — H2 + intro (matches the site-wide SectionHeader). */
+function StepHeader({ title, body }: { title: string; body: string }) {
     return (
         <div className="mx-auto max-w-[860px] text-center">
-            <div className="rd-index">0{index + 1}</div>
-            <H2 className="mt-3">{title}</H2>
+            <H2>{title}</H2>
             <Intro className="mx-auto mt-5 max-w-[760px]">{body}</Intro>
         </div>
     );
@@ -88,8 +85,10 @@ function OfferCard({ offer }: { offer: OnboardingOffer }) {
                 <H3>{offer.title}</H3>
                 {offer.badge ? <Tag accent>{offer.badge}</Tag> : null}
             </div>
-            <p className="mt-3 text-[13px] font-medium leading-6 text-[var(--rd-accent)]">{offer.subtext}</p>
-            <Body soft sm className="mt-3">
+            <Body sm className="mt-3">
+                {offer.subtext}
+            </Body>
+            <Body soft sm className="mt-2">
                 {offer.description}
             </Body>
             <ul className="mt-5 flex flex-col gap-2.5">
@@ -106,40 +105,22 @@ function OfferCard({ offer }: { offer: OnboardingOffer }) {
                 ))}
             </ul>
             <div className="mt-auto pt-6">
-                <Tag mono>{offer.footer}</Tag>
+                <Tag>{offer.footer}</Tag>
             </div>
         </div>
     );
 }
 
-function FaqItem({ item, defaultOpen }: { item: DisclosureItem; defaultOpen?: boolean }) {
-    return (
-        <details open={defaultOpen} className="group rd-tile rd-tile--left">
-            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 [&::-webkit-details-marker]:hidden">
-                <H3>{item.question}</H3>
-                <span className="mt-0.5 inline-flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[var(--rd-hair)] text-[var(--rd-fg-3)] transition group-open:border-[var(--rd-accent-hair)] group-open:text-[var(--rd-accent)]">
-                    <ChevronDown className="h-4 w-4 transition duration-200 group-open:rotate-180" aria-hidden="true" />
-                </span>
-            </summary>
-            <Body soft className="mt-4">
-                {item.answer}
-            </Body>
-        </details>
-    );
-}
-
 function StepSection({
     step,
-    index,
     onStartNda,
 }: {
     step: OnboardingStep;
-    index: number;
     onStartNda: () => void;
 }) {
     return (
         <Section id={step.id}>
-            <StepHeader index={index} title={step.detailTitle} body={step.detailBody} />
+            <StepHeader title={step.detailTitle} body={step.detailBody} />
 
             {step.kind === 'offers' ? (
                 <>
@@ -150,23 +131,20 @@ function StepSection({
                     </div>
 
                     {step.scopeTitle && step.scopeBody && step.scopeItems?.length ? (
-                        <div className="mx-auto mt-8 w-full max-w-[1120px] rd-tile">
-                            <div className="mx-auto max-w-[760px]">
+                        <div className="mt-14">
+                            <div className="mx-auto max-w-[760px] text-center">
                                 <H3>{step.scopeTitle}</H3>
-                                <Body soft className="mt-4">
+                                <Body soft className="mx-auto mt-4 max-w-[640px]">
                                     {step.scopeBody}
                                 </Body>
                             </div>
-                            <div className="mt-8 grid gap-3 text-left sm:grid-cols-2 xl:grid-cols-5">
+                            <div className="mx-auto mt-8 grid max-w-[1120px] gap-4 text-left sm:grid-cols-2 lg:grid-cols-5">
                                 {step.scopeItems.map((scope) => (
-                                    <div
-                                        key={scope.title}
-                                        className="rounded-[var(--rd-r-md)] border border-[var(--rd-hair)] bg-[var(--rd-bg)] p-4"
-                                    >
-                                        <p className="text-[14px] font-medium text-[var(--rd-fg)]">{scope.title}</p>
-                                        <p className="mt-2 text-[14px] leading-6 text-[var(--rd-fg-2)]">
+                                    <div key={scope.title} className="rd-tile rd-tile--static rd-tile--left">
+                                        <H3>{scope.title}</H3>
+                                        <Body soft sm className="mt-2">
                                             {scope.description}
-                                        </p>
+                                        </Body>
                                     </div>
                                 ))}
                             </div>
@@ -191,7 +169,7 @@ function StepSection({
                     ) : null}
                 </>
             ) : step.bullets?.length ? (
-                <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile rd-tile--left">
+                <div className="mx-auto mt-10 w-full max-w-[640px] rd-tile rd-tile--static rd-tile--left">
                     <BulletList items={step.bullets} />
                 </div>
             ) : step.actions?.length ? (
@@ -249,7 +227,7 @@ export default function DealRoomV3() {
                     style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
                 />
                 <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
-                    <div className="mx-auto max-w-[860px] text-center">
+                    <div className="mx-auto max-w-[820px] text-center">
                         <Eyebrow>{ui.eyebrow}</Eyebrow>
                         <H1 className="mt-5">{content.heroTitle}</H1>
                         <Subhead className="mx-auto mt-5 max-w-[760px]">{content.heroBody}</Subhead>
@@ -271,10 +249,8 @@ export default function DealRoomV3() {
                                         className="rd-tile rd-tile--left flex flex-col text-left focus-visible:outline-none"
                                         style={isActive ? { borderColor: 'var(--rd-accent)' } : undefined}
                                     >
-                                        <div className="rd-microlabel">
-                                            {ui.step} 0{index + 1}
-                                        </div>
-                                        <H3 className="mt-2">{step.title}</H3>
+                                        <div className="rd-index">0{index + 1}</div>
+                                        <H3 className="mt-3">{step.title}</H3>
                                         <Body soft sm className="mt-2">
                                             {step.summary}
                                         </Body>
@@ -295,8 +271,8 @@ export default function DealRoomV3() {
             </header>
 
             {/* ── Onboarding steps ─────────────────────────────── */}
-            {content.onboardingSteps.map((step, index) => (
-                <StepSection key={step.id} step={step} index={index} onStartNda={handleStartNda} />
+            {content.onboardingSteps.map((step) => (
+                <StepSection key={step.id} step={step} onStartNda={handleStartNda} />
             ))}
 
             {/* ── Overview ─────────────────────────────────────── */}
@@ -313,11 +289,7 @@ export default function DealRoomV3() {
                     <H2>{content.faqTitle}</H2>
                     <Intro className="mx-auto mt-5 max-w-[760px]">{content.faqIntro}</Intro>
                 </div>
-                <div className="mx-auto mt-10 flex max-w-[820px] flex-col gap-3">
-                    {content.faqs.map((item, index) => (
-                        <FaqItem key={item.question} item={item} defaultOpen={index === 0} />
-                    ))}
-                </div>
+                <FaqAccordion items={content.faqs.map(({ question, answer }) => ({ q: question, a: answer }))} />
             </Section>
 
             {/* ── Contact ──────────────────────────────────────── */}
@@ -345,12 +317,14 @@ export default function DealRoomV3() {
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                 <div>
                                     <H3>{content.contact.name}</H3>
-                                    <p className="mt-1 text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--rd-accent)]">
+                                    <p
+                                        className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--rd-accent)]"
+                                        style={{ fontFamily: 'var(--rd-meta)' }}
+                                    >
                                         {content.contact.title}
                                     </p>
                                 </div>
-                                <Button href={`mailto:${content.contact.email}`} variant="secondary">
-                                    <Mail className="h-4 w-4" aria-hidden="true" />
+                                <Button href={`mailto:${content.contact.email}`} variant="secondary" arrow>
                                     {content.contactCtaLabel ?? content.contact.email}
                                 </Button>
                             </div>

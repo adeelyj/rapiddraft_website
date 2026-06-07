@@ -59,7 +59,7 @@ const CONTENT = {
         backLink: 'Back to Deal Room',
         hero: {
             eyebrow: 'NDA + LOI Request',
-            heading: 'Share the details to prepare the NDA and LOI.',
+            heading: 'Share the details to prepare the NDA and LOI',
             subhead:
                 'We use these to prepare both documents and send them together. Once they are signed, we set up the discussion. Your drawings and workflow details stay covered by the NDA from the start.',
             checklist: [
@@ -80,13 +80,12 @@ const CONTENT = {
             businessUnit: { label: 'Business unit / site', placeholder: 'Customer entity / site / team' },
             systems: { label: 'Systems / environment', placeholder: 'Siemens NX / Teamcenter / internal standards' },
             useCase: { label: 'Use case / workflow', placeholder: 'Drawing checks / manufacturability review / selected release workflow' },
-            required: 'required',
-            submit: 'Send NDA + LOI Request',
-            submitting: 'Sending NDA + LOI Request...',
+            submit: 'Send NDA + LOI request',
+            submitting: 'Sending NDA + LOI request...',
         },
         success: {
-            followUpTitle: 'Request received.',
-            thankYouTitle: 'Thank you.',
+            followUpTitle: 'Request received',
+            thankYouTitle: 'Thank you',
             followUpBody:
                 'Your request was received and saved. The automated NDA and LOI send needs a manual follow-up, and RapidDraft will take it from here.',
             testModeBody: 'Thank you for the details. The NDA and LOI were generated.',
@@ -113,7 +112,7 @@ const CONTENT = {
         backLink: 'Zurück zum Deal Room',
         hero: {
             eyebrow: 'NDA + LOI anfragen',
-            heading: 'Teilen Sie die Angaben zur Vorbereitung von NDA und LOI.',
+            heading: 'Teilen Sie die Angaben zur Vorbereitung von NDA und LOI',
             subhead:
                 'Wir nutzen sie, um beide Dokumente vorzubereiten und gemeinsam zu senden. Sind sie unterschrieben, vereinbaren wir das Gespräch. Ihre Zeichnungen und Workflow-Details sind vom Start an durch das NDA abgedeckt.',
             checklist: [
@@ -134,13 +133,12 @@ const CONTENT = {
             businessUnit: { label: 'Geschäftsbereich / Standort', placeholder: 'Gesellschaft / Standort / Team' },
             systems: { label: 'Systeme / Umgebung', placeholder: 'Siemens NX / Teamcenter / interne Normen' },
             useCase: { label: 'Anwendungsfall / Workflow', placeholder: 'Zeichnungsprüfung / Fertigbarkeits-Review / gewählter Freigabe-Workflow' },
-            required: 'erforderlich',
             submit: 'NDA + LOI Anfrage senden',
             submitting: 'NDA + LOI Anfrage wird gesendet...',
         },
         success: {
-            followUpTitle: 'Anfrage erhalten.',
-            thankYouTitle: 'Vielen Dank.',
+            followUpTitle: 'Anfrage erhalten',
+            thankYouTitle: 'Vielen Dank',
             followUpBody:
                 'Ihre Anfrage wurde erhalten und gespeichert. Der automatische Versand von NDA und LOI braucht eine manuelle Nachverfolgung, und RapidDraft übernimmt ab hier.',
             testModeBody: 'Danke für die Angaben. NDA und LOI wurden erstellt.',
@@ -247,7 +245,11 @@ export default function NdaRequest() {
     };
 
     const isComplete = status === 'success' || status === 'follow-up';
-    const required = <span className="text-[var(--rd-accent)]">*</span>;
+    const required = (
+        <span className="text-[var(--rd-accent)]" aria-hidden="true">
+            *
+        </span>
+    );
 
     return (
         <div className="rd2 rd-page">
@@ -265,15 +267,15 @@ export default function NdaRequest() {
                     style={{ background: 'radial-gradient(48% 50% at 50% -6%, var(--rd-accent-soft), transparent 62%)' }}
                 />
                 <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
-                    <div className="mx-auto max-w-[820px] text-center">
-                        <Link
-                            to="/deal-room"
-                            className="inline-flex items-center gap-2 text-[14px] text-[var(--rd-fg-3)] transition hover:text-[var(--rd-accent)]"
-                        >
-                            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                            {t.backLink}
-                        </Link>
-                        <Eyebrow className="mt-5">{t.hero.eyebrow}</Eyebrow>
+                    <Link
+                        to="/deal-room"
+                        className="inline-flex items-center gap-2 text-[14px] text-[var(--rd-fg-3)] transition hover:text-[var(--rd-accent)]"
+                    >
+                        <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                        {t.backLink}
+                    </Link>
+                    <div className="mx-auto mt-8 max-w-[820px] text-center">
+                        <Eyebrow>{t.hero.eyebrow}</Eyebrow>
                         <H1 className="mt-5">{t.hero.heading}</H1>
                         <Subhead className="mx-auto mt-5 max-w-[760px]">{t.hero.subhead}</Subhead>
                         <ul className="mx-auto mt-8 flex max-w-[560px] flex-col gap-2.5 text-left">
@@ -300,7 +302,7 @@ export default function NdaRequest() {
                     <Intro className="mx-auto mt-5 max-w-[760px]">{t.form.intro}</Intro>
                 </div>
 
-                <div className="mx-auto mt-10 w-full max-w-[680px] rd-tile rd-tile--left">
+                <div className="mx-auto mt-10 w-full max-w-[680px] rd-tile rd-tile--static rd-tile--left">
                     {isComplete ? (
                         <div className="py-2">
                             <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--rd-accent-soft)] text-[var(--rd-accent)]">
@@ -357,7 +359,7 @@ export default function NdaRequest() {
                                 <Button to="/deal-room" variant="primary">
                                     {t.success.returnCta}
                                 </Button>
-                                <Button href={`mailto:${INTERNAL_RECIPIENT}`} variant="secondary">
+                                <Button href={`mailto:${INTERNAL_RECIPIENT}`} variant="secondary" arrow>
                                     {t.success.emailCta}
                                 </Button>
                             </div>
