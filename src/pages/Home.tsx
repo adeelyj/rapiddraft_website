@@ -449,7 +449,7 @@ export default function Home() {
           title={t.solution.title}
           intro={t.solution.intro}
         />
-        <div className="mx-auto mt-10 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
+        <div className="mx-auto mt-10 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-sunken)] p-5 shadow-[inset_0_2px_8px_-4px_rgba(17,24,39,0.12)] sm:p-6">
           <Figure caption={t.solution.caption}>
             <HubAndSpokeFigure />
           </Figure>
@@ -481,8 +481,8 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ── Security teaser ──────────────────────────────── */}
-      <Section screen>
+      {/* ── Security teaser (dark band for contrast + the sovereignty theme) ── */}
+      <Section screen className="rd-dark bg-[var(--rd-bg)]">
         <SectionHeader
           eyebrow={t.security.eyebrow}
           title={t.security.title}
