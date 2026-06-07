@@ -12,10 +12,8 @@ import {
   Intro,
   Body,
   Button,
-  Tag,
-  Figure,
 } from '../components/ui/primitives';
-import EngineeringStackFigure from '../components/diagrams/EngineeringStackFigure';
+import StackAndSovereignty from '../components/platform/StackAndSovereignty';
 import { useLang } from '../i18n/LanguageContext';
 
 const CONTENT = {
@@ -98,20 +96,6 @@ const CONTENT = {
         ],
       },
     ],
-    integrations: {
-      title: 'Works inside the stack you already run',
-      intro:
-        'RapidDraft fits natively with Siemens NX, CATIA, SolidWorks, and EPLAN, and connects to your PDM or PLM, for example CIM Database. It reads your CAD models, drawings, and BOMs, and works with your release process rather than replacing it.',
-      tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PLM / PDM (CIM Database)', 'Drawings', 'BOMs'],
-    },
-    aiLayer: {
-      title: 'The AI review layer',
-      intro:
-        'Analyze drawings, apply rules, surface issues, capture decisions. RapidDraft automates the repetitive checking and surfaces what needs attention. Every approval stays with your engineers, and it runs inside your environment.',
-      cta: 'How we keep your data secure',
-      caption:
-        'One review layer across your stack: drawings, PDM/PLM, and supplier QA in; DFM findings, inspection documents, BOMs, release gates, and an audit trail out.',
-    },
     faqSection: {
       title: 'Frequently asked questions',
       cta: 'Book a demo',
@@ -218,20 +202,6 @@ const CONTENT = {
         ],
       },
     ],
-    integrations: {
-      title: 'Arbeitet in dem Stack, den Sie bereits nutzen',
-      intro:
-        'RapidDraft fügt sich nativ in Siemens NX, CATIA, SolidWorks und EPLAN ein und verbindet sich mit Ihrem PDM oder PLM, zum Beispiel CIM Database. Es liest Ihre CAD-Modelle, Zeichnungen und BOMs und arbeitet mit Ihrem Freigabeprozess, statt ihn zu ersetzen.',
-      tags: ['Siemens NX', 'CATIA', 'SolidWorks', 'EPLAN', 'PLM / PDM (CIM Database)', 'Zeichnungen', 'BOMs'],
-    },
-    aiLayer: {
-      title: 'Die KI-Review-Ebene',
-      intro:
-        'Zeichnungen analysieren, Regeln anwenden, Probleme aufdecken, Entscheidungen festhalten. RapidDraft automatisiert die repetitive Prüfung und hebt hervor, was Aufmerksamkeit braucht. Jede Freigabe bleibt bei Ihren Ingenieuren, und es läuft in Ihrer Umgebung.',
-      cta: 'Mehr zur Sicherheit',
-      caption:
-        'Eine Review-Ebene über Ihren Stack hinweg: Zeichnungen, PDM/PLM und Lieferanten-QS hinein; DFM-Befunde, Prüfdokumente, BOMs, Freigabe-Gates und ein Audit-Trail hinaus.',
-    },
     faqSection: {
       title: 'Häufig gestellte Fragen',
       cta: 'Demo buchen',
@@ -377,36 +347,8 @@ export default function Platform() {
         </div>
       </Section>
 
-      {/* ── Integrations ─────────────────────────────────── */}
-      <Section>
-        <SectionHeader
-          title={t.integrations.title}
-          intro={t.integrations.intro}
-        />
-        <div className="mx-auto mt-10 flex max-w-[860px] flex-wrap justify-center gap-2.5">
-          {t.integrations.tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </div>
-      </Section>
-
-      {/* ── AI review layer + figure ─────────────────────── */}
-      <Section>
-        <SectionHeader
-          title={t.aiLayer.title}
-          intro={t.aiLayer.intro}
-        />
-        <div className="mt-9 flex justify-center">
-          <Button to="/security" variant="secondary" arrow>
-            {t.aiLayer.cta}
-          </Button>
-        </div>
-        <div className="mx-auto mt-9 w-full max-w-[920px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-surface)] p-5 sm:p-6">
-          <Figure caption={t.aiLayer.caption}>
-            <EngineeringStackFigure />
-          </Figure>
-        </div>
-      </Section>
+      {/* ── Works with your stack, keeps your data secure ── */}
+      <StackAndSovereignty />
 
       {/* ── FAQ ──────────────────────────────────────────── */}
       <Section>
