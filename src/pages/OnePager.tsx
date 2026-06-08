@@ -4,12 +4,12 @@
    design language (tokens, Inter, hairlines, single accent) at a compact,
    document-grade scale.
 
-   Lean sales arc, one idea per beat, nothing repeated: who it is for + proof
-   (hero) -> the problem (tension) -> the transformation (hub-and-spoke figure)
-   -> how it runs on your own infrastructure (on-prem agent flow) -> where it
-   fits + standards -> a trust footer (backers, contact, and a QR that books a
-   demo, no button). Theme-reactive on screen (light / dark); print always
-   re-pins to a light, white-paper A4. */
+   Storyline: heading -> KPIs -> problem and solution (a side-by-side panel,
+   pain on the left, what RapidDraft does on the right) -> the transformation
+   (hub-and-spoke figure) -> how it works on your own infrastructure -> where it
+   fits -> a consolidated trust pill cloud -> a footer with backers, contact,
+   and a QR that books a demo (no button). Theme-reactive on screen (light /
+   dark); print always re-pins to a light, white-paper A4. */
 import { useLang } from '../i18n/LanguageContext';
 import PageMeta from '../components/PageMeta';
 import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
@@ -33,7 +33,7 @@ const CONTENT = {
     headingLead: 'Accelerate engineering decisions and ',
     headingMark: 'drawing release',
     subhead:
-      'An on-prem agent runs a tireless first pass over your drawings and reviews, grounded in your rules and traceable to the source. The engineer keeps the sign-off.',
+      'An on-prem agent runs a tireless first pass over your drawings and reviews, grounded in your rules. The engineer keeps the sign-off.',
     stats: [
       { k: '30%', v: 'Fewer change cycles' },
       { k: '10x', v: 'Faster feedback' },
@@ -41,7 +41,25 @@ const CONTENT = {
     ],
     problem: {
       title: 'The problem',
-      text: 'Design intent lives in CAD, requirements live in drawings, and the review logic lives in people’s heads. Collaboration is slow, drawing review is error-prone, and quality inspection is tedious.',
+      items: [
+        { a: 'Design intent', b: 'lives in CAD' },
+        { a: 'Requirements', b: 'live in drawings' },
+        { a: 'Review logic', b: 'is tribal knowledge' },
+        { a: 'Collaboration', b: 'is inefficient' },
+        { a: 'Drawing review', b: 'is error-prone' },
+        { a: 'Quality inspection', b: 'is slow' },
+      ],
+    },
+    helps: {
+      title: 'What RapidDraft does',
+      items: [
+        'Integrate with your existing PLM',
+        'Create QA docs (BOM, FAIR) from CAD',
+        'Standardize drawings to ISO / ASME',
+        'Run DFM manufacturability analysis',
+        'Collaborate across OEM and suppliers',
+        'On-prem AI, trained on anonymized data',
+      ],
     },
     figureCaption: 'From your engineering stack to an auditable release gate, with human-in-the-loop review at the center.',
     how: {
@@ -59,8 +77,8 @@ const CONTENT = {
       items: ['Technical drawing checks', 'Quality docs (BOM, FAIR)', 'DFM reviews', 'Supplier handoff', 'Change updates (ECN)'],
     },
     trust: {
-      title: 'Standards and sovereignty',
-      chips: ['EU Data Act', 'ISO / ASME', 'VDA Band 2, EMPB', 'No training on your IP', 'Full audit trail'],
+      title: 'Built for trust and sovereignty',
+      chips: ['Data Sovereignty', 'IP Protection', 'Employee Trust', 'Data Quality', 'Scalable Local AI', 'EU Data Act', 'ISO / ASME', 'VDA Band 2, EMPB', 'Full audit trail'],
     },
     pilot: {
       title: 'Launch a pilot with RapidDraft',
@@ -83,7 +101,7 @@ const CONTENT = {
     headingLead: 'Schnellere Entscheidungen und ',
     headingMark: 'Zeichnungsfreigabe',
     subhead:
-      'Ein On-Prem-Agent übernimmt den unermüdlichen ersten Durchgang über Ihre Zeichnungen und Reviews, verankert in Ihren Regeln und nachvollziehbar bis zur Quelle. Die Freigabe bleibt beim Ingenieur.',
+      'Ein On-Prem-Agent übernimmt den unermüdlichen ersten Durchgang über Ihre Zeichnungen und Reviews, verankert in Ihren Regeln. Die Freigabe bleibt beim Ingenieur.',
     stats: [
       { k: '30%', v: 'Weniger Änderungszyklen' },
       { k: '10x', v: 'Schnelleres Feedback' },
@@ -91,7 +109,25 @@ const CONTENT = {
     ],
     problem: {
       title: 'Das Problem',
-      text: 'Designabsicht steckt im CAD, Anforderungen in Zeichnungen, und die Prüflogik in den Köpfen. Zusammenarbeit ist langsam, Zeichnungsprüfung fehleranfällig, und die Qualitätsprüfung mühsam.',
+      items: [
+        { a: 'Designabsicht', b: 'steckt im CAD' },
+        { a: 'Anforderungen', b: 'in Zeichnungen' },
+        { a: 'Prüflogik', b: 'ist Erfahrungswissen' },
+        { a: 'Zusammenarbeit', b: 'ist ineffizient' },
+        { a: 'Zeichnungsprüfung', b: 'ist fehleranfällig' },
+        { a: 'Qualitätsprüfung', b: 'ist langsam' },
+      ],
+    },
+    helps: {
+      title: 'Was RapidDraft leistet',
+      items: [
+        'In Ihr bestehendes PLM integrieren',
+        'QA-Dokumente (BOM, FAIR) aus CAD erstellen',
+        'Zeichnungen auf ISO / ASME standardisieren',
+        'DFM-Fertigbarkeitsanalyse durchführen',
+        'Über OEM und Lieferanten zusammenarbeiten',
+        'On-Prem-KI, mit anonymisierten Daten trainiert',
+      ],
     },
     figureCaption: 'Von Ihrem Engineering-Stack zu einem auditierbaren Release-Gate, mit Human-in-the-Loop-Review im Zentrum.',
     how: {
@@ -109,8 +145,8 @@ const CONTENT = {
       items: ['Technische Zeichnungsprüfungen', 'Qualitätsdokumente (BOM, FAIR)', 'DFM-Reviews', 'Lieferanten-Handoff', 'Änderungen (ECN)'],
     },
     trust: {
-      title: 'Standards und Souveränität',
-      chips: ['EU Data Act', 'ISO / ASME', 'VDA Band 2, EMPB', 'Kein Training auf Ihrem IP', 'Vollständiger Audit-Trail'],
+      title: 'Für Vertrauen und Souveränität gebaut',
+      chips: ['Datensouveränität', 'IP-Schutz', 'Mitarbeitervertrauen', 'Datenqualität', 'Skalierbare lokale KI', 'EU Data Act', 'ISO / ASME', 'VDA Band 2, EMPB', 'Vollständiger Audit-Trail'],
     },
     pilot: {
       title: 'Starten Sie einen Piloten mit RapidDraft',
@@ -165,22 +201,29 @@ export default function OnePager() {
         /* ── Hero ────────────────────────────────────────────── */
         .op-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
         .op-slash { font-family: var(--rd-mono); color: var(--rd-accent); letter-spacing: 0; }
-        .op-h1 { font-family: var(--rd-sans, 'Inter'); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; color: var(--rd-head); margin: 8px 0 0; }
+        .op-h1 { font-family: var(--rd-sans, 'Inter'); font-size: 27px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; color: var(--rd-head); margin: 8px 0 0; }
         .op-mark { color: var(--rd-accent); }
-        .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 8px 0 0; max-width: 168mm; }
+        .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 8px 0 0; max-width: 172mm; }
 
-        /* ── Stat band ───────────────────────────────────────── */
-        .op-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 15px 0 0; border-top: 1px solid var(--rd-hair); border-bottom: 1px solid var(--rd-hair); }
-        .op-stat { padding: 12px 0 12px 18px; }
+        /* ── Stat band (KPIs) ────────────────────────────────── */
+        .op-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 14px 0 0; border-top: 1px solid var(--rd-hair); border-bottom: 1px solid var(--rd-hair); }
+        .op-stat { padding: 11px 0 11px 18px; }
         .op-stat:first-child { padding-left: 0; }
         .op-stat + .op-stat { border-left: 1px solid var(--rd-hair); }
         .op-stat-k { font-family: var(--rd-num); font-size: 21px; font-weight: 700; line-height: 1; color: var(--rd-accent); letter-spacing: -0.01em; }
         .op-stat-v { font-size: 8.6px; color: var(--rd-fg-3); margin-top: 3px; letter-spacing: 0.2px; }
 
-        /* ── Problem ─────────────────────────────────────────── */
-        .op-problem { margin-top: 15px; border-left: 2px solid var(--rd-accent); padding-left: 13px; }
-        .op-problem-title { font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-accent); margin: 0; }
-        .op-problem-text { font-size: 10px; line-height: 1.5; color: var(--rd-fg); margin: 5px 0 0; max-width: 175mm; }
+        /* ── Problem -> solution two-panel ───────────────────── */
+        .op-ps { display: grid; grid-template-columns: 1fr 30px 1fr; align-items: center; gap: 16px; margin-top: 16px; }
+        .op-ps-eyebrow { font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; margin: 0 0 7px; }
+        .op-ps-eyebrow--problem { color: var(--rd-accent); }
+        .op-ps-eyebrow--solution { color: var(--rd-head); }
+        .op-ps-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+        .op-ps-item { font-size: 9.2px; line-height: 1.35; color: var(--rd-fg); display: flex; align-items: baseline; gap: 6px; }
+        .op-ps-sub { color: var(--rd-accent); font-weight: 600; }
+        .op-ps-tick { color: var(--rd-accent); font-weight: 700; flex-shrink: 0; }
+        .op-ps-arrow { display: flex; align-items: center; justify-content: center; color: var(--rd-accent); }
+        .op-ps-arrow svg { width: 26px; height: 26px; }
 
         /* ── Section headings + figure caption ───────────────── */
         .op-section-title { font-size: 11.5px; font-weight: 600; letter-spacing: 0; color: var(--rd-head); margin: 0; }
@@ -189,29 +232,29 @@ export default function OnePager() {
 
         /* ── How it works (on-prem flow) ─────────────────────── */
         .op-flow { display: flex; align-items: stretch; gap: 0; margin-top: 10px; }
-        .op-step { flex: 1; display: flex; flex-direction: column; border: 1px solid var(--rd-hair); border-radius: 10px; background: var(--rd-surface); padding: 11px 12px; }
+        .op-step { flex: 1; display: flex; flex-direction: column; border: 1px solid var(--rd-hair); border-radius: 10px; background: var(--rd-surface); padding: 10px 11px; }
         .op-step-k { font-family: var(--rd-num); font-size: 11px; font-weight: 700; color: var(--rd-accent); letter-spacing: 0.4px; }
         .op-step-title { font-size: 9.2px; font-weight: 600; line-height: 1.2; color: var(--rd-fg-strong); margin: 5px 0 0; }
-        .op-step-body { font-size: 8.4px; line-height: 1.42; color: var(--rd-fg-2); margin: 4px 0 0; }
+        .op-step-body { font-size: 8.4px; line-height: 1.4; color: var(--rd-fg-2); margin: 4px 0 0; }
         .op-chev { display: flex; align-items: center; padding: 0 6px; color: var(--rd-accent); font-size: 13px; font-weight: 600; opacity: 0.85; }
         .op-head-lock { display: flex; align-items: center; gap: 7px; }
 
-        /* ── Two-column: where it fits / standards ───────────── */
-        .op-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 15px; }
+        /* ── Where it fits + trust pills ─────────────────────── */
+        .op-pillsec { margin-top: 14px; }
         .op-chips { display: flex; flex-wrap: wrap; gap: 6px 5px; margin-top: 8px; }
         .op-chip { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 4px 9px; font-size: 8.5px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
         .op-chip--soft { border-color: var(--rd-accent-hair); color: var(--rd-fg); }
 
         /* ── Pilot CTA band with QR (no button) ──────────────── */
-        .op-pilot { display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid var(--rd-accent-hair); background: var(--rd-accent-soft); border-radius: 13px; padding: 13px 16px; }
+        .op-pilot { display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid var(--rd-accent-hair); background: var(--rd-accent-soft); border-radius: 13px; padding: 12px 16px; }
         .op-pilot-title { font-size: 12px; font-weight: 600; color: var(--rd-head); margin: 0; }
         .op-pilot-body { font-size: 9.2px; line-height: 1.45; color: var(--rd-fg-2); margin: 4px 0 0; max-width: 130mm; }
         .op-qr { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
-        .op-qr-img { width: 72px; height: 72px; display: block; border-radius: 9px; box-shadow: 0 2px 8px -3px rgba(17,24,39,0.25); }
+        .op-qr-img { width: 70px; height: 70px; display: block; border-radius: 9px; box-shadow: 0 2px 8px -3px rgba(17,24,39,0.25); }
         .op-qr-label { font-size: 9.2px; font-weight: 600; line-height: 1.3; color: var(--rd-fg); text-align: right; max-width: 92px; }
 
         /* ── Trust row: backers + contact ────────────────────── */
-        .op-trust { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 13px; }
+        .op-trust { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; }
         .op-backers { display: flex; align-items: center; gap: 13px; }
         .op-backed { font-family: var(--rd-meta); font-size: 7.6px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--rd-fg-3); }
         .op-backer { height: 21px; width: auto; filter: grayscale(1); opacity: 0.7; }
@@ -252,13 +295,9 @@ export default function OnePager() {
             width: 210mm !important; height: 297mm !important; min-height: 0 !important; overflow: hidden !important;
           }
           .op-sheet, .op-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          /* Force the dark-on-light logo + un-inverted backer logos on paper.
-             The [data-theme='dark'] selector is left in the cascade when printing
-             from dark, so match its specificity to be sure grayscale wins. */
           .op-logo--light { display: block !important; }
           .op-logo--dark { display: none !important; }
           [data-theme='dark'] .op-backer, .op-backer { filter: grayscale(1) !important; opacity: 0.7 !important; }
-          /* Clean QR edges on paper, so a drop shadow never confuses a scanner. */
           .op-qr-img { box-shadow: none !important; }
         }
       `}</style>
@@ -285,9 +324,9 @@ export default function OnePager() {
               {t.headingLead}
               <span className="op-mark">{t.headingMark}</span>
             </h1>
-            <p className="op-sub">{t.subhead}</p>
           </div>
 
+          {/* KPIs */}
           <div className="op-stats">
             {t.stats.map((s) => (
               <div key={s.k} className="op-stat">
@@ -298,14 +337,36 @@ export default function OnePager() {
           </div>
         </header>
 
-        {/* ── The problem ────────────────────────────────── */}
-        <div className="op-problem">
-          <p className="op-problem-title">{t.problem.title}</p>
-          <p className="op-problem-text">{t.problem.text}</p>
+        {/* ── Problem  ->  what RapidDraft does ───────────── */}
+        <div className="op-ps">
+          <div>
+            <p className="op-ps-eyebrow op-ps-eyebrow--problem">{t.problem.title}</p>
+            <ul className="op-ps-list">
+              {t.problem.items.map((it) => (
+                <li key={it.a} className="op-ps-item">
+                  <span><span className="op-ps-sub">{it.a}</span> {it.b}.</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="op-ps-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12 H17 M12 6 l7 6 -7 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </div>
+          <div>
+            <p className="op-ps-eyebrow op-ps-eyebrow--solution">{t.helps.title}</p>
+            <ul className="op-ps-list">
+              {t.helps.items.map((it) => (
+                <li key={it} className="op-ps-item">
+                  <span className="op-ps-tick" aria-hidden="true">✓</span>
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* ── The transformation (hero figure) ───────────── */}
-        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '138mm' }}>
+        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '110mm' }}>
           <HubAndSpokeFigure inputs={HS_INPUTS} outputs={HS_OUTPUTS} alt={HS_ALT} />
         </div>
         <p className="op-cap">{t.figureCaption}</p>
@@ -331,28 +392,28 @@ export default function OnePager() {
           </div>
         </div>
 
-        {/* ── Where it fits  /  Standards and sovereignty ─── */}
-        <div className="op-cols">
-          <div>
-            <p className="op-section-title">{t.fit.title}</p>
-            <div className="op-chips">
-              {t.fit.items.map((c) => (
-                <span key={c} className="op-chip op-chip--soft">{c}</span>
-              ))}
-            </div>
+        {/* ── Where it fits ──────────────────────────────── */}
+        <div className="op-pillsec">
+          <p className="op-section-title">{t.fit.title}</p>
+          <div className="op-chips">
+            {t.fit.items.map((c) => (
+              <span key={c} className="op-chip op-chip--soft">{c}</span>
+            ))}
           </div>
-          <div>
-            <p className="op-section-title">{t.trust.title}</p>
-            <div className="op-chips">
-              {t.trust.chips.map((c) => (
-                <span key={c} className="op-chip">{c}</span>
-              ))}
-            </div>
+        </div>
+
+        {/* ── Built for trust (consolidated pills) ───────── */}
+        <div className="op-pillsec">
+          <p className="op-section-title">{t.trust.title}</p>
+          <div className="op-chips">
+            {t.trust.chips.map((c) => (
+              <span key={c} className="op-chip">{c}</span>
+            ))}
           </div>
         </div>
 
         {/* ── Footer: pilot + QR, then backers + contact (anchored) ── */}
-        <div className="mt-auto pt-5">
+        <div className="mt-auto pt-4">
           <div className="op-pilot">
             <div>
               <p className="op-pilot-title">{t.pilot.title}</p>
