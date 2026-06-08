@@ -1,14 +1,15 @@
 /* /one-pager: a self-contained, print-ready A4 one-pager. Not linked anywhere
-   in the site nav. Designed to print to a single A4 page with ~1cm margins and
-   no nav/footer (the <style> below scopes the print rules to this route). Uses
-   the site's design language (tokens, Inter, hairlines, single accent) at a
-   compact, document-grade scale.
+   in the site nav. Prints to a single A4 page with 1cm margins and no nav/footer
+   (the <style> below scopes the print rules to this route). Uses the site's
+   design language (tokens, Inter, hairlines, single accent) at a compact,
+   document-grade scale.
 
    Lean sales arc, one idea per beat, nothing repeated: who it is for + proof
-   (hero) -> the problem (tension) -> the transformation (hub-and-spoke figure,
-   the hero visual) -> how it runs on your own infrastructure (on-prem agent
-   flow) -> where it fits + standards -> credibility + pilot CTA. Theme-reactive
-   on screen (light / dark); print always re-pins to a light, white-paper A4. */
+   (hero) -> the problem (tension) -> the transformation (hub-and-spoke figure)
+   -> how it runs on your own infrastructure (on-prem agent flow) -> where it
+   fits + standards -> a trust footer (backers, contact, and a QR that books a
+   demo, no button). Theme-reactive on screen (light / dark); print always
+   re-pins to a light, white-paper A4. */
 import { useLang } from '../i18n/LanguageContext';
 import PageMeta from '../components/PageMeta';
 import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
@@ -59,15 +60,17 @@ const CONTENT = {
     },
     trust: {
       title: 'Standards and sovereignty',
-      chips: ['No training on your IP', 'ISO / ASME', 'VDA Band 2, EMPB', 'Full audit trail'],
+      chips: ['EU Data Act', 'ISO / ASME', 'VDA Band 2, EMPB', 'No training on your IP', 'Full audit trail'],
     },
-    proof: 'Advised by leaders at Siemens, Volocopter, and Amazon. Backed by UnternehmerTUM and XPLORE.',
     pilot: {
       title: 'Launch a pilot with RapidDraft',
       body: 'Start narrow: one product family, one release process, or one recurring review bottleneck.',
-      cta: 'Book a demo',
-      contact: 'rapiddraft.ai · info@rapiddraft.ai · Munich, Germany',
+      scan: 'Scan to book a demo',
     },
+    backedBy: 'Backed by',
+    contact: 'info@rapiddraft.ai · rapiddraft.ai · +49 176 8444 3362',
+    madePre: 'made with',
+    madePost: 'in Munich',
   },
   de: {
     meta: {
@@ -107,15 +110,17 @@ const CONTENT = {
     },
     trust: {
       title: 'Standards und Souveränität',
-      chips: ['Kein Training auf Ihrem IP', 'ISO / ASME', 'VDA Band 2, EMPB', 'Vollständiger Audit-Trail'],
+      chips: ['EU Data Act', 'ISO / ASME', 'VDA Band 2, EMPB', 'Kein Training auf Ihrem IP', 'Vollständiger Audit-Trail'],
     },
-    proof: 'Beraten von Führungskräften bei Siemens, Volocopter und Amazon. Unterstützt von UnternehmerTUM und XPLORE.',
     pilot: {
       title: 'Starten Sie einen Piloten mit RapidDraft',
       body: 'Eng anfangen: eine Produktfamilie, ein Freigabeprozess oder ein wiederkehrender Review-Engpass.',
-      cta: 'Demo buchen',
-      contact: 'rapiddraft.ai · info@rapiddraft.ai · München, Deutschland',
+      scan: 'Zum Buchen scannen',
     },
+    backedBy: 'Unterstützt von',
+    contact: 'info@rapiddraft.ai · rapiddraft.ai · +49 176 8444 3362',
+    madePre: 'mit',
+    madePost: 'in München gebaut',
   },
 } as const;
 
@@ -147,7 +152,7 @@ export default function OnePager() {
       <style>{`
         .op-screen { display: flex; justify-content: center; background: var(--rd-sunken); padding: 28px 16px; }
         .op-sheet {
-          width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 9mm 11mm;
+          width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 10mm 10mm;
           background: #fff; color: var(--rd-fg);
           box-shadow: 0 18px 60px -28px rgba(17,24,39,0.4);
           display: flex; flex-direction: column;
@@ -155,31 +160,31 @@ export default function OnePager() {
         }
 
         /* ── Header ──────────────────────────────────────────── */
-        .op-badge { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 3.5px 10px; font-size: 8.6px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
+        .op-badge { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 3.5px 10px; font-size: 8.4px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
 
         /* ── Hero ────────────────────────────────────────────── */
-        .op-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--rd-meta); font-size: 8.6px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
+        .op-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
         .op-slash { font-family: var(--rd-mono); color: var(--rd-accent); letter-spacing: 0; }
-        .op-h1 { font-family: var(--rd-sans, 'Inter'); font-size: 27px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; color: var(--rd-head); margin: 8px 0 0; }
+        .op-h1 { font-family: var(--rd-sans, 'Inter'); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; color: var(--rd-head); margin: 8px 0 0; }
         .op-mark { color: var(--rd-accent); }
-        .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 8px 0 0; max-width: 165mm; }
+        .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 8px 0 0; max-width: 168mm; }
 
         /* ── Stat band ───────────────────────────────────────── */
-        .op-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 14px 0 0; border-top: 1px solid var(--rd-hair); border-bottom: 1px solid var(--rd-hair); }
-        .op-stat { padding: 11px 0 11px 18px; }
+        .op-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 15px 0 0; border-top: 1px solid var(--rd-hair); border-bottom: 1px solid var(--rd-hair); }
+        .op-stat { padding: 12px 0 12px 18px; }
         .op-stat:first-child { padding-left: 0; }
         .op-stat + .op-stat { border-left: 1px solid var(--rd-hair); }
-        .op-stat-k { font-family: var(--rd-num); font-size: 20px; font-weight: 700; line-height: 1; color: var(--rd-accent); letter-spacing: -0.01em; }
-        .op-stat-v { font-size: 8.4px; color: var(--rd-fg-3); margin-top: 3px; letter-spacing: 0.2px; }
+        .op-stat-k { font-family: var(--rd-num); font-size: 21px; font-weight: 700; line-height: 1; color: var(--rd-accent); letter-spacing: -0.01em; }
+        .op-stat-v { font-size: 8.6px; color: var(--rd-fg-3); margin-top: 3px; letter-spacing: 0.2px; }
 
         /* ── Problem ─────────────────────────────────────────── */
-        .op-problem { margin-top: 15px; border-left: 2px solid var(--rd-accent); padding-left: 12px; }
-        .op-problem-title { font-family: var(--rd-meta); font-size: 8.6px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-accent); margin: 0; }
-        .op-problem-text { font-size: 10px; line-height: 1.5; color: var(--rd-fg); margin: 5px 0 0; max-width: 172mm; }
+        .op-problem { margin-top: 15px; border-left: 2px solid var(--rd-accent); padding-left: 13px; }
+        .op-problem-title { font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-accent); margin: 0; }
+        .op-problem-text { font-size: 10px; line-height: 1.5; color: var(--rd-fg); margin: 5px 0 0; max-width: 175mm; }
 
         /* ── Section headings + figure caption ───────────────── */
         .op-section-title { font-size: 11.5px; font-weight: 600; letter-spacing: 0; color: var(--rd-head); margin: 0; }
-        .op-section-sub { font-size: 9.2px; line-height: 1.45; color: var(--rd-fg-3); margin: 3px 0 0; max-width: 160mm; }
+        .op-section-sub { font-size: 9px; line-height: 1.45; color: var(--rd-fg-3); margin: 3px 0 0; max-width: 160mm; }
         .op-cap { font-size: 8.6px; line-height: 1.4; color: var(--rd-fg-3); text-align: center; margin: 7px auto 0; max-width: 150mm; }
 
         /* ── How it works (on-prem flow) ─────────────────────── */
@@ -192,24 +197,34 @@ export default function OnePager() {
         .op-head-lock { display: flex; align-items: center; gap: 7px; }
 
         /* ── Two-column: where it fits / standards ───────────── */
-        .op-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 17px; }
-        .op-chips { display: flex; flex-wrap: wrap; gap: 6px 5px; margin-top: 9px; }
-        .op-chip { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 4px 9px; font-size: 8.6px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
+        .op-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 15px; }
+        .op-chips { display: flex; flex-wrap: wrap; gap: 6px 5px; margin-top: 8px; }
+        .op-chip { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 4px 9px; font-size: 8.5px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
         .op-chip--soft { border-color: var(--rd-accent-hair); color: var(--rd-fg); }
 
-        /* ── Footer: credibility + pilot CTA ─────────────────── */
-        .op-proof { font-size: 9px; line-height: 1.45; color: var(--rd-fg-3); margin: 12px 0 0; }
-        .op-pilot { display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid var(--rd-accent-hair); background: var(--rd-accent-soft); border-radius: 12px; padding: 11px 15px; }
-        .op-pilot-title { font-size: 11.5px; font-weight: 600; color: var(--rd-head); margin: 0; }
-        .op-pilot-body { font-size: 9.2px; line-height: 1.4; color: var(--rd-fg-2); margin: 3px 0 0; max-width: 120mm; }
-        .op-cta { display: inline-flex; align-items: center; border-radius: 999px; background: var(--rd-accent); color: #fff; font-size: 10.5px; font-weight: 600; padding: 9px 18px; white-space: nowrap; }
-        .op-contact { font-family: var(--rd-meta); font-size: 8.2px; letter-spacing: 0.3px; color: var(--rd-fg-3); text-align: center; margin: 9px 0 0; }
+        /* ── Pilot CTA band with QR (no button) ──────────────── */
+        .op-pilot { display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid var(--rd-accent-hair); background: var(--rd-accent-soft); border-radius: 13px; padding: 13px 16px; }
+        .op-pilot-title { font-size: 12px; font-weight: 600; color: var(--rd-head); margin: 0; }
+        .op-pilot-body { font-size: 9.2px; line-height: 1.45; color: var(--rd-fg-2); margin: 4px 0 0; max-width: 130mm; }
+        .op-qr { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
+        .op-qr-img { width: 72px; height: 72px; display: block; border-radius: 9px; box-shadow: 0 2px 8px -3px rgba(17,24,39,0.25); }
+        .op-qr-label { font-size: 9px; font-weight: 600; line-height: 1.25; color: var(--rd-fg); text-align: right; max-width: 66px; }
+        .op-qr-label span { color: var(--rd-accent); }
+
+        /* ── Trust row: backers + contact ────────────────────── */
+        .op-trust { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 13px; }
+        .op-backers { display: flex; align-items: center; gap: 13px; }
+        .op-backed { font-family: var(--rd-meta); font-size: 7.6px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--rd-fg-3); }
+        .op-backer { height: 21px; width: auto; filter: grayscale(1); opacity: 0.7; }
+        .op-contact { font-family: var(--rd-meta); font-size: 8.2px; letter-spacing: 0.2px; color: var(--rd-fg-3); text-align: right; margin: 0; }
+        .op-heart { color: var(--rd-accent); }
 
         /* ── Theme-reactive logo swap (light mark / white mark) ─ */
-        .op-logo { display: block; width: auto; height: 46px; }
+        .op-logo { display: block; width: auto; height: 40px; }
         .op-logo--dark { display: none; }
         [data-theme='dark'] .op-logo--light { display: none; }
         [data-theme='dark'] .op-logo--dark { display: block; }
+        [data-theme='dark'] .op-backer { filter: grayscale(1) invert(1); opacity: 0.88; }
         .op-lock { width: 13px; height: 13px; stroke: var(--rd-accent); fill: none; stroke-width: 1.6; }
         .op-lock rect { fill: var(--rd-accent-soft); }
 
@@ -226,9 +241,9 @@ export default function OnePager() {
           .op-screen { background: #fff !important; padding: 0 !important; min-height: 0 !important; display: block !important; }
           /* Always print a light, white-paper A4, even when the app is in dark
              mode: re-pin every --rd-* token on the sheet to its light value so
-             all token-driven descendants (text, boxes, the figure) render as
-             dark ink on white. Pin to exactly one A4 page; overflow:hidden stops
-             a sub-pixel rounding sliver from spilling to a second page. */
+             all token-driven descendants render as dark ink on white. Pin to
+             exactly one A4 page; overflow:hidden stops a sub-pixel rounding
+             sliver from spilling to a second page. */
           .op-sheet {
             --rd-bg: #f5f5f5; --rd-surface: #ffffff; --rd-raised: #ffffff; --rd-sunken: #ececec; --rd-inverse: #0d0d0d;
             --rd-fg-strong: #000000; --rd-head: #1f1f1f; --rd-fg: #1a1a1a; --rd-fg-2: #4a4a4a; --rd-fg-3: #5f5f5f; --rd-muted: #a0a0a0;
@@ -238,8 +253,10 @@ export default function OnePager() {
             width: 210mm !important; height: 297mm !important; min-height: 0 !important; overflow: hidden !important;
           }
           .op-sheet, .op-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          /* Force the dark-on-light logo + un-inverted backer logos on paper. */
           .op-logo--light { display: block !important; }
           .op-logo--dark { display: none !important; }
+          .op-backer { filter: grayscale(1) !important; opacity: 0.7 !important; }
         }
       `}</style>
 
@@ -259,7 +276,7 @@ export default function OnePager() {
               ))}
             </div>
           </div>
-          <div className="mt-5">
+          <div className="mt-4">
             <Eyebrow>{t.eyebrow}</Eyebrow>
             <h1 className="op-h1">
               {t.headingLead}
@@ -285,13 +302,13 @@ export default function OnePager() {
         </div>
 
         {/* ── The transformation (hero figure) ───────────── */}
-        <div className="mx-auto mt-7 w-full" style={{ maxWidth: '146mm' }}>
+        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '138mm' }}>
           <HubAndSpokeFigure inputs={HS_INPUTS} outputs={HS_OUTPUTS} alt={HS_ALT} />
         </div>
         <p className="op-cap">{t.figureCaption}</p>
 
         {/* ── How it works, on your infrastructure ────────── */}
-        <div className="mt-7">
+        <div className="mt-5">
           <div className="op-head-lock">
             <LockGlyph />
             <p className="op-section-title">{t.how.title}</p>
@@ -331,18 +348,26 @@ export default function OnePager() {
           </div>
         </div>
 
-        {/* ── Footer: credibility + pilot CTA (anchored bottom) ── */}
-        <div className="mt-auto pt-6">
-          <hr style={{ border: 0, borderTop: '1px solid var(--rd-hair)', margin: 0 }} />
-          <p className="op-proof">{t.proof}</p>
-          <div className="op-pilot mt-3">
+        {/* ── Footer: pilot + QR, then backers + contact (anchored) ── */}
+        <div className="mt-auto pt-5">
+          <div className="op-pilot">
             <div>
               <p className="op-pilot-title">{t.pilot.title}</p>
               <p className="op-pilot-body">{t.pilot.body}</p>
             </div>
-            <span className="op-cta">{t.pilot.cta}</span>
+            <div className="op-qr">
+              <p className="op-qr-label">{t.pilot.scan} <span>›</span></p>
+              <img src="/media/qr-book-demo.svg" alt="QR code to book a demo at rapiddraft.ai/book-demo" className="op-qr-img" />
+            </div>
           </div>
-          <p className="op-contact">{t.pilot.contact}</p>
+          <div className="op-trust">
+            <div className="op-backers">
+              <span className="op-backed">{t.backedBy}</span>
+              <img src="/media/ecosystem/unternehmertum-logo.svg" alt="UnternehmerTUM" className="op-backer" />
+              <img src="/media/ecosystem/xplore-logo.svg" alt="XPLORE" className="op-backer" />
+            </div>
+            <p className="op-contact">{t.contact} · {t.madePre} <span className="op-heart">♥</span> {t.madePost}</p>
+          </div>
         </div>
       </article>
     </div>
