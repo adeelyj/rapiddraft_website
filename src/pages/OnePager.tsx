@@ -2,64 +2,65 @@
    in the site nav. Designed to print to a single A4 page with ~1cm margins and
    no nav/footer (the <style> below scopes the print rules to this route). Uses
    the site's design language (tokens, Inter, hairlines, single accent) at a
-   compact, document-grade scale, and reuses the engineering-stack figure. */
+   compact, document-grade scale.
+
+   Narrative: value + proof -> the inputs/outputs transformation (hub and spoke)
+   -> how it runs on your own infrastructure (the on-prem agent flow) -> where it
+   fits + why it is trusted -> pilot CTA. Theme-reactive on screen (light / dark);
+   print always re-pins to a light, white-paper A4. */
 import { useLang } from '../i18n/LanguageContext';
 import PageMeta from '../components/PageMeta';
-import BrandMark from '../components/BrandMark';
-import EngineeringStackFigure from '../components/diagrams/EngineeringStackFigure';
+import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
+
+const HS_INPUTS = ['NX / CATIA / SW', '2D Drawings', 'PDM / PLM', 'Release Package', 'Supplier QA'];
+const HS_OUTPUTS = ['DFM Findings', 'FAIR Readiness', 'BOM Consistency', 'Release Gate', 'Audit (VDA, EMPB)'];
+const HS_ALT =
+  'Engineering inputs (NX/CATIA/SW, 2D drawings, PDM/PLM, release package, supplier QA) feed into ' +
+  'RapidDraft at the center, which produces DFM findings, FAIR readiness, BOM consistency, a release ' +
+  'gate, and a VDA/EMPB audit trail.';
 
 const CONTENT = {
   en: {
     meta: {
       title: 'One-pager | RapidDraft',
-      description: 'Agentic drawing release and design review for engineering teams. On-prem, human-in-the-loop, grounded in your own rules.',
+      description:
+        'On-prem agentic AI for hardware and mechanical engineering. A tireless first pass over your drawings and reviews, grounded in your rules and traceable to the source. The engineer keeps the sign-off.',
     },
     badges: ['On-prem AI', 'SSO', 'Local / EU Cloud', 'GDPR-compliant'],
     eyebrow: 'For hardware and mechanical engineering teams',
-    headline: 'Agentic drawing release and design review',
+    headingLead: 'Accelerate engineering decisions and ',
+    headingMark: 'drawing release',
     subhead:
-      'RapidDraft catches design and drawing issues earlier, automates repetitive review, and keeps decision context on the model, across CAD, manufacturing drawings, and release workflows. On-prem, grounded in your own rules.',
-    problem: {
-      title: 'Where release slows down',
-      lines: [
-        'Design intent lives in CAD. Requirements live in drawings. Review logic is tribal knowledge.',
-        'Collaboration is inefficient, drawing review is error-prone, and quality inspection is slow.',
+      'An on-prem agent runs a tireless first pass over your drawings and reviews, grounded in your rules and traceable to the source. The engineer keeps the sign-off.',
+    stats: [
+      { k: '30%', v: 'Fewer change cycles' },
+      { k: '10x', v: 'Faster feedback' },
+      { k: '50%', v: 'Less checking time' },
+    ],
+    figureCaption:
+      'RapidDraft sits between your engineering stack and an auditable release gate, with human-in-the-loop review at the center.',
+    how: {
+      title: 'How it works, on your infrastructure',
+      sub: 'Your data stays on-site. The agent runs the first pass, and an engineer approves before anything is written back to your PLM.',
+      steps: [
+        { k: '01', title: 'Your data', body: 'CAD, drawings, BOM, and EPLAN stay on your NVIDIA DGX Spark, on your network.' },
+        { k: '02', title: 'The agent runs the first pass', body: 'It orchestrates BOM, DFM, model, and knowledge tools. Evidence-linked, not a chatbot.' },
+        { k: '03', title: 'The engineer approves', body: 'A traceable second set of eyes. The engineer keeps the sign-off, never the AI.' },
+        { k: '04', title: 'Release to your PLM', body: 'Approved findings are written back to your CIM Database.' },
       ],
     },
-    helps: {
-      title: 'RapidDraft helps you',
-      items: [
-        { title: 'Analyze manufacturing drawings', body: 'Find missing, inconsistent, or review-critical information before release.' },
-        { title: 'Accelerate design reviews', body: 'Apply engineering, manufacturing, and your company-specific logic.' },
-        { title: 'Remove team silos', body: 'Bring teams together in a shared CAD review environment.' },
-        { title: 'Preserve company knowledge', body: 'Keep comments, findings, and manufacturing feedback on the model.' },
-      ],
+    fit: {
+      title: 'Where it fits',
+      items: ['Technical drawing checks', 'Quality docs (BOM, FAIR)', 'DFM reviews', 'Supplier handoff', 'Change updates (ECN)'],
     },
-    useCases: {
-      title: 'Typical use cases',
-      items: [
-        { title: 'Technical drawing checks', body: 'Catch common drawing errors before they reach production.' },
-        { title: 'Quality inspection documents', body: 'Build the BOM and first-article inspection report from CAD data.' },
-        { title: 'Design-for-manufacturing reviews', body: 'Surface manufacturing issues before supplier feedback.' },
-        { title: 'Supplier / OEM CAD collaboration', body: 'Let QA, design, and suppliers collaborate in one place.' },
-      ],
+    trust: {
+      title: 'Built for data sovereignty',
+      chips: ['On-prem, no IP training', 'GDPR, EU residency', 'SSO, role-based access', 'ISO / ASME aligned', 'VDA Band 2, EMPB', 'Full audit trail'],
     },
-    sovereignty: {
-      title: 'AI with data sovereignty, your data stays in-house',
-      items: [
-        { title: 'Data sovereignty', body: 'Models run locally, on-prem.' },
-        { title: 'IP protection', body: 'Training only on anonymized or approved data.' },
-        { title: 'Employee trust', body: 'Transparent, traceable, human-in-the-loop workflows.' },
-        { title: 'Data quality', body: 'One clean source across part data, drawings, and BOMs.' },
-      ],
-    },
+    proof: 'Advised by leaders at Siemens, Volocopter, and Amazon. Backed by UnternehmerTUM and XPLORE.',
     pilot: {
       title: 'Launch a pilot with RapidDraft',
-      body: 'Start narrow: one product family, one drawing-release process, or one recurring review bottleneck.',
-      points: [
-        { k: '~30% ROI', v: 'from better design-review workflows' },
-        { k: 'Scalable local AI', v: 'deployed on-prem and built to scale' },
-      ],
+      body: 'Start narrow: one product family, one release process, or one recurring review bottleneck.',
       cta: 'Book a demo',
       contact: 'rapiddraft.ai · info@rapiddraft.ai · Munich, Germany',
     },
@@ -67,54 +68,44 @@ const CONTENT = {
   de: {
     meta: {
       title: 'One-Pager | RapidDraft',
-      description: 'Agentische Zeichnungsfreigabe und Design-Review für Engineering-Teams. On-Prem, Human-in-the-Loop, verankert in Ihren eigenen Regeln.',
+      description:
+        'On-Prem-KI für Hardware- und Mechanik-Engineering. Ein unermüdlicher erster Durchgang über Ihre Zeichnungen und Reviews, verankert in Ihren Regeln und nachvollziehbar bis zur Quelle. Die Freigabe bleibt beim Ingenieur.',
     },
     badges: ['On-Prem-KI', 'SSO', 'Lokale / EU-Cloud', 'DSGVO-konform'],
     eyebrow: 'Für Hardware- und Mechanik-Engineering-Teams',
-    headline: 'Agentische Zeichnungsfreigabe und Design-Review',
+    headingLead: 'Schnellere Entscheidungen und ',
+    headingMark: 'Zeichnungsfreigabe',
     subhead:
-      'RapidDraft erkennt Zeichnungs- und Designprobleme früher, automatisiert wiederkehrende Prüfung und hält den Entscheidungskontext am Modell, über CAD, Fertigungszeichnungen und Freigabe-Workflows hinweg. On-Prem, verankert in Ihren eigenen Regeln.',
-    problem: {
-      title: 'Wo die Freigabe ins Stocken gerät',
-      lines: [
-        'Designabsicht steckt im CAD. Anforderungen in Zeichnungen. Prüflogik ist Erfahrungswissen.',
-        'Zusammenarbeit ist ineffizient, Zeichnungsprüfung fehleranfällig, Qualitätsprüfung langsam.',
+      'Ein On-Prem-Agent übernimmt den unermüdlichen ersten Durchgang über Ihre Zeichnungen und Reviews, verankert in Ihren Regeln und nachvollziehbar bis zur Quelle. Die Freigabe bleibt beim Ingenieur.',
+    stats: [
+      { k: '30%', v: 'Weniger Änderungszyklen' },
+      { k: '10x', v: 'Schnelleres Feedback' },
+      { k: '50%', v: 'Weniger Prüfzeit' },
+    ],
+    figureCaption:
+      'RapidDraft sitzt zwischen Ihrem Engineering-Stack und einem auditierbaren Release-Gate, mit Human-in-the-Loop-Review im Zentrum.',
+    how: {
+      title: 'So funktioniert es, auf Ihrer Infrastruktur',
+      sub: 'Ihre Daten bleiben im Haus. Der Agent übernimmt den ersten Durchgang, und ein Ingenieur gibt frei, bevor etwas in Ihr PLM zurückgeschrieben wird.',
+      steps: [
+        { k: '01', title: 'Ihre Daten', body: 'CAD, Zeichnungen, BOM und EPLAN bleiben auf Ihrem NVIDIA DGX Spark, in Ihrem Netzwerk.' },
+        { k: '02', title: 'Der Agent prüft zuerst', body: 'Er orchestriert BOM-, DFM-, Modell- und Wissens-Tools. Mit Belegen verknüpft, kein Chatbot.' },
+        { k: '03', title: 'Der Ingenieur gibt frei', body: 'Ein nachvollziehbares zweites Augenpaar. Die Freigabe bleibt beim Ingenieur, nie bei der KI.' },
+        { k: '04', title: 'Freigabe an Ihr PLM', body: 'Freigegebene Befunde werden in Ihre CIM-Datenbank zurückgeschrieben.' },
       ],
     },
-    helps: {
-      title: 'RapidDraft hilft Ihnen',
-      items: [
-        { title: 'Fertigungszeichnungen analysieren', body: 'Fehlende, inkonsistente oder prüfkritische Angaben vor der Freigabe finden.' },
-        { title: 'Design-Reviews beschleunigen', body: 'Konstruktions-, Fertigungs- und unternehmenseigene Logik anwenden.' },
-        { title: 'Silos auflösen', body: 'Teams in einer gemeinsamen CAD-Review-Umgebung zusammenbringen.' },
-        { title: 'Unternehmenswissen bewahren', body: 'Kommentare, Befunde und Fertigungsfeedback am Modell halten.' },
-      ],
+    fit: {
+      title: 'Wo es passt',
+      items: ['Technische Zeichnungsprüfungen', 'Qualitätsdokumente (BOM, FAIR)', 'DFM-Reviews', 'Lieferanten-Handoff', 'Änderungen (ECN)'],
     },
-    useCases: {
-      title: 'Typische Anwendungsfälle',
-      items: [
-        { title: 'Technische Zeichnungsprüfungen', body: 'Häufige Zeichnungsfehler abfangen, bevor sie in die Produktion gelangen.' },
-        { title: 'Qualitätsdokumente', body: 'BOM und Erstmusterprüfbericht aus CAD-Daten erstellen.' },
-        { title: 'Design-for-Manufacturing-Reviews', body: 'Fertigungsprobleme vor dem Lieferantenfeedback sichtbar machen.' },
-        { title: 'Lieferanten- / OEM-CAD-Zusammenarbeit', body: 'QA, Konstruktion und Lieferanten an einem Ort zusammenarbeiten lassen.' },
-      ],
+    trust: {
+      title: 'Für Datensouveränität gebaut',
+      chips: ['On-Prem, kein IP-Training', 'DSGVO, EU-Residenz', 'SSO, rollenbasiert', 'ISO / ASME', 'VDA Band 2, EMPB', 'Vollständiger Audit-Trail'],
     },
-    sovereignty: {
-      title: 'KI mit Datensouveränität, Ihre Daten bleiben im Haus',
-      items: [
-        { title: 'Datensouveränität', body: 'Modelle laufen lokal, On-Prem.' },
-        { title: 'IP-Schutz', body: 'Training nur auf anonymisierten oder freigegebenen Daten.' },
-        { title: 'Vertrauen der Mitarbeitenden', body: 'Transparente, nachvollziehbare, Human-in-the-Loop-Workflows.' },
-        { title: 'Datenqualität', body: 'Eine saubere Quelle über Teiledaten, Zeichnungen und BOMs.' },
-      ],
-    },
+    proof: 'Beraten von Führungskräften bei Siemens, Volocopter und Amazon. Unterstützt von UnternehmerTUM und XPLORE.',
     pilot: {
       title: 'Starten Sie einen Piloten mit RapidDraft',
-      body: 'Eng anfangen: eine Produktfamilie, ein Zeichnungs-Freigabeprozess oder ein wiederkehrender Review-Engpass.',
-      points: [
-        { k: '~30% ROI', v: 'durch bessere Design-Review-Workflows' },
-        { k: 'Skalierbare lokale KI', v: 'On-Prem bereitgestellt und auf Skalierung ausgelegt' },
-      ],
+      body: 'Eng anfangen: eine Produktfamilie, ein Freigabeprozess oder ein wiederkehrender Review-Engpass.',
       cta: 'Demo buchen',
       contact: 'rapiddraft.ai · info@rapiddraft.ai · München, Deutschland',
     },
@@ -130,13 +121,12 @@ function Eyebrow({ children }: { children: string }) {
   );
 }
 
-function ItemRow({ title, body, num }: { title: string; body: string; num?: number }) {
+function LockGlyph() {
   return (
-    <div className="op-item">
-      {num != null && <span className="op-num">{String(num).padStart(2, '0')}</span>}
-      <p className="op-item-title">{title}</p>
-      <p className="op-item-body">{body}</p>
-    </div>
+    <svg viewBox="0 0 24 24" className="op-lock" aria-hidden="true">
+      <rect x="5" y="10.5" width="14" height="9.5" rx="2.4" />
+      <path d="M7.5 10.5 V8 a4.5 4.5 0 0 1 9 0 V10.5" fill="none" />
+    </svg>
   );
 }
 
@@ -148,33 +138,73 @@ export default function OnePager() {
     <div className="rd2 op-screen">
       <PageMeta title={t.meta.title} description={t.meta.description} path="/one-pager" />
       <style>{`
-        .op-screen { display: flex; justify-content: center; background: #e7e7ea; padding: 28px 16px; }
+        .op-screen { display: flex; justify-content: center; background: var(--rd-sunken); padding: 28px 16px; }
         .op-sheet {
           width: 210mm; min-height: 297mm; box-sizing: border-box; padding: 10mm 11mm;
           background: #fff; color: var(--rd-fg);
           box-shadow: 0 18px 60px -28px rgba(17,24,39,0.4);
           display: flex; flex-direction: column;
-          font-family: var(--rd-text, 'Inter', sans-serif);
+          font-family: var(--rd-sans, 'Inter', sans-serif);
         }
-        .op-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
-        .op-slash { font-family: var(--rd-mono); color: var(--rd-accent); letter-spacing: 0; }
-        .op-h1 { font-family: var(--rd-text, 'Inter'); font-size: 27px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.06; color: var(--rd-head); margin: 7px 0 0; }
-        .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 7px 0 0; max-width: 165mm; }
+
+        /* ── Header ──────────────────────────────────────────── */
         .op-badge { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 3px 9px; font-size: 8.5px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
-        .op-rule { border: 0; border-top: 1px solid var(--rd-hair); margin: 0; }
-        .op-section-title { font-size: 11.5px; font-weight: 600; letter-spacing: -0.01em; color: var(--rd-head); margin: 0 0 6px; }
-        .op-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .op-item { border: 1px solid var(--rd-hair); border-radius: 9px; background: var(--rd-surface); padding: 8px 9px; }
-        .op-num { display: block; font-family: var(--rd-num); font-size: 11px; font-weight: 600; color: var(--rd-accent); margin-bottom: 2px; }
-        .op-item-title { font-size: 9.6px; font-weight: 600; line-height: 1.2; color: var(--rd-fg-strong); margin: 0; }
-        .op-item-body { font-size: 8.7px; line-height: 1.32; color: var(--rd-fg-2); margin: 3px 0 0; }
-        .op-problem { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-        .op-problem p { font-size: 10px; line-height: 1.4; color: var(--rd-fg); margin: 0; }
-        .op-pilot { display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid var(--rd-accent-hair); background: var(--rd-accent-soft); border-radius: 12px; padding: 11px 14px; }
-        .op-pilot-k { font-family: var(--rd-num); font-size: 14px; font-weight: 700; color: var(--rd-accent); line-height: 1; }
-        .op-pilot-v { font-size: 8.6px; color: var(--rd-fg-2); margin-top: 2px; }
-        .op-cta { display: inline-flex; align-items: center; border-radius: 999px; background: var(--rd-accent); color: #fff; font-size: 10px; font-weight: 600; padding: 7px 16px; white-space: nowrap; }
-        .op-contact { font-family: var(--rd-meta); font-size: 8px; letter-spacing: 0.3px; color: var(--rd-fg-3); text-align: center; margin: 0; }
+
+        /* ── Hero ────────────────────────────────────────────── */
+        .op-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
+        .op-slash { font-family: var(--rd-mono); color: var(--rd-accent); letter-spacing: 0; }
+        .op-h1 { font-family: var(--rd-sans, 'Inter'); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; color: var(--rd-head); margin: 8px 0 0; }
+        .op-mark { color: var(--rd-accent); }
+        .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 8px 0 0; max-width: 158mm; }
+
+        /* ── Stat band ───────────────────────────────────────── */
+        .op-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 16px 0 0; border-top: 1px solid var(--rd-hair); border-bottom: 1px solid var(--rd-hair); }
+        .op-stat { padding: 12px 0 12px 18px; }
+        .op-stat:first-child { padding-left: 0; }
+        .op-stat + .op-stat { border-left: 1px solid var(--rd-hair); }
+        .op-stat-k { font-family: var(--rd-num); font-size: 20px; font-weight: 700; line-height: 1; color: var(--rd-accent); letter-spacing: -0.01em; }
+        .op-stat-v { font-size: 8.4px; color: var(--rd-fg-3); margin-top: 3px; letter-spacing: 0.2px; }
+
+        /* ── Section headings ────────────────────────────────── */
+        .op-section-title { font-size: 11.5px; font-weight: 600; letter-spacing: 0; color: var(--rd-head); margin: 0; }
+        .op-section-sub { font-size: 9px; line-height: 1.45; color: var(--rd-fg-3); margin: 3px 0 0; max-width: 150mm; }
+        .op-head-row { display: flex; align-items: center; gap: 7px; }
+        .op-lock { width: 12px; height: 12px; stroke: var(--rd-accent); fill: none; stroke-width: 1.6; }
+        .op-lock rect { fill: var(--rd-accent-soft); }
+        .op-cap { font-size: 8.6px; line-height: 1.4; color: var(--rd-fg-3); text-align: center; margin: 7px auto 0; max-width: 150mm; }
+
+        /* ── On-prem flow (how it works) ─────────────────────── */
+        .op-flow { display: flex; align-items: stretch; gap: 0; margin-top: 12px; }
+        .op-step { flex: 1; border: 1px solid var(--rd-hair); border-radius: 10px; background: var(--rd-surface); padding: 11px 12px; }
+        .op-step-k { font-family: var(--rd-num); font-size: 10.5px; font-weight: 700; color: var(--rd-accent); letter-spacing: 0.4px; }
+        .op-step-title { font-size: 9.4px; font-weight: 600; line-height: 1.25; color: var(--rd-fg-strong); margin: 5px 0 0; }
+        .op-step-body { font-size: 8.8px; line-height: 1.45; color: var(--rd-fg-2); margin: 5px 0 0; }
+        .op-chev { display: flex; align-items: center; padding: 0 5px; color: var(--rd-accent); font-size: 13px; font-weight: 600; opacity: 0.85; }
+
+        /* ── Two-column: where it fits / trust ───────────────── */
+        .op-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .op-chips { display: flex; flex-wrap: wrap; gap: 6px 5px; margin-top: 8px; }
+        .op-chip { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; padding: 4px 9px; font-size: 8.6px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
+        .op-chip--soft { border-color: var(--rd-accent-hair); color: var(--rd-fg); }
+        .op-proof { font-size: 8.8px; line-height: 1.45; color: var(--rd-fg-3); margin: 13px 0 0; }
+
+        /* ── Pilot CTA + contact ─────────────────────────────── */
+        .op-pilot { display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid var(--rd-accent-hair); background: var(--rd-accent-soft); border-radius: 12px; padding: 12px 15px; }
+        .op-pilot-title { font-size: 11.5px; font-weight: 600; color: var(--rd-head); margin: 0; }
+        .op-pilot-body { font-size: 9px; line-height: 1.4; color: var(--rd-fg-2); margin: 3px 0 0; max-width: 118mm; }
+        .op-cta { display: inline-flex; align-items: center; border-radius: 999px; background: var(--rd-accent); color: #fff; font-size: 10.5px; font-weight: 600; padding: 9px 19px; white-space: nowrap; }
+        .op-contact { font-family: var(--rd-meta); font-size: 8px; letter-spacing: 0.3px; color: var(--rd-fg-3); text-align: center; margin: 8px 0 0; }
+
+        /* ── Theme-reactive logo swap (light mark / white mark) ─ */
+        .op-logo { display: block; width: auto; height: 46px; }
+        .op-logo--dark { display: none; }
+        [data-theme='dark'] .op-logo--light { display: none; }
+        [data-theme='dark'] .op-logo--dark { display: block; }
+
+        /* Dark mode: the sheet becomes a dark document matching the site; a
+           hairline defines its edge since the drop shadow is invisible on the
+           near-black canvas. (Print re-pins everything back to white paper.) */
+        [data-theme='dark'] .op-sheet { background: var(--rd-bg); border: 1px solid var(--rd-hair); }
 
         @media print {
           @page { size: A4; margin: 0; }
@@ -182,12 +212,25 @@ export default function OnePager() {
           .rd-app > nav, .rd-app > footer, .rd-app__grid-root { display: none !important; }
           .rd-app > main, .rd-app { overflow: visible !important; }
           .op-screen { background: #fff !important; padding: 0 !important; min-height: 0 !important; display: block !important; }
-          /* Pin the sheet to exactly one A4 page. Measured content is ~282mm
-             (15mm under A4), so overflow:hidden never clips real content, it
-             only guards against a sub-pixel rounding sliver tipping to page 2. */
-          .op-sheet { box-shadow: none !important; width: 210mm !important; height: 297mm !important; min-height: 0 !important; overflow: hidden !important; }
-          .op-cta, .op-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          .op-pilot, .op-num, .op-slash, .op-pilot-k { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          /* Always print a light, white-paper A4, even when the app is in dark
+             mode: re-pin every --rd-* token on the sheet to its light value so
+             all token-driven descendants (text, boxes, the figure) render as
+             dark ink on white. Pin to exactly one A4 page; overflow:hidden stops
+             a sub-pixel rounding sliver from spilling to a second page. */
+          .op-sheet {
+            --rd-bg: #f5f5f5; --rd-surface: #ffffff; --rd-raised: #ffffff; --rd-sunken: #ececec; --rd-inverse: #0d0d0d;
+            --rd-fg-strong: #000000; --rd-head: #1f1f1f; --rd-fg: #1a1a1a; --rd-fg-2: #4a4a4a; --rd-fg-3: #5f5f5f; --rd-muted: #a0a0a0;
+            --rd-hair: #e0e0e0; --rd-edge: #c8c8c8;
+            --rd-accent: #ea580c; --rd-accent-press: #c2410c; --rd-accent-soft: rgba(234,88,12,0.10); --rd-accent-hair: rgba(234,88,12,0.32);
+            background: #ffffff !important; border: 0 !important; box-shadow: none !important;
+            width: 210mm !important; height: 297mm !important; min-height: 0 !important; overflow: hidden !important;
+          }
+          /* Print the light design exactly (boxes, accent tint, CTA, figure)
+             rather than letting the browser drop background colors. */
+          .op-sheet, .op-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          /* Force the dark-on-light logo regardless of the on-screen theme. */
+          .op-logo--light { display: block !important; }
+          .op-logo--dark { display: none !important; }
         }
       `}</style>
 
@@ -195,7 +238,12 @@ export default function OnePager() {
         {/* ── Header ─────────────────────────────────────── */}
         <header>
           <div className="flex items-start justify-between gap-4">
-            <BrandMark theme="light" size="md" />
+            {/* Theme-reactive logo: dark mark on the light sheet, white mark on
+                the dark sheet. Print always forces the dark mark (white paper). */}
+            <div className="shrink-0">
+              <img src="/media/rd_logo.png" alt="RapidDraft" className="op-logo op-logo--light" />
+              <img src="/media/rd_logo_white.png" alt="" aria-hidden="true" className="op-logo op-logo--dark" />
+            </div>
             <div className="flex flex-wrap justify-end gap-1.5">
               {t.badges.map((b) => (
                 <span key={b} className="op-badge">{b}</span>
@@ -204,70 +252,85 @@ export default function OnePager() {
           </div>
           <div className="mt-4">
             <Eyebrow>{t.eyebrow}</Eyebrow>
-            <h1 className="op-h1">{t.headline}</h1>
+            <h1 className="op-h1">
+              {t.headingLead}
+              <span className="op-mark">{t.headingMark}</span>
+            </h1>
             <p className="op-sub">{t.subhead}</p>
+          </div>
+
+          {/* proof stats */}
+          <div className="op-stats">
+            {t.stats.map((s) => (
+              <div key={s.k} className="op-stat">
+                <div className="op-stat-k">{s.k}</div>
+                <div className="op-stat-v">{s.v}</div>
+              </div>
+            ))}
           </div>
         </header>
 
-        {/* ── Figure ─────────────────────────────────────── */}
-        <div className="mx-auto mt-4 w-full" style={{ maxWidth: '166mm' }}>
-          <EngineeringStackFigure />
+        {/* ── Hub-and-spoke: inputs -> RapidDraft -> outputs ─ */}
+        <div className="mx-auto mt-6 w-full" style={{ maxWidth: '168mm' }}>
+          <HubAndSpokeFigure inputs={HS_INPUTS} outputs={HS_OUTPUTS} alt={HS_ALT} />
         </div>
+        <p className="op-cap">{t.figureCaption}</p>
 
-        <hr className="op-rule" style={{ margin: '22px 0 11px' }} />
+        <hr className="op-rule" style={{ border: 0, borderTop: '1px solid var(--rd-hair)', margin: '20px 0 0' }} />
 
-        {/* ── Problem ────────────────────────────────────── */}
-        <p className="op-section-title">{t.problem.title}</p>
-        <div className="op-problem">
-          {t.problem.lines.map((l) => (
-            <p key={l}>{l}</p>
-          ))}
-        </div>
-
-        <hr className="op-rule" style={{ margin: '11px 0' }} />
-
-        {/* ── RapidDraft helps you ───────────────────────── */}
-        <p className="op-section-title">{t.helps.title}</p>
-        <div className="op-grid4">
-          {t.helps.items.map((it) => (
-            <ItemRow key={it.title} title={it.title} body={it.body} />
-          ))}
-        </div>
-
-        {/* ── Use cases ──────────────────────────────────── */}
-        <p className="op-section-title" style={{ marginTop: '11px' }}>{t.useCases.title}</p>
-        <div className="op-grid4">
-          {t.useCases.items.map((it, i) => (
-            <ItemRow key={it.title} title={it.title} body={it.body} num={i + 1} />
-          ))}
-        </div>
-
-        {/* ── Data sovereignty ───────────────────────────── */}
-        <p className="op-section-title" style={{ marginTop: '11px' }}>{t.sovereignty.title}</p>
-        <div className="op-grid4">
-          {t.sovereignty.items.map((it) => (
-            <ItemRow key={it.title} title={it.title} body={it.body} />
-          ))}
-        </div>
-
-        {/* ── Pilot (pinned to the bottom) ───────────────── */}
-        <div className="mt-auto pt-3">
-          <div className="op-pilot">
-            <div>
-              <p className="op-section-title" style={{ margin: 0 }}>{t.pilot.title}</p>
-              <p className="op-sub" style={{ margin: '3px 0 0', fontSize: '9px' }}>{t.pilot.body}</p>
-            </div>
-            <div className="flex items-center gap-5">
-              {t.pilot.points.map((p) => (
-                <div key={p.k} className="text-right">
-                  <div className="op-pilot-k">{p.k}</div>
-                  <div className="op-pilot-v">{p.v}</div>
+        {/* ── How it works, on your infrastructure ────────── */}
+        <div className="mt-5">
+          <div className="op-head-row">
+            <LockGlyph />
+            <p className="op-section-title">{t.how.title}</p>
+          </div>
+          <p className="op-section-sub">{t.how.sub}</p>
+          <div className="op-flow">
+            {t.how.steps.map((s, i) => (
+              <div key={s.k} className="contents">
+                {i > 0 && <span className="op-chev" aria-hidden="true">›</span>}
+                <div className="op-step">
+                  <div className="op-step-k">{s.k}</div>
+                  <p className="op-step-title">{s.title}</p>
+                  <p className="op-step-body">{s.body}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Where it fits  /  Built for data sovereignty ── */}
+        <div className="op-cols">
+          <div>
+            <p className="op-section-title">{t.fit.title}</p>
+            <div className="op-chips">
+              {t.fit.items.map((c) => (
+                <span key={c} className="op-chip op-chip--soft">{c}</span>
               ))}
-              <span className="op-cta">{t.pilot.cta}</span>
             </div>
           </div>
-          <p className="op-contact" style={{ marginTop: '7px' }}>{t.pilot.contact}</p>
+          <div>
+            <p className="op-section-title">{t.trust.title}</p>
+            <div className="op-chips">
+              {t.trust.chips.map((c) => (
+                <span key={c} className="op-chip">{c}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Footer: credibility + pilot CTA (anchored to the bottom) ── */}
+        <div className="mt-auto pt-5">
+          <hr style={{ border: 0, borderTop: '1px solid var(--rd-hair)', margin: 0 }} />
+          <p className="op-proof">{t.proof}</p>
+          <div className="op-pilot mt-3">
+            <div>
+              <p className="op-pilot-title">{t.pilot.title}</p>
+              <p className="op-pilot-body">{t.pilot.body}</p>
+            </div>
+            <span className="op-cta">{t.pilot.cta}</span>
+          </div>
+          <p className="op-contact">{t.pilot.contact}</p>
         </div>
       </article>
     </div>
