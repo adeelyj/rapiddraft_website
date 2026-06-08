@@ -481,8 +481,8 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ── Security teaser (dark band for contrast + the sovereignty theme) ── */}
-      <Section screen className="rd-dark bg-[var(--rd-bg)]">
+      {/* ── Security teaser ──────────────────────────────── */}
+      <Section screen>
         <SectionHeader
           eyebrow={t.security.eyebrow}
           title={t.security.title}
