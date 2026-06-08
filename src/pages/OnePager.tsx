@@ -189,7 +189,7 @@ export default function OnePager() {
 
         /* ── How it works (on-prem flow) ─────────────────────── */
         .op-flow { display: flex; align-items: stretch; gap: 0; margin-top: 10px; }
-        .op-step { flex: 1; display: flex; flex-direction: column; border: 1px solid var(--rd-hair); border-radius: 10px; background: var(--rd-surface); padding: 9px 11px; }
+        .op-step { flex: 1; display: flex; flex-direction: column; border: 1px solid var(--rd-hair); border-radius: 10px; background: var(--rd-surface); padding: 11px 12px; }
         .op-step-k { font-family: var(--rd-num); font-size: 11px; font-weight: 700; color: var(--rd-accent); letter-spacing: 0.4px; }
         .op-step-title { font-size: 9.2px; font-weight: 600; line-height: 1.2; color: var(--rd-fg-strong); margin: 5px 0 0; }
         .op-step-body { font-size: 8.4px; line-height: 1.42; color: var(--rd-fg-2); margin: 4px 0 0; }
@@ -208,8 +208,7 @@ export default function OnePager() {
         .op-pilot-body { font-size: 9.2px; line-height: 1.45; color: var(--rd-fg-2); margin: 4px 0 0; max-width: 130mm; }
         .op-qr { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
         .op-qr-img { width: 72px; height: 72px; display: block; border-radius: 9px; box-shadow: 0 2px 8px -3px rgba(17,24,39,0.25); }
-        .op-qr-label { font-size: 9px; font-weight: 600; line-height: 1.25; color: var(--rd-fg); text-align: right; max-width: 66px; }
-        .op-qr-label span { color: var(--rd-accent); }
+        .op-qr-label { font-size: 9.2px; font-weight: 600; line-height: 1.3; color: var(--rd-fg); text-align: right; max-width: 92px; }
 
         /* ── Trust row: backers + contact ────────────────────── */
         .op-trust { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 13px; }
@@ -253,10 +252,14 @@ export default function OnePager() {
             width: 210mm !important; height: 297mm !important; min-height: 0 !important; overflow: hidden !important;
           }
           .op-sheet, .op-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          /* Force the dark-on-light logo + un-inverted backer logos on paper. */
+          /* Force the dark-on-light logo + un-inverted backer logos on paper.
+             The [data-theme='dark'] selector is left in the cascade when printing
+             from dark, so match its specificity to be sure grayscale wins. */
           .op-logo--light { display: block !important; }
           .op-logo--dark { display: none !important; }
-          .op-backer { filter: grayscale(1) !important; opacity: 0.7 !important; }
+          [data-theme='dark'] .op-backer, .op-backer { filter: grayscale(1) !important; opacity: 0.7 !important; }
+          /* Clean QR edges on paper, so a drop shadow never confuses a scanner. */
+          .op-qr-img { box-shadow: none !important; }
         }
       `}</style>
 
@@ -356,7 +359,7 @@ export default function OnePager() {
               <p className="op-pilot-body">{t.pilot.body}</p>
             </div>
             <div className="op-qr">
-              <p className="op-qr-label">{t.pilot.scan} <span>›</span></p>
+              <p className="op-qr-label">{t.pilot.scan}</p>
               <img src="/media/qr-book-demo.svg" alt="QR code to book a demo at rapiddraft.ai/book-demo" className="op-qr-img" />
             </div>
           </div>
