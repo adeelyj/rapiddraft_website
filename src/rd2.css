@@ -168,6 +168,11 @@ html.rd-snap {
 @media (pointer: coarse) {
   html.rd-snap { scroll-snap-type: none; }
 }
+/* Snap sections fill the viewport, so they must snap flush to the top and let
+   their flex-centred content land in the middle (the nav auto-hides on the way
+   down). The base .rd-section scroll-margin-top is anchor offset for inner flow
+   pages; on the snap page it would land every section ~88px low and off-centre. */
+html.rd-snap .rd-screen { scroll-margin-top: 0; }
 /* The footer is the last snap stop so it stays reachable under `mandatory`
    (without its own snap target the bottom would pull back to the last section).
    Home resets to the top on mount (scrollTo(0,0) + manual restoration), so this
