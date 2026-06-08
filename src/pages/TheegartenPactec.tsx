@@ -1,295 +1,1052 @@
+import { useEffect, useState } from 'react';
 import PageMeta from '../components/PageMeta';
 import Section from '../components/Section';
 import Reveal from '../components/home/Reveal';
 
-const demoSteps = [
-    {
-        title: 'Quality Documents',
-        body: ['Drawing to Inspection Report'],
-    },
-    {
-        title: 'Design errors',
-        body: ['Step file DFM review', 'Drawing issues'],
-    },
-    {
-        title: 'Naming standardization',
-        body: ['Solidworks file renamed'],
-    },
-    {
-        title: 'Knowledge management',
-        body: ['E-plan files query with AI agent'],
-    },
-    {
-        title: 'Collaboration',
-        body: ['Commenting', 'Shared environment between supplier/client'],
-    },
-];
+type PageLang = 'en' | 'de';
 
-const foundingTeam = [
-    {
-        name: 'Adeel Yawar Jamil',
-        title: 'Founder & Mechanical Engineering Lead',
-        bio: '15+ years across CAD, simulation, and technical documentation in aerospace, automotive, and process industries.',
-        image: '/media/adeel.jpg',
+const PAGE_CONTENT = {
+    en: {
+        metaTitle: 'RapidDraft for Theegarten-Pactec | AI-assisted release checks',
+        metaDescription:
+            'A tailored RapidDraft follow-up for Theegarten-Pactec: AI-assisted drawing, BOM, and CIM Database release checks with source-linked findings, engineer approval, and controlled deployment.',
+        hero: {
+            kicker: 'For Theegarten-Pactec Engineering',
+            title: 'Agentic drawing release and design review for engineering teams',
+            body:
+                'RapidDraft helps hardware teams catch design and drawing issues earlier, automate repetitive review checks, and preserve decision context across CAD models, manufacturing drawings, and release workflows.',
+            cta: 'Contact Us',
+            chips: ['GDPR aligned', 'On-prem option', 'Local/private AI', 'Engineer approval'],
+        },
+        language: {
+            label: 'Page language',
+            en: 'EN',
+            de: 'DE',
+        },
+        security: {
+            kicker: 'Security First',
+            title: 'Data security and transparency come first',
+            body:
+                'Runs locally on-prem, optimized for AI hardware like NVIDIA DGX Spark. No data leaves your infrastructure.',
+        },
+        architecture: {
+            kicker: 'Architecture Follow-Up',
+            title: 'Product Architecture',
+            body:
+                'The architecture should be discussed as a set of deployment decisions, not as a fixed cloud product. The first pilot can stay narrow while preserving the path to Theegarten-approved enterprise infrastructure.',
+            principles: [
+                {
+                    title: 'Boundary first',
+                    body:
+                        'Drawings, BOMs, prompts, embeddings, generated findings, and review reports remain inside the agreed Theegarten-approved boundary.',
+                },
+                {
+                    title: 'Human approval remains central',
+                    body:
+                        'RapidDraft proposes source-linked findings; Theegarten engineers approve, reject, or request changes before release handoff.',
+                },
+                {
+                    title: 'Integration is phased',
+                    body:
+                        'Start with file/package ingestion and manual export, then add customer-approved connectors for CIM Database, EPLAN, CAD/PDM/PLM, and document stores.',
+                },
+            ],
+            stack: {
+                title: 'Local AI deployment stack',
+                columns: ['Layer', 'POC', 'Pilot (serious)', 'Production / Enterprise'],
+                rows: [
+                    ['Compute', 'DGX Spark / workstation (demo)', 'CPU control node + 2x L40S or RTX PRO 6000 Blackwell', 'H200 pool / customer AI platform'],
+                    ['Runtime', 'Docker Compose', 'K3s + Helm', 'Kubernetes · OpenShift AI · VMware Private AI · Run:ai'],
+                    ['Model serving', 'vLLM', 'vLLM + 1 NIM · LiteLLM gateway', 'NVIDIA AI Enterprise + NIM (+ Triton / SGLang) · Model Gateway'],
+                    ['Data & vectors', 'PostgreSQL + pgvector', 'PostgreSQL + Qdrant + MinIO', '+ OpenSearch / Elastic · separated DB / vector / object'],
+                    ['Doc intelligence', 'Docling', 'Docling + PaddleOCR / Surya', '+ Table Transformer · layout models · scaled ingestion'],
+                    ['Agent & workflow', 'LangGraph', 'LangGraph + Temporal (human gates)', 'Versioned prompt / agent / workflow registry · provenance'],
+                    ['Identity & security', 'Local / Keycloak', 'Keycloak SSO + RBAC · ACL-before-retrieval', 'OIDC / SAML / AD · OPA / Casbin · Vault · SBOM · signed · air-gap'],
+                    ['Observability', 'Langfuse (opt.)', 'Prometheus + Grafana + Langfuse', '+ LangSmith / Elastic / Splunk'],
+                    ['Connectors', 'File share · STEP AP242', 'SharePoint · BOM export · 1 PDM spike', 'CIM / PLM · EPLAN · SolidWorks PDM · NX Open · Creo (controlled plane)'],
+                ],
+            },
+            notes: [
+                'DGX Spark is best treated as a pilot/reference appliance, not the default departmental production server.',
+                'CIM, EPLAN, CAD/PDM/PLM, and file-share connectors should stay marked as future integrations until scoped with Theegarten IT.',
+                'Project indexing is for cited retrieval, not cross-customer reuse or silent model training.',
+            ],
+        },
+        roadmap: {
+            kicker: 'Product Roadmap',
+            title: 'From release review to engineering workflow intelligence',
+            body:
+                'RapidDraft starts with trusted release checks and grows into a governed workflow layer for CAD, drawings, BOMs, PLM data, and engineering knowledge.',
+            phases: [
+                {
+                    title: 'Pilot: Release Review Intelligence',
+                    body: 'Check drawings, BOMs, CAD exports, and release packages before sign-off.',
+                    chips: ['Findings', 'Change summary', 'Review report'],
+                },
+                {
+                    title: 'Connected Review Workflow',
+                    body: 'Move review context through existing PLM, PDM, CIM, CAD export, EPLAN, and file-share workflows.',
+                    chips: ['CIM / PLM', 'EPLAN context', 'Report handoff'],
+                },
+                {
+                    title: 'Engineering Knowledge & Decision Memory',
+                    body: 'Make standards, manuals, previous findings, and decisions searchable with source citations.',
+                    chips: ['Cited retrieval', 'Prior reviews', 'Rule templates'],
+                },
+                {
+                    title: 'Assisted Engineering Automation',
+                    body: 'Draft change summaries, action lists, checklists, and release artifacts for engineer approval.',
+                    chips: ['Action lists', 'Checklists', 'Draft summaries'],
+                },
+                {
+                    title: 'Enterprise Engineering AI Platform',
+                    body: 'Scale with private deployment, identity, audit, workflow versions, and approved model routing.',
+                    chips: ['SSO / RBAC', 'Audit trail', 'Model routing'],
+                },
+                {
+                    title: 'Long-Term Vision: RapidDraft Studio',
+                    body: 'Bring review, workflows, AI assistance, decisions, approvals, and release evidence into one engineering cockpit.',
+                    chips: ['CAD context', 'Workflow cockpit', 'Release evidence'],
+                },
+            ],
+            foundationLabel: 'Constant across every phase',
+            foundationItems: [
+                'source-linked evidence',
+                'engineer approval',
+                'existing CAD / PLM authority',
+                'controlled customer data boundary',
+            ],
+        },
+        demo: {
+            kicker: 'Live Demo',
+            title: 'Release check for a real module-change workflow',
+            body:
+                'We will demonstrate the release logic on a representative Theegarten workflow: drawing update, BOM impact, optional EPLAN context, and CIM Database release review.',
+            steps: [
+                {
+                    title: 'Quality documents',
+                    body: ['Drawing to inspection report'],
+                    media: { type: 'placeholder', label: 'Quality document demo placeholder' },
+                },
+                {
+                    title: 'Design errors',
+                    body: ['STEP file DFM review', 'Drawing issues'],
+                    media: { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM review video' },
+                },
+                {
+                    title: 'Knowledge management',
+                    body: ['EPLAN files queried with AI agent'],
+                    media: { type: 'placeholder', label: 'Knowledge management demo placeholder' },
+                },
+                {
+                    title: 'Collaboration',
+                    body: ['Commenting', 'Shared supplier/client review context'],
+                    media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-pillar commenting video' },
+                },
+                {
+                    title: 'Other',
+                    body: ['Naming standardization', 'SOLIDWORKS file renamed'],
+                },
+            ],
+        },
+        nextSteps: {
+            title: 'Action Tracker',
+            columns: ['Action', 'Status'],
+            rows: [
+                ['First Meeting, June 04 2026', 'DONE'],
+                ['Followup meeting on June 16, 13-14 Uhr', 'Scheduled'],
+                ['Define project scope and success/fail criteria', 'Open'],
+                ['Sign NDA and Letter of Intent', 'Open'],
+                ['RapidDraft visits Theegarten', 'Open'],
+                ['Kickoff', 'Open'],
+            ],
+        },
+        pilot: {
+            kicker: 'Pilot Programme',
+            title: 'Proof of value before production deployment',
+            body:
+                'Validate RapidDraft on one representative release workflow, prove findings quality with Theegarten engineers, and decide on production only after the value and security fit are clear.',
+            phases: [
+                {
+                    title: 'Phase 1 — Feasibility',
+                    note: '',
+                    duration: '1 week',
+                    body:
+                        'Visit Theegarten-Pactec and interview 2-3 engineers to map one release workflow, pain points, data boundaries, and success criteria.',
+                    deliverable: 'Deliverable: feasibility report, scope, security concept.',
+                },
+                {
+                    title: 'Phase 2 — Kick-off',
+                    note: '',
+                    duration: '1 week',
+                    body:
+                        'Confirm scope, sample packages, access constraints, demo workflow, open questions, and team responsibilities.',
+                    deliverable: 'Deliverable: signed LOI, kick-off deck, roles, timeline.',
+                },
+                {
+                    title: 'Phase 3 — Review',
+                    note: '',
+                    duration: '2 weeks',
+                    body:
+                        'Review implementation status with engineers and test whether findings are useful, traceable, and relevant to release decisions.',
+                    deliverable: 'Deliverable: value report, use cases, findings quality.',
+                },
+                {
+                    title: 'Phase 4 — Deployment',
+                    note: '(optional)',
+                    duration: 'optional',
+                    body:
+                        'Move to production only if the value case, security requirements, and rollout approach are confirmed.',
+                    deliverable: 'Deliverable: deployment plan, training, support model.',
+                },
+            ],
+        },
+        team: {
+            kicker: 'The team behind RapidDraft',
+            title: 'Engineering depth, AI capability, and industrial execution.',
+            body:
+                'Theegarten-Pactec would work directly with founders who understand mechanical release workflows, controlled deployment, and production AI systems.',
+            cta: 'Contact Us',
+            members: [
+                {
+                    name: 'Adeel Yawar Jamil',
+                    title: 'Founder & Mechanical Engineering Lead',
+                    bio:
+                        '15+ years across CAD, simulation, and technical documentation in aerospace, automotive, and process industries.',
+                    image: '/media/adeel.jpg',
+                },
+                {
+                    name: 'Dr. Hasan Raza',
+                    title: 'Founder & Operations Lead',
+                    bio:
+                        '15+ years scaling engineering and manufacturing operations, with focus on controlled deployment inside industrial workflows.',
+                    image: '/media/hasan.jpg',
+                },
+                {
+                    name: 'Sreekar Reddy Sajjala',
+                    title: 'Founder & AI Lead',
+                    bio:
+                        'Builds production AI systems and engineering software across FEM, CFD, topology optimization, and data-driven tooling.',
+                    image: '/media/sreekar.jpg',
+                },
+            ],
+        },
+        diagrams: {
+            stack: {
+                aria: 'RapidDraft layer connecting Theegarten engineering inputs to controlled release outputs',
+                title: 'RapidDraft connects engineering inputs to controlled release outputs',
+                inputs: [
+                    ['SOLIDWORKS', 'EPLAN'],
+                    ['2D Drawings'],
+                    ['CIM Database'],
+                    ['Release Package'],
+                    ['Supplier QA'],
+                ],
+                outputs: ['DFM Findings', 'Inspection Readiness', 'BOM Consistency', 'Release Gates', 'Audit Trail'],
+                center: 'RapidDraft',
+                centerNote: 'HUMAN-IN-THE-LOOP REVIEW',
+            },
+            localAi: {
+                aria:
+                    'Local AI deployment architecture from Theegarten release package to engineer-approved CIM Database release',
+                title: 'Local AI deployment architecture for RapidDraft at Theegarten-Pactec',
+                packageKicker: 'THEEGARTEN-PACTEC DATA',
+                packageTitle: 'Release Package',
+                packageMeta: 'CAD · Drawing · BOM · EPLAN',
+                hardwareKicker: 'PRIVATE RUNTIME OPTION',
+                hardwareTitle: 'NVIDIA DGX Spark',
+                hardwareMeta: 'Runs on-site · company network',
+                workspaceKicker: 'RAPIDDRAFT WORKSPACE',
+                workspaceTitle: 'Agent inside the product',
+                workspaceMeta: 'Orchestrates tools, not a chatbot',
+                toolLayer: 'AGENT TOOL LAYER',
+                tools: ['BOM', 'DFM', 'Model / Canvas', 'Knowledge', 'Artifacts'],
+                reasoning: 'Checks · retrieval · evidence',
+                outputKicker: 'AGENT OUTPUT',
+                outputTitle: 'Evidence-linked results',
+                outputMeta: 'BOM · DFM · citations · release notes',
+                humanKicker: 'HUMAN IN THE LOOP',
+                humanTitle: 'Engineer approval',
+                humanMeta: 'Reviews & approves before release',
+                plmKicker: 'PLM HANDOFF',
+                plmTitle: 'CIM Database release summary',
+                plmMeta: 'Review report written back to PLM',
+            },
+        },
     },
-    {
-        name: 'Dr. Hasan Raza',
-        title: 'Founder & Operations Lead',
-        bio: '15+ years scaling engineering and manufacturing operations, with focus on controlled deployment inside industrial workflows.',
-        image: '/media/hasan.jpg',
+    de: {
+        metaTitle: 'RapidDraft für Theegarten-Pactec | KI-gestützte Freigabeprüfungen',
+        metaDescription:
+            'RapidDraft Follow-up für Theegarten-Pactec: KI-gestützte Prüfungen von Zeichnungen, Stücklisten und CIM-Database-Freigaben mit nachvollziehbaren Befunden, Engineer-Freigabe und kontrollierter Bereitstellung.',
+        hero: {
+            kicker: 'Für Theegarten-Pactec Engineering',
+            title: 'KI-Review für Engineering-Freigaben',
+            body:
+                'RapidDraft hilft Hardware-Teams, Design- und Zeichnungsfehler früher zu erkennen, wiederkehrende Review-Schritte zu automatisieren und Entscheidungskontext über CAD-Modelle, Fertigungszeichnungen und Freigabeprozesse hinweg zu sichern.',
+            cta: 'Kontakt aufnehmen',
+            chips: ['DSGVO-orientiert', 'On-prem möglich', 'Lokale/private KI', 'Engineer-Freigabe'],
+        },
+        language: {
+            label: 'Seitensprache',
+            en: 'EN',
+            de: 'DE',
+        },
+        security: {
+            kicker: 'Security First',
+            title: 'Datensicherheit und Transparenz zuerst',
+            body:
+                'Läuft lokal/on-prem und ist für KI-Hardware wie NVIDIA DGX Spark optimiert. Keine Daten verlassen Ihre Infrastruktur.',
+        },
+        architecture: {
+            kicker: 'Architektur-Follow-up',
+            title: 'Produktarchitektur',
+            body:
+                'Die Architektur sollte als Reihe von Bereitstellungsentscheidungen besprochen werden, nicht als festes Cloud-Produkt. Der erste Pilot kann bewusst eng bleiben und trotzdem den Pfad zu Theegarten-genehmigter Enterprise-Infrastruktur offenhalten.',
+            principles: [
+                {
+                    title: 'Grenze zuerst',
+                    body:
+                        'Zeichnungen, Stücklisten, Prompts, Embeddings, generierte Befunde und Review-Reports bleiben innerhalb der vereinbarten Theegarten-genehmigten Grenze.',
+                },
+                {
+                    title: 'Engineer-Freigabe bleibt zentral',
+                    body:
+                        'RapidDraft schlägt quellenbasierte Befunde vor; Theegarten-Engineers bestätigen, verwerfen oder fordern Änderungen an, bevor eine Freigabeübergabe erfolgt.',
+                },
+                {
+                    title: 'Integration erfolgt phasenweise',
+                    body:
+                        'Start mit Datei-/Paket-Ingestion und manuellem Export, danach kundenseitig genehmigte Connectoren für CIM Database, EPLAN, CAD/PDM/PLM und Dokumentenspeicher.',
+                },
+            ],
+            stack: {
+                title: 'Lokaler KI-Bereitstellungs-Stack',
+                columns: ['Ebene', 'POC', 'Pilot (seriös)', 'Produktion / Enterprise'],
+                rows: [
+                    ['Compute', 'DGX Spark / Workstation (Demo)', 'CPU-Control-Node + 2x L40S oder RTX PRO 6000 Blackwell', 'H200-Pool / Kunden-AI-Plattform'],
+                    ['Runtime', 'Docker Compose', 'K3s + Helm', 'Kubernetes · OpenShift AI · VMware Private AI · Run:ai'],
+                    ['Model Serving', 'vLLM', 'vLLM + 1 NIM · LiteLLM Gateway', 'NVIDIA AI Enterprise + NIM (+ Triton / SGLang) · Model Gateway'],
+                    ['Daten & Vektoren', 'PostgreSQL + pgvector', 'PostgreSQL + Qdrant + MinIO', '+ OpenSearch / Elastic · getrennte DB / Vector / Object Stores'],
+                    ['Dokumentintelligenz', 'Docling', 'Docling + PaddleOCR / Surya', '+ Table Transformer · Layout-Modelle · skalierte Ingestion'],
+                    ['Agent & Workflow', 'LangGraph', 'LangGraph + Temporal (Human Gates)', 'Versioniertes Prompt-/Agent-/Workflow-Registry · Provenance'],
+                    ['Identität & Security', 'Lokal / Keycloak', 'Keycloak SSO + RBAC · ACL-before-retrieval', 'OIDC / SAML / AD · OPA / Casbin · Vault · SBOM · signiert · Air-gap'],
+                    ['Observability', 'Langfuse (opt.)', 'Prometheus + Grafana + Langfuse', '+ LangSmith / Elastic / Splunk'],
+                    ['Connectoren', 'File Share · STEP AP242', 'SharePoint · BOM-Export · 1 PDM-Spike', 'CIM / PLM · EPLAN · SolidWorks PDM · NX Open · Creo (kontrolliert geplant)'],
+                ],
+            },
+            notes: [
+                'DGX Spark sollte als Pilot-/Referenz-Appliance verstanden werden, nicht als Standardserver für produktive Fachbereiche.',
+                'CIM, EPLAN, CAD/PDM/PLM und File-Share-Connectoren bleiben als zukünftige Integrationen markiert, bis sie mit Theegarten IT gescoped sind.',
+                'Projektindexierung dient zitiertem Retrieval, nicht kundenübergreifender Wiederverwendung oder stillem Modelltraining.',
+            ],
+        },
+        roadmap: {
+            kicker: 'Produkt-Roadmap',
+            title: 'Von der Freigabeprüfung zur Engineering-Workflow-Intelligenz',
+            body:
+                'RapidDraft startet mit vertrauenswürdigen Freigabeprüfungen und wächst zu einer kontrollierten Workflow-Schicht für CAD, Zeichnungen, Stücklisten, PLM-Daten und Engineering-Wissen.',
+            phases: [
+                {
+                    title: 'Pilot: Release Review Intelligence',
+                    body: 'Zeichnungen, Stücklisten, CAD-Exporte und Freigabepakete vor dem Sign-off prüfen.',
+                    chips: ['Befunde', 'Änderungsübersicht', 'Review-Report'],
+                },
+                {
+                    title: 'Connected Review Workflow',
+                    body: 'Review-Kontext durch bestehende PLM-, PDM-, CIM-, CAD-Export-, EPLAN- und File-Share-Workflows bewegen.',
+                    chips: ['CIM / PLM', 'EPLAN-Kontext', 'Report-Übergabe'],
+                },
+                {
+                    title: 'Engineering Knowledge & Decision Memory',
+                    body: 'Standards, Handbücher, frühere Befunde und Entscheidungen mit Quellenzitaten durchsuchbar machen.',
+                    chips: ['Zitiertes Retrieval', 'Frühere Reviews', 'Rule Templates'],
+                },
+                {
+                    title: 'Assisted Engineering Automation',
+                    body: 'Änderungszusammenfassungen, Action Lists, Checklisten und Freigabeartefakte für Engineer-Freigabe entwerfen.',
+                    chips: ['Action Lists', 'Checklisten', 'Draft Summaries'],
+                },
+                {
+                    title: 'Enterprise Engineering AI Platform',
+                    body: 'Skalierung mit privater Bereitstellung, Identity, Audit, Workflow-Versionen und genehmigtem Model Routing.',
+                    chips: ['SSO / RBAC', 'Audit Trail', 'Model Routing'],
+                },
+                {
+                    title: 'Long-Term Vision: RapidDraft Studio',
+                    body: 'Review, Workflows, KI-Unterstützung, Entscheidungen, Freigaben und Release-Evidenz in einem Engineering-Cockpit bündeln.',
+                    chips: ['CAD-Kontext', 'Workflow-Cockpit', 'Release-Evidenz'],
+                },
+            ],
+            foundationLabel: 'Konstant über alle Phasen',
+            foundationItems: [
+                'quellenbasierte Evidenz',
+                'Engineer-Freigabe',
+                'bestehende CAD-/PLM-Autorität',
+                'kontrollierte Kundendatengrenze',
+            ],
+        },
+        demo: {
+            kicker: 'Live Demo',
+            title: 'Freigabeprüfung für einen realen Moduländerungs-Workflow',
+            body:
+                'Wir demonstrieren die Freigabelogik an einem repräsentativen Theegarten-Workflow: Zeichnungsänderung, Stücklistenauswirkung, optionaler EPLAN-Kontext und CIM-Database-Freigabeprüfung.',
+            steps: [
+                {
+                    title: 'Qualitätsdokumente',
+                    body: ['Von Zeichnung zu Prüfbericht'],
+                    media: { type: 'placeholder', label: 'Platzhalter für Qualitätsdokumente' },
+                },
+                {
+                    title: 'Designfehler',
+                    body: ['DFM-Review der STEP-Datei', 'Zeichnungsfehler'],
+                    media: { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM-Review-Video' },
+                },
+                {
+                    title: 'Knowledge Management',
+                    body: ['EPLAN-Dateien mit KI-Agent abfragen'],
+                    media: { type: 'placeholder', label: 'Platzhalter für Knowledge Management' },
+                },
+                {
+                    title: 'Zusammenarbeit',
+                    body: ['Kommentierung', 'Gemeinsamer Review-Kontext für Lieferant und Kunde'],
+                    media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-Pillar-Kommentierungs-Video' },
+                },
+                {
+                    title: 'Sonstiges',
+                    body: ['Benennungsstandardisierung', 'SOLIDWORKS-Datei umbenannt'],
+                },
+            ],
+        },
+        nextSteps: {
+            title: 'Action Tracker',
+            columns: ['Aktion', 'Status'],
+            rows: [
+                ['Erstes Meeting, 04. Juni 2026', 'Erledigt'],
+                ['Follow-up-Termin am 16. Juni, 13-14 Uhr', 'Geplant'],
+                ['Projektumfang und Erfolgs-/Abbruchkriterien definieren', 'Offen'],
+                ['NDA und Letter of Intent unterzeichnen', 'Offen'],
+                ['RapidDraft besucht Theegarten', 'Offen'],
+                ['Kickoff', 'Offen'],
+            ],
+        },
+        pilot: {
+            kicker: 'Pilotprogramm',
+            title: 'Wertnachweis vor Produktionsbereitstellung',
+            body:
+                'RapidDraft an einem repräsentativen Freigabe-Workflow validieren, Befundqualität mit Theegarten-Engineers prüfen und erst nach klarem Wert- und Security-Fit über Produktion entscheiden.',
+            phases: [
+                {
+                    title: 'Phase 1 — Machbarkeit',
+                    note: '',
+                    duration: '1 Woche',
+                    body:
+                        'Besuch bei Theegarten-Pactec und Interviews mit 2-3 Engineers, um einen Freigabe-Workflow, Pain Points, Datengrenzen und Erfolgskriterien zu erfassen.',
+                    deliverable: 'Deliverable: Machbarkeitsbericht, Scope, Security-Konzept.',
+                },
+                {
+                    title: 'Phase 2 — Kick-off',
+                    note: '',
+                    duration: '1 Woche',
+                    body:
+                        'Scope, Beispielpakete, Zugriffsbeschränkungen, Demo-Workflow, offene Fragen und Teamverantwortung bestätigen.',
+                    deliverable: 'Deliverable: unterzeichnetes LOI, Kick-off-Deck, Rollen, Zeitplan.',
+                },
+                {
+                    title: 'Phase 3 — Review',
+                    note: '',
+                    duration: '2 Wochen',
+                    body:
+                        'Implementierungsstand mit Engineers prüfen und testen, ob Befunde nützlich, nachvollziehbar und relevant für Freigabeentscheidungen sind.',
+                    deliverable: 'Deliverable: Value Report, Use Cases, Befundqualität.',
+                },
+                {
+                    title: 'Phase 4 — Deployment',
+                    note: '(optional)',
+                    duration: 'optional',
+                    body:
+                        'Produktionsstart nur dann, wenn Value Case, Security-Anforderungen und Rollout-Ansatz bestätigt sind.',
+                    deliverable: 'Deliverable: Deployment-Plan, Training, Support-Modell.',
+                },
+            ],
+        },
+        team: {
+            kicker: 'Das Team hinter RapidDraft',
+            title: 'Engineering-Tiefe, KI-Kompetenz und industrielle Umsetzung.',
+            body:
+                'Theegarten-Pactec würde direkt mit Gründern arbeiten, die mechanische Freigabe-Workflows, kontrollierte Bereitstellung und produktive KI-Systeme verstehen.',
+            cta: 'Kontakt aufnehmen',
+            members: [
+                {
+                    name: 'Adeel Yawar Jamil',
+                    title: 'Founder & Mechanical Engineering Lead',
+                    bio:
+                        '15+ Jahre Erfahrung in CAD, Simulation und technischer Dokumentation in Aerospace, Automotive und Prozessindustrie.',
+                    image: '/media/adeel.jpg',
+                },
+                {
+                    name: 'Dr. Hasan Raza',
+                    title: 'Founder & Operations Lead',
+                    bio:
+                        '15+ Jahre Erfahrung im Skalieren von Engineering- und Manufacturing-Operations mit Fokus auf kontrollierte Bereitstellung in industriellen Workflows.',
+                    image: '/media/hasan.jpg',
+                },
+                {
+                    name: 'Sreekar Reddy Sajjala',
+                    title: 'Founder & AI Lead',
+                    bio:
+                        'Entwickelt produktive KI-Systeme und Engineering-Software für FEM, CFD, Topologieoptimierung und datengetriebene Tools.',
+                    image: '/media/sreekar.jpg',
+                },
+            ],
+        },
+        diagrams: {
+            stack: {
+                aria: 'RapidDraft verbindet Theegarten-Engineering-Eingaben mit kontrollierten Freigabeergebnissen',
+                title: 'RapidDraft verbindet Engineering-Eingaben mit kontrollierten Freigabeergebnissen',
+                inputs: [
+                    ['SOLIDWORKS', 'EPLAN'],
+                    ['2D-Zeichnungen'],
+                    ['CIM Database'],
+                    ['Freigabepaket'],
+                    ['Lieferanten-QA'],
+                ],
+                outputs: ['DFM-Befunde', 'Prüfbereitschaft', 'Stücklistenabgleich', 'Freigabe-Gates', 'Audit Trail'],
+                center: 'RapidDraft',
+                centerNote: 'HUMAN-IN-THE-LOOP REVIEW',
+            },
+            localAi: {
+                aria:
+                    'Lokale KI-Bereitstellungsarchitektur vom Theegarten-Freigabepaket zur Engineer-geprüften CIM-Database-Freigabe',
+                title: 'Lokale KI-Bereitstellungsarchitektur für RapidDraft bei Theegarten-Pactec',
+                packageKicker: 'THEEGARTEN-PACTEC DATEN',
+                packageTitle: 'Freigabepaket',
+                packageMeta: 'CAD · Zeichnung · BOM · EPLAN',
+                hardwareKicker: 'PRIVATE LAUFZEITOPTION',
+                hardwareTitle: 'NVIDIA DGX Spark',
+                hardwareMeta: 'Läuft vor Ort · Firmennetzwerk',
+                workspaceKicker: 'RAPIDDRAFT WORKSPACE',
+                workspaceTitle: 'Agent im Produkt',
+                workspaceMeta: 'Orchestriert Tools, kein Chatbot',
+                toolLayer: 'AGENT TOOL LAYER',
+                tools: ['BOM', 'DFM', 'Modell / Canvas', 'Knowledge', 'Artefakte'],
+                reasoning: 'Prüfungen · Retrieval · Evidenz',
+                outputKicker: 'AGENT OUTPUT',
+                outputTitle: 'Quellenbasierte Ergebnisse',
+                outputMeta: 'BOM · DFM · Zitate · Freigabenotizen',
+                humanKicker: 'HUMAN IN THE LOOP',
+                humanTitle: 'Engineer-Freigabe',
+                humanMeta: 'Prüft & bestätigt vor Freigabe',
+                plmKicker: 'PLM HANDOFF',
+                plmTitle: 'CIM-Freigabezusammenfassung',
+                plmMeta: 'Review-Report zurück an PLM',
+            },
+        },
     },
-    {
-        name: 'Sreekar Reddy Sajjala',
-        title: 'Founder & AI Lead',
-        bio: 'Builds production AI systems and engineering software across FEM, CFD, topology optimization, and data-driven tooling.',
-        image: '/media/sreekar.jpg',
-    },
-];
+} as const;
 
-const pilotPhases = [
-    {
-        title: 'Phase 1 — Feasibility',
-        note: '',
-        duration: '1 week',
-        body: 'Visit Theegarten-Pactec and interview 2–3 engineers to map one release workflow, pain points, data boundaries, and success criteria.',
-        deliverable: 'Deliverable: feasibility report, scope, security concept.',
-    },
-    {
-        title: 'Phase 2 — Kick-off',
-        note: '',
-        duration: '1 week',
-        body: 'Confirm scope, sample packages, access constraints, demo workflow, open questions, and team responsibilities.',
-        deliverable: 'Deliverable: signed LOI, kick-off deck, roles, timeline.',
-    },
-    {
-        title: 'Phase 3 — Review',
-        note: '',
-        duration: '2 weeks',
-        body: 'Review implementation status with engineers and test whether findings are useful, traceable, and relevant to release decisions.',
-        deliverable: 'Deliverable: value report, use cases, findings quality.',
-    },
-    {
-        title: 'Phase 4 — Deployment',
-        note: '(optional)',
-        duration: 'optional',
-        body: 'Move to production only if the value case, security requirements, and rollout approach are confirmed.',
-        deliverable: 'Deliverable: deployment plan, training, support model.',
-    },
-];
+type LocalAiDiagramCopy = (typeof PAGE_CONTENT)[keyof typeof PAGE_CONTENT]['diagrams']['localAi'];
+type StackDiagramCopy = (typeof PAGE_CONTENT)[keyof typeof PAGE_CONTENT]['diagrams']['stack'];
 
-function LocalAiDeploymentDiagram() {
-    const MONO = "'IBM Plex Mono', monospace";
-    const DISPLAY = "'Space Grotesk', 'Manrope', sans-serif";
-    const C = {
+function SecurityFirstDeploymentDiagram({ labels }: { labels: LocalAiDiagramCopy }) {
+    const mono = "'IBM Plex Mono', monospace";
+    const display = "'Space Grotesk', 'Manrope', sans-serif";
+    const c = {
         ink: '#111827',
         gray: '#6B7280',
         faint: '#9CA3AF',
         border: '#D1D5DB',
-        borderSoft: '#E5E7EB',
         card: 'rgba(255,255,255,0.84)',
         orange: '#EA580C',
         orangeText: '#C2410C',
         orangeBorder: '#FDBA74',
         orangeFill: 'rgba(255,247,237,0.9)',
     };
-
     const tools = [
-        { label: 'BOM', x: 442, y: 206, w: 46 },
-        { label: 'DFM', x: 494, y: 206, w: 46 },
-        { label: 'Model / Canvas', x: 546, y: 206, w: 112 },
-        { label: 'Knowledge', x: 442, y: 242, w: 84 },
-        { label: 'Artifacts', x: 532, y: 242, w: 72 },
+        { label: labels.tools[0] ?? 'BOM', x: 442, y: 206, w: 46 },
+        { label: labels.tools[1] ?? 'DFM', x: 494, y: 206, w: 46 },
+        { label: labels.tools[2] ?? 'Model / Canvas', x: 546, y: 206, w: 112 },
+        { label: labels.tools[3] ?? 'Knowledge', x: 442, y: 242, w: 84 },
+        { label: labels.tools[4] ?? 'Artifacts', x: 532, y: 242, w: 72 },
     ];
 
     return (
-        <div
-            className="relative w-full"
-            aria-label="Local-AI deployment architecture from Theegarten release package to engineer-approved CIM Database release"
-        >
+        <div className="relative w-full" aria-label={labels.aria}>
             <svg
                 viewBox="0 0 1200 420"
                 role="img"
-                aria-labelledby="rd3-title"
+                aria-label={labels.title}
                 className="block h-auto w-full overflow-visible"
             >
-                <title id="rd3-title">Local-AI deployment architecture for RapidDraft at Theegarten-Pactec</title>
                 <defs>
-                    <radialGradient id="rd3-core-glow" cx="50%" cy="50%" r="50%">
+                    <radialGradient id="security-dgx-glow" cx="50%" cy="50%" r="50%">
                         <stop offset="0%" stopColor="#FB923C" stopOpacity="0.18" />
                         <stop offset="60%" stopColor="#FB923C" stopOpacity="0.05" />
                         <stop offset="100%" stopColor="#FB923C" stopOpacity="0" />
                     </radialGradient>
-                    <linearGradient id="rd3-logo" x1="0" y1="0" x2="1" y2="1">
+                    <linearGradient id="security-dgx-logo" x1="0" y1="0" x2="1" y2="1">
                         <stop stopColor="#F97316" />
                         <stop offset="1" stopColor="#C2410C" />
                     </linearGradient>
-                    <filter id="rd3-soft" x="-40%" y="-40%" width="180%" height="180%">
+                    <filter id="security-dgx-soft" x="-40%" y="-40%" width="180%" height="180%">
                         <feDropShadow dx="0" dy="10" stdDeviation="16" floodColor="#111827" floodOpacity="0.07" />
                     </filter>
-                    <filter id="rd3-orange-soft" x="-50%" y="-50%" width="200%" height="200%">
+                    <filter id="security-dgx-orange-soft" x="-50%" y="-50%" width="200%" height="200%">
                         <feDropShadow dx="0" dy="12" stdDeviation="20" floodColor="#EA580C" floodOpacity="0.14" />
                     </filter>
                     <style>
                         {`
-                            .rd3-flow-base {
+                            .security-dgx-flow-base {
                                 stroke: rgba(75,85,99,0.28);
                                 stroke-width: 1.4;
                                 stroke-linecap: round;
                                 stroke-dasharray: 2 8;
                             }
-                            .rd3-flow {
+                            .security-dgx-flow {
                                 stroke: rgba(75,85,99,0.48);
                                 stroke-width: 1.55;
                                 stroke-linecap: round;
                                 stroke-dasharray: 2 11;
-                                animation: rd3-dash 2.8s linear infinite;
+                                animation: security-dgx-dash 2.8s linear infinite;
                             }
-                            .rd3-flow-d { animation-delay: 0.9s; }
-                            @keyframes rd3-dash { to { stroke-dashoffset: -84; } }
-                            .rd3-pip { animation: rd3-pip 2.8s ease-in-out infinite; }
-                            @keyframes rd3-pip { 0%,100%{opacity:.45} 50%{opacity:1} }
-                            @media (prefers-reduced-motion:reduce) { .rd3-flow,.rd3-pip { animation:none; } }
+                            .security-dgx-flow-d { animation-delay: 0.9s; }
+                            .security-dgx-pip { animation: security-dgx-pip 2.8s ease-in-out infinite; }
+                            @keyframes security-dgx-dash { to { stroke-dashoffset: -84; } }
+                            @keyframes security-dgx-pip { 0%,100%{opacity:.45} 50%{opacity:1} }
+                            @media (prefers-reduced-motion: reduce) {
+                                .security-dgx-flow,
+                                .security-dgx-pip { animation: none; }
+                            }
                         `}
                     </style>
                 </defs>
 
-                {/* ambient glow behind agent column */}
-                <ellipse cx="580" cy="210" rx="280" ry="210" fill="url(#rd3-core-glow)" />
+                <ellipse cx="580" cy="210" rx="280" ry="210" fill="url(#security-dgx-glow)" />
 
-                {/* ── COL 1: INPUT ─────────────────────────────────────── */}
-
-                <g filter="url(#rd3-soft)">
-                    <rect x="20" y="40" width="300" height="104" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                <g filter="url(#security-dgx-soft)">
+                    <rect x="20" y="40" width="300" height="104" rx="16" fill={c.card} stroke={c.border} strokeWidth="1.1" />
                 </g>
-                <text x="42" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>THEEGARTEN-PACTEC DATA</text>
-                <text x="42" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release Package</text>
-                <text x="42" y="120" fontFamily={MONO} fontSize="13" fill={C.gray}>CAD · Drawing · BOM · EPLAN</text>
+                <text x="42" y="66" fontFamily={mono} fontSize="12" letterSpacing="2.2" fill={c.faint}>
+                    {labels.packageKicker}
+                </text>
+                <text x="42" y="96" fontFamily={display} fontSize="21" fontWeight="600" fill={c.ink}>
+                    {labels.packageTitle}
+                </text>
+                <text x="42" y="120" fontFamily={mono} fontSize="13" fill={c.gray}>
+                    {labels.packageMeta}
+                </text>
 
-                <g filter="url(#rd3-soft)">
-                    <rect x="20" y="160" width="300" height="242" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                <g filter="url(#security-dgx-soft)">
+                    <rect x="20" y="160" width="300" height="242" rx="16" fill={c.card} stroke={c.border} strokeWidth="1.1" />
                 </g>
-                <text x="42" y="184" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>ON-PREM HARDWARE</text>
+                <text x="42" y="184" fontFamily={mono} fontSize="12" letterSpacing="2.2" fill={c.faint}>
+                    {labels.hardwareKicker}
+                </text>
                 <image href="/media/NVIDIA-DGX-SPARK.png" x="100" y="196" width="140" height="140" preserveAspectRatio="xMidYMid meet" />
-                <text x="42" y="362" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>NVIDIA DGX Spark</text>
-                <text x="42" y="386" fontFamily={MONO} fontSize="13" fill={C.gray}>Runs on-site · company network</text>
+                <text x="42" y="362" fontFamily={display} fontSize="21" fontWeight="600" fill={c.ink}>
+                    {labels.hardwareTitle}
+                </text>
+                <text x="42" y="386" fontFamily={mono} fontSize="13" fill={c.gray}>
+                    {labels.hardwareMeta}
+                </text>
 
-                {/* boundary gate — sits between the two col-1 cards */}
-                <g filter="url(#rd3-soft)">
-                    <rect x="346" y="128" width="50" height="50" rx="14" fill="rgba(255,255,255,0.92)" stroke={C.orangeBorder} strokeWidth="1.2" />
+                <g filter="url(#security-dgx-soft)">
+                    <rect x="346" y="128" width="50" height="50" rx="14" fill="rgba(255,255,255,0.92)" stroke={c.orangeBorder} strokeWidth="1.2" />
                 </g>
-                <g stroke={C.orange} strokeWidth="1.6" fill="none" strokeLinecap="round">
+                <g stroke={c.orange} strokeWidth="1.6" fill="none" strokeLinecap="round">
                     <rect x="363" y="152" width="18" height="13" rx="2.5" />
                     <path d="M365 152 V147 a6.5 6.5 0 0 1 13 0 V152" />
                 </g>
-                <circle cx="372" cy="159" r="1.8" fill={C.orange} />
+                <circle cx="372" cy="159" r="1.8" fill={c.orange} />
 
-                {/* ── COL 2: AGENT ─────────────────────────────────────── */}
-
-                <g filter="url(#rd3-orange-soft)">
-                    <rect x="420" y="40" width="320" height="362" rx="18" fill={C.orangeFill} stroke={C.orangeBorder} strokeWidth="1.3" />
+                <g filter="url(#security-dgx-orange-soft)">
+                    <rect x="420" y="40" width="320" height="362" rx="18" fill={c.orangeFill} stroke={c.orangeBorder} strokeWidth="1.3" />
                 </g>
                 <g transform="translate(442,54)">
-                    <rect width="30" height="30" rx="9" fill="url(#rd3-logo)" />
+                    <rect width="30" height="30" rx="9" fill="url(#security-dgx-logo)" />
                     <rect x="8" y="9.5" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.95" />
                     <rect x="8" y="14.8" width="10" height="3" rx="1.5" fill="#ffffff" opacity="0.78" />
                     <rect x="8" y="20.1" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.95" />
                 </g>
-                <text x="484" y="74" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.orangeText}>RAPIDDRAFT WORKSPACE</text>
-                <text x="442" y="112" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Agent inside the product</text>
-                <text x="442" y="138" fontFamily={MONO} fontSize="13" fill={C.gray}>Orchestrates tools, not a chatbot</text>
-                <text x="442" y="188" fontFamily={MONO} fontSize="12" letterSpacing="2.6" fill={C.faint}>AGENT TOOL LAYER</text>
-                {tools.map((t) => (
-                    <g key={t.label}>
-                        <rect x={t.x} y={t.y} width={t.w} height="26" rx="8" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.32)" />
-                        <text x={t.x + t.w / 2} y={t.y + 17} textAnchor="middle" fontFamily={MONO} fontSize="11" fill={C.orangeText}>
-                            {t.label}
+                <text x="484" y="74" fontFamily={mono} fontSize="12" letterSpacing="2.2" fill={c.orangeText}>
+                    {labels.workspaceKicker}
+                </text>
+                <text x="442" y="112" fontFamily={display} fontSize="21" fontWeight="600" fill={c.ink}>
+                    {labels.workspaceTitle}
+                </text>
+                <text x="442" y="138" fontFamily={mono} fontSize="13" fill={c.gray}>
+                    {labels.workspaceMeta}
+                </text>
+                <text x="442" y="188" fontFamily={mono} fontSize="12" letterSpacing="2.6" fill={c.faint}>
+                    {labels.toolLayer}
+                </text>
+                {tools.map((tool) => (
+                    <g key={tool.label}>
+                        <rect x={tool.x} y={tool.y} width={tool.w} height="26" rx="8" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.32)" />
+                        <text x={tool.x + tool.w / 2} y={tool.y + 17} textAnchor="middle" fontFamily={mono} fontSize="11" fill={c.orangeText}>
+                            {tool.label}
                         </text>
                     </g>
                 ))}
-                <circle cx="446" cy="346" r="4.5" fill={C.orange} className="rd3-pip" />
-                <text x="462" y="350" fontFamily={MONO} fontSize="11" fill={C.gray}>Reasoning · orchestration · evidence</text>
+                <circle cx="446" cy="346" r="4.5" fill={c.orange} className="security-dgx-pip" />
+                <text x="462" y="350" fontFamily={mono} fontSize="11" fill={c.gray}>
+                    {labels.reasoning}
+                </text>
 
-                {/* ── COL 3: OUTPUT (animated) ─────────────────────────── */}
-
-                {/* Card 1 — fades out at step 1 */}
                 <g>
-                    <animate attributeName="opacity"
-                        values="1;1;0;0;1;1"
-                        keyTimes="0;0.18;0.22;0.78;0.82;1"
-                        dur="10s" repeatCount="indefinite" />
-                    <g filter="url(#rd3-soft)">
-                        <rect x="848" y="40" width="332" height="108" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.18;0.22;0.78;0.82;1" dur="10s" repeatCount="indefinite" />
+                    <g filter="url(#security-dgx-soft)">
+                        <rect x="810" y="40" width="370" height="108" rx="16" fill={c.card} stroke={c.border} strokeWidth="1.1" />
                     </g>
-                    <text x="870" y="66" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>AGENT OUTPUT</text>
-                    <text x="870" y="96" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Evidence-linked results</text>
-                    <text x="870" y="122" fontFamily={MONO} fontSize="13" fill={C.gray}>BOM · DFM · citations · release notes</text>
+                    <text x="832" y="66" fontFamily={mono} fontSize="12" letterSpacing="2.2" fill={c.faint}>
+                        {labels.outputKicker}
+                    </text>
+                    <text x="832" y="96" fontFamily={display} fontSize="19" fontWeight="600" fill={c.ink}>
+                        {labels.outputTitle}
+                    </text>
+                    <text x="832" y="122" fontFamily={mono} fontSize="12" fill={c.gray}>
+                        {labels.outputMeta}
+                    </text>
                 </g>
 
-                {/* Card 2 — slides up 124px then fades */}
                 <g>
-                    {/* @ts-ignore */}
-                    <animateTransform attributeName="transform" type="translate"
-                        values="0,0;0,0;0,-124;0,-124;0,0;0,0"
-                        keyTimes="0;0.18;0.22;0.42;0.43;1"
-                        dur="10s" repeatCount="indefinite" calcMode="linear" />
-                    <animate attributeName="opacity"
-                        values="1;1;0;0;0;1;1"
-                        keyTimes="0;0.38;0.42;0.62;0.78;0.82;1"
-                        dur="10s" repeatCount="indefinite" />
-                    <g filter="url(#rd3-soft)">
-                        <rect x="848" y="164" width="332" height="116" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <animateTransform attributeName="transform" type="translate" values="0,0;0,0;0,-124;0,-124;0,0;0,0" keyTimes="0;0.18;0.22;0.42;0.43;1" dur="10s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.38;0.42;0.62;0.78;0.82;1" dur="10s" repeatCount="indefinite" />
+                    <g filter="url(#security-dgx-soft)">
+                        <rect x="810" y="164" width="370" height="116" rx="16" fill={c.card} stroke={c.border} strokeWidth="1.1" />
                     </g>
-                    <text x="870" y="190" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.orangeText}>HUMAN IN THE LOOP</text>
-                    <g transform="translate(1120,170)">
-                        <rect width="28" height="28" rx="8" fill="none" stroke={C.orangeBorder} />
-                        <g stroke={C.orange} strokeWidth="1.6" fill="none">
+                    <text x="832" y="190" fontFamily={mono} fontSize="12" letterSpacing="2.2" fill={c.orangeText}>
+                        {labels.humanKicker}
+                    </text>
+                    <g transform="translate(1126,170)">
+                        <rect width="28" height="28" rx="8" fill="none" stroke={c.orangeBorder} />
+                        <g stroke={c.orange} strokeWidth="1.6" fill="none">
                             <circle cx="14" cy="11" r="4" />
                             <path d="M6 25 c0-4.5 3.8-7 8-7 s8 2.5 8 7" strokeLinecap="round" />
                         </g>
                     </g>
-                    <text x="870" y="224" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Engineer approval</text>
-                    <text x="870" y="250" fontFamily={MONO} fontSize="13" fill={C.gray}>Reviews &amp; approves before release</text>
+                    <text x="832" y="224" fontFamily={display} fontSize="19" fontWeight="600" fill={c.ink}>
+                        {labels.humanTitle}
+                    </text>
+                    <text x="832" y="250" fontFamily={mono} fontSize="12" fill={c.gray}>
+                        {labels.humanMeta}
+                    </text>
                 </g>
 
-                {/* Card 3 — slides up 256px total then fades */}
                 <g>
-                    {/* @ts-ignore */}
-                    <animateTransform attributeName="transform" type="translate"
-                        values="0,0;0,0;0,-124;0,-124;0,-256;0,-256;0,0;0,0"
-                        keyTimes="0;0.18;0.22;0.38;0.42;0.62;0.63;1"
-                        dur="10s" repeatCount="indefinite" calcMode="linear" />
-                    <animate attributeName="opacity"
-                        values="1;1;0;0;1;1"
-                        keyTimes="0;0.58;0.62;0.78;0.82;1"
-                        dur="10s" repeatCount="indefinite" />
-                    <g filter="url(#rd3-soft)">
-                        <rect x="848" y="296" width="332" height="108" rx="16" fill={C.card} stroke={C.border} strokeWidth="1.1" />
+                    <animateTransform attributeName="transform" type="translate" values="0,0;0,0;0,-124;0,-124;0,-256;0,-256;0,0;0,0" keyTimes="0;0.18;0.22;0.38;0.42;0.62;0.63;1" dur="10s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.58;0.62;0.78;0.82;1" dur="10s" repeatCount="indefinite" />
+                    <g filter="url(#security-dgx-soft)">
+                        <rect x="810" y="296" width="370" height="108" rx="16" fill={c.card} stroke={c.border} strokeWidth="1.1" />
                     </g>
-                    <text x="870" y="322" fontFamily={MONO} fontSize="12" letterSpacing="2.2" fill={C.faint}>PLM INTEGRATION</text>
-                    <text x="870" y="350" fontFamily={DISPLAY} fontSize="21" fontWeight="600" fill={C.ink}>Release → CIM Database</text>
-                    <text x="870" y="374" fontFamily={MONO} fontSize="13" fill={C.gray}>Written back to PLM</text>
+                    <text x="832" y="322" fontFamily={mono} fontSize="12" letterSpacing="2.2" fill={c.faint}>
+                        {labels.plmKicker}
+                    </text>
+                    <text x="832" y="350" fontFamily={display} fontSize="18" fontWeight="600" fill={c.ink}>
+                        {labels.plmTitle}
+                    </text>
+                    <text x="832" y="374" fontFamily={mono} fontSize="12" fill={c.gray}>
+                        {labels.plmMeta}
+                    </text>
                 </g>
 
-                {/* ── CONNECTORS ───────────────────────────────────────── */}
                 <g fill="none">
-                    <path d="M320 92 H420" className="rd3-flow-base" />
-                    <path d="M320 92 H420" className="rd3-flow" />
-                    <path d="M320 281 H420" className="rd3-flow-base" />
-                    <path d="M320 281 H420" className="rd3-flow rd3-flow-d" />
-                    <path d="M740 94 H848" className="rd3-flow-base" />
-                    <path d="M740 94 H848" className="rd3-flow rd3-flow-d" />
+                    <path d="M320 92 H420" className="security-dgx-flow-base" />
+                    <path d="M320 92 H420" className="security-dgx-flow" />
+                    <path d="M320 281 H420" className="security-dgx-flow-base" />
+                    <path d="M320 281 H420" className="security-dgx-flow security-dgx-flow-d" />
+                    <path d="M740 94 H810" className="security-dgx-flow-base" />
+                    <path d="M740 94 H810" className="security-dgx-flow security-dgx-flow-d" />
                 </g>
                 <g fill="rgba(75,85,99,0.55)">
                     <path d="M420 92 l-7 -3.5 l0 7 z" />
                     <path d="M420 281 l-7 -3.5 l0 7 z" />
-                    <path d="M848 94 l-7 -3.5 l0 7 z" />
+                    <path d="M810 94 l-7 -3.5 l0 7 z" />
                 </g>
             </svg>
         </div>
     );
 }
 
-function EngineeringStackDiagram() {
+export function LocalAiDeploymentDiagram({ labels }: { labels: LocalAiDiagramCopy }) {
+    const p = 'theegarten-deploy';
+    const mono = "'IBM Plex Mono', monospace";
+    const display = "'Space Grotesk', 'Manrope', sans-serif";
+    const body = "'Manrope', sans-serif";
+    const ink = '#0F172A';
+    const slate = '#334155';
+    const muted = '#475569';
+    const faint = '#64748B';
+    const line = '#94A3B8';
+    const hair = '#E2E8F0';
+    const orange = '#EA580C';
+    const orangeText = '#C2410C';
+    const orangeSoft = '#FFF7ED';
+    const orangeBorder = '#FDBA74';
+    const paper = '#FFFFFF';
+
+    const edge = (d: string, tone: 'solid' | 'target' | 'future' = 'solid') => {
+        const color = tone === 'target' ? orange : tone === 'future' ? faint : slate;
+        return (
+            <path
+                d={d}
+                fill="none"
+                stroke={color}
+                strokeWidth={tone === 'target' ? 1.8 : 1.55}
+                strokeDasharray={tone === 'future' ? '7 7' : undefined}
+                markerEnd={`url(#${p}-${tone === 'target' ? 'orange' : tone === 'future' ? 'faint' : 'slate'}-arrow)`}
+            />
+        );
+    };
+
+    const edgeLabel = (x: number, y: number, w: number, text: string, tone: 'solid' | 'target' | 'future' = 'solid') => (
+        <g>
+            <rect x={x - w / 2} y={y - 11} width={w} height="22" rx="6" fill={paper} stroke={hair} />
+            <text
+                x={x}
+                y={y + 4}
+                textAnchor="middle"
+                fontFamily={mono}
+                fontSize="10.5"
+                fill={tone === 'target' ? orangeText : tone === 'future' ? muted : slate}
+            >
+                {text}
+            </text>
+        </g>
+    );
+
+    const zone = (
+        x: number,
+        y: number,
+        w: number,
+        h: number,
+        label: string,
+        sub: string,
+        tone: 'customer' | 'runtime' | 'control' | 'inference',
+    ) => {
+        const z = {
+            customer: { stroke: slate, fill: 'rgba(255,255,255,0.58)', dash: undefined, color: slate },
+            runtime: { stroke: orange, fill: 'rgba(255,247,237,0.42)', dash: '9 7', color: orangeText },
+            control: { stroke: orangeBorder, fill: 'rgba(255,247,237,0.62)', dash: undefined, color: orangeText },
+            inference: { stroke: faint, fill: 'rgba(241,245,249,0.74)', dash: undefined, color: muted },
+        }[tone];
+        return (
+            <g>
+                <rect
+                    x={x}
+                    y={y}
+                    width={w}
+                    height={h}
+                    rx="14"
+                    fill={z.fill}
+                    stroke={z.stroke}
+                    strokeWidth="1.55"
+                    strokeDasharray={z.dash}
+                />
+                <text x={x + 22} y={y + 30} fontFamily={mono} fontSize="11" letterSpacing="1.55" fontWeight="700" fill={z.color}>
+                    {label}
+                </text>
+                <text x={x + 22} y={y + 49} fontFamily={body} fontSize="12.5" fill={muted}>
+                    {sub}
+                </text>
+            </g>
+        );
+    };
+
+    const node = (
+        x: number,
+        y: number,
+        w: number,
+        h: number,
+        kicker: string,
+        title: string,
+        meta: string,
+        meta2 = '',
+        tone: 'service' | 'agent' | 'output' = 'service',
+    ) => {
+        const isAgent = tone === 'agent';
+        const isOutput = tone === 'output';
+        return (
+            <g filter={`url(#${p}-shadow)`}>
+                <rect
+                    x={x}
+                    y={y}
+                    width={w}
+                    height={h}
+                    rx="10"
+                    fill={isAgent ? ink : isOutput ? orangeSoft : paper}
+                    stroke={isAgent ? ink : isOutput ? orangeBorder : line}
+                    strokeWidth={isAgent ? 1.7 : 1.35}
+                />
+                <text
+                    x={x + 16}
+                    y={y + 23}
+                    fontFamily={mono}
+                    fontSize="9.4"
+                    letterSpacing="1.15"
+                    fontWeight="700"
+                    fill={isAgent ? orangeBorder : isOutput ? orangeText : muted}
+                >
+                    {kicker}
+                </text>
+                <text x={x + 16} y={y + 46} fontFamily={display} fontSize="16" fontWeight="700" fill={isAgent ? paper : ink}>
+                    {title}
+                </text>
+                <text x={x + 16} y={y + 66} fontFamily={mono} fontSize="10.8" fill={isAgent ? '#CBD5E1' : muted}>
+                    {meta}
+                </text>
+                {meta2 ? (
+                    <text x={x + 16} y={y + 83} fontFamily={mono} fontSize="10.8" fill={isAgent ? '#CBD5E1' : muted}>
+                        {meta2}
+                    </text>
+                ) : null}
+            </g>
+        );
+    };
+
+    return (
+        <div
+            className="relative w-full overflow-hidden rounded-[1.1rem] border border-slate-300 bg-slate-50 p-2 shadow-[0_28px_90px_-60px_rgba(15,23,42,0.32)] sm:p-4"
+            aria-label={labels.aria}
+        >
+            <svg
+                viewBox="0 0 1240 742"
+                role="img"
+                aria-label={labels.title}
+                className="block h-auto w-full rounded-[0.85rem] border border-slate-200 bg-[#F8FAFC]"
+            >
+                <defs>
+                    <pattern id={`${p}-grid`} width="26" height="26" patternUnits="userSpaceOnUse">
+                        <path d="M26 0H0V26" fill="none" stroke={hair} strokeWidth="1" />
+                    </pattern>
+                    <filter id={`${p}-shadow`} x="-20%" y="-20%" width="140%" height="160%">
+                        <feDropShadow dx="0" dy="6" stdDeviation="7" floodColor="#0F172A" floodOpacity="0.06" />
+                    </filter>
+                    <marker id={`${p}-slate-arrow`} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                        <path d="M0 0L9 4.5L0 9Z" fill={slate} />
+                    </marker>
+                    <marker id={`${p}-orange-arrow`} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                        <path d="M0 0L9 4.5L0 9Z" fill={orange} />
+                    </marker>
+                    <marker id={`${p}-faint-arrow`} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                        <path d="M0 0L9 4.5L0 9Z" fill={faint} />
+                    </marker>
+                </defs>
+
+                <rect width="1240" height="742" fill={`url(#${p}-grid)`} />
+                {zone(20, 70, 1200, 648, 'THEEGARTEN-PACTEC CONTROLLED BOUNDARY', 'Theegarten owns DATA, release decisions, and the system of record.', 'customer')}
+                <g>
+                    <rect x="560" y="84" width="636" height="26" rx="7" fill={paper} stroke={orangeBorder} />
+                    <text x="878" y="101" textAnchor="middle" fontFamily={mono} fontSize="10.5" fill={orangeText}>
+                        TRUST BOUNDARY · backend-mediated model calls · ACL-filtered retrieval · no silent training
+                    </text>
+                </g>
+
+                {zone(350, 124, 852, 566, 'RAPIDDRAFT CONTROLLED RUNTIME - LOCAL / PRIVATE OPTION', 'Pilot can use Docker Compose or k3s; enterprise can move to approved Kubernetes / AI platform.', 'runtime')}
+                {zone(372, 190, 476, 500, 'ENGINEERING CONTROL PLANE', 'RapidDraft owns workflow, evidence, approvals, audit, and reports.', 'control')}
+                {zone(872, 190, 312, 424, 'INFERENCE PLANE', 'Swappable private model serving behind a gateway.', 'inference')}
+
+                <g filter={`url(#${p}-shadow)`}>
+                    <rect x="52" y="152" width="250" height="86" rx="10" fill={paper} stroke={slate} strokeWidth="1.4" />
+                    <circle cx="78" cy="193" r="9" fill="#F1F5F9" stroke={slate} strokeWidth="1.3" />
+                    <path d="M64 218c2-12 9-17 14-17s12 5 14 17" fill="none" stroke={slate} strokeWidth="1.3" strokeLinecap="round" />
+                    <text x="104" y="176" fontFamily={mono} fontSize="9.5" letterSpacing="1.2" fontWeight="700" fill={muted}>
+                        PERSON
+                    </text>
+                    <text x="104" y="198" fontFamily={display} fontSize="17" fontWeight="700" fill={ink}>
+                        User
+                    </text>
+                    <text x="104" y="217" fontFamily={mono} fontSize="11" fill={muted}>
+                        engineering reviewer
+                    </text>
+                </g>
+
+                <g filter={`url(#${p}-shadow)`}>
+                    <path d="M52 292V426A125 13 0 0 0 302 426V292" fill={paper} stroke={slate} strokeWidth="1.4" />
+                    <ellipse cx="177" cy="292" rx="125" ry="13" fill="#F1F5F9" stroke={slate} strokeWidth="1.4" />
+                    <text x="177" y="318" textAnchor="middle" fontFamily={mono} fontSize="9.5" letterSpacing="1.2" fontWeight="700" fill={muted}>
+                        DATA STORE
+                    </text>
+                    <text x="177" y="342" textAnchor="middle" fontFamily={display} fontSize="18" fontWeight="800" fill={ink}>
+                        DATA
+                    </text>
+                    <text x="177" y="365" textAnchor="middle" fontFamily={mono} fontSize="10.5" fill={muted}>
+                        drawings · BOM · STEP AP242
+                    </text>
+                    <text x="177" y="383" textAnchor="middle" fontFamily={mono} fontSize="10.5" fill={muted}>
+                        EPLAN context · CIM metadata
+                    </text>
+                    <text x="177" y="401" textAnchor="middle" fontFamily={mono} fontSize="10.5" fill={muted}>
+                        prompts · embeddings · findings
+                    </text>
+                </g>
+
+                <g filter={`url(#${p}-shadow)`}>
+                    <polygon points="177,420 301,500 177,580 53,500" fill={orangeSoft} stroke={orange} strokeWidth="2" />
+                    <text x="177" y="483" textAnchor="middle" fontFamily={mono} fontSize="9.5" letterSpacing="1.2" fontWeight="700" fill={orangeText}>
+                        DECISION
+                    </text>
+                    <text x="177" y="503" textAnchor="middle" fontFamily={display} fontSize="15.5" fontWeight="800" fill={ink}>
+                        Decision block
+                    </text>
+                    <text x="177" y="525" textAnchor="middle" fontFamily={mono} fontSize="10" fill={muted}>
+                        approve · reject
+                    </text>
+                    <text x="177" y="540" textAnchor="middle" fontFamily={mono} fontSize="10" fill={muted}>
+                        request change
+                    </text>
+                </g>
+
+                {node(394, 252, 216, 92, 'CONTAINER · AGENT', 'RapidDraft Agent', 'review orchestration', 'typed tool calls', 'agent')}
+                {node(628, 252, 198, 92, 'WORKFLOW', 'Durable workflow', 'human approval gates', 'Temporal-ready')}
+                {node(394, 362, 216, 84, 'RETRIEVAL', 'Knowledge index', 'pgvector or Qdrant', 'cited retrieval')}
+                {node(628, 362, 198, 84, 'REGISTRY', 'Prompt / agent versions', 'approved artifacts')}
+                {node(394, 462, 216, 84, 'DETERMINISTIC', 'Verifiers', 'BOM · revision · GD&T')}
+                {node(628, 462, 198, 84, 'GOVERNANCE', 'Audit + provenance', 'prompt/model/data ver.')}
+                {node(394, 566, 216, 92, 'INGEST', 'Doc + CAD ingestion', 'PDF · table · OCR', 'STEP / package export')}
+                {node(628, 566, 198, 92, 'OUTPUT ARTIFACT', 'Release packet', 'prepared for review', 'not automatic write-back', 'output')}
+
+                {node(892, 252, 272, 78, 'GATEWAY', 'Model gateway', 'LiteLLM / RapidDraft policy', 'backend-mediated')}
+                {node(892, 348, 272, 66, 'SERVING', 'LLM runtime', 'vLLM or NVIDIA NIM')}
+                {node(892, 432, 272, 62, 'VISION', 'Vision model', 'drawing / document evidence')}
+                {node(892, 512, 272, 78, 'RETRIEVAL MODELS', 'Embeddings + reranker', 'project-scoped retrieval')}
+
+                <g filter={`url(#${p}-shadow)`}>
+                    <path d="M937 648V694A123 12 0 0 0 1183 694V648" fill={paper} stroke={slate} strokeWidth="1.4" />
+                    <ellipse cx="1060" cy="648" rx="123" ry="12" fill="#F1F5F9" stroke={slate} strokeWidth="1.4" />
+                    <text x="1060" y="672" textAnchor="middle" fontFamily={mono} fontSize="9.5" letterSpacing="1.2" fontWeight="700" fill={muted}>
+                        SYSTEM OF RECORD · THEEGARTEN
+                    </text>
+                    <text x="1060" y="694" textAnchor="middle" fontFamily={display} fontSize="17" fontWeight="800" fill={ink}>
+                        CIM Database
+                    </text>
+                </g>
+
+                {edge('M302 195H348V298H394')}
+                {edge('M302 350H336V604H394')}
+                {edge('M302 384H320V628H394', 'future')}
+                {edge('M500 252V236H866V291H892', 'target')}
+                {edge('M1028 330V348')}
+                {edge('M1028 414V432')}
+                {edge('M1028 494V512')}
+                {edge('M394 504H340V500H301')}
+                {edge('M177 580V676H720V658')}
+                {edge('M826 612H900V650H937')}
+                {edge('M240 458H372V300H394', 'target')}
+
+                {edgeLabel(342, 250, 148, 'authenticated session')}
+                {edgeLabel(336, 472, 126, 'STEP / file export')}
+                {edgeLabel(322, 650, 170, 'future: PDM / EPLAN', 'future')}
+                {edgeLabel(706, 228, 156, 'model + embed calls', 'target')}
+                {edgeLabel(356, 528, 156, 'source-linked findings')}
+                {edgeLabel(446, 676, 150, 'approved export')}
+                {edgeLabel(1010, 620, 204, 'prepared summary · not write-back')}
+                {edgeLabel(300, 450, 116, 'request change', 'target')}
+            </svg>
+        </div>
+    );
+}
+
+function EngineeringStackDiagram({ labels }: { labels: StackDiagramCopy }) {
     const inputPillX = 20;
     const outputPillX = 800;
     const pillWidth = 300;
@@ -297,56 +1054,56 @@ function EngineeringStackDiagram() {
 
     const inputs = [
         {
-            label: ['SOLIDWORKS', 'EPLAN'],
+            label: labels.inputs[0],
             y: 84,
             path: 'M320 84 C388 88 432 184 478 280',
         },
         {
-            label: ['2D Drawings'],
+            label: labels.inputs[1],
             y: 180,
             path: 'M320 180 C388 184 432 226 478 280',
         },
         {
-            label: ['CIM Database'],
+            label: labels.inputs[2],
             y: 280,
             path: 'M320 280 H478',
             active: true,
         },
         {
-            label: ['Release Package'],
+            label: labels.inputs[3],
             y: 380,
             path: 'M320 380 C388 376 432 334 478 280',
         },
         {
-            label: ['Supplier QA'],
+            label: labels.inputs[4],
             y: 476,
             path: 'M320 476 C388 472 432 376 478 280',
         },
     ];
     const outputs = [
         {
-            label: 'DFM Findings',
+            label: labels.outputs[0],
             y: 84,
             path: 'M642 280 C688 184 732 88 800 84',
         },
         {
-            label: 'Inspection Readiness',
+            label: labels.outputs[1],
             y: 180,
             path: 'M642 280 C688 226 732 184 800 180',
         },
         {
-            label: 'BOM Consistency',
+            label: labels.outputs[2],
             y: 280,
             path: 'M642 280 H800',
             active: true,
         },
         {
-            label: 'Release Gates',
+            label: labels.outputs[3],
             y: 380,
             path: 'M642 280 C688 334 732 376 800 380',
         },
         {
-            label: 'Audit Trail',
+            label: labels.outputs[4],
             y: 476,
             path: 'M642 280 C688 376 732 472 800 476',
         },
@@ -354,8 +1111,8 @@ function EngineeringStackDiagram() {
 
     return (
         <div
-            className="relative mx-auto w-full max-w-[880px] lg:-ml-2 lg:-mr-16 lg:w-[120%] lg:max-w-none"
-            aria-label="RapidDraft layer connecting Theegarten engineering inputs to controlled release outputs"
+            className="relative mx-auto w-full max-w-[880px]"
+            aria-label={labels.aria}
         >
             <svg
                 viewBox="0 0 1120 560"
@@ -364,7 +1121,7 @@ function EngineeringStackDiagram() {
                 className="block h-auto w-full overflow-visible"
             >
                 <title id="theegarten-stack-title">
-                    RapidDraft connects engineering inputs to controlled release outputs
+                    {labels.title}
                 </title>
                 <defs>
                     <radialGradient id="rd-core-glow-gradient" cx="50%" cy="50%" r="50%">
@@ -541,7 +1298,7 @@ function EngineeringStackDiagram() {
                         fontWeight="800"
                         letterSpacing="0.8"
                     >
-                        RapidDraft
+                        {labels.center}
                     </text>
                     <text
                         y="143"
@@ -551,7 +1308,7 @@ function EngineeringStackDiagram() {
                         fontWeight="700"
                         letterSpacing="1.2"
                     >
-                        HUMAN-IN-THE-LOOP REVIEW
+                        {labels.centerNote}
                     </text>
                 </g>
             </svg>
@@ -560,35 +1317,87 @@ function EngineeringStackDiagram() {
 }
 
 export default function TheegartenPactec() {
+    const [lang, setLang] = useState<PageLang>('en');
+    const copy = PAGE_CONTENT[lang];
+
+    useEffect(() => {
+        const timeouts: number[] = [];
+        const scrollToHash = () => {
+            const hash = window.location.hash.slice(1);
+
+            if (!hash) {
+                return;
+            }
+
+            [80, 320].forEach((delay) => {
+                const timeout = window.setTimeout(() => {
+                    document.getElementById(hash)?.scrollIntoView({ block: 'start' });
+                }, delay);
+                timeouts.push(timeout);
+            });
+        };
+
+        scrollToHash();
+        window.addEventListener('hashchange', scrollToHash);
+
+        return () => {
+            window.removeEventListener('hashchange', scrollToHash);
+            timeouts.forEach((timeout) => window.clearTimeout(timeout));
+        };
+    }, [lang]);
+
     return (
         <>
             <PageMeta
-                title="RapidDraft for Theegarten-Pactec | AI-assisted release checks"
-                description="A tailored RapidDraft pitch for Theegarten-Pactec: AI-assisted drawing, BOM, and CIM Database release checks with source-linked findings, engineer approval, and controlled deployment."
+                title={copy.metaTitle}
+                description={copy.metaDescription}
                 path="/theegarten-pactec"
             />
 
             <section className="hero-mesh relative overflow-hidden border-b border-stone-200/70">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top_left,rgba(255,237,213,0.62),transparent_32%)]" />
                 <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-14 sm:px-6 md:py-16 lg:grid-cols-[minmax(0,0.47fr)_minmax(0,0.53fr)] lg:items-center lg:px-8 lg:py-20 xl:px-10">
-                    <Reveal className="lg:max-w-[610px]">
-                        <div className="site-kicker">For Theegarten-Pactec Engineering</div>
-                        <h1 className="hero-title mt-6 max-w-4xl text-balance lg:text-[3.25rem] xl:text-[3.55rem]">
-                            Agentic drawing release and design review for engineering teams
+                    <Reveal className="min-w-0 lg:max-w-[610px]">
+                        <div className="flex flex-wrap items-center gap-3">
+                            <div className="site-kicker">{copy.hero.kicker}</div>
+                            <div
+                                className="inline-flex rounded-full border border-orange-200/80 bg-white p-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
+                                role="group"
+                                aria-label={copy.language.label}
+                            >
+                                {(['en', 'de'] as const).map((option) => (
+                                    <button
+                                        key={option}
+                                        type="button"
+                                        onClick={() => setLang(option)}
+                                        aria-pressed={lang === option}
+                                        className={`rounded-full px-3 py-1.5 transition ${
+                                            lang === option
+                                                ? 'bg-orange-100 text-primary shadow-[0_8px_20px_-16px_rgba(234,88,12,0.8)]'
+                                                : 'text-gray-500 hover:text-primary'
+                                        }`}
+                                    >
+                                        {copy.language[option]}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <h1 className="hero-title mt-6 max-w-full break-words text-balance hyphens-auto text-[2.42rem] sm:text-[3.3rem] md:text-[4rem] lg:text-[3.25rem] xl:text-[3.55rem]">
+                            {copy.hero.title}
                         </h1>
                         <p className="hero-copy mt-6 max-w-2xl">
-                            RapidDraft helps hardware teams catch design and drawing issues earlier, automate repetitive review checks, and preserve decision context across CAD models, manufacturing drawings, and release workflows.
+                            {copy.hero.body}
                         </p>
                         <div className="mt-8">
                             <a
                                 href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai,hasan@rapiddraft.ai"
                                 className="btn-primary w-full sm:w-auto"
                             >
-                                Contact Us
+                                {copy.hero.cta}
                             </a>
                         </div>
                         <div className="mt-6 flex max-w-3xl flex-wrap gap-2.5">
-                            {['GDPR Compliant', 'On-prem AI', 'Local/EU Cloud', 'SSO'].map((chip) => (
+                            {copy.hero.chips.map((chip) => (
                                 <span
                                     key={chip}
                                     className="rounded-full border border-orange-200/80 bg-orange-50/70 px-3.5 py-1.5 text-xs font-semibold text-primary shadow-[0_10px_26px_-24px_rgba(234,88,12,0.5)]"
@@ -599,52 +1408,208 @@ export default function TheegartenPactec() {
                         </div>
                     </Reveal>
 
-                    <Reveal delay={0.08}>
-                        <EngineeringStackDiagram />
+                    <Reveal delay={0.08} className="min-w-0">
+                        <EngineeringStackDiagram labels={copy.diagrams.stack} />
                     </Reveal>
                 </div>
             </section>
 
-            <section className="hero-mesh relative overflow-hidden border-y border-stone-200/70 py-16 md:py-24">
+            <section id="security-first" className="hero-mesh relative overflow-hidden border-y border-stone-200/70 py-16 md:py-24">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_68%_38%,rgba(255,237,213,0.55),transparent_44%)]" />
                 <div className="relative mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
                     <Reveal>
                         <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                             <div className="max-w-lg">
-                                <div className="site-kicker">Security First</div>
+                                <div className="site-kicker">{copy.security.kicker}</div>
                                 <h2 className="section-title mt-5 text-balance">
-                                    Data security and transparency come first
+                                    {copy.security.title}
                                 </h2>
                             </div>
                             <p className="section-copy max-w-sm">
-                                Runs locally on-prem, optimized for AI hardware like NVIDIA DGX Spark. No data leaves your infrastructure.
+                                {copy.security.body}
                             </p>
                         </div>
                     </Reveal>
                     <Reveal delay={0.08}>
-                        <LocalAiDeploymentDiagram />
+                        <SecurityFirstDeploymentDiagram labels={copy.diagrams.localAi} />
                     </Reveal>
                 </div>
             </section>
 
-            <Section className="!py-16 md:!py-24" background="light">
+            <Section id="product-architecture" className="scroll-mt-24 !py-16 md:!py-24" background="light">
+                <Reveal className="max-w-4xl">
+                    <div className="site-kicker">{copy.architecture.kicker}</div>
+                    <h2 className="section-title mt-5 max-w-3xl text-balance">{copy.architecture.title}</h2>
+                    <p className="section-copy mt-5 max-w-3xl">{copy.architecture.body}</p>
+                </Reveal>
+
+                <Reveal delay={0.04}>
+                    <div className="mt-8 grid gap-4 md:grid-cols-3">
+                        {copy.architecture.principles.map((point) => (
+                            <div key={point.title} className="border-l border-orange-200 bg-white/60 px-5 py-4">
+                                <h3 className="text-base font-semibold tracking-tight text-gray-950">{point.title}</h3>
+                                <p className="mt-2 text-sm leading-6 text-gray-600">{point.body}</p>
+                            </div>
+                        ))}
+                    </div>
+                </Reveal>
+
+                <Reveal delay={0.08} className="min-w-0">
+                    <div className="mt-10 overflow-hidden rounded-[0.9rem] border border-slate-200 border-t-orange-300 bg-white shadow-[0_24px_80px_-58px_rgba(17,24,39,0.28)]">
+                        <div className="overflow-x-auto">
+                            <table
+                                aria-label={copy.architecture.stack.title}
+                                className="w-full min-w-[980px] table-fixed border-collapse text-left lg:min-w-0"
+                            >
+                                <colgroup>
+                                    <col className="w-[17%]" />
+                                    <col className="w-[26%]" />
+                                    <col className="w-[28%]" />
+                                    <col className="w-[29%]" />
+                                </colgroup>
+                                <thead>
+                                    <tr className="border-b border-slate-200 bg-slate-50">
+                                        {copy.architecture.stack.columns.map((column, columnIndex) => (
+                                            <th
+                                                key={column}
+                                                scope="col"
+                                                className={`px-5 py-5 align-middle font-mono text-xs font-semibold uppercase tracking-[0.28em] ${
+                                                    columnIndex === 2 ? 'text-primary' : 'text-slate-600'
+                                                }`}
+                                            >
+                                                {column}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {copy.architecture.stack.rows.map(([layer, poc, pilot, production]) => (
+                                        <tr key={layer} className="border-b border-slate-100 last:border-b-0">
+                                            <th
+                                                scope="row"
+                                                className="border-r border-slate-100 px-5 py-7 align-top text-[15px] font-semibold leading-7 text-slate-950 xl:text-base"
+                                            >
+                                                {layer}
+                                            </th>
+                                            <td className="border-r border-slate-100 px-5 py-7 align-top text-[15px] leading-7 text-slate-600 xl:text-base">
+                                                <span className="block break-words">{poc}</span>
+                                            </td>
+                                            <td className="border-r border-slate-100 bg-orange-50/25 px-5 py-7 align-top text-[15px] leading-7 text-slate-800 xl:text-base">
+                                                <span className="block break-words">{pilot}</span>
+                                            </td>
+                                            <td className="px-5 py-7 align-top text-[15px] leading-7 text-slate-700 xl:text-base">
+                                                <span className="block break-words">{production}</span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </Reveal>
+
+                <Reveal delay={0.12}>
+                    <div className="mt-8 grid gap-3 md:grid-cols-3">
+                        {copy.architecture.notes.map((note, index) => (
+                            <div key={note} className="border-l border-orange-200 bg-white/55 px-5 py-4">
+                                <div className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary/75">
+                                    Note {String(index + 1).padStart(2, '0')}
+                                </div>
+                                <p className="mt-2 text-sm leading-6 text-gray-600">{note}</p>
+                            </div>
+                        ))}
+                    </div>
+                </Reveal>
+            </Section>
+
+            <Section id="product-roadmap" className="scroll-mt-24 !py-16 md:!py-24" background="light">
+                <Reveal className="max-w-4xl">
+                    <div className="site-kicker">{copy.roadmap.kicker}</div>
+                    <h2 className="section-title mt-5 max-w-3xl text-balance">{copy.roadmap.title}</h2>
+                    <p className="section-copy mt-5 max-w-3xl">{copy.roadmap.body}</p>
+                </Reveal>
+
+                <div id="product-roadmap-two-column" className="mt-10 scroll-mt-24">
+                    <div className="grid gap-9 lg:grid-cols-2 lg:gap-14">
+                        {[0, 3].map((startIndex) => (
+                            <ol key={startIndex} className="relative space-y-7 pl-12">
+                                <div className="absolute bottom-2 left-5 top-2 w-px bg-gradient-to-b from-orange-200 via-stone-200 to-slate-200" />
+                                {copy.roadmap.phases.slice(startIndex, startIndex + 3).map((phase, phaseIndex) => {
+                                    const phaseNumber = startIndex + phaseIndex + 1;
+
+                                    return (
+                                        <li key={phase.title} className="relative">
+                                            <div className="absolute -left-12 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-orange-200 bg-[#fffaf3] font-mono text-xs font-semibold text-primary shadow-[0_12px_32px_-26px_rgba(234,88,12,0.9)]">
+                                                {String(phaseNumber).padStart(2, '0')}
+                                            </div>
+                                            <details className="group min-w-0 border-b border-stone-200/90 pb-5">
+                                                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 py-1 text-left">
+                                                    <h3 className="min-w-0 text-lg font-semibold leading-tight tracking-tight text-gray-950">
+                                                        {phase.title}
+                                                    </h3>
+                                                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-stone-200 font-mono text-sm leading-none text-gray-500 transition group-open:rotate-45 group-open:border-orange-200 group-open:text-primary">
+                                                        +
+                                                    </span>
+                                                </summary>
+                                                <p className="max-w-xl pt-3 text-sm leading-6 text-gray-600">
+                                                    {phase.body}
+                                                </p>
+                                            </details>
+                                        </li>
+                                    );
+                                })}
+                            </ol>
+                        ))}
+                    </div>
+                </div>
+            </Section>
+
+            <Section id="live-demo" className="scroll-mt-24 !py-16 md:!py-24" background="light">
                 <div className="grid gap-9 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-stretch">
                     <Reveal className="lg:flex lg:h-full lg:flex-col">
-                        <div className="site-kicker">Live Demo</div>
-                        <h2 className="section-title mt-5 text-balance">Release check for a real module-change workflow</h2>
+                        <div className="site-kicker">{copy.demo.kicker}</div>
+                        <h2 className="section-title mt-5 text-balance">{copy.demo.title}</h2>
                         <p className="section-copy mt-5">
-                            We will demonstrate the release logic on a representative Theegarten workflow: drawing update, BOM impact, optional EPLAN context, and CIM Database release review.
+                            {copy.demo.body}
                         </p>
                     </Reveal>
 
                     <div className="grid gap-3 sm:grid-cols-2 lg:h-full lg:auto-rows-fr">
-                        {demoSteps.map((step, index) => (
+                        {copy.demo.steps.map((step, index) => (
                             <Reveal key={step.title} delay={index * 0.04}>
                                 <article
                                     className={`surface-card flex h-full flex-col p-5 ${
-                                        index === demoSteps.length - 1 ? 'sm:col-span-2' : ''
+                                        index === copy.demo.steps.length - 1 ? 'sm:col-span-2' : ''
                                     }`}
                                 >
+                                    {'media' in step ? (
+                                        <div className="mb-5 overflow-hidden rounded-[0.65rem] border border-stone-200 bg-stone-50/80">
+                                            {'src' in step.media ? (
+                                                <video
+                                                    className="aspect-video w-full bg-stone-100 object-cover"
+                                                    src={step.media.src}
+                                                    aria-label={step.media.label}
+                                                    autoPlay
+                                                    controls
+                                                    loop
+                                                    muted
+                                                    playsInline
+                                                    preload="metadata"
+                                                />
+                                            ) : (
+                                                <div className="flex aspect-video w-full items-center justify-center bg-[linear-gradient(135deg,rgba(255,247,237,0.92),rgba(255,255,255,0.9))] p-5">
+                                                    <div className="w-full border border-dashed border-orange-200 px-4 py-6 text-center">
+                                                        <div className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary/75">
+                                                            Placeholder
+                                                        </div>
+                                                        <div className="mt-2 text-sm font-semibold leading-5 text-gray-800">
+                                                            {step.media.label}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : null}
                                     <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
                                     <h3 className="mt-3 text-lg font-semibold leading-tight tracking-tight text-gray-950">
                                         {step.title}
@@ -661,18 +1626,70 @@ export default function TheegartenPactec() {
                 </div>
             </Section>
 
+            <section id="action-tracker" className="hero-mesh scroll-mt-24 relative overflow-hidden border-t border-stone-200/70 py-12 md:py-16">
+                <div className="relative mx-auto max-w-[980px] px-5 sm:px-6 lg:px-8">
+                    <Reveal>
+                        <details className="group rounded-[0.9rem] border border-stone-200 bg-white/78 shadow-[0_24px_80px_-62px_rgba(17,24,39,0.28)]" open>
+                            <summary className="flex cursor-pointer list-none items-center gap-3 px-5 py-4 text-left transition hover:bg-orange-50/55 sm:px-6">
+                                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-gray-500 transition group-open:rotate-90">
+                                    &gt;
+                                </span>
+                                <h2 className="text-xl font-semibold tracking-tight text-gray-950 sm:text-2xl">
+                                    {copy.nextSteps.title}
+                                </h2>
+                            </summary>
+                            <div className="border-t border-stone-200/80">
+                                <div className="grid grid-cols-[minmax(0,1fr)_8rem] border-b border-stone-200/80 bg-stone-50/70 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary/80 sm:px-6">
+                                    {copy.nextSteps.columns.map((column) => (
+                                        <div key={column}>{column}</div>
+                                    ))}
+                                </div>
+                                <div className="divide-y divide-stone-200/80">
+                                    {copy.nextSteps.rows.map(([action, status], index) => (
+                                        <div
+                                            key={action}
+                                            className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 px-5 py-4 text-sm leading-6 text-gray-700 sm:px-6"
+                                        >
+                                            <div className="flex min-w-0 items-start gap-3 font-semibold text-gray-950">
+                                                <span className="mt-0.5 shrink-0 font-mono text-xs text-primary">
+                                                    {String(index + 1).padStart(2, '0')}
+                                                </span>
+                                                <span className="min-w-0 break-words">{action}</span>
+                                            </div>
+                                            <div>
+                                                <span
+                                                    className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${
+                                                        status === 'DONE' || status === 'Erledigt'
+                                                            ? 'border-slate-200 bg-slate-100 text-slate-700'
+                                                            : status === 'Scheduled' || status === 'Geplant'
+                                                            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                                                            : 'border-orange-200 bg-orange-50 text-primary'
+                                                    }`}
+                                                >
+                                                    {status}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </details>
+                    </Reveal>
+                </div>
+            </section>
+
             <section className="hero-mesh relative overflow-hidden border-t border-stone-200/70 py-16 md:py-24">
                 <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
                     <Reveal className="mx-auto max-w-3xl text-center">
-                        <div className="site-kicker mx-auto w-fit">Pilot Programme</div>
-                        <h2 className="section-title mt-5 text-balance">Proof of value before production deployment</h2>
+                        <div className="site-kicker mx-auto w-fit">{copy.pilot.kicker}</div>
+                        <h2 className="section-title mt-5 text-balance">{copy.pilot.title}</h2>
                         <p className="section-copy mx-auto mt-5">
-                            Validate RapidDraft on one representative release workflow, prove findings quality with Theegarten engineers, and decide on production only after the value and security fit are clear.
+                            {copy.pilot.body}
                         </p>
                     </Reveal>
 
                     <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
-                        {pilotPhases.map((phase, index) => (
+                        {copy.pilot.phases.map((phase, index) => (
                             <Reveal key={phase.title} delay={index * 0.05}>
                                 <article className="surface-card flex h-full flex-col p-5 xl:p-6">
                                     <div className="flex items-start justify-between gap-4">
@@ -697,25 +1714,25 @@ export default function TheegartenPactec() {
                         <div className="warm-panel overflow-hidden p-5 sm:p-7 lg:p-8">
                             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.35fr)_minmax(0,0.65fr)] lg:items-center">
                                 <div>
-                                    <div className="site-kicker">The team behind RapidDraft</div>
+                                    <div className="site-kicker">{copy.team.kicker}</div>
                                     <h2 className="section-title mt-5 text-balance">
-                                        Engineering depth, AI capability, and industrial execution.
+                                        {copy.team.title}
                                     </h2>
                                     <p className="section-copy mt-5">
-                                        Theegarten-Pactec would work directly with founders who understand mechanical release workflows, controlled deployment, and production AI systems.
+                                        {copy.team.body}
                                     </p>
                                     <div className="mt-7">
                                         <a
                                             href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai,hasan@rapiddraft.ai"
                                             className="btn-primary w-full sm:w-auto"
                                         >
-                                            Contact Us
+                                            {copy.team.cta}
                                         </a>
                                     </div>
                                 </div>
 
                                 <div className="grid gap-4 sm:grid-cols-3">
-                                    {foundingTeam.map((leader) => (
+                                    {copy.team.members.map((leader) => (
                                         <article
                                             key={leader.name}
                                             className="rounded-[1.45rem] border border-stone-200/85 bg-white/82 p-4 shadow-[0_18px_44px_-36px_rgba(17,24,39,0.2)]"
