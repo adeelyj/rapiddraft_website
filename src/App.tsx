@@ -16,6 +16,7 @@ import DealRoomV2 from './pages/DealRoomV2';
 import DealRoomV3 from './pages/DealRoomV3';
 import NdaRequest from './pages/NdaRequest';
 import LoiRequest from './pages/LoiRequest';
+import OnePager from './pages/OnePager';
 import ForwardPage from './forward/ForwardPage';
 import TheegartenPactec from './pages/TheegartenPactec';
 
@@ -133,6 +134,7 @@ function App() {
         <Route path="book-demo" element={<BookDemoPage />} />
         <Route path="join-us" element={<Navigate to="/company#open-roles" replace />} />
         <Route path="theegarten-pactec" element={<TheegartenPactec />} />
+        <Route path="one-pager" element={<OnePager />} />
       </Route>
     </Routes>
   );
