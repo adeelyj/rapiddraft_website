@@ -157,20 +157,24 @@
   }
   .rd-screen--hero { min-height: auto; }
 }
-/* Desktop: native CSS scroll-snap gives a gentle, OS-momentum section snap with
-   no wheel interception. `proximity` only nudges to a section when scrolling
-   settles near one, so it never fights the user. Touch and short viewports get
-   plain scrolling (snap released above). */
+/* Desktop: native CSS scroll-snap gives an OS-momentum section snap with no
+   wheel interception. `mandatory` settles firmly on each section so every
+   scroll lands on a full screen. Touch and short viewports get plain scrolling
+   (snap released above). */
 html.rd-snap {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
 }
 @media (pointer: coarse) {
   html.rd-snap { scroll-snap-type: none; }
 }
-/* The closing CTA is the last snap stop; the footer flows beneath it as the
-   document tail (no snap target at the very bottom, which would otherwise pull
-   the initial load position to the end). */
+/* The footer is the last snap stop so it stays reachable under `mandatory`
+   (without its own snap target the bottom would pull back to the last section).
+   Home resets to the top on mount (scrollTo(0,0) + manual restoration), so this
+   never lands the initial load at the footer. */
+html.rd-snap .rd-app > footer {
+  scroll-snap-align: start;
+}
 /* Card-style reveal: each section's content fades and slides up as it
    takes over the viewport (toggled by an IntersectionObserver in Home). */
 html.rd-snap .rd-screen .rd-container {
