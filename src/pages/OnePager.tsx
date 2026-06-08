@@ -39,26 +39,25 @@ const CONTENT = {
       { k: '10x', v: 'Faster feedback' },
       { k: '50%', v: 'Less checking time' },
     ],
+    /* Paired 1:1, each "does" line answers the problem on its row. */
     problem: {
       title: 'The problem',
       items: [
-        { a: 'Design intent', b: 'lives in CAD' },
-        { a: 'Requirements', b: 'live in drawings' },
-        { a: 'Review logic', b: 'is tribal knowledge' },
-        { a: 'Collaboration', b: 'is inefficient' },
-        { a: 'Drawing review', b: 'is error-prone' },
-        { a: 'Quality inspection', b: 'is slow' },
+        'Review logic is tribal knowledge',
+        'Drawing review is error-prone',
+        'Quality docs are built by hand',
+        'Teams and suppliers work in silos',
+        'Your IP cannot leave the building',
       ],
     },
     helps: {
       title: 'What RapidDraft does',
       items: [
-        'Integrate with your existing PLM',
-        'Create QA docs (BOM, FAIR) from CAD',
-        'Standardize drawings to ISO / ASME',
-        'Run DFM manufacturability analysis',
-        'Collaborate across OEM and suppliers',
-        'On-prem AI, trained on anonymized data',
+        'Applies your rules on every check',
+        'A tireless, evidence-linked first pass',
+        'Builds BOM and FAIR docs from CAD',
+        'One shared model across teams',
+        'On-prem AI, trained on approved data',
       ],
     },
     figureCaption: 'From your engineering stack to an auditable release gate, with human-in-the-loop review at the center.',
@@ -110,23 +109,21 @@ const CONTENT = {
     problem: {
       title: 'Das Problem',
       items: [
-        { a: 'Designabsicht', b: 'steckt im CAD' },
-        { a: 'Anforderungen', b: 'in Zeichnungen' },
-        { a: 'Prüflogik', b: 'ist Erfahrungswissen' },
-        { a: 'Zusammenarbeit', b: 'ist ineffizient' },
-        { a: 'Zeichnungsprüfung', b: 'ist fehleranfällig' },
-        { a: 'Qualitätsprüfung', b: 'ist langsam' },
+        'Prüflogik ist Erfahrungswissen',
+        'Zeichnungsprüfung ist fehleranfällig',
+        'Qualitätsdokumente entstehen von Hand',
+        'Teams und Lieferanten in Silos',
+        'Ihr IP darf das Haus nicht verlassen',
       ],
     },
     helps: {
       title: 'Was RapidDraft leistet',
       items: [
-        'In Ihr bestehendes PLM integrieren',
-        'QA-Dokumente (BOM, FAIR) aus CAD erstellen',
-        'Zeichnungen auf ISO / ASME standardisieren',
-        'DFM-Fertigbarkeitsanalyse durchführen',
-        'Über OEM und Lieferanten zusammenarbeiten',
-        'On-Prem-KI, mit anonymisierten Daten trainiert',
+        'Wendet Ihre Regeln bei jeder Prüfung an',
+        'Ein unermüdlicher, belegbasierter Durchgang',
+        'Erstellt BOM- und FAIR-Dokumente aus CAD',
+        'Ein gemeinsames Modell über Teams hinweg',
+        'On-Prem-KI, mit freigegebenen Daten trainiert',
       ],
     },
     figureCaption: 'Von Ihrem Engineering-Stack zu einem auditierbaren Release-Gate, mit Human-in-the-Loop-Review im Zentrum.',
@@ -213,17 +210,14 @@ export default function OnePager() {
         .op-stat-k { font-family: var(--rd-num); font-size: 21px; font-weight: 700; line-height: 1; color: var(--rd-accent); letter-spacing: -0.01em; }
         .op-stat-v { font-size: 8.6px; color: var(--rd-fg-3); margin-top: 3px; letter-spacing: 0.2px; }
 
-        /* ── Problem -> solution two-panel ───────────────────── */
-        .op-ps { display: grid; grid-template-columns: 1fr 30px 1fr; align-items: center; gap: 16px; margin-top: 16px; }
-        .op-ps-eyebrow { font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; margin: 0 0 7px; }
-        .op-ps-eyebrow--problem { color: var(--rd-accent); }
-        .op-ps-eyebrow--solution { color: var(--rd-head); }
-        .op-ps-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-        .op-ps-item { font-size: 9.2px; line-height: 1.35; color: var(--rd-fg); display: flex; align-items: baseline; gap: 6px; }
-        .op-ps-sub { color: var(--rd-accent); font-weight: 600; }
+        /* ── Problem -> solution: two cards with a chevron ───── */
+        .op-ps { display: flex; align-items: stretch; gap: 0; margin-top: 15px; }
+        .op-ps-card { flex: 1; border: 1px solid var(--rd-hair); border-radius: 11px; background: var(--rd-surface); padding: 11px 13px; }
+        .op-ps-eyebrow { font-family: var(--rd-meta); font-size: 8.4px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0 0 9px; }
+        .op-ps-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .op-ps-item { font-size: 9.2px; line-height: 1.3; color: var(--rd-fg); display: flex; align-items: baseline; gap: 7px; }
         .op-ps-tick { color: var(--rd-accent); font-weight: 700; flex-shrink: 0; }
-        .op-ps-arrow { display: flex; align-items: center; justify-content: center; color: var(--rd-accent); }
-        .op-ps-arrow svg { width: 26px; height: 26px; }
+        .op-ps-chev { display: flex; align-items: center; padding: 0 7px; color: var(--rd-accent); font-size: 15px; font-weight: 600; opacity: 0.9; }
 
         /* ── Section headings + figure caption ───────────────── */
         .op-section-title { font-size: 11.5px; font-weight: 600; letter-spacing: 0; color: var(--rd-head); margin: 0; }
@@ -337,23 +331,19 @@ export default function OnePager() {
           </div>
         </header>
 
-        {/* ── Problem  ->  what RapidDraft does ───────────── */}
+        {/* ── Problem  ->  what RapidDraft does (paired cards) ── */}
         <div className="op-ps">
-          <div>
-            <p className="op-ps-eyebrow op-ps-eyebrow--problem">{t.problem.title}</p>
+          <div className="op-ps-card">
+            <p className="op-ps-eyebrow">{t.problem.title}</p>
             <ul className="op-ps-list">
               {t.problem.items.map((it) => (
-                <li key={it.a} className="op-ps-item">
-                  <span><span className="op-ps-sub">{it.a}</span> {it.b}.</span>
-                </li>
+                <li key={it} className="op-ps-item">{it}</li>
               ))}
             </ul>
           </div>
-          <div className="op-ps-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12 H17 M12 6 l7 6 -7 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </div>
-          <div>
-            <p className="op-ps-eyebrow op-ps-eyebrow--solution">{t.helps.title}</p>
+          <span className="op-ps-chev" aria-hidden="true">›</span>
+          <div className="op-ps-card">
+            <p className="op-ps-eyebrow">{t.helps.title}</p>
             <ul className="op-ps-list">
               {t.helps.items.map((it) => (
                 <li key={it} className="op-ps-item">
@@ -366,7 +356,7 @@ export default function OnePager() {
         </div>
 
         {/* ── The transformation (hero figure) ───────────── */}
-        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '110mm' }}>
+        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '104mm' }}>
           <HubAndSpokeFigure inputs={HS_INPUTS} outputs={HS_OUTPUTS} alt={HS_ALT} />
         </div>
         <p className="op-cap">{t.figureCaption}</p>
