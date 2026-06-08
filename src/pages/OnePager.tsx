@@ -42,12 +42,24 @@ const CONTENT = {
     how: {
       title: 'How it works, on your infrastructure',
       sub: 'Your data stays on-site. The agent runs the first pass, and an engineer approves before anything is written back to your PLM.',
-      steps: [
-        { k: '01', title: 'Your data', body: 'CAD, drawings, BOM, and EPLAN stay on your NVIDIA DGX Spark, on your network.' },
-        { k: '02', title: 'The agent runs the first pass', body: 'It orchestrates BOM, DFM, model, and knowledge tools. Evidence-linked, not a chatbot.' },
-        { k: '03', title: 'The engineer approves', body: 'A traceable second set of eyes. The engineer keeps the sign-off, never the AI.' },
-        { k: '04', title: 'Release to your PLM', body: 'Approved findings are written back to your CIM Database.' },
-      ],
+      arch: {
+        inputs: [
+          { eyebrow: 'Your data', title: 'Your release package', meta: 'CAD · Drawing · BOM · EPLAN' },
+          { eyebrow: 'On-prem hardware', title: 'NVIDIA DGX Spark', meta: 'Runs on-site, your network' },
+        ],
+        boundary: 'Security boundary',
+        agent: {
+          eyebrow: 'RapidDraft workspace',
+          title: 'Agent inside the product',
+          meta: 'Orchestrates tools, not a chatbot',
+          tools: ['BOM', 'DFM', 'Model / Canvas', 'Knowledge', 'Artifacts'],
+        },
+        outputs: [
+          { eyebrow: 'Agent output', title: 'Evidence-linked results', meta: 'BOM · DFM · citations · release notes', accent: false },
+          { eyebrow: 'Human in the loop', title: 'Engineer approval', meta: 'Reviews and approves before release', accent: true },
+          { eyebrow: 'PLM integration', title: 'Release to CIM Database', meta: 'Written back to your PLM', accent: false },
+        ],
+      },
     },
     fit: {
       title: 'Where it fits',
@@ -87,12 +99,24 @@ const CONTENT = {
     how: {
       title: 'So funktioniert es, auf Ihrer Infrastruktur',
       sub: 'Ihre Daten bleiben im Haus. Der Agent übernimmt den ersten Durchgang, und ein Ingenieur gibt frei, bevor etwas in Ihr PLM zurückgeschrieben wird.',
-      steps: [
-        { k: '01', title: 'Ihre Daten', body: 'CAD, Zeichnungen, BOM und EPLAN bleiben auf Ihrem NVIDIA DGX Spark, in Ihrem Netzwerk.' },
-        { k: '02', title: 'Der Agent prüft zuerst', body: 'Er orchestriert BOM-, DFM-, Modell- und Wissens-Tools. Mit Belegen verknüpft, kein Chatbot.' },
-        { k: '03', title: 'Der Ingenieur gibt frei', body: 'Ein nachvollziehbares zweites Augenpaar. Die Freigabe bleibt beim Ingenieur, nie bei der KI.' },
-        { k: '04', title: 'Freigabe an Ihr PLM', body: 'Freigegebene Befunde werden in Ihre CIM-Datenbank zurückgeschrieben.' },
-      ],
+      arch: {
+        inputs: [
+          { eyebrow: 'Ihre Daten', title: 'Ihr Freigabepaket', meta: 'CAD · Zeichnung · BOM · EPLAN' },
+          { eyebrow: 'On-Prem-Hardware', title: 'NVIDIA DGX Spark', meta: 'Läuft vor Ort, Ihr Netzwerk' },
+        ],
+        boundary: 'Sicherheits­grenze',
+        agent: {
+          eyebrow: 'RapidDraft Workspace',
+          title: 'Agent im Produkt',
+          meta: 'Orchestriert Tools, kein Chatbot',
+          tools: ['BOM', 'DFM', 'Modell / Canvas', 'Wissen', 'Artefakte'],
+        },
+        outputs: [
+          { eyebrow: 'Agent-Ergebnis', title: 'Mit Belegen verknüpft', meta: 'BOM · DFM · Zitate · Release Notes', accent: false },
+          { eyebrow: 'Human in the Loop', title: 'Ingenieur-Freigabe', meta: 'Prüft und gibt vor Release frei', accent: true },
+          { eyebrow: 'PLM-Integration', title: 'Freigabe an CIM-Datenbank', meta: 'Zurückgeschrieben in Ihr PLM', accent: false },
+        ],
+      },
     },
     fit: {
       title: 'Wo es passt',
@@ -168,18 +192,26 @@ export default function OnePager() {
         /* ── Section headings ────────────────────────────────── */
         .op-section-title { font-size: 11.5px; font-weight: 600; letter-spacing: 0; color: var(--rd-head); margin: 0; }
         .op-section-sub { font-size: 9px; line-height: 1.45; color: var(--rd-fg-3); margin: 3px 0 0; max-width: 150mm; }
-        .op-head-row { display: flex; align-items: center; gap: 7px; }
         .op-lock { width: 12px; height: 12px; stroke: var(--rd-accent); fill: none; stroke-width: 1.6; }
         .op-lock rect { fill: var(--rd-accent-soft); }
         .op-cap { font-size: 8.6px; line-height: 1.4; color: var(--rd-fg-3); text-align: center; margin: 7px auto 0; max-width: 150mm; }
 
-        /* ── On-prem flow (how it works) ─────────────────────── */
-        .op-flow { display: flex; align-items: stretch; gap: 0; margin-top: 12px; }
-        .op-step { flex: 1; border: 1px solid var(--rd-hair); border-radius: 10px; background: var(--rd-surface); padding: 11px 12px; }
-        .op-step-k { font-family: var(--rd-num); font-size: 10.5px; font-weight: 700; color: var(--rd-accent); letter-spacing: 0.4px; }
-        .op-step-title { font-size: 9.4px; font-weight: 600; line-height: 1.25; color: var(--rd-fg-strong); margin: 5px 0 0; }
-        .op-step-body { font-size: 8.8px; line-height: 1.45; color: var(--rd-fg-2); margin: 5px 0 0; }
-        .op-chev { display: flex; align-items: center; padding: 0 5px; color: var(--rd-accent); font-size: 13px; font-weight: 600; opacity: 0.85; }
+        /* ── On-prem architecture (how it works) ─────────────── */
+        .op-arch { display: flex; align-items: stretch; gap: 8px; margin-top: 11px; }
+        .op-arch-col { display: flex; flex-direction: column; gap: 6px; }
+        .op-arch-col--in { flex: 1; }
+        .op-arch-col--out { flex: 1.06; }
+        .op-arch-card { display: flex; flex: 1; flex-direction: column; justify-content: center; border: 1px solid var(--rd-hair); border-radius: 9px; background: var(--rd-surface); padding: 7px 9px; }
+        .op-arch-agent { display: flex; flex: 1.16; flex-direction: column; justify-content: center; border: 1px solid var(--rd-accent-hair); border-radius: 11px; background: var(--rd-surface); padding: 9px 11px; }
+        .op-arch-eyebrow { font-size: 6.6px; font-weight: 600; letter-spacing: 0.7px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
+        .op-arch-eyebrow--accent { color: var(--rd-accent); }
+        .op-arch-title { font-size: 9.2px; font-weight: 600; line-height: 1.18; color: var(--rd-fg-strong); margin: 2px 0 0; }
+        .op-arch-meta { font-size: 7.6px; line-height: 1.32; color: var(--rd-fg-2); margin: 3px 0 0; }
+        .op-arch-tools { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+        .op-arch-tool { display: inline-flex; align-items: center; border: 1px solid var(--rd-hair); border-radius: 999px; background: var(--rd-bg); padding: 2px 6px; font-size: 6.9px; font-weight: 500; color: var(--rd-fg-2); white-space: nowrap; }
+        .op-arch-bound { flex: 0 0 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+        .op-arch-bound .op-lock { width: 16px; height: 16px; }
+        .op-arch-boundlabel { font-size: 5.7px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: var(--rd-accent); text-align: center; line-height: 1.25; margin: 0; }
 
         /* ── Two-column: where it fits / trust ───────────────── */
         .op-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
@@ -271,31 +303,54 @@ export default function OnePager() {
         </header>
 
         {/* ── Hub-and-spoke: inputs -> RapidDraft -> outputs ─ */}
-        <div className="mx-auto mt-6 w-full" style={{ maxWidth: '168mm' }}>
+        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '132mm' }}>
           <HubAndSpokeFigure inputs={HS_INPUTS} outputs={HS_OUTPUTS} alt={HS_ALT} />
         </div>
         <p className="op-cap">{t.figureCaption}</p>
 
-        <hr className="op-rule" style={{ border: 0, borderTop: '1px solid var(--rd-hair)', margin: '20px 0 0' }} />
+        <hr className="op-rule" style={{ border: 0, borderTop: '1px solid var(--rd-hair)', margin: '16px 0 0' }} />
 
-        {/* ── How it works, on your infrastructure ────────── */}
+        {/* ── How it works: on-prem architecture ──────────── */}
         <div className="mt-5">
-          <div className="op-head-row">
-            <LockGlyph />
-            <p className="op-section-title">{t.how.title}</p>
-          </div>
+          <p className="op-section-title">{t.how.title}</p>
           <p className="op-section-sub">{t.how.sub}</p>
-          <div className="op-flow">
-            {t.how.steps.map((s, i) => (
-              <div key={s.k} className="contents">
-                {i > 0 && <span className="op-chev" aria-hidden="true">›</span>}
-                <div className="op-step">
-                  <div className="op-step-k">{s.k}</div>
-                  <p className="op-step-title">{s.title}</p>
-                  <p className="op-step-body">{s.body}</p>
+          <div className="op-arch">
+            {/* inputs: your data + on-prem hardware */}
+            <div className="op-arch-col op-arch-col--in">
+              {t.how.arch.inputs.map((c) => (
+                <div key={c.title} className="op-arch-card">
+                  <p className="op-arch-eyebrow">{c.eyebrow}</p>
+                  <p className="op-arch-title">{c.title}</p>
+                  <p className="op-arch-meta">{c.meta}</p>
                 </div>
+              ))}
+            </div>
+            {/* security boundary */}
+            <div className="op-arch-bound">
+              <LockGlyph />
+              <p className="op-arch-boundlabel">{t.how.arch.boundary}</p>
+            </div>
+            {/* agent workspace + tool layer */}
+            <div className="op-arch-agent">
+              <p className="op-arch-eyebrow op-arch-eyebrow--accent">{t.how.arch.agent.eyebrow}</p>
+              <p className="op-arch-title">{t.how.arch.agent.title}</p>
+              <p className="op-arch-meta">{t.how.arch.agent.meta}</p>
+              <div className="op-arch-tools">
+                {t.how.arch.agent.tools.map((tool) => (
+                  <span key={tool} className="op-arch-tool">{tool}</span>
+                ))}
               </div>
-            ))}
+            </div>
+            {/* outputs: evidence, engineer approval, PLM */}
+            <div className="op-arch-col op-arch-col--out">
+              {t.how.arch.outputs.map((c) => (
+                <div key={c.title} className="op-arch-card">
+                  <p className={c.accent ? 'op-arch-eyebrow op-arch-eyebrow--accent' : 'op-arch-eyebrow'}>{c.eyebrow}</p>
+                  <p className="op-arch-title">{c.title}</p>
+                  <p className="op-arch-meta">{c.meta}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
