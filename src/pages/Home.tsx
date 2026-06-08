@@ -18,7 +18,7 @@ import {
 } from '../components/ui/primitives';
 import CapabilityRail, { type RailItem } from '../components/home2/CapabilityRail';
 import RoiCalculator from '../components/home2/RoiCalculator';
-import FindingAnatomyFigure from '../components/diagrams/FindingAnatomyFigure';
+import HubAndSpokeFigure from '../components/diagrams/HubAndSpokeFigure';
 import { useLang } from '../i18n/LanguageContext';
 
 const CONTENT = {
@@ -115,16 +115,7 @@ const CONTENT = {
       intro:
         'Human-in-the-loop AI grounded in your rules. Every finding links back to its source: the rule, standard, or drawing note.',
       caption:
-        'One flagged bore, traced to the rule and standard it came from, with the engineer keeping the sign-off.',
-      figure: {
-        sheet: 'BRACKET 4471-A · REV C',
-        finding: 'FINDING',
-        issue: 'Missing datum on the Ø22 bore',
-        tracedTo: 'TRACED TO',
-        rule: 'GD&T policy §4.2',
-        standard: 'ISO 5459',
-        decision: 'Engineer reviews and keeps the sign-off',
-      },
+        'RapidDraft sits between your release package, PDM/PLM, drawings, and CAD and an auditable release gate, with human-in-the-loop review at the center.',
     },
     capabilitiesSection: {
       eyebrow: 'Capabilities',
@@ -243,16 +234,7 @@ const CONTENT = {
       intro:
         'Human-in-the-Loop-KI, verankert in Ihren Regeln. Jeder Befund führt zurück auf seine Quelle: die Regel, Norm oder Zeichnungsnotiz.',
       caption:
-        'Eine markierte Bohrung, zurückverfolgt auf die Regel und Norm, aus der sie stammt, mit der Freigabe beim Ingenieur.',
-      figure: {
-        sheet: 'BRACKET 4471-A · REV C',
-        finding: 'BEFUND',
-        issue: 'Fehlender Bezug an der Ø22-Bohrung',
-        tracedTo: 'ZURÜCKVERFOLGT AUF',
-        rule: 'GD&T-Regel §4.2',
-        standard: 'ISO 5459',
-        decision: 'Ingenieur prüft und behält die Freigabe',
-      },
+        'RapidDraft steht zwischen Ihrem Freigabepaket, PDM/PLM, Zeichnungen und CAD und einem auditierbaren Freigabe-Gate, mit Human-in-the-Loop-Prüfung im Zentrum.',
     },
     capabilitiesSection: {
       eyebrow: 'Funktionen',
@@ -467,9 +449,9 @@ export default function Home() {
           title={t.solution.title}
           intro={t.solution.intro}
         />
-        <div className="mx-auto mt-10 w-full max-w-[960px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-sunken)] p-5 shadow-[inset_0_2px_8px_-4px_rgba(17,24,39,0.12)] sm:p-7">
+        <div className="mx-auto mt-10 w-full max-w-[820px] rounded-[16px] border border-[var(--rd-hair)] bg-[var(--rd-sunken)] p-5 shadow-[inset_0_2px_8px_-4px_rgba(17,24,39,0.12)] sm:p-6">
           <Figure caption={t.solution.caption}>
-            <FindingAnatomyFigure labels={t.solution.figure} />
+            <HubAndSpokeFigure />
           </Figure>
         </div>
       </Section>
