@@ -132,12 +132,14 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/qa-report.mp4', label: 'QA report video' },
                 },
                 {
-                    title: 'Drawing and model review',
-                    body: ['STEP file DFM review', 'Drawing linting', 'Naming and drafting consistency'],
-                    mediaList: [
-                        { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM review video' },
-                        { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find drawing errors video' },
-                    ],
+                    title: 'DFM review',
+                    body: ['STEP file design-for-manufacturing review'],
+                    media: { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM review video' },
+                },
+                {
+                    title: 'Drawing review',
+                    body: ['Find drawing errors', 'Naming and drafting consistency'],
+                    media: { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find drawing errors video' },
                 },
                 {
                     title: 'EPLAN knowledge lookup',
@@ -150,12 +152,9 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-pillar commenting video' },
                 },
                 {
-                    title: 'CIM Database handoff',
-                    body: ['Review report prepared for engineer-approved PLM handoff'],
-                },
-                {
                     title: 'Planned next capabilities',
                     body: [
+                        'CIM Database handoff demo',
                         'EMPB / AS9102 export adapters',
                         'Access-controlled engineering knowledge',
                         'Naming and documentation standards',
@@ -422,12 +421,14 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/qa-report.mp4', label: 'QA-Report-Video' },
                 },
                 {
-                    title: 'Zeichnungs- und Modellprüfung',
-                    body: ['DFM-Review der STEP-Datei', 'Zeichnungsprüfung', 'Benennungs- und Drafting-Konsistenz'],
-                    mediaList: [
-                        { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM-Review-Video' },
-                        { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find-Drawing-Errors-Video' },
-                    ],
+                    title: 'DFM-Review',
+                    body: ['Design-for-Manufacturing-Review der STEP-Datei'],
+                    media: { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM-Review-Video' },
+                },
+                {
+                    title: 'Zeichnungsprüfung',
+                    body: ['Zeichnungsfehler finden', 'Benennungs- und Drafting-Konsistenz'],
+                    media: { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find-Drawing-Errors-Video' },
                 },
                 {
                     title: 'EPLAN Knowledge Lookup',
@@ -440,12 +441,9 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-Pillar-Kommentierungs-Video' },
                 },
                 {
-                    title: 'CIM-Database-Übergabe',
-                    body: ['Review-Report für Engineer-freigegebene PLM-Übergabe vorbereiten'],
-                },
-                {
                     title: 'Geplante nächste Funktionen',
                     body: [
+                        'CIM-Database-Übergabe-Demo',
                         'EMPB-/AS9102-Exportadapter',
                         'Zugriffsgesteuertes Engineering-Wissen',
                         'Benennungs- und Dokumentationsstandards',
@@ -1361,7 +1359,7 @@ function EngineeringStackDiagram({ labels }: { labels: StackDiagramCopy }) {
 }
 
 export default function TheegartenPactec() {
-    const [lang, setLang] = useState<PageLang>('en');
+    const [lang, setLang] = useState<PageLang>('de');
     const copy = PAGE_CONTENT[lang];
 
     useEffect(() => {
@@ -1492,27 +1490,23 @@ export default function TheegartenPactec() {
 
                     <div className="grid gap-3 sm:grid-cols-2 lg:h-full lg:auto-rows-fr">
                         {copy.demo.steps.map((step, index) => {
-                            const mediaItems = 'mediaList' in step ? step.mediaList : 'media' in step ? [step.media] : [];
+                            const media = 'media' in step ? step.media : null;
 
                             return (
                                 <Reveal key={step.title} delay={index * 0.04}>
                                     <article className="surface-card flex h-full flex-col p-5">
-                                        {mediaItems.length ? (
-                                            <div className={`mb-5 grid gap-2 ${mediaItems.length > 1 ? 'sm:grid-cols-2' : ''}`}>
-                                                {mediaItems.map((media) => (
-                                                    <div key={media.src} className="overflow-hidden rounded-[0.65rem] border border-stone-200 bg-stone-50/80">
-                                                        <video
-                                                            className="aspect-video w-full bg-stone-100 object-cover"
-                                                            src={media.src}
-                                                            aria-label={media.label}
-                                                            controls
-                                                            loop
-                                                            muted
-                                                            playsInline
-                                                            preload="metadata"
-                                                        />
-                                                    </div>
-                                                ))}
+                                        {media ? (
+                                            <div className="mb-5 overflow-hidden rounded-[0.65rem] border border-stone-200 bg-stone-50/80">
+                                                <video
+                                                    className="aspect-video w-full bg-stone-100 object-cover"
+                                                    src={media.src}
+                                                    aria-label={media.label}
+                                                    controls
+                                                    loop
+                                                    muted
+                                                    playsInline
+                                                    preload="metadata"
+                                                />
                                             </div>
                                         ) : null}
                                         <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
@@ -1545,11 +1539,6 @@ export default function TheegartenPactec() {
                                 </h2>
                             </summary>
                             <div className="border-t border-stone-200/80">
-                                <div className="grid grid-cols-[minmax(0,1fr)_8rem] border-b border-stone-200/80 bg-stone-50/70 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary/80 sm:px-6">
-                                    {copy.nextSteps.columns.map((column) => (
-                                        <div key={column}>{column}</div>
-                                    ))}
-                                </div>
                                 <div>
                                     {copy.nextSteps.groups.map((group, groupIndex) => {
                                         const previousRows = copy.nextSteps.groups
