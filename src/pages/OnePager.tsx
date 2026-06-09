@@ -202,7 +202,7 @@ export default function OnePager() {
         .op-eyebrow { display: flex; align-items: center; gap: 7px; font-family: var(--rd-meta); font-size: 8.5px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0; }
         .op-slash { font-family: var(--rd-mono); color: var(--rd-accent); letter-spacing: 0; }
         .op-h1 { font-family: var(--rd-sans, 'Inter'); font-size: 27px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; color: var(--rd-head); margin: 8px 0 0; }
-        .op-mark { color: var(--rd-accent); }
+        .op-mark { color: var(--rd-head); }
         .op-sub { font-size: 10.5px; line-height: 1.5; color: var(--rd-fg-2); margin: 8px 0 0; max-width: 172mm; }
 
         /* ── Stat band (KPIs) ────────────────────────────────── */
