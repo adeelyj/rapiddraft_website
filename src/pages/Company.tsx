@@ -12,9 +12,7 @@ import {
   Subhead,
   Intro,
   Body,
-  Button,
   Tag,
-  MetaRow,
 } from '../components/ui/primitives';
 
 // Photos + LinkedIn are language-independent, keyed by person name.
@@ -183,12 +181,6 @@ const CONTENT = {
       messageLabel: 'What have you built? Why RapidDraft?',
       submit: 'Apply',
     },
-    contact: {
-      title: 'Contact',
-      meta: ['info@rapiddraft.ai', '+49 176 8444 3362', 'Munich, Germany'],
-      ctaPrimary: 'Book a demo',
-      ctaSecondary: 'Contact us',
-    },
     founders: [
       {
         name: 'Adeel Yawar Jamil',
@@ -300,12 +292,6 @@ const CONTENT = {
       emailLabel: 'E-Mail',
       messageLabel: 'Was haben Sie gebaut? Warum RapidDraft?',
       submit: 'Bewerben',
-    },
-    contact: {
-      title: 'Kontakt',
-      meta: ['info@rapiddraft.ai', '+49 176 8444 3362', 'München, Deutschland'],
-      ctaPrimary: 'Demo buchen',
-      ctaSecondary: 'Kontakt aufnehmen',
     },
     founders: [
       {
@@ -536,19 +522,6 @@ export default function Company() {
         </div>
       </Section>
 
-      {/* ── Contact ──────────────────────────────────────── */}
-      <Section>
-        <SectionHeader title={t.contact.title} />
-        <MetaRow className="mt-8 justify-center" items={[...t.contact.meta]} />
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button to="/book-demo" variant="primary">
-            {t.contact.ctaPrimary}
-          </Button>
-          <Button href="mailto:info@rapiddraft.ai" variant="secondary" arrow>
-            {t.contact.ctaSecondary}
-          </Button>
-        </div>
-      </Section>
     </div>
   );
 }
