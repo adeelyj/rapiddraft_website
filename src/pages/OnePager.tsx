@@ -39,25 +39,26 @@ const CONTENT = {
       { k: '10x', v: 'Faster feedback' },
       { k: '50%', v: 'Less checking time' },
     ],
-    /* Paired 1:1, each "does" line answers the problem on its row. */
     problem: {
       title: 'The problem',
       items: [
-        'Review logic is tribal knowledge',
-        'Drawing review is error-prone',
-        'Quality docs are built by hand',
-        'Teams and suppliers work in silos',
-        'Your IP cannot leave the building',
+        'Design intent lives in CAD.',
+        'Requirements live in drawings.',
+        'Review logic is tribal knowledge.',
+        'Collaboration is inefficient.',
+        'Drawing review is error-prone.',
+        'Quality inspection is slow.',
       ],
     },
     helps: {
       title: 'What RapidDraft does',
       items: [
-        'Applies your rules on every check',
-        'A tireless, evidence-linked first pass',
-        'Builds BOM and FAIR docs from CAD',
-        'One shared model across teams',
-        'On-prem AI, trained on approved data',
+        'Integrate with your existing PLM',
+        'Create QA docs (BOM, FAIR) from CAD',
+        'Standardize drawings to ISO / ASME',
+        'Run DFM manufacturability analysis',
+        'Collaborate across OEM and suppliers',
+        'On-prem AI, trained on anonymized data',
       ],
     },
     figureCaption: 'From your engineering stack to an auditable release gate, with human-in-the-loop review at the center.',
@@ -109,21 +110,23 @@ const CONTENT = {
     problem: {
       title: 'Das Problem',
       items: [
-        'Prüflogik ist Erfahrungswissen',
-        'Zeichnungsprüfung ist fehleranfällig',
-        'Qualitätsdokumente entstehen von Hand',
-        'Teams und Lieferanten in Silos',
-        'Ihr IP darf das Haus nicht verlassen',
+        'Designabsicht steckt im CAD.',
+        'Anforderungen in Zeichnungen.',
+        'Prüflogik ist Erfahrungswissen.',
+        'Zusammenarbeit ist ineffizient.',
+        'Zeichnungsprüfung ist fehleranfällig.',
+        'Qualitätsprüfung ist langsam.',
       ],
     },
     helps: {
       title: 'Was RapidDraft leistet',
       items: [
-        'Wendet Ihre Regeln bei jeder Prüfung an',
-        'Ein unermüdlicher, belegbasierter Durchgang',
-        'Erstellt BOM- und FAIR-Dokumente aus CAD',
-        'Ein gemeinsames Modell über Teams hinweg',
-        'On-Prem-KI, mit freigegebenen Daten trainiert',
+        'In Ihr bestehendes PLM integrieren',
+        'QA-Dokumente (BOM, FAIR) aus CAD erstellen',
+        'Zeichnungen auf ISO / ASME standardisieren',
+        'DFM-Fertigbarkeitsanalyse durchführen',
+        'Über OEM und Lieferanten zusammenarbeiten',
+        'On-Prem-KI, mit anonymisierten Daten trainiert',
       ],
     },
     figureCaption: 'Von Ihrem Engineering-Stack zu einem auditierbaren Release-Gate, mit Human-in-the-Loop-Review im Zentrum.',
@@ -211,10 +214,10 @@ export default function OnePager() {
         .op-stat-v { font-size: 8.6px; color: var(--rd-fg-3); margin-top: 3px; letter-spacing: 0.2px; }
 
         /* ── Problem -> solution: two cards with a chevron ───── */
-        .op-ps { display: flex; align-items: stretch; gap: 0; margin-top: 15px; }
-        .op-ps-card { flex: 1; border: 1px solid var(--rd-hair); border-radius: 11px; background: var(--rd-surface); padding: 11px 13px; }
-        .op-ps-eyebrow { font-family: var(--rd-meta); font-size: 8.4px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0 0 9px; }
-        .op-ps-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .op-ps { display: flex; align-items: stretch; gap: 0; margin-top: 12px; }
+        .op-ps-card { flex: 1; border: 1px solid var(--rd-hair); border-radius: 11px; background: var(--rd-surface); padding: 9px 12px; }
+        .op-ps-eyebrow { font-family: var(--rd-meta); font-size: 8.4px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; color: var(--rd-fg-3); margin: 0 0 7px; }
+        .op-ps-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
         .op-ps-item { font-size: 9.2px; line-height: 1.3; color: var(--rd-fg); display: flex; align-items: baseline; gap: 7px; }
         .op-ps-tick { color: var(--rd-accent); font-weight: 700; flex-shrink: 0; }
         .op-ps-chev { display: flex; align-items: center; padding: 0 7px; color: var(--rd-accent); font-size: 15px; font-weight: 600; opacity: 0.9; }
@@ -356,7 +359,7 @@ export default function OnePager() {
         </div>
 
         {/* ── The transformation (hero figure) ───────────── */}
-        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '104mm' }}>
+        <div className="mx-auto mt-5 w-full" style={{ maxWidth: '98mm' }}>
           <HubAndSpokeFigure inputs={HS_INPUTS} outputs={HS_OUTPUTS} alt={HS_ALT} />
         </div>
         <p className="op-cap">{t.figureCaption}</p>
