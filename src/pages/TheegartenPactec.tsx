@@ -55,7 +55,7 @@ const PAGE_CONTENT = {
                 title: 'Local AI deployment stack',
                 columns: ['Layer', 'POC', 'Pilot (serious)', 'Production / Enterprise'],
                 rows: [
-                    ['Compute', 'DGX Spark / workstation (demo)', 'CPU control node + 2x L40S or RTX PRO 6000 Blackwell', 'H200 pool / customer AI platform'],
+                    ['Compute', 'DGX Spark / workstation (demo)', '01. DGX/RTX Spark\n02. RTX PRO 6000 Blackwell', 'H200 pool / customer AI platform'],
                     ['Runtime', 'Docker Compose', 'K3s + Helm', 'Kubernetes · OpenShift AI · VMware Private AI · Run:ai'],
                     ['Model serving', 'vLLM', 'vLLM + 1 NIM · LiteLLM gateway', 'NVIDIA AI Enterprise + NIM (+ Triton / SGLang) · Model Gateway'],
                     ['Data & vectors', 'PostgreSQL + pgvector', 'PostgreSQL + Qdrant + MinIO', '+ OpenSearch / Elastic · separated DB / vector / object'],
@@ -126,7 +126,7 @@ const PAGE_CONTENT = {
                 {
                     title: 'Quality documents',
                     body: ['Drawing to inspection report'],
-                    media: { type: 'placeholder', label: 'Quality document demo placeholder' },
+                    media: { type: 'video', src: '/media/theegarten/qa-report.mp4', label: 'QA report video' },
                 },
                 {
                     title: 'Design errors',
@@ -136,7 +136,12 @@ const PAGE_CONTENT = {
                 {
                     title: 'Knowledge management',
                     body: ['EPLAN files queried with AI agent'],
-                    media: { type: 'placeholder', label: 'Knowledge management demo placeholder' },
+                    media: { type: 'video', src: '/media/theegarten/rag-eplan.mp4', label: 'EPLAN RAG video' },
+                },
+                {
+                    title: 'Find Drawing Errors',
+                    body: ['Drawing linting', 'Naming and drafting consistency'],
+                    media: { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find drawing errors video' },
                 },
                 {
                     title: 'Collaboration',
@@ -144,21 +149,34 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-pillar commenting video' },
                 },
                 {
-                    title: 'Other',
-                    body: ['Naming standardization', 'SOLIDWORKS file renamed'],
+                    title: 'Roadmap',
+                    body: [
+                        'CIM / PLM review-report handoff',
+                        'EMPB / AS9102 export adapters',
+                        'Access-controlled engineering knowledge',
+                        'Naming and documentation standards',
+                    ],
                 },
             ],
         },
         nextSteps: {
             title: 'Action Tracker',
             columns: ['Action', 'Status'],
-            rows: [
-                ['First Meeting, June 04 2026', 'DONE'],
-                ['Followup meeting on June 16, 13-14 Uhr', 'Scheduled'],
-                ['Define project scope and success/fail criteria', 'Open'],
-                ['Sign NDA and Letter of Intent', 'Open'],
-                ['RapidDraft visits Theegarten', 'Open'],
-                ['Kickoff', 'Open'],
+            groups: [
+                {
+                    title: 'Phase 01',
+                    rows: [
+                        ['First Meeting, June 04 2026', 'DONE'],
+                        ['Followup meeting on June 16, 13-14 Uhr', 'Scheduled'],
+                        ['Define project scope and success/fail criteria', 'Open'],
+                        ['Sign NDA and Letter of Intent', 'Open'],
+                        ['RapidDraft visits Theegarten', 'Open'],
+                    ],
+                },
+                {
+                    title: 'Phase 02: Kickoff',
+                    rows: [['Kickoff', 'Open']],
+                },
             ],
         },
         pilot: {
@@ -323,7 +341,7 @@ const PAGE_CONTENT = {
                 title: 'Lokaler KI-Bereitstellungs-Stack',
                 columns: ['Ebene', 'POC', 'Pilot (seriös)', 'Produktion / Enterprise'],
                 rows: [
-                    ['Compute', 'DGX Spark / Workstation (Demo)', 'CPU-Control-Node + 2x L40S oder RTX PRO 6000 Blackwell', 'H200-Pool / Kunden-AI-Plattform'],
+                    ['Compute', 'DGX Spark / Workstation (Demo)', '01. DGX/RTX Spark\n02. RTX PRO 6000 Blackwell', 'H200-Pool / Kunden-AI-Plattform'],
                     ['Runtime', 'Docker Compose', 'K3s + Helm', 'Kubernetes · OpenShift AI · VMware Private AI · Run:ai'],
                     ['Model Serving', 'vLLM', 'vLLM + 1 NIM · LiteLLM Gateway', 'NVIDIA AI Enterprise + NIM (+ Triton / SGLang) · Model Gateway'],
                     ['Daten & Vektoren', 'PostgreSQL + pgvector', 'PostgreSQL + Qdrant + MinIO', '+ OpenSearch / Elastic · getrennte DB / Vector / Object Stores'],
@@ -394,7 +412,7 @@ const PAGE_CONTENT = {
                 {
                     title: 'Qualitätsdokumente',
                     body: ['Von Zeichnung zu Prüfbericht'],
-                    media: { type: 'placeholder', label: 'Platzhalter für Qualitätsdokumente' },
+                    media: { type: 'video', src: '/media/theegarten/qa-report.mp4', label: 'QA-Report-Video' },
                 },
                 {
                     title: 'Designfehler',
@@ -404,7 +422,12 @@ const PAGE_CONTENT = {
                 {
                     title: 'Knowledge Management',
                     body: ['EPLAN-Dateien mit KI-Agent abfragen'],
-                    media: { type: 'placeholder', label: 'Platzhalter für Knowledge Management' },
+                    media: { type: 'video', src: '/media/theegarten/rag-eplan.mp4', label: 'EPLAN-RAG-Video' },
+                },
+                {
+                    title: 'Find Drawing Errors',
+                    body: ['Zeichnungs-Linting', 'Benennung und Drafting-Konsistenz'],
+                    media: { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find-Drawing-Errors-Video' },
                 },
                 {
                     title: 'Zusammenarbeit',
@@ -412,21 +435,34 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-Pillar-Kommentierungs-Video' },
                 },
                 {
-                    title: 'Sonstiges',
-                    body: ['Benennungsstandardisierung', 'SOLIDWORKS-Datei umbenannt'],
+                    title: 'Roadmap',
+                    body: [
+                        'CIM-/PLM-Review-Report-Übergabe',
+                        'EMPB-/AS9102-Exportadapter',
+                        'Zugriffsgesteuertes Engineering-Wissen',
+                        'Benennungs- und Dokumentationsstandards',
+                    ],
                 },
             ],
         },
         nextSteps: {
             title: 'Action Tracker',
             columns: ['Aktion', 'Status'],
-            rows: [
-                ['Erstes Meeting, 04. Juni 2026', 'Erledigt'],
-                ['Follow-up-Termin am 16. Juni, 13-14 Uhr', 'Geplant'],
-                ['Projektumfang und Erfolgs-/Abbruchkriterien definieren', 'Offen'],
-                ['NDA und Letter of Intent unterzeichnen', 'Offen'],
-                ['RapidDraft besucht Theegarten', 'Offen'],
-                ['Kickoff', 'Offen'],
+            groups: [
+                {
+                    title: 'Phase 01',
+                    rows: [
+                        ['Erstes Meeting, 04. Juni 2026', 'Erledigt'],
+                        ['Follow-up-Termin am 16. Juni, 13-14 Uhr', 'Geplant'],
+                        ['Projektumfang und Erfolgs-/Abbruchkriterien definieren', 'Offen'],
+                        ['NDA und Letter of Intent unterzeichnen', 'Offen'],
+                        ['RapidDraft besucht Theegarten', 'Offen'],
+                    ],
+                },
+                {
+                    title: 'Phase 02: Kickoff',
+                    rows: [['Kickoff', 'Offen']],
+                },
             ],
         },
         pilot: {
@@ -1492,13 +1528,13 @@ export default function TheegartenPactec() {
                                                 {layer}
                                             </th>
                                             <td className="border-r border-slate-100 px-5 py-7 align-top text-[15px] leading-7 text-slate-600 xl:text-base">
-                                                <span className="block break-words">{poc}</span>
+                                                <span className="block whitespace-pre-line break-words">{poc}</span>
                                             </td>
                                             <td className="border-r border-slate-100 bg-orange-50/25 px-5 py-7 align-top text-[15px] leading-7 text-slate-800 xl:text-base">
-                                                <span className="block break-words">{pilot}</span>
+                                                <span className="block whitespace-pre-line break-words">{pilot}</span>
                                             </td>
                                             <td className="px-5 py-7 align-top text-[15px] leading-7 text-slate-700 xl:text-base">
-                                                <span className="block break-words">{production}</span>
+                                                <span className="block whitespace-pre-line break-words">{production}</span>
                                             </td>
                                         </tr>
                                     ))}
@@ -1577,37 +1613,19 @@ export default function TheegartenPactec() {
                     <div className="grid gap-3 sm:grid-cols-2 lg:h-full lg:auto-rows-fr">
                         {copy.demo.steps.map((step, index) => (
                             <Reveal key={step.title} delay={index * 0.04}>
-                                <article
-                                    className={`surface-card flex h-full flex-col p-5 ${
-                                        index === copy.demo.steps.length - 1 ? 'sm:col-span-2' : ''
-                                    }`}
-                                >
+                                <article className="surface-card flex h-full flex-col p-5">
                                     {'media' in step ? (
                                         <div className="mb-5 overflow-hidden rounded-[0.65rem] border border-stone-200 bg-stone-50/80">
-                                            {'src' in step.media ? (
-                                                <video
-                                                    className="aspect-video w-full bg-stone-100 object-cover"
-                                                    src={step.media.src}
-                                                    aria-label={step.media.label}
-                                                    autoPlay
-                                                    controls
-                                                    loop
-                                                    muted
-                                                    playsInline
-                                                    preload="metadata"
-                                                />
-                                            ) : (
-                                                <div className="flex aspect-video w-full items-center justify-center bg-[linear-gradient(135deg,rgba(255,247,237,0.92),rgba(255,255,255,0.9))] p-5">
-                                                    <div className="w-full border border-dashed border-orange-200 px-4 py-6 text-center">
-                                                        <div className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary/75">
-                                                            Placeholder
-                                                        </div>
-                                                        <div className="mt-2 text-sm font-semibold leading-5 text-gray-800">
-                                                            {step.media.label}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
+                                            <video
+                                                className="aspect-video w-full bg-stone-100 object-cover"
+                                                src={step.media.src}
+                                                aria-label={step.media.label}
+                                                controls
+                                                loop
+                                                muted
+                                                playsInline
+                                                preload="metadata"
+                                            />
                                         </div>
                                     ) : null}
                                     <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
@@ -1644,33 +1662,48 @@ export default function TheegartenPactec() {
                                         <div key={column}>{column}</div>
                                     ))}
                                 </div>
-                                <div className="divide-y divide-stone-200/80">
-                                    {copy.nextSteps.rows.map(([action, status], index) => (
-                                        <div
-                                            key={action}
-                                            className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 px-5 py-4 text-sm leading-6 text-gray-700 sm:px-6"
-                                        >
-                                            <div className="flex min-w-0 items-start gap-3 font-semibold text-gray-950">
-                                                <span className="mt-0.5 shrink-0 font-mono text-xs text-primary">
-                                                    {String(index + 1).padStart(2, '0')}
-                                                </span>
-                                                <span className="min-w-0 break-words">{action}</span>
+                                <div>
+                                    {copy.nextSteps.groups.map((group, groupIndex) => {
+                                        const previousRows = copy.nextSteps.groups
+                                            .slice(0, groupIndex)
+                                            .reduce((total, item) => total + item.rows.length, 0);
+
+                                        return (
+                                            <div key={group.title} className="border-b border-stone-200/80 last:border-b-0">
+                                                <div className="border-b border-stone-200/70 bg-orange-50/35 px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary sm:px-6">
+                                                    {group.title}
+                                                </div>
+                                                <div className="divide-y divide-stone-200/80">
+                                                    {group.rows.map(([action, status], rowIndex) => (
+                                                        <div
+                                                            key={action}
+                                                            className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 px-5 py-4 text-sm leading-6 text-gray-700 sm:px-6"
+                                                        >
+                                                            <div className="flex min-w-0 items-start gap-3 font-semibold text-gray-950">
+                                                                <span className="mt-0.5 shrink-0 font-mono text-xs text-primary">
+                                                                    {String(previousRows + rowIndex + 1).padStart(2, '0')}
+                                                                </span>
+                                                                <span className="min-w-0 break-words">{action}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span
+                                                                    className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${
+                                                                        status === 'DONE' || status === 'Erledigt'
+                                                                            ? 'border-slate-200 bg-slate-100 text-slate-700'
+                                                                            : status === 'Scheduled' || status === 'Geplant'
+                                                                            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                                                                            : 'border-orange-200 bg-orange-50 text-primary'
+                                                                    }`}
+                                                                >
+                                                                    {status}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
-                                            <div>
-                                                <span
-                                                    className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${
-                                                        status === 'DONE' || status === 'Erledigt'
-                                                            ? 'border-slate-200 bg-slate-100 text-slate-700'
-                                                            : status === 'Scheduled' || status === 'Geplant'
-                                                            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                                                            : 'border-orange-200 bg-orange-50 text-primary'
-                                                    }`}
-                                                >
-                                                    {status}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </details>
@@ -1697,9 +1730,6 @@ export default function TheegartenPactec() {
                                             {phase.title}
                                             {phase.note ? <span className="block">{phase.note}</span> : null}
                                         </h3>
-                                        <span className="ml-auto shrink-0 rounded-full border border-orange-200 bg-orange-50/80 px-3 py-1 text-xs font-semibold text-primary">
-                                            {phase.duration}
-                                        </span>
                                     </div>
                                     <p className="mt-4 text-sm leading-6 text-gray-600">{phase.body}</p>
                                     <p className="mt-5 rounded-[1rem] border border-orange-200/80 bg-orange-50/80 px-3 py-2.5 text-sm font-semibold leading-6 text-primary xl:mt-auto">
