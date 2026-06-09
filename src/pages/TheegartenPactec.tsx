@@ -12,11 +12,11 @@ const PAGE_CONTENT = {
             'A tailored RapidDraft follow-up for Theegarten-Pactec: AI-assisted drawing, BOM, and CIM Database release checks with source-linked findings, engineer approval, and controlled deployment.',
         hero: {
             kicker: 'For Theegarten-Pactec Engineering',
-            title: 'Agentic drawing release and design review for engineering teams',
+            title: 'Catch drawing and BOM errors before release',
             body:
-                'RapidDraft helps hardware teams catch design and drawing issues earlier, automate repetitive review checks, and preserve decision context across CAD models, manufacturing drawings, and release workflows.',
+                'RapidDraft reviews a release package — drawing, BOM, STEP model, and EPLAN context — and returns source-linked findings your engineers approve before the change reaches CIM Database.',
             cta: 'Contact Us',
-            chips: ['GDPR aligned', 'On-prem option', 'Local/private AI', 'Engineer approval'],
+            chips: ['Controlled boundary', 'On-prem option', 'No silent training', 'Engineer approval'],
         },
         language: {
             label: 'Page language',
@@ -24,16 +24,16 @@ const PAGE_CONTENT = {
             de: 'DE',
         },
         security: {
-            kicker: 'Security First',
-            title: 'Data security and transparency come first',
+            kicker: 'Data Security',
+            title: 'Your design data stays inside the agreed boundary',
             body:
-                'Runs locally on-prem, optimized for AI hardware like NVIDIA DGX Spark. No data leaves your infrastructure.',
+                'For the pilot, RapidDraft can run inside a Theegarten-approved local or private environment. Drawings, BOMs, prompts, embeddings, findings, and reports stay within the agreed boundary and are not used for silent model training.',
         },
         architecture: {
             kicker: 'Architecture Follow-Up',
-            title: 'Product Architecture',
+            title: 'How RapidDraft deploys inside your environment',
             body:
-                'The architecture should be discussed as a set of deployment decisions, not as a fixed cloud product. The first pilot can stay narrow while preserving the path to Theegarten-approved enterprise infrastructure.',
+                'We treat architecture as a set of deployment decisions Theegarten makes with us: where data is processed, how model calls are mediated, which systems are connected, and where engineers keep release control.',
             principles: [
                 {
                     title: 'Boundary first',
@@ -53,9 +53,12 @@ const PAGE_CONTENT = {
             ],
             stack: {
                 title: 'Local AI deployment stack',
-                columns: ['Layer', 'POC', 'Pilot (serious)', 'Production / Enterprise'],
+                appendixTitle: 'Technical deployment stack',
+                appendixBody:
+                    'A deeper IT view for comparing proof-of-concept, pilot, and production deployment options. The exact runtime is scoped with Theegarten IT before any production commitment.',
+                columns: ['Layer', 'Proof of Concept', 'Pilot', 'Production / Enterprise'],
                 rows: [
-                    ['Compute', 'DGX Spark / workstation (demo)', 'CPU control node + 2x L40S or RTX PRO 6000 Blackwell', 'H200 pool / customer AI platform'],
+                    ['Compute', 'DGX Spark / workstation (demo)', '01. DGX/RTX Spark\n02. RTX PRO 6000 Blackwell', 'H200 pool / customer AI platform'],
                     ['Runtime', 'Docker Compose', 'K3s + Helm', 'Kubernetes · OpenShift AI · VMware Private AI · Run:ai'],
                     ['Model serving', 'vLLM', 'vLLM + 1 NIM · LiteLLM gateway', 'NVIDIA AI Enterprise + NIM (+ Triton / SGLang) · Model Gateway'],
                     ['Data & vectors', 'PostgreSQL + pgvector', 'PostgreSQL + Qdrant + MinIO', '+ OpenSearch / Elastic · separated DB / vector / object'],
@@ -67,45 +70,45 @@ const PAGE_CONTENT = {
                 ],
             },
             notes: [
-                'DGX Spark is best treated as a pilot/reference appliance, not the default departmental production server.',
+                'DGX/RTX Spark is a pilot/reference option; production can use customer-approved GPU servers or enterprise AI platforms.',
                 'CIM, EPLAN, CAD/PDM/PLM, and file-share connectors should stay marked as future integrations until scoped with Theegarten IT.',
                 'Project indexing is for cited retrieval, not cross-customer reuse or silent model training.',
             ],
         },
         roadmap: {
-            kicker: 'Product Roadmap',
-            title: 'From release review to engineering workflow intelligence',
+            kicker: 'Adoption Path',
+            title: 'From pilot release checks to a controlled engineering workflow layer',
             body:
-                'RapidDraft starts with trusted release checks and grows into a governed workflow layer for CAD, drawings, BOMs, PLM data, and engineering knowledge.',
+                'The first step is a narrow, measurable release-check pilot. Later stages can add CIM Database handoff, EPLAN/document context, and governed automation only after Theegarten approves the scope.',
             phases: [
                 {
-                    title: 'Pilot: Release Review Intelligence',
+                    title: 'Pilot release checks',
                     body: 'Check drawings, BOMs, CAD exports, and release packages before sign-off.',
                     chips: ['Findings', 'Change summary', 'Review report'],
                 },
                 {
-                    title: 'Connected Review Workflow',
-                    body: 'Move review context through existing PLM, PDM, CIM, CAD export, EPLAN, and file-share workflows.',
+                    title: 'CIM Database report handoff',
+                    body: 'Attach a source-linked review report to the release record while CIM Database remains the system of record.',
                     chips: ['CIM / PLM', 'EPLAN context', 'Report handoff'],
                 },
                 {
-                    title: 'Engineering Knowledge & Decision Memory',
-                    body: 'Make standards, manuals, previous findings, and decisions searchable with source citations.',
+                    title: 'EPLAN and document context',
+                    body: 'Use approved project documents, EPLAN context, standards, and prior findings for cited retrieval inside the agreed boundary.',
                     chips: ['Cited retrieval', 'Prior reviews', 'Rule templates'],
                 },
                 {
-                    title: 'Assisted Engineering Automation',
+                    title: 'Engineer-approved automation',
                     body: 'Draft change summaries, action lists, checklists, and release artifacts for engineer approval.',
                     chips: ['Action lists', 'Checklists', 'Draft summaries'],
                 },
                 {
-                    title: 'Enterprise Engineering AI Platform',
+                    title: 'Enterprise deployment boundary',
                     body: 'Scale with private deployment, identity, audit, workflow versions, and approved model routing.',
                     chips: ['SSO / RBAC', 'Audit trail', 'Model routing'],
                 },
                 {
-                    title: 'Long-Term Vision: RapidDraft Studio',
-                    body: 'Bring review, workflows, AI assistance, decisions, approvals, and release evidence into one engineering cockpit.',
+                    title: 'Longer-term engineering cockpit',
+                    body: 'Bring review, workflows, AI assistance, decisions, approvals, and release evidence into one controlled workspace.',
                     chips: ['CAD context', 'Workflow cockpit', 'Release evidence'],
                 },
             ],
@@ -121,22 +124,27 @@ const PAGE_CONTENT = {
             kicker: 'Live Demo',
             title: 'Release check for a real module-change workflow',
             body:
-                'We will demonstrate the release logic on a representative Theegarten workflow: drawing update, BOM impact, optional EPLAN context, and CIM Database release review.',
+                'We will demonstrate the release logic on a representative Theegarten workflow: drawing update, BOM impact, optional EPLAN context, and engineer-approved CIM Database handoff.',
             steps: [
                 {
-                    title: 'Quality documents',
+                    title: 'Inspection report generation',
                     body: ['Drawing to inspection report'],
-                    media: { type: 'placeholder', label: 'Quality document demo placeholder' },
+                    media: { type: 'video', src: '/media/theegarten/qa-report.mp4', label: 'QA report video' },
                 },
                 {
-                    title: 'Design errors',
-                    body: ['STEP file DFM review', 'Drawing issues'],
+                    title: 'DFM review',
+                    body: ['STEP file design-for-manufacturing review'],
                     media: { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM review video' },
                 },
                 {
-                    title: 'Knowledge management',
-                    body: ['EPLAN files queried with AI agent'],
-                    media: { type: 'placeholder', label: 'Knowledge management demo placeholder' },
+                    title: 'Drawing review',
+                    body: ['Find drawing errors', 'Naming and drafting consistency'],
+                    media: { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find drawing errors video' },
+                },
+                {
+                    title: 'EPLAN knowledge lookup',
+                    body: ['Approved project documents queried with cited answers'],
+                    media: { type: 'video', src: '/media/theegarten/rag-eplan.mp4', label: 'EPLAN RAG video' },
                 },
                 {
                     title: 'Collaboration',
@@ -144,21 +152,34 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-pillar commenting video' },
                 },
                 {
-                    title: 'Other',
-                    body: ['Naming standardization', 'SOLIDWORKS file renamed'],
+                    title: 'Planned next capabilities',
+                    body: [
+                        'CIM Database handoff demo',
+                        'EMPB / AS9102 export adapters',
+                        'Access-controlled engineering knowledge',
+                        'Naming and documentation standards',
+                    ],
                 },
             ],
         },
         nextSteps: {
             title: 'Action Tracker',
             columns: ['Action', 'Status'],
-            rows: [
-                ['First Meeting, June 04 2026', 'DONE'],
-                ['Followup meeting on June 16, 13-14 Uhr', 'Scheduled'],
-                ['Define project scope and success/fail criteria', 'Open'],
-                ['Sign NDA and Letter of Intent', 'Open'],
-                ['RapidDraft visits Theegarten', 'Open'],
-                ['Kickoff', 'Open'],
+            groups: [
+                {
+                    title: 'Phase 01',
+                    rows: [
+                        ['First Meeting, June 04 2026', 'Completed'],
+                        ['Follow-up meeting, June 16, 13:00-14:00 CEST', 'Scheduled'],
+                        ['Define project scope and success/fail criteria', 'Open'],
+                        ['Confirm NDA and pilot LOI documents', 'Open'],
+                        ['RapidDraft visits Theegarten', 'Open'],
+                    ],
+                },
+                {
+                    title: 'Phase 02: Kickoff',
+                    rows: [['Kickoff', 'Open']],
+                },
             ],
         },
         pilot: {
@@ -173,7 +194,7 @@ const PAGE_CONTENT = {
                     duration: '1 week',
                     body:
                         'Visit Theegarten-Pactec and interview 2-3 engineers to map one release workflow, pain points, data boundaries, and success criteria.',
-                    deliverable: 'Deliverable: feasibility report, scope, security concept.',
+                    deliverable: 'Output: agreed pilot scope, security concept, and success criteria.',
                 },
                 {
                     title: 'Phase 2 — Kick-off',
@@ -181,7 +202,7 @@ const PAGE_CONTENT = {
                     duration: '1 week',
                     body:
                         'Confirm scope, sample packages, access constraints, demo workflow, open questions, and team responsibilities.',
-                    deliverable: 'Deliverable: signed LOI, kick-off deck, roles, timeline.',
+                    deliverable: 'Output: confirmed sample package, roles, timeline, and kickoff materials.',
                 },
                 {
                     title: 'Phase 3 — Review',
@@ -189,7 +210,7 @@ const PAGE_CONTENT = {
                     duration: '2 weeks',
                     body:
                         'Review implementation status with engineers and test whether findings are useful, traceable, and relevant to release decisions.',
-                    deliverable: 'Deliverable: value report, use cases, findings quality.',
+                    deliverable: 'Output: value report, use-case fit, and findings-quality assessment.',
                 },
                 {
                     title: 'Phase 4 — Deployment',
@@ -197,13 +218,13 @@ const PAGE_CONTENT = {
                     duration: 'optional',
                     body:
                         'Move to production only if the value case, security requirements, and rollout approach are confirmed.',
-                    deliverable: 'Deliverable: deployment plan, training, support model.',
+                    deliverable: 'Output: deployment plan, training approach, and support model.',
                 },
             ],
         },
         team: {
-            kicker: 'The team behind RapidDraft',
-            title: 'Engineering depth, AI capability, and industrial execution.',
+            kicker: 'Pilot Team',
+            title: 'Direct engineering and AI support for the pilot.',
             body:
                 'Theegarten-Pactec would work directly with founders who understand mechanical release workflows, controlled deployment, and production AI systems.',
             cta: 'Contact Us',
@@ -258,7 +279,7 @@ const PAGE_CONTENT = {
                 hardwareMeta: 'Runs on-site · company network',
                 workspaceKicker: 'RAPIDDRAFT WORKSPACE',
                 workspaceTitle: 'Agent inside the product',
-                workspaceMeta: 'Orchestrates tools, not a chatbot',
+                workspaceMeta: 'Runs defined checks and retrieval',
                 toolLayer: 'AGENT TOOL LAYER',
                 tools: ['BOM', 'DFM', 'Model / Canvas', 'Knowledge', 'Artifacts'],
                 reasoning: 'Checks · retrieval · evidence',
@@ -280,11 +301,11 @@ const PAGE_CONTENT = {
             'RapidDraft Follow-up für Theegarten-Pactec: KI-gestützte Prüfungen von Zeichnungen, Stücklisten und CIM-Database-Freigaben mit nachvollziehbaren Befunden, Engineer-Freigabe und kontrollierter Bereitstellung.',
         hero: {
             kicker: 'Für Theegarten-Pactec Engineering',
-            title: 'KI-Review für Engineering-Freigaben',
+            title: 'Zeichnungs- und Stücklistenfehler vor der Freigabe erkennen',
             body:
-                'RapidDraft hilft Hardware-Teams, Design- und Zeichnungsfehler früher zu erkennen, wiederkehrende Review-Schritte zu automatisieren und Entscheidungskontext über CAD-Modelle, Fertigungszeichnungen und Freigabeprozesse hinweg zu sichern.',
+                'RapidDraft prüft ein Freigabepaket — Zeichnung, Stückliste, STEP-Modell und EPLAN-Kontext — und liefert quellenbasierte Befunde, die Ihre Engineers vor der Übergabe an CIM Database freigeben.',
             cta: 'Kontakt aufnehmen',
-            chips: ['DSGVO-orientiert', 'On-prem möglich', 'Lokale/private KI', 'Engineer-Freigabe'],
+            chips: ['Kontrollierte Grenze', 'On-prem möglich', 'Kein stilles Training', 'Engineer-Freigabe'],
         },
         language: {
             label: 'Seitensprache',
@@ -292,16 +313,16 @@ const PAGE_CONTENT = {
             de: 'DE',
         },
         security: {
-            kicker: 'Security First',
-            title: 'Datensicherheit und Transparenz zuerst',
+            kicker: 'Datensicherheit',
+            title: 'Ihre Konstruktionsdaten bleiben innerhalb der vereinbarten Grenze',
             body:
-                'Läuft lokal/on-prem und ist für KI-Hardware wie NVIDIA DGX Spark optimiert. Keine Daten verlassen Ihre Infrastruktur.',
+                'Für den Pilot kann RapidDraft innerhalb einer von Theegarten freigegebenen lokalen oder privaten Umgebung laufen. Zeichnungen, Stücklisten, Prompts, Embeddings, Befunde und Reports bleiben innerhalb der vereinbarten Grenze und werden nicht für stilles Modelltraining genutzt.',
         },
         architecture: {
             kicker: 'Architektur-Follow-up',
-            title: 'Produktarchitektur',
+            title: 'Wie RapidDraft in Ihrer Umgebung bereitgestellt wird',
             body:
-                'Die Architektur sollte als Reihe von Bereitstellungsentscheidungen besprochen werden, nicht als festes Cloud-Produkt. Der erste Pilot kann bewusst eng bleiben und trotzdem den Pfad zu Theegarten-genehmigter Enterprise-Infrastruktur offenhalten.',
+                'Wir behandeln Architektur als Reihe von Bereitstellungsentscheidungen, die Theegarten mit uns trifft: wo Daten verarbeitet werden, wie Modellaufrufe vermittelt werden, welche Systeme angebunden werden und wo Engineers die Freigabekontrolle behalten.',
             principles: [
                 {
                     title: 'Grenze zuerst',
@@ -321,9 +342,12 @@ const PAGE_CONTENT = {
             ],
             stack: {
                 title: 'Lokaler KI-Bereitstellungs-Stack',
-                columns: ['Ebene', 'POC', 'Pilot (seriös)', 'Produktion / Enterprise'],
+                appendixTitle: 'Technischer Bereitstellungs-Stack',
+                appendixBody:
+                    'Eine vertiefte IT-Sicht zum Vergleich von Proof of Concept, Pilot und Produktionsoptionen. Die konkrete Laufzeitumgebung wird vor einer Produktionsentscheidung mit Theegarten IT gescoped.',
+                columns: ['Ebene', 'Proof of Concept', 'Pilot', 'Produktion / Enterprise'],
                 rows: [
-                    ['Compute', 'DGX Spark / Workstation (Demo)', 'CPU-Control-Node + 2x L40S oder RTX PRO 6000 Blackwell', 'H200-Pool / Kunden-AI-Plattform'],
+                    ['Compute', 'DGX Spark / Workstation (Demo)', '01. DGX/RTX Spark\n02. RTX PRO 6000 Blackwell', 'H200-Pool / Kunden-AI-Plattform'],
                     ['Runtime', 'Docker Compose', 'K3s + Helm', 'Kubernetes · OpenShift AI · VMware Private AI · Run:ai'],
                     ['Model Serving', 'vLLM', 'vLLM + 1 NIM · LiteLLM Gateway', 'NVIDIA AI Enterprise + NIM (+ Triton / SGLang) · Model Gateway'],
                     ['Daten & Vektoren', 'PostgreSQL + pgvector', 'PostgreSQL + Qdrant + MinIO', '+ OpenSearch / Elastic · getrennte DB / Vector / Object Stores'],
@@ -335,45 +359,45 @@ const PAGE_CONTENT = {
                 ],
             },
             notes: [
-                'DGX Spark sollte als Pilot-/Referenz-Appliance verstanden werden, nicht als Standardserver für produktive Fachbereiche.',
+                'DGX/RTX Spark ist eine Pilot-/Referenzoption; Produktion kann auf kundenseitig freigegebenen GPU-Servern oder Enterprise-AI-Plattformen laufen.',
                 'CIM, EPLAN, CAD/PDM/PLM und File-Share-Connectoren bleiben als zukünftige Integrationen markiert, bis sie mit Theegarten IT gescoped sind.',
                 'Projektindexierung dient zitiertem Retrieval, nicht kundenübergreifender Wiederverwendung oder stillem Modelltraining.',
             ],
         },
         roadmap: {
-            kicker: 'Produkt-Roadmap',
-            title: 'Von der Freigabeprüfung zur Engineering-Workflow-Intelligenz',
+            kicker: 'Adoptionspfad',
+            title: 'Vom Pilot für Freigabeprüfungen zur kontrollierten Engineering-Workflow-Schicht',
             body:
-                'RapidDraft startet mit vertrauenswürdigen Freigabeprüfungen und wächst zu einer kontrollierten Workflow-Schicht für CAD, Zeichnungen, Stücklisten, PLM-Daten und Engineering-Wissen.',
+                'Der erste Schritt ist ein enger, messbarer Pilot für Freigabeprüfungen. Spätere Stufen können CIM-Database-Übergabe, EPLAN-/Dokumentenkontext und kontrollierte Automatisierung ergänzen, sobald Theegarten den Umfang freigibt.',
             phases: [
                 {
-                    title: 'Pilot: Release Review Intelligence',
+                    title: 'Pilot-Freigabeprüfungen',
                     body: 'Zeichnungen, Stücklisten, CAD-Exporte und Freigabepakete vor dem Sign-off prüfen.',
                     chips: ['Befunde', 'Änderungsübersicht', 'Review-Report'],
                 },
                 {
-                    title: 'Connected Review Workflow',
-                    body: 'Review-Kontext durch bestehende PLM-, PDM-, CIM-, CAD-Export-, EPLAN- und File-Share-Workflows bewegen.',
+                    title: 'CIM-Database-Reportübergabe',
+                    body: 'Einen quellenbasierten Review-Report an den Freigabedatensatz anhängen, während CIM Database das führende System bleibt.',
                     chips: ['CIM / PLM', 'EPLAN-Kontext', 'Report-Übergabe'],
                 },
                 {
-                    title: 'Engineering Knowledge & Decision Memory',
-                    body: 'Standards, Handbücher, frühere Befunde und Entscheidungen mit Quellenzitaten durchsuchbar machen.',
+                    title: 'EPLAN- und Dokumentenkontext',
+                    body: 'Freigegebene Projektdokumente, EPLAN-Kontext, Standards und frühere Befunde für zitiertes Retrieval innerhalb der vereinbarten Grenze nutzen.',
                     chips: ['Zitiertes Retrieval', 'Frühere Reviews', 'Rule Templates'],
                 },
                 {
-                    title: 'Assisted Engineering Automation',
+                    title: 'Engineer-freigegebene Automatisierung',
                     body: 'Änderungszusammenfassungen, Action Lists, Checklisten und Freigabeartefakte für Engineer-Freigabe entwerfen.',
                     chips: ['Action Lists', 'Checklisten', 'Draft Summaries'],
                 },
                 {
-                    title: 'Enterprise Engineering AI Platform',
+                    title: 'Enterprise-Bereitstellungsgrenze',
                     body: 'Skalierung mit privater Bereitstellung, Identity, Audit, Workflow-Versionen und genehmigtem Model Routing.',
                     chips: ['SSO / RBAC', 'Audit Trail', 'Model Routing'],
                 },
                 {
-                    title: 'Long-Term Vision: RapidDraft Studio',
-                    body: 'Review, Workflows, KI-Unterstützung, Entscheidungen, Freigaben und Release-Evidenz in einem Engineering-Cockpit bündeln.',
+                    title: 'Langfristiges Engineering-Cockpit',
+                    body: 'Review, Workflows, KI-Unterstützung, Entscheidungen, Freigaben und Release-Evidenz in einem kontrollierten Workspace bündeln.',
                     chips: ['CAD-Kontext', 'Workflow-Cockpit', 'Release-Evidenz'],
                 },
             ],
@@ -389,22 +413,27 @@ const PAGE_CONTENT = {
             kicker: 'Live Demo',
             title: 'Freigabeprüfung für einen realen Moduländerungs-Workflow',
             body:
-                'Wir demonstrieren die Freigabelogik an einem repräsentativen Theegarten-Workflow: Zeichnungsänderung, Stücklistenauswirkung, optionaler EPLAN-Kontext und CIM-Database-Freigabeprüfung.',
+                'Wir demonstrieren die Freigabelogik an einem repräsentativen Theegarten-Workflow: Zeichnungsänderung, Stücklistenauswirkung, optionaler EPLAN-Kontext und Engineer-freigegebene CIM-Database-Übergabe.',
             steps: [
                 {
-                    title: 'Qualitätsdokumente',
+                    title: 'Prüfberichtserstellung',
                     body: ['Von Zeichnung zu Prüfbericht'],
-                    media: { type: 'placeholder', label: 'Platzhalter für Qualitätsdokumente' },
+                    media: { type: 'video', src: '/media/theegarten/qa-report.mp4', label: 'QA-Report-Video' },
                 },
                 {
-                    title: 'Designfehler',
-                    body: ['DFM-Review der STEP-Datei', 'Zeichnungsfehler'],
+                    title: 'DFM-Review',
+                    body: ['Design-for-Manufacturing-Review der STEP-Datei'],
                     media: { type: 'video', src: '/media/theegarten/dfm-review-injection-sample.mp4', label: 'DFM-Review-Video' },
                 },
                 {
-                    title: 'Knowledge Management',
-                    body: ['EPLAN-Dateien mit KI-Agent abfragen'],
-                    media: { type: 'placeholder', label: 'Platzhalter für Knowledge Management' },
+                    title: 'Zeichnungsprüfung',
+                    body: ['Zeichnungsfehler finden', 'Benennungs- und Drafting-Konsistenz'],
+                    media: { type: 'video', src: '/media/theegarten/find-drawing-errors.mp4', label: 'Find-Drawing-Errors-Video' },
+                },
+                {
+                    title: 'EPLAN Knowledge Lookup',
+                    body: ['Freigegebene Projektdokumente mit zitierten Antworten abfragen'],
+                    media: { type: 'video', src: '/media/theegarten/rag-eplan.mp4', label: 'EPLAN-RAG-Video' },
                 },
                 {
                     title: 'Zusammenarbeit',
@@ -412,21 +441,34 @@ const PAGE_CONTENT = {
                     media: { type: 'video', src: '/media/theegarten/commenting-apillar.mp4', label: 'A-Pillar-Kommentierungs-Video' },
                 },
                 {
-                    title: 'Sonstiges',
-                    body: ['Benennungsstandardisierung', 'SOLIDWORKS-Datei umbenannt'],
+                    title: 'Geplante nächste Funktionen',
+                    body: [
+                        'CIM-Database-Übergabe-Demo',
+                        'EMPB-/AS9102-Exportadapter',
+                        'Zugriffsgesteuertes Engineering-Wissen',
+                        'Benennungs- und Dokumentationsstandards',
+                    ],
                 },
             ],
         },
         nextSteps: {
             title: 'Action Tracker',
             columns: ['Aktion', 'Status'],
-            rows: [
-                ['Erstes Meeting, 04. Juni 2026', 'Erledigt'],
-                ['Follow-up-Termin am 16. Juni, 13-14 Uhr', 'Geplant'],
-                ['Projektumfang und Erfolgs-/Abbruchkriterien definieren', 'Offen'],
-                ['NDA und Letter of Intent unterzeichnen', 'Offen'],
-                ['RapidDraft besucht Theegarten', 'Offen'],
-                ['Kickoff', 'Offen'],
+            groups: [
+                {
+                    title: 'Phase 01',
+                    rows: [
+                        ['Erstes Meeting, 04. Juni 2026', 'Abgeschlossen'],
+                        ['Follow-up-Termin am 16. Juni, 13:00-14:00 CEST', 'Geplant'],
+                        ['Projektumfang und Erfolgs-/Abbruchkriterien definieren', 'Offen'],
+                        ['NDA- und Pilot-LOI-Dokumente bestätigen', 'Offen'],
+                        ['RapidDraft besucht Theegarten', 'Offen'],
+                    ],
+                },
+                {
+                    title: 'Phase 02: Kickoff',
+                    rows: [['Kickoff', 'Offen']],
+                },
             ],
         },
         pilot: {
@@ -441,7 +483,7 @@ const PAGE_CONTENT = {
                     duration: '1 Woche',
                     body:
                         'Besuch bei Theegarten-Pactec und Interviews mit 2-3 Engineers, um einen Freigabe-Workflow, Pain Points, Datengrenzen und Erfolgskriterien zu erfassen.',
-                    deliverable: 'Deliverable: Machbarkeitsbericht, Scope, Security-Konzept.',
+                    deliverable: 'Output: abgestimmter Pilotumfang, Security-Konzept und Erfolgskriterien.',
                 },
                 {
                     title: 'Phase 2 — Kick-off',
@@ -449,7 +491,7 @@ const PAGE_CONTENT = {
                     duration: '1 Woche',
                     body:
                         'Scope, Beispielpakete, Zugriffsbeschränkungen, Demo-Workflow, offene Fragen und Teamverantwortung bestätigen.',
-                    deliverable: 'Deliverable: unterzeichnetes LOI, Kick-off-Deck, Rollen, Zeitplan.',
+                    deliverable: 'Output: bestätigtes Beispielpaket, Rollen, Zeitplan und Kick-off-Materialien.',
                 },
                 {
                     title: 'Phase 3 — Review',
@@ -457,7 +499,7 @@ const PAGE_CONTENT = {
                     duration: '2 Wochen',
                     body:
                         'Implementierungsstand mit Engineers prüfen und testen, ob Befunde nützlich, nachvollziehbar und relevant für Freigabeentscheidungen sind.',
-                    deliverable: 'Deliverable: Value Report, Use Cases, Befundqualität.',
+                    deliverable: 'Output: Value Report, Use-Case-Fit und Bewertung der Befundqualität.',
                 },
                 {
                     title: 'Phase 4 — Deployment',
@@ -465,13 +507,13 @@ const PAGE_CONTENT = {
                     duration: 'optional',
                     body:
                         'Produktionsstart nur dann, wenn Value Case, Security-Anforderungen und Rollout-Ansatz bestätigt sind.',
-                    deliverable: 'Deliverable: Deployment-Plan, Training, Support-Modell.',
+                    deliverable: 'Output: Deployment-Plan, Trainingsansatz und Support-Modell.',
                 },
             ],
         },
         team: {
-            kicker: 'Das Team hinter RapidDraft',
-            title: 'Engineering-Tiefe, KI-Kompetenz und industrielle Umsetzung.',
+            kicker: 'Pilot-Team',
+            title: 'Direkte Engineering- und KI-Unterstützung für den Pilot.',
             body:
                 'Theegarten-Pactec würde direkt mit Gründern arbeiten, die mechanische Freigabe-Workflows, kontrollierte Bereitstellung und produktive KI-Systeme verstehen.',
             cta: 'Kontakt aufnehmen',
@@ -526,7 +568,7 @@ const PAGE_CONTENT = {
                 hardwareMeta: 'Läuft vor Ort · Firmennetzwerk',
                 workspaceKicker: 'RAPIDDRAFT WORKSPACE',
                 workspaceTitle: 'Agent im Produkt',
-                workspaceMeta: 'Orchestriert Tools, kein Chatbot',
+                workspaceMeta: 'Führt definierte Prüfungen und Retrieval aus',
                 toolLayer: 'AGENT TOOL LAYER',
                 tools: ['BOM', 'DFM', 'Modell / Canvas', 'Knowledge', 'Artefakte'],
                 reasoning: 'Prüfungen · Retrieval · Evidenz',
@@ -1317,7 +1359,7 @@ function EngineeringStackDiagram({ labels }: { labels: StackDiagramCopy }) {
 }
 
 export default function TheegartenPactec() {
-    const [lang, setLang] = useState<PageLang>('en');
+    const [lang, setLang] = useState<PageLang>('de');
     const copy = PAGE_CONTENT[lang];
 
     useEffect(() => {
@@ -1436,6 +1478,147 @@ export default function TheegartenPactec() {
                 </div>
             </section>
 
+            <Section id="live-demo" className="scroll-mt-24 !py-16 md:!py-24" background="light">
+                <div className="grid gap-9 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-stretch">
+                    <Reveal className="lg:flex lg:h-full lg:flex-col">
+                        <div className="site-kicker">{copy.demo.kicker}</div>
+                        <h2 className="section-title mt-5 text-balance">{copy.demo.title}</h2>
+                        <p className="section-copy mt-5">
+                            {copy.demo.body}
+                        </p>
+                    </Reveal>
+
+                    <div className="grid gap-3 sm:grid-cols-2 lg:h-full lg:auto-rows-fr">
+                        {copy.demo.steps.map((step, index) => {
+                            const media = 'media' in step ? step.media : null;
+
+                            return (
+                                <Reveal key={step.title} delay={index * 0.04}>
+                                    <article className="surface-card flex h-full flex-col p-5">
+                                        {media ? (
+                                            <div className="mb-5 overflow-hidden rounded-[0.65rem] border border-stone-200 bg-stone-50/80">
+                                                <video
+                                                    className="aspect-video w-full bg-stone-100 object-cover"
+                                                    src={media.src}
+                                                    aria-label={media.label}
+                                                    controls
+                                                    loop
+                                                    muted
+                                                    playsInline
+                                                    preload="metadata"
+                                                />
+                                            </div>
+                                        ) : null}
+                                        <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
+                                        <h3 className="mt-3 text-lg font-semibold leading-tight tracking-tight text-gray-950">
+                                            {step.title}
+                                        </h3>
+                                        <div className="mt-2 space-y-1 text-sm leading-6 text-gray-600">
+                                            {step.body.map((line) => (
+                                                <p key={line}>{line}</p>
+                                            ))}
+                                        </div>
+                                    </article>
+                                </Reveal>
+                            );
+                        })}
+                    </div>
+                </div>
+            </Section>
+
+            <section id="action-tracker" className="hero-mesh scroll-mt-24 relative overflow-hidden border-t border-stone-200/70 py-12 md:py-16">
+                <div className="relative mx-auto max-w-[980px] px-5 sm:px-6 lg:px-8">
+                    <Reveal>
+                        <details className="group rounded-[0.9rem] border border-stone-200 bg-white/78 shadow-[0_24px_80px_-62px_rgba(17,24,39,0.28)]" open>
+                            <summary className="flex cursor-pointer list-none items-center gap-3 px-5 py-4 text-left transition hover:bg-orange-50/55 sm:px-6">
+                                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-gray-500 transition group-open:rotate-90">
+                                    &gt;
+                                </span>
+                                <h2 className="text-xl font-semibold tracking-tight text-gray-950 sm:text-2xl">
+                                    {copy.nextSteps.title}
+                                </h2>
+                            </summary>
+                            <div className="border-t border-stone-200/80">
+                                <div>
+                                    {copy.nextSteps.groups.map((group, groupIndex) => {
+                                        const previousRows = copy.nextSteps.groups
+                                            .slice(0, groupIndex)
+                                            .reduce((total, item) => total + item.rows.length, 0);
+
+                                        return (
+                                            <div key={group.title} className="border-b border-stone-200/80 last:border-b-0">
+                                                <div className="border-b border-stone-200/70 bg-orange-50/35 px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary sm:px-6">
+                                                    {group.title}
+                                                </div>
+                                                <div className="divide-y divide-stone-200/80">
+                                                    {group.rows.map(([action, status], rowIndex) => (
+                                                        <div
+                                                            key={action}
+                                                            className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 px-5 py-4 text-sm leading-6 text-gray-700 sm:px-6"
+                                                        >
+                                                            <div className="flex min-w-0 items-start gap-3 font-semibold text-gray-950">
+                                                                <span className="mt-0.5 shrink-0 font-mono text-xs text-primary">
+                                                                    {String(previousRows + rowIndex + 1).padStart(2, '0')}
+                                                                </span>
+                                                                <span className="min-w-0 break-words">{action}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span
+                                                                    className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${
+                                                                        status === 'Completed' || status === 'Abgeschlossen'
+                                                                            ? 'border-slate-200 bg-slate-100 text-slate-700'
+                                                                            : status === 'Scheduled' || status === 'Geplant'
+                                                                            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                                                                            : 'border-orange-200 bg-orange-50 text-primary'
+                                                                    }`}
+                                                                >
+                                                                    {status}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </details>
+                    </Reveal>
+                </div>
+            </section>
+
+            <section id="pilot-programme" className="hero-mesh relative overflow-hidden border-t border-stone-200/70 py-16 md:py-24">
+                <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
+                    <Reveal className="mx-auto max-w-3xl text-center">
+                        <div className="site-kicker mx-auto w-fit">{copy.pilot.kicker}</div>
+                        <h2 className="section-title mt-5 text-balance">{copy.pilot.title}</h2>
+                        <p className="section-copy mx-auto mt-5">
+                            {copy.pilot.body}
+                        </p>
+                    </Reveal>
+
+                    <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
+                        {copy.pilot.phases.map((phase, index) => (
+                            <Reveal key={phase.title} delay={index * 0.05}>
+                                <article className="surface-card flex h-full flex-col p-5 xl:p-6">
+                                    <div className="flex items-start justify-between gap-4">
+                                        <h3 className="min-w-0 flex-1 text-lg font-semibold leading-tight tracking-tight text-gray-950">
+                                            {phase.title}
+                                            {phase.note ? <span className="block">{phase.note}</span> : null}
+                                        </h3>
+                                    </div>
+                                    <p className="mt-4 text-sm leading-6 text-gray-600">{phase.body}</p>
+                                    <p className="mt-5 rounded-[1rem] border border-orange-200/80 bg-orange-50/80 px-3 py-2.5 text-sm font-semibold leading-6 text-primary xl:mt-auto">
+                                        {phase.deliverable}
+                                    </p>
+                                </article>
+                            </Reveal>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             <Section id="product-architecture" className="scroll-mt-24 !py-16 md:!py-24" background="light">
                 <Reveal className="max-w-4xl">
                     <div className="site-kicker">{copy.architecture.kicker}</div>
@@ -1455,57 +1638,72 @@ export default function TheegartenPactec() {
                 </Reveal>
 
                 <Reveal delay={0.08} className="min-w-0">
-                    <div className="mt-10 overflow-hidden rounded-[0.9rem] border border-slate-200 border-t-orange-300 bg-white shadow-[0_24px_80px_-58px_rgba(17,24,39,0.28)]">
-                        <div className="overflow-x-auto">
-                            <table
-                                aria-label={copy.architecture.stack.title}
-                                className="w-full min-w-[980px] table-fixed border-collapse text-left lg:min-w-0"
-                            >
-                                <colgroup>
-                                    <col className="w-[17%]" />
-                                    <col className="w-[26%]" />
-                                    <col className="w-[28%]" />
-                                    <col className="w-[29%]" />
-                                </colgroup>
-                                <thead>
-                                    <tr className="border-b border-slate-200 bg-slate-50">
-                                        {copy.architecture.stack.columns.map((column, columnIndex) => (
-                                            <th
-                                                key={column}
-                                                scope="col"
-                                                className={`px-5 py-5 align-middle font-mono text-xs font-semibold uppercase tracking-[0.28em] ${
-                                                    columnIndex === 2 ? 'text-primary' : 'text-slate-600'
-                                                }`}
-                                            >
-                                                {column}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {copy.architecture.stack.rows.map(([layer, poc, pilot, production]) => (
-                                        <tr key={layer} className="border-b border-slate-100 last:border-b-0">
-                                            <th
-                                                scope="row"
-                                                className="border-r border-slate-100 px-5 py-7 align-top text-[15px] font-semibold leading-7 text-slate-950 xl:text-base"
-                                            >
-                                                {layer}
-                                            </th>
-                                            <td className="border-r border-slate-100 px-5 py-7 align-top text-[15px] leading-7 text-slate-600 xl:text-base">
-                                                <span className="block break-words">{poc}</span>
-                                            </td>
-                                            <td className="border-r border-slate-100 bg-orange-50/25 px-5 py-7 align-top text-[15px] leading-7 text-slate-800 xl:text-base">
-                                                <span className="block break-words">{pilot}</span>
-                                            </td>
-                                            <td className="px-5 py-7 align-top text-[15px] leading-7 text-slate-700 xl:text-base">
-                                                <span className="block break-words">{production}</span>
-                                            </td>
+                    <details className="group mt-10 overflow-hidden rounded-[0.9rem] border border-slate-200 border-t-orange-300 bg-white shadow-[0_24px_80px_-58px_rgba(17,24,39,0.28)]">
+                        <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-5 transition hover:bg-orange-50/45 sm:px-6">
+                            <div className="min-w-0">
+                                <h3 className="text-lg font-semibold tracking-tight text-slate-950">
+                                    {copy.architecture.stack.appendixTitle}
+                                </h3>
+                                <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+                                    {copy.architecture.stack.appendixBody}
+                                </p>
+                            </div>
+                            <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 font-mono text-base leading-none text-slate-500 transition group-open:rotate-45 group-open:border-orange-200 group-open:text-primary">
+                                +
+                            </span>
+                        </summary>
+                        <div className="border-t border-slate-200">
+                            <div className="overflow-x-auto">
+                                <table
+                                    aria-label={copy.architecture.stack.title}
+                                    className="w-full min-w-[980px] table-fixed border-collapse text-left lg:min-w-0"
+                                >
+                                    <colgroup>
+                                        <col className="w-[17%]" />
+                                        <col className="w-[26%]" />
+                                        <col className="w-[28%]" />
+                                        <col className="w-[29%]" />
+                                    </colgroup>
+                                    <thead>
+                                        <tr className="border-b border-slate-200 bg-slate-50">
+                                            {copy.architecture.stack.columns.map((column, columnIndex) => (
+                                                <th
+                                                    key={column}
+                                                    scope="col"
+                                                    className={`px-5 py-5 align-middle font-mono text-xs font-semibold uppercase tracking-[0.28em] ${
+                                                        columnIndex === 2 ? 'text-primary' : 'text-slate-600'
+                                                    }`}
+                                                >
+                                                    {column}
+                                                </th>
+                                            ))}
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {copy.architecture.stack.rows.map(([layer, poc, pilot, production]) => (
+                                            <tr key={layer} className="border-b border-slate-100 last:border-b-0">
+                                                <th
+                                                    scope="row"
+                                                    className="border-r border-slate-100 px-5 py-7 align-top text-[15px] font-semibold leading-7 text-slate-950 xl:text-base"
+                                                >
+                                                    {layer}
+                                                </th>
+                                                <td className="border-r border-slate-100 px-5 py-7 align-top text-[15px] leading-7 text-slate-600 xl:text-base">
+                                                    <span className="block whitespace-pre-line break-words">{poc}</span>
+                                                </td>
+                                                <td className="border-r border-slate-100 bg-orange-50/25 px-5 py-7 align-top text-[15px] leading-7 text-slate-800 xl:text-base">
+                                                    <span className="block whitespace-pre-line break-words">{pilot}</span>
+                                                </td>
+                                                <td className="px-5 py-7 align-top text-[15px] leading-7 text-slate-700 xl:text-base">
+                                                    <span className="block whitespace-pre-line break-words">{production}</span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+                    </details>
                 </Reveal>
 
                 <Reveal delay={0.12}>
@@ -1564,153 +1762,9 @@ export default function TheegartenPactec() {
                 </div>
             </Section>
 
-            <Section id="live-demo" className="scroll-mt-24 !py-16 md:!py-24" background="light">
-                <div className="grid gap-9 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-stretch">
-                    <Reveal className="lg:flex lg:h-full lg:flex-col">
-                        <div className="site-kicker">{copy.demo.kicker}</div>
-                        <h2 className="section-title mt-5 text-balance">{copy.demo.title}</h2>
-                        <p className="section-copy mt-5">
-                            {copy.demo.body}
-                        </p>
-                    </Reveal>
-
-                    <div className="grid gap-3 sm:grid-cols-2 lg:h-full lg:auto-rows-fr">
-                        {copy.demo.steps.map((step, index) => (
-                            <Reveal key={step.title} delay={index * 0.04}>
-                                <article
-                                    className={`surface-card flex h-full flex-col p-5 ${
-                                        index === copy.demo.steps.length - 1 ? 'sm:col-span-2' : ''
-                                    }`}
-                                >
-                                    {'media' in step ? (
-                                        <div className="mb-5 overflow-hidden rounded-[0.65rem] border border-stone-200 bg-stone-50/80">
-                                            {'src' in step.media ? (
-                                                <video
-                                                    className="aspect-video w-full bg-stone-100 object-cover"
-                                                    src={step.media.src}
-                                                    aria-label={step.media.label}
-                                                    autoPlay
-                                                    controls
-                                                    loop
-                                                    muted
-                                                    playsInline
-                                                    preload="metadata"
-                                                />
-                                            ) : (
-                                                <div className="flex aspect-video w-full items-center justify-center bg-[linear-gradient(135deg,rgba(255,247,237,0.92),rgba(255,255,255,0.9))] p-5">
-                                                    <div className="w-full border border-dashed border-orange-200 px-4 py-6 text-center">
-                                                        <div className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary/75">
-                                                            Placeholder
-                                                        </div>
-                                                        <div className="mt-2 text-sm font-semibold leading-5 text-gray-800">
-                                                            {step.media.label}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ) : null}
-                                    <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
-                                    <h3 className="mt-3 text-lg font-semibold leading-tight tracking-tight text-gray-950">
-                                        {step.title}
-                                    </h3>
-                                    <div className="mt-2 space-y-1 text-sm leading-6 text-gray-600">
-                                        {step.body.map((line) => (
-                                            <p key={line}>{line}</p>
-                                        ))}
-                                    </div>
-                                </article>
-                            </Reveal>
-                        ))}
-                    </div>
-                </div>
-            </Section>
-
-            <section id="action-tracker" className="hero-mesh scroll-mt-24 relative overflow-hidden border-t border-stone-200/70 py-12 md:py-16">
-                <div className="relative mx-auto max-w-[980px] px-5 sm:px-6 lg:px-8">
-                    <Reveal>
-                        <details className="group rounded-[0.9rem] border border-stone-200 bg-white/78 shadow-[0_24px_80px_-62px_rgba(17,24,39,0.28)]" open>
-                            <summary className="flex cursor-pointer list-none items-center gap-3 px-5 py-4 text-left transition hover:bg-orange-50/55 sm:px-6">
-                                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-gray-500 transition group-open:rotate-90">
-                                    &gt;
-                                </span>
-                                <h2 className="text-xl font-semibold tracking-tight text-gray-950 sm:text-2xl">
-                                    {copy.nextSteps.title}
-                                </h2>
-                            </summary>
-                            <div className="border-t border-stone-200/80">
-                                <div className="grid grid-cols-[minmax(0,1fr)_8rem] border-b border-stone-200/80 bg-stone-50/70 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary/80 sm:px-6">
-                                    {copy.nextSteps.columns.map((column) => (
-                                        <div key={column}>{column}</div>
-                                    ))}
-                                </div>
-                                <div className="divide-y divide-stone-200/80">
-                                    {copy.nextSteps.rows.map(([action, status], index) => (
-                                        <div
-                                            key={action}
-                                            className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 px-5 py-4 text-sm leading-6 text-gray-700 sm:px-6"
-                                        >
-                                            <div className="flex min-w-0 items-start gap-3 font-semibold text-gray-950">
-                                                <span className="mt-0.5 shrink-0 font-mono text-xs text-primary">
-                                                    {String(index + 1).padStart(2, '0')}
-                                                </span>
-                                                <span className="min-w-0 break-words">{action}</span>
-                                            </div>
-                                            <div>
-                                                <span
-                                                    className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${
-                                                        status === 'DONE' || status === 'Erledigt'
-                                                            ? 'border-slate-200 bg-slate-100 text-slate-700'
-                                                            : status === 'Scheduled' || status === 'Geplant'
-                                                            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                                                            : 'border-orange-200 bg-orange-50 text-primary'
-                                                    }`}
-                                                >
-                                                    {status}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </details>
-                    </Reveal>
-                </div>
-            </section>
-
-            <section className="hero-mesh relative overflow-hidden border-t border-stone-200/70 py-16 md:py-24">
+            <section id="pilot-team" className="hero-mesh relative overflow-hidden border-t border-stone-200/70 py-16 md:py-24">
                 <div className="mx-auto max-w-[1280px] px-5 sm:px-6 lg:px-8 xl:px-10">
-                    <Reveal className="mx-auto max-w-3xl text-center">
-                        <div className="site-kicker mx-auto w-fit">{copy.pilot.kicker}</div>
-                        <h2 className="section-title mt-5 text-balance">{copy.pilot.title}</h2>
-                        <p className="section-copy mx-auto mt-5">
-                            {copy.pilot.body}
-                        </p>
-                    </Reveal>
-
-                    <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
-                        {copy.pilot.phases.map((phase, index) => (
-                            <Reveal key={phase.title} delay={index * 0.05}>
-                                <article className="surface-card flex h-full flex-col p-5 xl:p-6">
-                                    <div className="flex items-start justify-between gap-4">
-                                        <h3 className="min-w-0 flex-1 text-lg font-semibold leading-tight tracking-tight text-gray-950">
-                                            {phase.title}
-                                            {phase.note ? <span className="block">{phase.note}</span> : null}
-                                        </h3>
-                                        <span className="ml-auto shrink-0 rounded-full border border-orange-200 bg-orange-50/80 px-3 py-1 text-xs font-semibold text-primary">
-                                            {phase.duration}
-                                        </span>
-                                    </div>
-                                    <p className="mt-4 text-sm leading-6 text-gray-600">{phase.body}</p>
-                                    <p className="mt-5 rounded-[1rem] border border-orange-200/80 bg-orange-50/80 px-3 py-2.5 text-sm font-semibold leading-6 text-primary xl:mt-auto">
-                                        {phase.deliverable}
-                                    </p>
-                                </article>
-                            </Reveal>
-                        ))}
-                    </div>
-
-                    <Reveal delay={0.08} className="mx-auto mt-10 max-w-[1180px]">
+                    <Reveal className="mx-auto max-w-[1180px]">
                         <div className="warm-panel overflow-hidden p-5 sm:p-7 lg:p-8">
                             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.35fr)_minmax(0,0.65fr)] lg:items-center">
                                 <div>
