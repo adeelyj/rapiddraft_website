@@ -15,6 +15,7 @@ import NdaRequest from './pages/NdaRequest';
 import LoiRequest from './pages/LoiRequest';
 import ForwardPage from './forward/ForwardPage';
 import TheegartenPactec from './pages/TheegartenPactec';
+import { LocaleProvider, type Locale } from './i18n/LocaleContext';
 
 const PITCH_HOSTNAME = 'pitch.rapiddraft.ai';
 const FORWARD_HOSTNAME = 'forward.rapiddraft.ai';
@@ -41,6 +42,40 @@ function CompanyDemoRoute() {
   }
 
   return <CompanyDemoPage config={companyDemo} />;
+}
+
+function LocalizedLayout({ locale }: { locale: Locale }) {
+  return (
+    <LocaleProvider locale={locale}>
+      <Layout />
+    </LocaleProvider>
+  );
+}
+
+function LocalizedRoutes({ locale }: { locale: Locale }) {
+  const prefix = locale === 'de' ? '/de' : '';
+
+  return (
+    <Route path={locale === 'de' ? '/de' : '/'} element={<LocalizedLayout locale={locale} />}>
+      <Route index element={<Product />} />
+      <Route path="cad-concept" element={<CadConcept />} />
+      <Route path="how-it-works" element={<Navigate to={`${prefix || '/'}`} replace />} />
+      <Route path="pitch" element={<Navigate to={`${prefix || '/'}`} replace />} />
+      <Route path="deal-room" element={<DealRoomV3 />} />
+      <Route path="deal-room/nda-request" element={<NdaRequest />} />
+      <Route path="deal-room/loi-request" element={<LoiRequest />} />
+      <Route path="deal-room_v1" element={<DealRoom />} />
+      <Route path="deal-room_v2" element={<DealRoomV2 />} />
+      <Route path="deal-room_v3" element={<Navigate to={`${prefix}/deal-room`} replace />} />
+      <Route path="deal-room_v3/nda-request" element={<Navigate to={`${prefix}/deal-room/nda-request`} replace />} />
+      <Route path="deal-room_v3/loi-request" element={<Navigate to={`${prefix}/deal-room/loi-request`} replace />} />
+      <Route path="use-cases" element={<UseCases />} />
+      <Route path="team" element={<Team />} />
+      <Route path="book-demo" element={<BookDemo />} />
+      <Route path="join-us" element={<Navigate to={`${prefix}/team#open-roles`} replace />} />
+      <Route path="theegarten-pactec" element={<TheegartenPactec />} />
+    </Route>
+  );
 }
 
 function App() {
@@ -81,7 +116,7 @@ function App() {
   return (
     <Routes>
       <Route path="/pilots/:slug" element={<CompanyDemoRoute />} />
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<LocalizedLayout locale="en" />}>
         <Route index element={<Product />} />
         <Route path="cad-concept" element={<CadConcept />} />
         <Route path="how-it-works" element={<Navigate to="/" replace />} />
@@ -100,6 +135,7 @@ function App() {
         <Route path="join-us" element={<Navigate to="/team#open-roles" replace />} />
         <Route path="theegarten-pactec" element={<TheegartenPactec />} />
       </Route>
+      {LocalizedRoutes({ locale: 'de' })}
     </Routes>
   );
 }

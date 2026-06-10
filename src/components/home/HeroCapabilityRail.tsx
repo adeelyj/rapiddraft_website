@@ -177,7 +177,7 @@ export default function HeroCapabilityRail({
                                 <span className="h-2.5 w-2.5 rounded-full bg-stone-300" />
                                 <span className="h-2.5 w-2.5 rounded-full bg-stone-300" />
                             </div>
-                            <div className="aspect-[4/3] bg-stone-100 sm:aspect-[16/10] lg:aspect-[16/9]">
+                            <div className="aspect-[4/3] max-h-[38vh] bg-stone-100 sm:aspect-[16/10] lg:aspect-[16/9]">
                                 <VideoStage
                                     item={activeItem}
                                     seekRequest={seekRequest}

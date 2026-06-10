@@ -30,7 +30,7 @@ export function Nav() {
           href="#where-we-fit"
           className="flex items-center gap-2 text-meta font-semibold text-ink"
         >
-          <img src="/media/rd_logo.png" alt="RapidDraft" className="h-5 w-auto" />
+          <img src="/Logo.svg" alt="RapidDraft" className="h-6 w-6 shrink-0 object-contain" />
           <span className="hidden text-ink-60 sm:inline">×</span>
           <span className="hidden sm:inline">Forward Engineering</span>
         </a>

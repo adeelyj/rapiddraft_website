@@ -7,8 +7,8 @@ type BrandMarkProps = {
 };
 
 const sizeClasses = {
-    sm: 'h-9 sm:h-10',
-    md: 'h-11 sm:h-12',
+    sm: 'h-9 w-9 sm:h-10 sm:w-10',
+    md: 'h-11 w-11 sm:h-12 sm:w-12',
 } as const;
 
 export default function BrandMark({
@@ -16,11 +16,13 @@ export default function BrandMark({
     size = 'sm',
     className,
 }: BrandMarkProps) {
+    void theme;
+
     return (
         <img
-            src={theme === 'dark' ? '/media/rd_logo_white.png' : '/media/rd_logo.png'}
+            src="/Logo.svg"
             alt="RapidDraft"
-            className={clsx('block w-auto object-contain', sizeClasses[size], className)}
+            className={clsx('block shrink-0 object-contain', sizeClasses[size], className)}
         />
     );
 }

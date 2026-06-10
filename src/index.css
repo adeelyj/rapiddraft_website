@@ -279,6 +279,7 @@
     width: 100%;
     background: linear-gradient(90deg, transparent, rgba(222, 186, 147, 0.18), transparent);
   }
+
 }
 
 @layer utilities {
