@@ -25,14 +25,14 @@ export default function MediaFrame({
 
     return (
         <figure className={clsx('group relative', frameClassName)}>
-            <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,237,213,0.58),transparent_62%)] blur-2xl transition duration-500 group-hover:scale-[1.02]" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-stone-200/80 bg-white shadow-[0_28px_80px_-36px_rgba(17,24,39,0.3)]">
-                <div className="flex items-center gap-2 border-b border-stone-200/80 px-5 py-3">
-                    <span className="h-2.5 w-2.5 rounded-full bg-primary/65" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-stone-300" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-stone-300" />
+            <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_top,var(--rd-accent-soft),transparent_62%)] blur-2xl transition duration-500 group-hover:scale-[1.02]" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-[var(--rd-hair)] bg-[var(--rd-surface)] shadow-[var(--rd-shadow-hover)]">
+                <div className="flex items-center gap-2 border-b border-[var(--rd-hair)] px-5 py-3">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[var(--rd-accent)]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[var(--rd-hair)]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[var(--rd-hair)]" />
                 </div>
-                <div className={clsx('bg-stone-100', aspectClassName)}>
+                <div className={clsx('bg-[var(--rd-sunken)]', aspectClassName)}>
                     {isVideo ? (
                         <video
                             src={src}
@@ -61,7 +61,7 @@ export default function MediaFrame({
                 </div>
             </div>
             {caption ? (
-                <figcaption className="mt-3 text-sm leading-6 text-gray-500">{caption}</figcaption>
+                <figcaption className="mt-3 text-sm leading-6 text-[var(--rd-fg-3)]">{caption}</figcaption>
             ) : null}
         </figure>
     );

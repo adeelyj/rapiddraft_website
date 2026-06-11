@@ -47,6 +47,66 @@ function CompanyDemoRoute() {
   return <CompanyDemoPage config={companyDemo} />;
 }
 
+/* One definition for the Layout route tree, mounted twice: at '/' (English)
+   and at '/de' (German). Pages localize themselves via useLang(); redirect
+   targets need the prefix baked in because <Navigate> renders before any
+   locale-aware helper. */
+function layoutRoutes(pfx: '' | '/de') {
+  return (
+    <Route path={pfx === '' ? '/' : pfx} element={<Layout />}>
+      <Route index element={<Home />} />
+      {/* Legacy home kept (unlisted) for side-by-side comparison */}
+      <Route path="home-v1" element={<Product />} />
+      <Route path="platform" element={<Platform />} />
+      <Route path="security" element={<Security />} />
+      <Route path="company" element={<Company />} />
+      <Route
+        path="impressum"
+        element={
+          <StubPage
+            eyebrow="Legal"
+            title="Impressum"
+            note="Our Impressum is being finalized. For company and legal details, contact info@rapiddraft.ai."
+            metaTitle="Impressum | RapidDraft"
+            metaDescription="RapidDraft company and legal information."
+            path="/impressum"
+          />
+        }
+      />
+      <Route
+        path="privacy"
+        element={
+          <StubPage
+            eyebrow="Legal"
+            title="Privacy"
+            note="Our privacy policy is being finalized. For data-protection questions, contact info@rapiddraft.ai."
+            metaTitle="Privacy | RapidDraft"
+            metaDescription="How RapidDraft handles your data."
+            path="/privacy"
+          />
+        }
+      />
+      <Route path="cad-concept" element={<Navigate to={`${pfx}/platform`} replace />} />
+      <Route path="how-it-works" element={<Navigate to={pfx || '/'} replace />} />
+      <Route path="pitch" element={<Navigate to={pfx || '/'} replace />} />
+      <Route path="deal-room" element={<DealRoomV3 />} />
+      <Route path="deal-room/nda-request" element={<NdaRequest />} />
+      <Route path="deal-room/loi-request" element={<LoiRequest />} />
+      <Route path="deal-room_v1" element={<DealRoom />} />
+      <Route path="deal-room_v2" element={<DealRoomV2 />} />
+      <Route path="deal-room_v3" element={<Navigate to={`${pfx}/deal-room`} replace />} />
+      <Route path="deal-room_v3/nda-request" element={<Navigate to={`${pfx}/deal-room/nda-request`} replace />} />
+      <Route path="deal-room_v3/loi-request" element={<Navigate to={`${pfx}/deal-room/loi-request`} replace />} />
+      <Route path="use-cases" element={<UseCasesPage />} />
+      <Route path="team" element={<Navigate to={`${pfx}/company#team`} replace />} />
+      <Route path="book-demo" element={<BookDemoPage />} />
+      <Route path="join-us" element={<Navigate to={`${pfx}/company#open-roles`} replace />} />
+      <Route path="theegarten-pactec" element={<TheegartenPactec />} />
+      <Route path="one-pager" element={<OnePager />} />
+    </Route>
+  );
+}
+
 function App() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
   const normalizedHostname = normalizeHostname(hostname);
@@ -85,57 +145,8 @@ function App() {
   return (
     <Routes>
       <Route path="/pilots/:slug" element={<CompanyDemoRoute />} />
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        {/* Legacy home kept (unlisted) for side-by-side comparison */}
-        <Route path="home-v1" element={<Product />} />
-        <Route path="platform" element={<Platform />} />
-        <Route path="security" element={<Security />} />
-        <Route path="company" element={<Company />} />
-        <Route
-          path="impressum"
-          element={
-            <StubPage
-              eyebrow="Legal"
-              title="Impressum"
-              note="Our Impressum is being finalized. For company and legal details, contact info@rapiddraft.ai."
-              metaTitle="Impressum | RapidDraft"
-              metaDescription="RapidDraft company and legal information."
-              path="/impressum"
-            />
-          }
-        />
-        <Route
-          path="privacy"
-          element={
-            <StubPage
-              eyebrow="Legal"
-              title="Privacy"
-              note="Our privacy policy is being finalized. For data-protection questions, contact info@rapiddraft.ai."
-              metaTitle="Privacy | RapidDraft"
-              metaDescription="How RapidDraft handles your data."
-              path="/privacy"
-            />
-          }
-        />
-        <Route path="cad-concept" element={<Navigate to="/platform" replace />} />
-        <Route path="how-it-works" element={<Navigate to="/" replace />} />
-        <Route path="pitch" element={<Navigate to="/" replace />} />
-        <Route path="deal-room" element={<DealRoomV3 />} />
-        <Route path="deal-room/nda-request" element={<NdaRequest />} />
-        <Route path="deal-room/loi-request" element={<LoiRequest />} />
-        <Route path="deal-room_v1" element={<DealRoom />} />
-        <Route path="deal-room_v2" element={<DealRoomV2 />} />
-        <Route path="deal-room_v3" element={<Navigate to="/deal-room" replace />} />
-        <Route path="deal-room_v3/nda-request" element={<Navigate to="/deal-room/nda-request" replace />} />
-        <Route path="deal-room_v3/loi-request" element={<Navigate to="/deal-room/loi-request" replace />} />
-        <Route path="use-cases" element={<UseCasesPage />} />
-        <Route path="team" element={<Navigate to="/company#team" replace />} />
-        <Route path="book-demo" element={<BookDemoPage />} />
-        <Route path="join-us" element={<Navigate to="/company#open-roles" replace />} />
-        <Route path="theegarten-pactec" element={<TheegartenPactec />} />
-        <Route path="one-pager" element={<OnePager />} />
-      </Route>
+      {layoutRoutes('')}
+      {layoutRoutes('/de')}
     </Routes>
   );
 }

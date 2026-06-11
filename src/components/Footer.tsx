@@ -126,7 +126,7 @@ function Heart() {
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const { lang } = useLang();
+  const { lang, localizePath } = useLang();
   const t = CONTENT[lang];
 
   return (
@@ -134,7 +134,7 @@ export default function Footer() {
       <div className="rd-container py-16">
         <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.85fr_0.85fr_0.85fr_0.85fr]">
           <div className="max-w-sm sm:col-span-2 lg:col-span-1">
-            <Link to="/" aria-label="RapidDraft home" onClick={() => window.scrollTo(0, 0)} className="inline-flex">
+            <Link to={localizePath('/')} aria-label="RapidDraft home" onClick={() => window.scrollTo(0, 0)} className="inline-flex">
               <BrandMark theme="dark" size="sm" />
             </Link>
             <p className="mt-5 text-[14px] leading-7 text-[var(--rd-fg-2)]">{t.desc}</p>
@@ -153,7 +153,7 @@ export default function Footer() {
           {t.columns.map((col) => (
             <Col key={col.heading} heading={col.heading}>
               {col.links.map((l) => (
-                <Link key={l.name} to={l.to} className={linkCls}>
+                <Link key={l.name} to={localizePath(l.to)} className={linkCls}>
                   {l.name}
                 </Link>
               ))}
@@ -182,7 +182,7 @@ export default function Footer() {
                     {l.name}
                   </a>
                 ) : (
-                  <Link to={l.to} className="transition-colors hover:text-[var(--rd-accent)]">
+                  <Link to={localizePath(l.to)} className="transition-colors hover:text-[var(--rd-accent)]">
                     {l.name}
                   </Link>
                 )}

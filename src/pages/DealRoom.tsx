@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useLang } from '../i18n/LanguageContext';
 import PageMeta from '../components/PageMeta';
 import Section from '../components/Section';
 import Reveal from '../components/home/Reveal';
@@ -23,9 +24,11 @@ import {
 } from '../data/dealRoomContent';
 
 function SmartLink({ href, children, className }: { href: string; children: ReactNode; className: string }) {
+    const { localizePath } = useLang();
+
     if (href.startsWith('/')) {
         return (
-            <Link to={href} className={className}>
+            <Link to={localizePath(href)} className={className}>
                 {children}
             </Link>
         );

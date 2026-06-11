@@ -123,12 +123,14 @@ export default function CapabilityRail({ items }: { items: RailItem[] }) {
                 type="button"
                 onClick={(e) => handleSeek(item.key, e)}
                 aria-label={`Seek ${item.label}`}
-                className="relative block h-[3px] w-full overflow-hidden rounded-full bg-[var(--rd-hair)]"
+                className="relative block w-full py-2"
               >
-                <div
-                  className="absolute inset-y-0 left-0 rounded-full bg-[var(--rd-accent)] transition-[width] duration-75"
-                  style={{ width: `${active ? progress * 100 : 0}%` }}
-                />
+                <div className="relative h-[3px] w-full overflow-hidden rounded-full bg-[var(--rd-hair)]">
+                  <div
+                    className="absolute inset-y-0 left-0 rounded-full bg-[var(--rd-accent)] transition-[width] duration-75"
+                    style={{ width: `${active ? progress * 100 : 0}%` }}
+                  />
+                </div>
               </button>
             </div>
           );

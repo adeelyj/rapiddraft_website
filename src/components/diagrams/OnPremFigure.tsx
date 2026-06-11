@@ -24,11 +24,12 @@ export default function OnPremFigure({
   inputLabel?: string;
 }) {
   return (
+    <div className="overflow-x-auto sm:overflow-visible">
     <svg
       viewBox="0 0 1200 420"
       role="img"
       aria-label={ALT}
-      className="block h-auto w-full overflow-visible"
+      className="block h-auto w-full min-w-[860px] overflow-visible sm:min-w-0"
     >
       <style>
         {`
@@ -49,15 +50,9 @@ export default function OnPremFigure({
              flow makes inputs drift toward the workspace and outputs drift outward. */
           @keyframes op-flow { to { stroke-dashoffset: -90; } }
           @media (prefers-reduced-motion: reduce) { .op-flow { animation: none; } }
-          /* The SVG scales with its container; bump viewBox type on narrow
-             screens so the diagram stays legible after the scale-down. */
-          @media (max-width: 700px) {
-            .op-micro, .op-micro-accent { font-size: 19px; letter-spacing: 1.2px; }
-            .op-title { font-size: 31px; }
-            .op-sub { font-size: 21px; }
-            .op-tool-label { font-size: 18px; }
-            .op-bound { font-size: 15px; }
-          }
+          /* On phones the figure keeps its native proportions and scrolls
+             horizontally (min-width on the svg + overflow-x on the wrapper),
+             so text stays legible instead of being shrunk to fit. */
         `}
       </style>
 
@@ -158,5 +153,6 @@ export default function OnPremFigure({
       <text className="op-title" x="870" y="332">Release to CIM Database</text>
       <text className="op-sub" x="870" y="356">Written back to PLM</text>
     </svg>
+    </div>
   );
 }

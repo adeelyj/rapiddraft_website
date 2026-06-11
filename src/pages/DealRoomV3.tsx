@@ -197,7 +197,7 @@ function StepSection({
 }
 
 export default function DealRoomV3() {
-    const { lang } = useLang();
+    const { lang, localizePath } = useLang();
     const content = dealRoomV3Content[lang];
     const ui = UI[lang];
     const navigate = useNavigate();
@@ -212,7 +212,7 @@ export default function DealRoomV3() {
     };
 
     const handleStartNda = () => {
-        navigate('/deal-room/nda-request');
+        navigate(localizePath('/deal-room/nda-request'));
     };
 
     return (

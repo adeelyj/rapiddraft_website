@@ -4,6 +4,7 @@
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { useLang } from '../../i18n/LanguageContext';
 
 type Div = { className?: string; children?: ReactNode; id?: string };
 
@@ -175,6 +176,7 @@ export function Button({
   type = 'button',
   ariaLabel,
 }: ButtonProps) {
+  const { localizePath } = useLang();
   const cls = clsx('rd-btn', `rd-btn--${variant}`, className);
   const inner = (
     <>
@@ -184,7 +186,7 @@ export function Button({
   );
   if (to) {
     return (
-      <Link to={to} className={cls} aria-label={ariaLabel}>
+      <Link to={localizePath(to)} className={cls} aria-label={ariaLabel}>
         {inner}
       </Link>
     );
@@ -193,7 +195,7 @@ export function Button({
     const external = href.startsWith('http');
     return (
       <a
-        href={href}
+        href={external ? href : localizePath(href)}
         className={cls}
         aria-label={ariaLabel}
         {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}

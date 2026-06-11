@@ -35,6 +35,11 @@
   --rd-grid-line:     rgba(17, 17, 17, 0.05);
   --rd-shadow-hover:  0 14px 30px -20px rgba(17, 17, 17, 0.28);
 
+  /* Floating nav pill: a translucent surface so the faint backdrop blur reads,
+     plus one soft shadow. Flat house style — no gradient, no bevel, no glow. */
+  --rd-nav-surface:   rgba(255, 255, 255, 0.9);
+  --rd-nav-shadow:    0 12px 32px -20px rgba(17, 17, 17, 0.18);
+
   /* All reading + UI text is Inter. All numerics use --rd-num (Manrope, the
      credibility-KPI font from the earlier site). Geist Mono is kept only for
      the // and / accent marks. */
@@ -84,6 +89,9 @@
   --rd-focus:         #fb7a3c;
   --rd-grid-line:     rgba(255, 255, 255, 0.05);
   --rd-shadow-hover:  0 18px 40px -22px rgba(0, 0, 0, 0.72);
+
+  --rd-nav-surface:   rgba(17, 17, 17, 0.9);
+  --rd-nav-shadow:    0 14px 34px -22px rgba(0, 0, 0, 0.6);
 }
 
 /* ---------- Page shell ---------- */

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="./media/rd_icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/media/rd-mark.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RapidDraft keeps drawing release, design review, and manufacturing feedback attached to the CAD model." />
     <meta name="theme-color" content="#ea580c" />
@@ -17,7 +17,9 @@
     <meta name="twitter:image" content="/media/rd_social.png" />
     <title>RapidDraft | AI for drawing release and design review</title>
     <script>
-      // Set theme + language before paint to avoid a flash. Saved preference wins.
+      // Set theme + language before paint to avoid a flash. Theme: saved
+      // preference wins over the OS one. Language: the /de URL prefix is the
+      // source of truth (mirrors src/i18n/LanguageContext.tsx).
       (function () {
         try {
           var t = localStorage.getItem('rd-theme');
@@ -25,14 +27,81 @@
             t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           }
           document.documentElement.dataset.theme = t;
-          var l = localStorage.getItem('rd-lang');
-          document.documentElement.lang = l === 'de' ? 'de' : 'en';
+          var p = window.location.pathname;
+          document.documentElement.lang = p === '/de' || p.indexOf('/de/') === 0 ? 'de' : 'en';
         } catch (e) {}
       })();
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Pre-React boot screen: the brand bars drawing in, on the flat rd2
+           canvas (no gradients/shadows). React replaces all of this on mount. -->
+      <style>
+        .rd-boot {
+          min-height: 100vh;
+          display: grid;
+          place-items: center;
+          background: #f5f5f5;
+        }
+
+        :root[data-theme='dark'] .rd-boot {
+          background: #0d0d0d;
+        }
+
+        .rd-boot svg {
+          width: 56px;
+          height: 52px;
+        }
+
+        .rd-boot .rd-boot-bar {
+          fill: #ea580c;
+          transform-box: fill-box;
+          transform-origin: left center;
+          transform: scaleX(0.25);
+          animation: rd-boot-bar 760ms cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+        }
+
+        :root[data-theme='dark'] .rd-boot .rd-boot-bar {
+          fill: #fb7a3c;
+        }
+
+        .rd-boot .rd-boot-bar:nth-child(2) {
+          animation-delay: 85ms;
+        }
+
+        .rd-boot .rd-boot-bar:nth-child(3) {
+          animation-delay: 170ms;
+        }
+
+        @keyframes rd-boot-bar {
+          0% {
+            transform: scaleX(0.25);
+          }
+
+          45%,
+          100% {
+            transform: scaleX(1);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .rd-boot .rd-boot-bar {
+            animation: none;
+            transform: scaleX(1);
+          }
+        }
+      </style>
+      <div class="rd-boot" role="status" aria-label="Loading RapidDraft">
+        <svg viewBox="0 0 1138.7 1049.22" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(-2445.06 -476.51)">
+            <path class="rd-boot-bar" d="M3583.76,765.1H2582.91a137.85,137.85,0,0,1-137.85-137.85V476.51H3432.3A151.46,151.46,0,0,1,3583.76,628Z" />
+            <path class="rd-boot-bar" d="M3442.26,1145.41h-997.2V1004.63a147.81,147.81,0,0,1,147.8-147.81h990.9v147.09A141.5,141.5,0,0,1,3442.26,1145.41Z" />
+            <path class="rd-boot-bar" d="M3583.76,1525.73h-559.5a138.5,138.5,0,0,1-138.49-138.49v-150.1H3445a138.8,138.8,0,0,1,138.8,138.8Z" />
+          </g>
+        </svg>
+      </div>
+    </div>
     <!-- Netlify form detection for React SPA -->
     <form name="bookdemo" data-netlify="true" netlify hidden>
       <input type="text" name="name" />

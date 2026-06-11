@@ -186,7 +186,7 @@ async function captureNetlifySubmission(payload: Record<string, string>) {
 }
 
 export default function NdaRequest() {
-    const { lang } = useLang();
+    const { lang, localizePath } = useLang();
     const t = CONTENT[lang];
 
     const [status, setStatus] = useState<SubmissionState>('idle');
@@ -268,8 +268,8 @@ export default function NdaRequest() {
                 />
                 <Container className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-20">
                     <Link
-                        to="/deal-room"
-                        className="inline-flex items-center gap-2 text-[14px] text-[var(--rd-fg-3)] transition hover:text-[var(--rd-accent)]"
+                        to={localizePath('/deal-room')}
+                        className="inline-flex items-center gap-2 py-2 text-[14px] text-[var(--rd-fg-3)] transition hover:text-[var(--rd-accent)]"
                     >
                         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                         {t.backLink}

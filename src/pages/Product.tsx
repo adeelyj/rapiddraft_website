@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
+import { useLang } from '../i18n/LanguageContext';
 import Section from '../components/Section';
 import HeroCapabilityRail, { type HeroCapabilityItem } from '../components/home/HeroCapabilityRail';
 import ProblemSolutionStory from '../components/home/ProblemSolutionStory';
@@ -370,6 +371,7 @@ function RoiCalculatorSection() {
 
 export default function Product() {
     const [activeCapability, setActiveCapability] = useState(heroCapabilities[0].key);
+    const { localizePath } = useLang();
 
     return (
         <>
@@ -402,10 +404,10 @@ export default function Product() {
 
                     <Reveal delay={0.12} className="mx-auto mt-6 w-full max-w-[980px] sm:mt-8">
                         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                            <Link to="/book-demo" className="btn-primary w-full sm:w-auto">
+                            <Link to={localizePath('/book-demo')} className="btn-primary w-full sm:w-auto">
                                 Book a Demo
                             </Link>
-                            <Link to="/deal-room" className="btn-secondary w-full sm:w-auto">
+                            <Link to={localizePath('/deal-room')} className="btn-secondary w-full sm:w-auto">
                                 Explore Deal Room
                             </Link>
                         </div>
@@ -546,10 +548,10 @@ export default function Product() {
                             See how RapidDraft helps your team reduce review effort, generate manufacturing-ready drawings faster, and retain decision context across revisions.
                         </p>
                         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                            <Link to="/book-demo" className="btn-primary w-full sm:w-auto">
+                            <Link to={localizePath('/book-demo')} className="btn-primary w-full sm:w-auto">
                                 Book a Demo
                             </Link>
-                            <Link to="/use-cases" className="btn-secondary w-full sm:w-auto">
+                            <Link to={localizePath('/use-cases')} className="btn-secondary w-full sm:w-auto">
                                 See Use Cases
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
