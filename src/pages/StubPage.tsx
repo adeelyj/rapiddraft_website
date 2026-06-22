@@ -11,8 +11,8 @@ type StubPageProps = {
 };
 
 /* Interim placeholder rendered in the new design language. Used for pages that
-   are scheduled for the next build phase on the major-changes-hasan branch, so
-   navigation and footer links never 404 during review. */
+   are scheduled for a later build phase, so navigation and footer links never
+   404 during review. */
 export default function StubPage({
   eyebrow,
   title,
@@ -35,7 +35,7 @@ export default function StubPage({
             <Eyebrow className="mb-6">{eyebrow}</Eyebrow>
             <H1>{title}</H1>
             <Subhead className="mx-auto mt-5 max-w-[760px]">
-              {note ?? 'This section is being built on the major-changes-hasan branch and will follow shortly.'}
+              {note ?? 'This section is being finalized and will follow shortly.'}
             </Subhead>
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button to="/book-demo" variant="primary">
