@@ -33,12 +33,6 @@ const foundingTeam = [
         image: '/media/adeel.jpg',
     },
     {
-        name: 'Dr. Hasan Raza',
-        title: 'Founder & Operations Lead',
-        bio: '15+ years scaling engineering and manufacturing operations, with focus on controlled deployment inside industrial workflows.',
-        image: '/media/hasan.jpg',
-    },
-    {
         name: 'Sreekar Reddy Sajjala',
         title: 'Founder & AI Lead',
         bio: 'Builds production AI systems and engineering software across FEM, CFD, topology optimization, and data-driven tooling.',
@@ -581,7 +575,7 @@ export default function TheegartenPactec() {
                         </p>
                         <div className="mt-8">
                             <a
-                                href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai,hasan@rapiddraft.ai"
+                                href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai"
                                 className="btn-primary w-full sm:w-auto"
                             >
                                 Contact Us
@@ -706,7 +700,7 @@ export default function TheegartenPactec() {
                                     </p>
                                     <div className="mt-7">
                                         <a
-                                            href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai,hasan@rapiddraft.ai"
+                                            href="mailto:info@rapiddraft.ai?cc=adeel@rapiddraft.ai,sreekar@rapiddraft.ai"
                                             className="btn-primary w-full sm:w-auto"
                                         >
                                             Contact Us
@@ -714,7 +708,7 @@ export default function TheegartenPactec() {
                                     </div>
                                 </div>
 
-                                <div className="grid gap-4 sm:grid-cols-3">
+                                <div className="grid gap-4 sm:grid-cols-2">
                                     {foundingTeam.map((leader) => (
                                         <article
                                             key={leader.name}
