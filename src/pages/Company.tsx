@@ -18,7 +18,6 @@ import {
 // Photos + LinkedIn are language-independent, keyed by person name.
 const PEOPLE: Record<string, { image: string; linkedin: string }> = {
   'Adeel Yawar Jamil': { image: '/media/adeel.jpg', linkedin: 'https://www.linkedin.com/in/adeelyawarjamil/' },
-  'Dr. Hasan Raza': { image: '/media/hasan.jpg', linkedin: 'https://www.linkedin.com/in/shasanrr/' },
   'Sreekar Reddy Sajjala': { image: '/media/sreekar.jpg', linkedin: 'https://www.linkedin.com/in/sreekar2858/' },
   'Shehjar Kaul': { image: '/media/shehjar.jpg', linkedin: 'https://www.linkedin.com/in/shehjarkaul/' },
   'Julio Saucedo': { image: '/media/julio.jpg', linkedin: 'https://www.linkedin.com/in/julio-saucedo/' },
@@ -188,11 +187,6 @@ const CONTENT = {
         bio: '15+ years across CAD, simulation, and technical documentation in aerospace, automotive, and process industries. RapidDraft grew from his repeated experience of good designs stalling in the drawing and review chain.',
       },
       {
-        name: 'Dr. Hasan Raza',
-        role: 'Founder & Operations Lead',
-        bio: '15+ years scaling engineering and manufacturing operations globally, with the operating discipline to make RapidDraft useful inside real industrial release workflows.',
-      },
-      {
         name: 'Sreekar Reddy Sajjala',
         role: 'Founder & AI Lead',
         bio: 'Builds production AI systems and engineering software across FEM, CFD, topology optimization, and data-driven tooling, connecting engineering-grade reasoning with reliable software delivery.',
@@ -298,11 +292,6 @@ const CONTENT = {
         name: 'Adeel Yawar Jamil',
         role: 'Gründer & Lead Maschinenbau',
         bio: 'Über 15 Jahre in CAD, Simulation und technischer Dokumentation in Luft- und Raumfahrt, Automobil und Prozessindustrie. RapidDraft entstand aus seiner wiederkehrenden Erfahrung, dass gute Designs in der Zeichnungs- und Review-Kette ins Stocken geraten.',
-      },
-      {
-        name: 'Dr. Hasan Raza',
-        role: 'Gründer & Lead Operations',
-        bio: 'Über 15 Jahre im weltweiten Aufbau von Engineering- und Fertigungsabläufen, mit der operativen Disziplin, RapidDraft in realen industriellen Freigabe-Workflows nützlich zu machen.',
       },
       {
         name: 'Sreekar Reddy Sajjala',
@@ -413,7 +402,7 @@ export default function Company() {
       {/* ── Founding team ────────────────────────────────── */}
       <Section id="team">
         <SectionHeader title={t.team.title} intro={t.team.intro} />
-        <div className="mx-auto mt-10 grid max-w-[1120px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[760px] gap-4 sm:grid-cols-2">
           {t.founders.map((person) => (
             <FounderCard key={person.name} name={person.name} role={person.role} bio={person.bio} />
           ))}
