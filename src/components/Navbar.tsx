@@ -11,6 +11,7 @@ const NAV = {
   en: {
     links: [
       { name: 'Platform', to: '/platform' },
+      { name: 'Engineering Data', to: '/engineering-data' },
       { name: 'Use cases', to: '/use-cases' },
       { name: 'Security', to: '/security' },
       { name: 'Company', to: '/company' },
@@ -20,6 +21,7 @@ const NAV = {
   de: {
     links: [
       { name: 'Plattform', to: '/platform' },
+      { name: 'Engineering-Daten', to: '/engineering-data' },
       { name: 'Anwendungsfälle', to: '/use-cases' },
       { name: 'Sicherheit', to: '/security' },
       { name: 'Unternehmen', to: '/company' },
@@ -119,7 +121,7 @@ export default function Navbar() {
     >
       <div className="rd-container">
         <div className="pointer-events-auto mx-auto max-w-[1180px] rounded-full border border-[var(--rd-hair)] bg-[var(--rd-nav-surface)] shadow-[var(--rd-nav-shadow)] backdrop-blur-[8px]">
-          <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 lg:pl-7 lg:pr-3">
+          <div className="grid h-16 grid-cols-[1fr_auto] xl:grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 lg:pl-7 lg:pr-3">
             {/* left: logo */}
             <div className="flex items-center justify-start">
               <Link
@@ -133,7 +135,7 @@ export default function Navbar() {
             </div>
 
             {/* center: nav links */}
-            <div className="hidden items-center gap-6 lg:flex lg:gap-8">
+            <div className="hidden items-center gap-4 xl:flex xl:gap-4">
               {nav.links.map((link) => (
                 <Link
                   key={link.to}
@@ -165,14 +167,14 @@ export default function Navbar() {
 
             {/* right: controls */}
             <div className="flex items-center justify-end gap-3">
-              <div className="hidden items-center gap-3 lg:flex">
+              <div className="hidden items-center gap-3 xl:flex">
                 <LangToggle lang={lang} onSet={setLang} />
                 <ThemeToggle theme={theme} onToggle={toggle} />
                 <Link to={localizePath('/book-demo')} className="rd-btn rd-btn--primary rd-btn--sm">
                   {nav.cta}
                 </Link>
               </div>
-              <div className="flex items-center gap-2 lg:hidden">
+              <div className="flex items-center gap-2 xl:hidden">
                 <ThemeToggle theme={theme} onToggle={toggle} />
                 <button
                   type="button"
@@ -192,7 +194,7 @@ export default function Navbar() {
 
         <div
           className={clsx(
-            'pointer-events-auto mt-2 rounded-[var(--rd-r-lg)] border border-[var(--rd-hair)] bg-[var(--rd-surface)] lg:hidden',
+            'pointer-events-auto mt-2 rounded-[var(--rd-r-lg)] border border-[var(--rd-hair)] bg-[var(--rd-surface)] xl:hidden',
             isOpen ? 'block' : 'hidden',
           )}
         >

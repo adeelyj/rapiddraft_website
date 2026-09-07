@@ -30,6 +30,7 @@ const CONTENT = {
       {
         heading: 'More',
         links: [
+          { name: 'Engineering Data', to: '/engineering-data' },
           { name: 'Use cases', to: '/use-cases' },
           { name: 'Security', to: '/security' },
           { name: 'ROI calculator', to: '/#roi-calculator' },
@@ -73,6 +74,7 @@ const CONTENT = {
       {
         heading: 'Mehr',
         links: [
+          { name: 'Engineering-Daten', to: '/engineering-data' },
           { name: 'Anwendungsfälle', to: '/use-cases' },
           { name: 'Sicherheit', to: '/security' },
           { name: 'ROI-Rechner', to: '/#roi-calculator' },
