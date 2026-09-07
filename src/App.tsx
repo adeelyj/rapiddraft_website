@@ -2,6 +2,7 @@ import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import EngineeringData from './pages/EngineeringData';
 import StubPage from './pages/StubPage';
 import Platform from './pages/Platform';
 import Security from './pages/Security';
@@ -58,6 +59,7 @@ function layoutRoutes(pfx: '' | '/de') {
       {/* Legacy home kept (unlisted) for side-by-side comparison */}
       <Route path="home-v1" element={<Product />} />
       <Route path="platform" element={<Platform />} />
+      <Route path="engineering-data" element={<EngineeringData />} />
       <Route path="security" element={<Security />} />
       <Route path="company" element={<Company />} />
       <Route
